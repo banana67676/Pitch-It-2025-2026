@@ -3,21 +3,23 @@ extends Node2D
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene : PackedScene
 
-var SERVER_PORT  = 2135
-var SERVER_IP = "192.168.4.67"
+var port = 135
 
-func _on_button_pressed():
-	peer.create_server(SERVER_PORT)
+func _on_host_pressed() -> void:
+	peer.create_server(port)
 	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(add_player)
-	add_player()
-
-func _on_button_2_pressed():
-	peer.create_client(SERVER_IP, SERVER_PORT)
-	multiplayer.multiplayer_peer = peer
-
-
-func add_player(id = 1):
+	multiplayer.peer_connected.connect(_add_player)
+	_add_player()
+	
+func _add_player(id = 1):
 	var player = player_scene.instantiate()
 	player.name = str(id)
 	call_deferred("add_child", player)
+	pass
+
+func _on_join_pressed() -> void:
+	peer.create_client("localhost", port)
+	
+	multiplayer.multiplayer_peer = peer
+	pass # Replace with function body.
+	

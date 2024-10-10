@@ -1,5 +1,5 @@
 extends Sprite2D
-
+@export var drawing_scene: PackedScene
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
