@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://uusipllqkn41"]
 
 [ext_resource type="Texture2D" uid="uid://cibo4eikjhyt2" path="res://icon.svg" id="1_tdxrx"]
-[ext_resource type="Script" path="res://Player.gd" id="2_r8hio"]
-[ext_resource type="PackedScene" uid="uid://cat3r74f0e1ep" path="res://Drawing.tscn" id="3_yp4vl"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_r8hio"]
+[ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://scenes/Drawing.tscn" id="3_yp4vl"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_531s6"]
 properties/0/path = NodePath(".:position")
