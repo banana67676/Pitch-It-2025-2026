@@ -1,6 +1,6 @@
 extends Node2D
 
-const CARD = preload("res://card.tscn")
+const CARD = preload("res://scenes/card.tscn")
 
 var card_spawn_pos = Vector2(1000, 150)
 var hand_pos = Vector2(500, 500)

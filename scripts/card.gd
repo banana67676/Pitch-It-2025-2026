@@ -1,7 +1,6 @@
 extends Node2D
 
-@onready var timer: Timer = $FlipTimer
-
+@export var FLIP_TIME = .5
 
 @onready var front: Node2D = $Front
 @onready var back: Node2D = $Back
@@ -26,33 +25,35 @@ func _process(delta: float) -> void:
 	if(state == shrinking):
 		shrink()
 	if(state == growing):
-		grow()
-
-func _on_button_pressed() -> void:
-	print("button pressed")
-	state = shrinking
-	
+		grow()	
 
 func shrink():
-	var tween = create_tween()
-	tween.tween_property(
-		self, "scale:y", 0,
-		1
+	var shrinkTween = create_tween()
+	print("start tween")
+	shrinkTween.tween_property(
+		self, "scale:x", -.1,
+		FLIP_TIME
 	)
+	await shrinkTween.finished
+	print("end tween")
 	currentSide.visible = false
+	print("disabled ${currentSide}")
 	swap_current_side()
 	state = growing
 	print("swapped state")
 
 func grow():
-	var tween = create_tween()
-	
-	tween.tween_property(
-		self, "scale:y", 1,
-		1
+	var growTween = create_tween()
+	print("growing")
+	currentSide.visible = true
+	growTween.tween_property(
+		self, "scale:x", 1,
+		FLIP_TIME
 	)
-	
-	await tween.finished
+	print("done growing")
+	await growTween.finished
+	swap_current_side()
+	state = stay
 	
 	
 
@@ -63,3 +64,9 @@ func swap_current_side():
 		currentSide = back
 	else:
 		print("side is null")
+
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		print("card clicked")
+		state = shrinking
