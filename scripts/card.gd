@@ -14,59 +14,50 @@ enum {
 }
 var state = stay
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if(state == shrinking):
-		shrink()
-	if(state == growing):
-		grow()	
+	pass
 
-func shrink():
+func shrink() -> Tween:
+	print("shrinking")
 	var shrinkTween = create_tween()
-	print("start tween")
-	shrinkTween.tween_property(
-		self, "scale:x", -.1,
-		FLIP_TIME
-	)
-	await shrinkTween.finished
-	print("end tween")
+	shrinkTween.tween_property(self, "scale:x", 0, FLIP_TIME)
 	currentSide.visible = false
-	print("disabled ${currentSide}")
-	swap_current_side()
-	state = growing
-	print("swapped state")
+	print("done shrinking")
+	return shrinkTween
 
-func grow():
-	var growTween = create_tween()
+func grow() -> Tween:
 	print("growing")
 	currentSide.visible = true
-	growTween.tween_property(
-		self, "scale:x", 1,
-		FLIP_TIME
-	)
-	print("done growing")
-	await growTween.finished
-	swap_current_side()
-	state = stay
-	
-	
+	var growTween = create_tween()
+	growTween.tween_property(self, "scale:x", 1, FLIP_TIME)
+	print("done growing?")
+	return growTween
 
 func swap_current_side():
-	if(currentSide == back):
+	if currentSide == back:
 		currentSide = front
-	elif(currentSide == front):
+	elif currentSide == front:
 		currentSide = back
 	else:
 		print("side is null")
 
+func flip() -> void:
+	state = shrinking
+	var shrinkTween = shrink()
+	await shrinkTween.finished
+	swap_current_side()
+	state = growing
+	var growTween = grow()
+	await growTween.finished
+	print("actually done growing")
+	state = stay
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		print("card clicked")
-		state = shrinking
+		flip()
