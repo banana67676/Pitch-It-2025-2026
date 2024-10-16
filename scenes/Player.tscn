@@ -1,18 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://uusipllqkn41"]
+[gd_scene load_steps=6 format=3 uid="uid://uusipllqkn41"]
 
 [ext_resource type="Texture2D" uid="uid://cibo4eikjhyt2" path="res://icon.svg" id="1_tdxrx"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_r8hio"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://scenes/Drawing.tscn" id="3_yp4vl"]
+[ext_resource type="Script" path="res://scripts/PlayerBody.gd" id="4_rlg74"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_531s6"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="CharacterBody2D" type="Sprite2D"]
+[node name="RootPlayerState" type="Sprite2D"]
 texture = ExtResource("1_tdxrx")
 script = ExtResource("2_r8hio")
 drawing_scene = ExtResource("3_yp4vl")
 
+[node name="MultiplayerCursor" type="Sprite2D" parent="."]
+texture = ExtResource("1_tdxrx")
+script = ExtResource("4_rlg74")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_531s6")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HSlider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 16.0
+
+[node name="CheckButton" type="CheckButton" parent="Control"]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 24.0

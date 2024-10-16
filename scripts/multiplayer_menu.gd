@@ -22,4 +22,5 @@ func _on_button_2_pressed():
 func add_player(id = 1):
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	call_deferred("add_child", player)
+	get_tree().root.add_child(player)
+	visible = false
