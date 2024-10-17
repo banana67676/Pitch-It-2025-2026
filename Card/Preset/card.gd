@@ -26,19 +26,25 @@ func shrink() -> Tween:
 	print("shrinking")
 	var shrinkTween = create_tween()
 	shrinkTween.tween_property(self, "scale:x", 0, FLIP_TIME)
+	shrinkTween.tween_callback(grow)
 	currentSide.visible = false
 	print("done shrinking")
 	return shrinkTween
 
-func grow() -> Tween:
+func grow():
 	print("growing")
+	print(self.scale.x)
+	print("current side is ", currentSide)
+	swap_current_side()
+	var tween = create_tween()
+	print("growing")
+	state = growing
 	currentSide.visible = true
-	var growTween = create_tween()
-	growTween.tween_property(self, "scale:x", 1, FLIP_TIME)
-	print("done growing?")
-	return growTween
+
+	tween.tween_property(self, "scale:x", 1, FLIP_TIME)
 
 func swap_current_side():
+	print("swapping side was ", currentSide)
 	if currentSide == back:
 		currentSide = front
 	elif currentSide == front:
@@ -47,17 +53,20 @@ func swap_current_side():
 		print("side is null")
 
 func flip() -> void:
-	state = shrinking
-	var shrinkTween = shrink()
-	await shrinkTween.finished
-	swap_current_side()
-	state = growing
-	var growTween = grow()
-	await growTween.finished
-	print("actually done growing")
+	var tween = create_tween()
+	tween.tween_property(self, "scale:x", 0, FLIP_TIME)
+	tween.chain().tween_callback(grow)
 	state = stay
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		print("card clicked")
 		flip()
+		# test()
+
+
+func test():
+	var tween = create_tween()
+	tween.tween_property(self, "scale:x", 0, FLIP_TIME)
+	tween.chain().tween_property(self, "scale:x", 1, FLIP_TIME)
+	pass
