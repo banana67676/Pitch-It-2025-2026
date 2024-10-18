@@ -27,7 +27,6 @@ func shrink() -> Tween:
 	var shrinkTween = create_tween()
 	shrinkTween.tween_property(self, "scale:x", 0, FLIP_TIME)
 	shrinkTween.tween_callback(grow)
-	currentSide.visible = false
 	print("current side is ", currentSide)
 	print("disabled current side")
 	print("done shrinking")
@@ -37,10 +36,12 @@ func grow():
 	print("growing")
 	print(self.scale.x)
 	print("current side is ", currentSide)
+
+	swap_current_side()
+
 	var tween = create_tween()
 	state = growing
 	tween.tween_property(self, "scale:x", 1, FLIP_TIME)
-	swap_current_side()
 
 func swap_current_side():
 	print("swapping side was ", currentSide)
@@ -53,6 +54,7 @@ func swap_current_side():
 		print("side is null")
 
 	currentSide.visible = true
+	oldSide.visible = false
 	print("enabled " + str(currentSide))
 	print(currentSide.visible)
 
