@@ -28,6 +28,8 @@ func shrink() -> Tween:
 	shrinkTween.tween_property(self, "scale:x", 0, FLIP_TIME)
 	shrinkTween.tween_callback(grow)
 	currentSide.visible = false
+	print("current side is ", currentSide)
+	print("disabled current side")
 	print("done shrinking")
 	return shrinkTween
 
@@ -35,22 +37,24 @@ func grow():
 	print("growing")
 	print(self.scale.x)
 	print("current side is ", currentSide)
-	swap_current_side()
 	var tween = create_tween()
-	print("growing")
 	state = growing
-	currentSide.visible = true
-
 	tween.tween_property(self, "scale:x", 1, FLIP_TIME)
+	swap_current_side()
 
 func swap_current_side():
 	print("swapping side was ", currentSide)
+	var oldSide = currentSide
 	if currentSide == back:
 		currentSide = front
 	elif currentSide == front:
 		currentSide = back
 	else:
 		print("side is null")
+
+	currentSide.visible = true
+	print("enabled " + str(currentSide))
+	print(currentSide.visible)
 
 func flip() -> void:
 	var tween = create_tween()
@@ -59,10 +63,10 @@ func flip() -> void:
 	state = stay
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.is_pressed():
 		print("card clicked")
 		flip()
-		# test()
+		#test()
 
 
 func test():
