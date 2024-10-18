@@ -16,7 +16,7 @@ func _ready():
 	position = Vector2(0,0)
 	var canvas_fill = PackedByteArray()
 	canvas_fill.resize(WIDTH*HEIGHT*4)
-	self.repeat_fill(canvas_fill, PackedByteArray([0,0,0,255]))
+	self.repeat_fill(canvas_fill, PackedByteArray([0,0,0,0]))
 	image = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
 	image_texture = ImageTexture.create_from_image(image)
 	
@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 			
 		
 func _draw() -> void:
-	self.draw_texture(image_texture, Vector2(0,0))
+	self.draw_texture(image_texture, Vector2(15,15))
 #
 func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
 	for i in range(array.size()):
@@ -68,3 +68,13 @@ func min_distance(start: Vector2, end: Vector2, compare: Vector2) -> float:
 	return proj.distance_to(compare)
 	
 	
+
+
+func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		mode = drawing_modes.ERASE
+		mode_size *= 1.10
+	else:
+		mode = drawing_modes.DRAW
+		mode_size /= 1.10
+	pass # Replace with function body.

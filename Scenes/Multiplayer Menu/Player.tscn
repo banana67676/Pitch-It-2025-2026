@@ -11,29 +11,15 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="RootPlayerState" type="Sprite2D"]
+position = Vector2(0, -4)
 texture = ExtResource("1_tdxrx")
 script = ExtResource("2_r8hio")
 drawing_scene = ExtResource("3_yp4vl")
 
 [node name="MultiplayerCursor" type="Sprite2D" parent="."]
+position = Vector2(-642, 208)
 texture = ExtResource("1_tdxrx")
 script = ExtResource("4_rlg74")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_531s6")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HSlider" type="HSlider" parent="Control"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 16.0
-
-[node name="CheckButton" type="CheckButton" parent="Control"]
-layout_mode = 0
-offset_right = 44.0
-offset_bottom = 24.0
