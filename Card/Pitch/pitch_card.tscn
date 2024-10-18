@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdj8qosxqrbjt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_karpo"]
+size = Vector2(800, 400)
+
+[node name="Node2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_karpo")
