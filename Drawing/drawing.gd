@@ -10,7 +10,9 @@ const WIDTH = 800
 const HEIGHT = 600
 var mode_size = 5
 var draw_color = Color8(255,255,255,255)
+var defaults = [Color(255,0,0,255),Color(0,255,0,255),Color(0,0,255,255)]
 var prev_mouse_pos
+var draw_color_buffer = [Color(0,0,0,255)]
 
 func _ready():
 	position = Vector2(0,0)
@@ -19,6 +21,19 @@ func _ready():
 	self.repeat_fill(canvas_fill, PackedByteArray([0,0,0,0]))
 	image = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
 	image_texture = ImageTexture.create_from_image(image)
+	var color_plte = $Control/ColorPicker/ColorPalette
+	var posIndex = 0
+	for color in defaults:
+		var obj = Button.new()
+		obj.size.x = 20
+		obj.size.y = 20
+		obj.set_position(Vector2((posIndex % 2)*30,(posIndex/2)*30))
+		obj.add_theme_color_override("icon_hover_color", color)
+		obj.add_theme_color_override("icon_pressed_color", color)
+		color_plte.add_child(obj)
+		posIndex+=1
+		
+		
 	
 	
 func _process(delta: float) -> void:
@@ -77,4 +92,10 @@ func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
 	else:
 		mode = drawing_modes.DRAW
 		mode_size /= 1.10
+	pass # Replace with function body.
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	draw_color_buffer.append(draw_color)
+	draw_color = color
 	pass # Replace with function body.
