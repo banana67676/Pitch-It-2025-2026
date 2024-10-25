@@ -1,9 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdj8qosxqrbjt"]
+[gd_scene load_steps=3 format=3 uid="uid://bdj8qosxqrbjt"]
+
+[ext_resource type="Script" path="res://Card/Pitch/pitch_card.gd" id="1_537sv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_karpo"]
 size = Vector2(800, 400)
 
 [node name="Node2D" type="Area2D"]
+script = ExtResource("1_537sv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_karpo")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -231.0
+offset_top = -15.0
+offset_right = -130.0
+offset_bottom = 32.0
+text = "submit"
+
+[node name="TextEdit" type="TextEdit" parent="Button"]
+layout_mode = 0
+offset_left = 157.0
+offset_top = -99.0
+offset_right = 348.0
+offset_bottom = -40.0
+placeholder_text = "insert text"
