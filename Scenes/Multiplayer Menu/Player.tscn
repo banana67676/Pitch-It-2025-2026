@@ -11,6 +11,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="RootPlayerState" type="Sprite2D"]
+visible = false
 position = Vector2(0, -4)
 texture = ExtResource("1_tdxrx")
 script = ExtResource("2_r8hio")
