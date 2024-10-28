@@ -10,15 +10,38 @@ const WIDTH = 800
 const HEIGHT = 600
 var mode_size = 5
 var draw_color = Color8(255,255,255,255)
+var defaults = [Color8(255,0,0,255),
+Color8(0,255,0,255),Color8(0,0,255,255),Color8(0,0,0,255),Color8(255,255,255,255),Color8(139,69,19,255)]
+var color_plte
 var prev_mouse_pos
+var draw_color_buffer = [Color(0,0,0,255)]
+var icon = load("res://Assets/palette.png")
+
+func new_ui_button(color):
+	var button = TextureButton.new()
+	button.texture_normal=icon
+	color_plte.add_child(button)
+	button.size.x = 20
+	button.size.y = 20
+	var index = color_plte.get_child_count()-1
+	button.set_position(Vector2((index % 2)*30,(index/2)*30))
+	button.modulate = color;
+	button.connect("pressed", func(): draw_color = button.modulate)
+	return button
 
 func _ready():
 	position = Vector2(0,0)
 	var canvas_fill = PackedByteArray()
 	canvas_fill.resize(WIDTH*HEIGHT*4)
-	self.repeat_fill(canvas_fill, PackedByteArray([0,0,0,255]))
+	self.repeat_fill(canvas_fill, PackedByteArray([0,0,0,0]))
 	image = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
 	image_texture = ImageTexture.create_from_image(image)
+	color_plte = $Control/ColorPicker/ColorPalette
+	for color in defaults:
+		new_ui_button(color)
+		#obj.call_deferred("set","theme_override_colors/icon_normal_color", color)
+	var varied_button = new_ui_button(Color8(255,255,255,255))
+		
 	
 	
 func _process(delta: float) -> void:
@@ -49,7 +72,7 @@ func _process(delta: float) -> void:
 			
 		
 func _draw() -> void:
-	self.draw_texture(image_texture, Vector2(0,0))
+	self.draw_texture(image_texture, Vector2(15,15))
 #
 func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
 	for i in range(array.size()):
@@ -68,3 +91,20 @@ func min_distance(start: Vector2, end: Vector2, compare: Vector2) -> float:
 	return proj.distance_to(compare)
 	
 	
+
+
+func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		mode = drawing_modes.ERASE
+		mode_size *= 1.10
+	else:
+		mode = drawing_modes.DRAW
+		mode_size /= 1.10
+	pass # Replace with function body.
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	draw_color_buffer.append(draw_color)
+	draw_color = color
+	color_plte.get_child(color_plte.get_child_count()-1).modulate = color
+	pass # Replace with function body.
