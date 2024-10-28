@@ -25,7 +25,8 @@ folder_colors={
 "res://Card/What/": "yellow",
 "res://Card/Who/": "blue",
 "res://Drawing/": "green",
-"res://Scenes/": "blue"
+"res://Scenes/": "blue",
+"res://UI/": "teal"
 }
 
 [input]

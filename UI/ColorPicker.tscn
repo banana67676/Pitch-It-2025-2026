@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbndp01wsxkrr"]
+
+[ext_resource type="Shader" path="res://UI/CircleShader.gdshader" id="1_npug2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hfoa"]
+shader = ExtResource("1_npug2")
+shader_parameter/radius_scale = 1.0
+shader_parameter/width = 200.0
+shader_parameter/height = 200.0
+
+[node name="ColorPickerButton" type="ColorPickerButton"]
+material = SubResource("ShaderMaterial_8hfoa")
+offset_right = 200.0
+offset_bottom = 200.0
