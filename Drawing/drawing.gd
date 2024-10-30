@@ -90,7 +90,6 @@ func min_distance(start: Vector2, end: Vector2, compare: Vector2) -> float:
 	var proj = start + t * (end - start)
 	return proj.distance_to(compare)
 	
-	
 
 
 func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
