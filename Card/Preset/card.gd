@@ -2,8 +2,8 @@ extends Node2D
 
 @export var FLIP_TIME = .5
 
-@onready var front: Node2D = $Front
-@onready var back: Node2D = $Back
+@onready var front = $Front
+@onready var back = $Back
 
 @onready var currentSide = back
 
@@ -20,7 +20,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if(Input.is_action_just_pressed("ui_accept")):
+		print("card clicked")
+		flip()
+		#test()
 
 func shrink() -> Tween:
 	print("shrinking")
@@ -63,12 +66,6 @@ func flip() -> void:
 	tween.tween_property(self, "scale:x", 0, FLIP_TIME)
 	tween.chain().tween_callback(grow)
 	state = stay
-
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
-		print("card clicked")
-		flip()
-		#test()
 
 
 func test():

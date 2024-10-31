@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
 [ext_resource type="PackedScene" uid="uid://uusipllqkn41" path="res://Scenes/Multiplayer Menu/Player.tscn" id="2_r6qhr"]
 [ext_resource type="Theme" uid="uid://cvg5lo2itemby" path="res://Assets/test_theme.tres" id="3_s48ld"]
-[ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="4_aeojp"]
+[ext_resource type="PackedScene" uid="uid://dwovp0kxfryok" path="res://Card/Preset/Card_Preset.tscn" id="4_5esq6"]
 
 [node name="Multiplayer_Menu" type="Node2D"]
 script = ExtResource("1_a2imu")
@@ -26,11 +26,8 @@ text = "Join
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
 
-[node name="ColorPickerButton" parent="." instance=ExtResource("4_aeojp")]
-offset_left = 463.0
-offset_top = 142.0
-offset_right = 640.0
-offset_bottom = 322.0
+[node name="Card_Preset" parent="." instance=ExtResource("4_5esq6")]
+position = Vector2(666, 290)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
