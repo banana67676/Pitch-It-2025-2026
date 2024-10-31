@@ -2,10 +2,14 @@ extends Node2D
 
 @export var FLIP_TIME = .5
 
+@export var possible_text = ["text1", "text2"]
+@export var text : String
+
 @onready var front = $Front
 @onready var back = $Back
+@onready var label: Label = $Front/MarginContainer/ColorRect/MarginContainer/Label
 
-@onready var currentSide = back
+@onready var currentSide = front
 
 enum {
 	stay,
@@ -16,6 +20,8 @@ var state = stay
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pick_text()
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,6 +30,11 @@ func _process(delta: float) -> void:
 		print("card clicked")
 		flip()
 		#test()
+		
+func pick_text():
+	if(text == ""):
+		text = possible_text[randi_range(0, possible_text.size() - 1)]
+	label.text = text
 
 func shrink() -> Tween:
 	print("shrinking")
