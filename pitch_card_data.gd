@@ -7,6 +7,9 @@ var user_id : int
 var logo : Image
 var online : bool
 
+const WIDTH = 800
+const HEIGHT = 600
+
 func serialize() -> Dictionary:
 	return {
 		'title': title,
@@ -16,10 +19,10 @@ func serialize() -> Dictionary:
 		'logo' : logo.data
 	}
 
-static func deserialize(data: Dictionary) -> PlayerData:
+static func deserialize(data: Dictionary) -> PitchCardData:
 	var pcData : PitchCardData = PitchCardData.new()
-	pcData.logo = Image.create_from_data(
-		
+	pcData.logo = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGB8,
+		data['logo']
 	)
 	return pcData
 # Called when the node enters the scene tree for the first time.

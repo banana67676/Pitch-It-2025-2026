@@ -14,6 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+
 @rpc("authority", "call_local", "reliable") # Authority should be able to request this
 func export_card() -> PitchCardData:
 	var data = PitchCardData.new()

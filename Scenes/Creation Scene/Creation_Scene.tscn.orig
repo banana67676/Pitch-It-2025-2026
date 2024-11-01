@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://xkn8gxryucgg"]
+
+[ext_resource type="Script" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
+[ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h7afi"]
+
+[node name="Creation_Scene" type="Node2D"]
+script = ExtResource("1_0n1cf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+split_offset = -150
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Title"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 15
+
+[node name="Slogan" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Slogan"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DrawingScene" parent="MarginContainer/VSplitContainer/HSplitContainer" instance=ExtResource("1_r6dir")]
+<<<<<<< HEAD
+scale = Vector2(0.7, 0.7)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_h7afi")
+=======
+scale = Vector2(0.65, 0.65)
+>>>>>>> 7535602d7df48fac2c7f27c50adb312bebc7a297
