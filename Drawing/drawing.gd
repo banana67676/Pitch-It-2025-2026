@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("Mouse Click"):
 			# Plan: Create a parametric line equation where f(0) = prev_mouse_pos && f(1) = mouse_pos
 			# Then measure each point's distance from the line segment
-			var mouse_pos = get_global_mouse_position()
+			var mouse_pos = get_local_mouse_position()
 			if prev_mouse_pos == null:
 				prev_mouse_pos = mouse_pos
 			var low_x = min(mouse_pos.x, prev_mouse_pos.x)
