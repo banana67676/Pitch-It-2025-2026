@@ -1,14 +1,25 @@
-class PitchCardData:
-	var title
-	var slogan
-	var user
-	var logo
+extends Resource
+class_name PitchCardData
+var title : String
+var slogan : String
+var user : String
+var user_id : int
+var logo : Image
+var online : bool
 
+func serialize() -> Dictionary:
+	return {
+		'title': title,
+		'slogan': slogan,
+		'user': user,
+		'userId': user_id,
+		'logo' : logo.data
+	}
+
+static func deserialize(data: Dictionary) -> PlayerData:
+	var pcData : PitchCardData = PitchCardData.new()
+	pcData.logo = Image.create_from_data(
+		
+	)
+	return pcData
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
