@@ -2,10 +2,14 @@ extends Node2D
 
 @export var FLIP_TIME = .5
 
-@onready var front: Node2D = $Front
-@onready var back: Node2D = $Back
+@export var possible_text = ["text1", "text2"]
+@export var text : String
 
-@onready var currentSide = back
+@onready var front = $Front
+@onready var back = $Back
+@onready var label: Label = $Front/MarginContainer/ColorRect/MarginContainer/Label
+
+@onready var currentSide = front
 
 enum {
 	stay,
@@ -16,11 +20,21 @@ var state = stay
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pick_text()
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if(Input.is_action_just_pressed("ui_accept")):
+		print("card clicked")
+		flip()
+		#test()
+		
+func pick_text():
+	if(text == ""):
+		text = possible_text[randi_range(0, possible_text.size() - 1)]
+	label.text = text
 
 func shrink() -> Tween:
 	print("shrinking")
@@ -63,12 +77,6 @@ func flip() -> void:
 	tween.tween_property(self, "scale:x", 0, FLIP_TIME)
 	tween.chain().tween_callback(grow)
 	state = stay
-
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
-		print("card clicked")
-		flip()
-		#test()
 
 
 func test():

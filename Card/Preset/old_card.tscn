@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bs5bk21ksn7ea"]
 
-[ext_resource type="Script" path="res://Card/Preset/card.gd" id="1_iw4sg"]
-[ext_resource type="Texture2D" uid="uid://cibo4eikjhyt2" path="res://icon.svg" id="2_7ctgm"]
+[ext_resource type="Script" path="res://Card/Preset/card.gd" id="1_3eidb"]
+[ext_resource type="Texture2D" uid="uid://cibo4eikjhyt2" path="res://icon.svg" id="2_53hhv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcjb3"]
 size = Vector2(400, 250)
@@ -10,7 +10,7 @@ size = Vector2(400, 250)
 
 [node name="card" type="Area2D"]
 position = Vector2(578, 286)
-script = ExtResource("1_iw4sg")
+script = ExtResource("1_3eidb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rcjb3")
@@ -23,7 +23,7 @@ mesh = SubResource("BoxMesh_4rt14")
 [node name="Back" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="Back"]
-texture = ExtResource("2_7ctgm")
+texture = ExtResource("2_53hhv")
 
 [node name="Front" type="Node2D" parent="."]
 visible = false
