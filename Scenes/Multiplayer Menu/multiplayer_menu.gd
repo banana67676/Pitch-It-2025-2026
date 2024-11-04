@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VBoxContainer/MarginContainer/TextEdit
+@onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VSplitContainer/MarginContainer/TextEdit
 
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene : PackedScene
@@ -12,7 +12,7 @@ func add_player(id = 1):
 
 
 func _on_host_pressed() -> void:
-	if SERVER_PORT_READ.text.to_int() != null:
+	if SERVER_PORT_READ.text != null:
 		peer.create_server(SERVER_PORT_READ.text.to_int())
 		multiplayer.multiplayer_peer = peer
 		multiplayer.peer_connected.connect(add_player)
