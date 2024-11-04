@@ -13,7 +13,8 @@ config_version=5
 config/name="Pitch-it"
 run/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
+boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
 [file_customization]
 

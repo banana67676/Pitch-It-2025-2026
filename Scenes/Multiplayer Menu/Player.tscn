@@ -1,8 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://uusipllqkn41"]
 
-[ext_resource type="Texture2D" uid="uid://cibo4eikjhyt2" path="res://icon.svg" id="1_tdxrx"]
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/Player.gd" id="2_r8hio"]
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/PlayerBody.gd" id="4_rlg74"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fo210"]
+load_path = "res://.godot/imported/icon.svg-309ac985f599c0c98aa0faecda6f1974.ctex"
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_531s6"]
 properties/0/path = NodePath(".:position")
@@ -12,12 +14,12 @@ properties/0/replication_mode = 1
 [node name="RootPlayerState" type="Sprite2D"]
 visible = false
 position = Vector2(0, -4)
-texture = ExtResource("1_tdxrx")
+texture = SubResource("CompressedTexture2D_fo210")
 script = ExtResource("2_r8hio")
 
 [node name="MultiplayerCursor" type="Sprite2D" parent="."]
 position = Vector2(-642, 208)
-texture = ExtResource("1_tdxrx")
+texture = SubResource("CompressedTexture2D_fo210")
 script = ExtResource("4_rlg74")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

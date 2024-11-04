@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer/TextEdit2
+@onready var player_scene = preload("res://Scenes/Multiplayer Menu/Player.gd")
 
 var peer = ENetMultiplayerPeer.new()
-@export var player_scene : PackedScene
 
 func add_player(id = 1):
 	var player = player_scene.instantiate()
