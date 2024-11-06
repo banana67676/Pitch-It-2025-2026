@@ -3,15 +3,39 @@ extends Node
 
 enum game_state_enum{
 	title,
-	main_menu,
+	multiplayer_main_menu,
 	lobby,
 	creation,
-	presentaion,
+	display,
 	voting,
-	results,
-	end_game
+	results
 }
+
 
 var game_state : int = game_state_enum.title
 
 var settings : bool = false
+
+func change_game_state():
+	pass
+
+
+
+@rpc("any_peer", "call_local", "reliable")
+func enum_to_scene(state:game_state_enum) -> String:
+	match state:
+		game_state_enum.title:
+			return "res://Scenes/Title Scene/Title_Scene.tscn"
+		game_state_enum.multiplayer_main_menu:
+			return "res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
+		game_state_enum.lobby:
+			return "res://Scenes/Lobby Scene/Lobby_Scene.tscn"
+		game_state_enum.creation:
+			return "res://Scenes/Creation Scene/Creation_Scene.tscn"
+		game_state_enum.display:
+			return "res://Scenes/Display Scene/Display_Scene.tscn"
+		game_state_enum.voting:
+			return "res://Scenes/Voting Scene/Voting_Scene.tscn"
+		game_state_enum.results:
+			return "res://Scenes/Results Scene/Results Scene.tscn"
+	return "2135"
