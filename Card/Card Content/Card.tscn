@@ -1,19 +1,17 @@
 [gd_scene load_steps=2 format=3 uid="uid://6b5nae3lm6ou"]
 
-[ext_resource type="Script" path="res://Card/Preset/card.gd" id="1_kg628"]
+[ext_resource type="Script" path="res://Card/Card Content/card.gd" id="1_2iua7"]
 
 [node name="Card_Preset" type="Node2D"]
-script = ExtResource("1_kg628")
+script = ExtResource("1_2iua7")
 
 [node name="Front" type="ColorRect" parent="."]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -125.0
-offset_top = -175.0
-offset_right = 225.0
-offset_bottom = 75.0
+offset_right = 350.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -60,10 +58,8 @@ autowrap_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -125.0
-offset_top = -175.0
-offset_right = 225.0
-offset_bottom = 75.0
+offset_right = 350.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

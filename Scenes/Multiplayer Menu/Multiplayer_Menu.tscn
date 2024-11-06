@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo3vx0ii1i20j"]
+[gd_scene load_steps=2 format=3 uid="uid://bo3vx0ii1i20j"]
 
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
-[ext_resource type="PackedScene" uid="uid://cacidlr1ff8xq" path="res://Card/Card Content/What_Card.tscn" id="2_hlmgy"]
 
 [node name="Multiplayer_Menu" type="Node2D"]
 script = ExtResource("1_a2imu")
@@ -90,6 +89,3 @@ theme_override_constants/margin_bottom = 30
 [node name="MarginContainer_VBoxContainer_MarginContainer#TextEdit" type="TextEdit" parent="."]
 size_flags_vertical = 3
 placeholder_text = "Enter Port : ex 2135"
-
-[node name="What_Card" parent="." instance=ExtResource("2_hlmgy")]
-position = Vector2(184, 160)
