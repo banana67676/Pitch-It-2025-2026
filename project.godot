@@ -26,9 +26,6 @@ folder_colors={
 "res://Assets/": "purple",
 "res://Card/": "red",
 "res://Card/Pitch/": "orange",
-"res://Card/Preset/": "green",
-"res://Card/What/": "yellow",
-"res://Card/Who/": "blue",
 "res://Drawing/": "green",
 "res://Scenes/": "blue",
 "res://UI/": "teal"
