@@ -1,14 +1,18 @@
 extends Node2D
 
 @onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer/TextEdit2
+<<<<<<< HEAD
+=======
+@onready var player_scene = preload("res://Scenes/Multiplayer Menu/Player.gd")
+>>>>>>> 844ae6f7f6f6441aaf4c47366e1db35c42319f70
 
 var peer = ENetMultiplayerPeer.new()
-@export var player_scene : PackedScene
 
 func add_player(id = 1):
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	call_deferred("add_child", player)
+	self.get_parent().call_deferred("add_child", player)
+	visible = false
 
 
 func _on_host_pressed() -> void:
@@ -17,7 +21,6 @@ func _on_host_pressed() -> void:
 		multiplayer.multiplayer_peer = peer
 		multiplayer.peer_connected.connect(add_player)
 		add_player()
-
 
 func _on_join_pressed() -> void:
 	if SERVER_PORT_READ.text.to_int() != null:

@@ -39,6 +39,7 @@ layout_mode = 2
 [node name="Title" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+placeholder_text = "Title"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -51,13 +52,18 @@ theme_override_constants/margin_bottom = 15
 [node name="Slogan" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+placeholder_text = "Slogan"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DrawingScene" parent="MarginContainer/VSplitContainer/HSplitContainer" instance=ExtResource("1_r6dir")]
+<<<<<<< HEAD
 scale = Vector2(0.7, 0.7)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_h7afi")
+=======
+scale = Vector2(0.65, 0.65)
+>>>>>>> 7535602d7df48fac2c7f27c50adb312bebc7a297
