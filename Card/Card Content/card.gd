@@ -116,7 +116,7 @@ var possible_text = []
 @onready var back = $Back
 @onready var label: Label = $Front/MarginContainer/ColorRect/MarginContainer/Label
 
-@onready var currentSide = front
+@onready var currentSide = back
 
 enum {
 	stay,
@@ -127,9 +127,9 @@ var state = stay
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if(card_type == card_types.who):
+	if (card_type == card_types.who):
 		possible_text = who_text
-	elif(card_type == card_types.what):
+	elif (card_type == card_types.what):
 		possible_text = what_text
 	pick_text()
 
