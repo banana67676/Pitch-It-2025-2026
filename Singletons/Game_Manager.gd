@@ -15,6 +15,14 @@ enum game_mode_enum{
 	standard
 }
 
+var game_mode : game_mode_enum = game_mode_enum.standard
+
+func get_round_time() -> int:
+	match game_mode:
+		game_mode_enum.standard:
+			return 120
+	
+	return 2135
 
 var game_state : int = game_state_enum.title
 
