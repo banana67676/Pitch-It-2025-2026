@@ -2,12 +2,13 @@ extends Node2D
 
 const WIDTH = 800
 const HEIGHT = 600
+@onready var timer: Timer = $Timer
 
 const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	game_run()
+	timer.start(GameManager.creation_time)
 	pass # Replace with function body.
 
 
@@ -15,11 +16,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func game_run() -> void:
 	
-	
-
-var results = []
 
 @rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
 func export_card():
@@ -32,7 +29,5 @@ func export_card():
 
 @rpc("authority", "reliable")
 func import_card(pd: PitchCardData):
-	results.append(pd)
+	MultiplayerManager.results.append(pd)
 	
-@rpc("any_peer", "call_local", "reliable")
-func 

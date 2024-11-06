@@ -17,6 +17,8 @@ enum game_mode_enum{
 
 
 var game_state : int = game_state_enum.title
+var creation_time : float = 30
+var presentation_time : float = 60
 
 var settings : bool = false
 

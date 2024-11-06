@@ -19,6 +19,7 @@ boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 [autoload]
 
 GameManager="*res://Singletons/Game_Manager.gd"
+MultiplayerManager="*res://Singletons/Multiplayer_Manager.gd"
 
 [file_customization]
 
