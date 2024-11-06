@@ -1,10 +1,7 @@
 extends Node2D
 
 @onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer/TextEdit2
-<<<<<<< HEAD
-=======
 @onready var player_scene = preload("res://Scenes/Multiplayer Menu/Player.gd")
->>>>>>> 844ae6f7f6f6441aaf4c47366e1db35c42319f70
 
 var peer = ENetMultiplayerPeer.new()
 

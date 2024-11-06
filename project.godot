@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://Assets/icon.svg"
 boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
+[autoload]
+
+GameManager="*res://Singletons/Game_Manager.gd"
+
 [file_customization]
 
 folder_colors={
