@@ -3,7 +3,7 @@ extends Node2D
 const WIDTH = 800
 const HEIGHT = 600
 
-const PitchCardData = preload("res://pitch_card_data.gd")
+const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
