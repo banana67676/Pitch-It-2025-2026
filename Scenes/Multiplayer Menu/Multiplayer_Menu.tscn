@@ -88,3 +88,5 @@ theme_override_constants/margin_bottom = 30
 [node name="MarginContainer_VBoxContainer_MarginContainer#TextEdit" type="TextEdit" parent="."]
 size_flags_vertical = 3
 placeholder_text = "Enter Port : ex 2135"
+
+[connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
