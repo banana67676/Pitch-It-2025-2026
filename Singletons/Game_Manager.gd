@@ -11,17 +11,21 @@ enum game_state_enum{
 	results
 }
 
+enum game_mode_enum{
+	standard
+}
+
 
 var game_state : int = game_state_enum.title
 
 var settings : bool = false
 
-func change_game_state():
-	pass
-
-
 
 @rpc("any_peer", "call_local", "reliable")
+func change_game_state(state:game_state_enum):
+	get_tree().change_scene_to_file(enum_to_scene(state)) 
+
+
 func enum_to_scene(state:game_state_enum) -> String:
 	match state:
 		game_state_enum.title:
