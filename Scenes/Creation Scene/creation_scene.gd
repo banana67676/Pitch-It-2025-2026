@@ -3,10 +3,11 @@ extends Node2D
 const WIDTH = 800
 const HEIGHT = 600
 
-const PitchCardData = preload("res://pitch_card_data.gd")
+const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	game_run()
 	pass # Replace with function body.
 
 
@@ -14,12 +15,24 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func game_run() -> void:
+	
+	
 
-@rpc("authority", "call_local", "reliable") # Authority should be able to request this
-func export_card() -> PitchCardData:
+var results = []
+
+@rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
+func export_card():
 	var data = PitchCardData.new()
 	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
 	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture
 	data.creator = ""
-	return data
+	import_card.rpc(data)
+
+@rpc("authority", "reliable")
+func import_card(pd: PitchCardData):
+	results.append(pd)
+	
+@rpc("any_peer", "call_local", "reliable")
+func 
