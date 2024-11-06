@@ -45,11 +45,10 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Name:"
 
-[node name="TextEdit" type="RichTextLabel" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2"]
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-bbcode_enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -59,11 +58,10 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Port:"
 
-[node name="TextEdit2" type="RichTextLabel" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer"]
+[node name="TextEdit2" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 10
-bbcode_enabled = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2

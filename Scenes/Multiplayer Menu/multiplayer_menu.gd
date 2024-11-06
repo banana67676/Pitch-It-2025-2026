@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VSplitContainer/MarginContainer/TextEdit
+@onready var SERVER_PORT_READ: TextEdit = $MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer/TextEdit2
 
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene : PackedScene
