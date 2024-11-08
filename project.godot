@@ -21,6 +21,11 @@ boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 GameManager="*res://Singletons/Game_Manager.gd"
 MultiplayerManager="*res://Singletons/Multiplayer_Manager.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
 [file_customization]
 
 folder_colors={

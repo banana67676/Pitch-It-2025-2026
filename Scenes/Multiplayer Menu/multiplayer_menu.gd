@@ -35,5 +35,5 @@ func _on_join_pressed() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Esc"):
+	if Input.is_action_just_released("Esc"):
 		GameManager.change_game_state(GameManager.game_state_enum.title)
