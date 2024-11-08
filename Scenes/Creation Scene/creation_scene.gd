@@ -2,13 +2,12 @@ extends Node2D
 
 const WIDTH = 800
 const HEIGHT = 600
-@onready var timer: Timer = $Timer
 
 const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timer.start(GameManager.creation_time)
+	get_tree().create_timer(GameManager.get_round_time())
 	pass # Replace with function body.
 
 

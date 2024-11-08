@@ -107,3 +107,6 @@ func _on_color_picker_button_color_changed(color: Color) -> void:
 	draw_color = color
 	color_plte.get_child(color_plte.get_child_count()-1).modulate = color
 	pass # Replace with function body.
+
+func set_image(texture : Image):
+	image_texture.update(image)
