@@ -5,9 +5,6 @@
 [node name="Multiplayer_Menu" type="Node2D"]
 script = ExtResource("1_a2imu")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_top = 2.0
 offset_right = 1153.0
@@ -90,3 +87,4 @@ size_flags_vertical = 3
 placeholder_text = "Enter Port : ex 2135"
 
 [connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

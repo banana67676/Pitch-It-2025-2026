@@ -31,6 +31,7 @@ func _on_join_pressed() -> void:
 				print(i)
 				peer.create_client(i, SERVER_PORT_READ.text.to_int())
 				multiplayer.multiplayer_peer = peer
+				await multiplayer.connected_to_server
 				set_username.rpc(USERNAME_READ.text)
 
 @rpc("authority","reliable")

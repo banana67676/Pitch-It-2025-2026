@@ -4,6 +4,8 @@ extends Node
 func _ready() -> void:
 	if multiplayer.is_server():
 		multiplayer.peer_connected.connect(show_player)
+	else:
+		$Begin.visible = false
 	pass # Replace with function body.
 
 func show_player():
