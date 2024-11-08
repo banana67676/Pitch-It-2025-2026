@@ -2,7 +2,6 @@
 
 [node name="LobbyScene" type="Node2D"]
 
-<<<<<<< HEAD
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -15,7 +14,7 @@ theme_override_constants/margin_bottom = 100
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
-=======
+
 [node name="Label" type="Label" parent="."]
 offset_top = 28.0
 offset_right = 157.0
@@ -27,4 +26,4 @@ text = "Lobby"
 [node name="Begin" type="Button" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
->>>>>>> 096e1fa5657691b87a824963cfcd3023574d611b
+
