@@ -18,8 +18,8 @@ func _on_host_pressed() -> void:
 	if SERVER_PORT_READ.text != null:
 		peer.create_server(SERVER_PORT_READ.text.to_int())
 		multiplayer.multiplayer_peer = peer
-		#multiplayer.peer_connected.connect(add_player)
-		#add_player()
+		multiplayer.peer_connected.connect(add_player)
+		add_player()
 		GameManager.change_game_state(GameManager.game_state_enum.lobby)
 
 func _on_join_pressed() -> void:
@@ -30,3 +30,10 @@ func _on_join_pressed() -> void:
 				print(i)
 				peer.create_client(i, SERVER_PORT_READ.text.to_int())
 				multiplayer.multiplayer_peer = peer
+
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Esc"):
+		GameManager.change_game_state(GameManager.game_state_enum.title)
