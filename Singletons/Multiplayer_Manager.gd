@@ -10,14 +10,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-var results = []
+var cards = []
 
 func run_game():
+	# Run creation screen
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation)
 	await get_tree().create_timer(GameManager.creation_time).timeout
-	get_tree().find_child("Creation_Scene").export_card.rpc()
-	for product in results:
-		get_tree().find_child("ResultsScene").display().rpc(product)
-		await get_tree().create_time(GameManager.presentation_time)
-	GameManager.change_game_state.rpc(GameManager.game_state_enum.display)
 	
+	# Get cards
+	get_tree().find_child("Creation_Scene").export_card.rpc()
+	# Change to display
+	GameManager.change_game_state.rpc(GameManager.game_state_enum.display)
+	for product in cards:
+		get_tree().current_scene.display.rpc(product)
+		await get_tree().create_time(GameManager.presentation_time)
+	
+	# Voting
+	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting)
+	
+	# Results
+	GameManager.change_game_state.rpc(GameManager.game_state_enum.results)

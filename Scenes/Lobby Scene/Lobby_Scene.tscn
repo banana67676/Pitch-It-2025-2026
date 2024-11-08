@@ -7,3 +7,9 @@ offset_top = 28.0
 offset_right = 157.0
 offset_bottom = 51.0
 text = "Lobby"
+
+[node name="Player List" type="Node2D" parent="."]
+
+[node name="Begin" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
