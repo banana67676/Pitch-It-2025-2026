@@ -29,4 +29,8 @@ func export_card():
 @rpc("authority", "reliable")
 func import_card(pd: PitchCardData):
 	MultiplayerManager.results.append(pd)
-	
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_released("Esc"):
+		GameManager.quit_game(true)
