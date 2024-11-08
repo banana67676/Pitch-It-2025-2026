@@ -7,9 +7,9 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "this is the displaying"
 
-[node name="CardInfo" type="Node2D" parent="."]
+[node name="DisplayScene" type="Node2D" parent="."]
 
-[node name="Slogan" type="Label" parent="CardInfo"]
+[node name="Slogan" type="Label" parent="DisplayScene"]
 offset_left = 269.0
 offset_top = 96.0
 offset_right = 309.0
@@ -17,7 +17,7 @@ offset_bottom = 119.0
 text = "slogan
 "
 
-[node name="ProdName" type="Label" parent="CardInfo"]
+[node name="ProdName" type="Label" parent="DisplayScene"]
 offset_left = 270.0
 offset_top = 56.0
 offset_right = 331.0
