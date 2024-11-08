@@ -21,14 +21,14 @@ func _on_host_pressed() -> void:
 		multiplayer.multiplayer_peer = peer
 		multiplayer.peer_connected.connect(add_player)
 		add_player()
-		GameManager.change_game_state(GameManager.game_state_enum.lobby)
+		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
 
 func _on_join_pressed() -> void:
+	print(SERVER_PORT_READ.text.to_int())
 	if SERVER_PORT_READ.text.to_int() != null:
 		var ip_addresses = IP.get_local_addresses()
 		for i in ip_addresses:
 			if !i.begins_with("f"):
-				print(i)
 				peer.create_client(i, SERVER_PORT_READ.text.to_int())
 				multiplayer.multiplayer_peer = peer
 				set_username.rpc(USERNAME_READ.text)
@@ -44,11 +44,11 @@ func set_username(name: String):
 @rpc("any_peer", "reliable")
 func join_setup(success: bool):
 	if success:
-		GameManager.change_game_state(GameManager.game_state_enum.lobby)
+		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
 	else:
 		multiplayer.multiplayer_peer = null
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.title)
+		GameManager.change_game_state(GameManager.game_state_enum.title,false)

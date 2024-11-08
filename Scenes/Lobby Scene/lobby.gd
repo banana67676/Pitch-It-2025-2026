@@ -17,4 +17,4 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu)
+		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, false)

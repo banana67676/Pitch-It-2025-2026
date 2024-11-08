@@ -34,7 +34,7 @@ func quit_game(protected:bool):
 	get_tree().quit()
 
 @rpc("any_peer", "call_local", "reliable")
-func change_game_state(state:game_state_enum):
+func change_game_state(state:game_state_enum, protected : bool):
 	get_tree().change_scene_to_file(enum_to_scene(state)) 
 
 

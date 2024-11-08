@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=2 format=3 uid="uid://cj0mn0lb3a808"]
+
+[ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_top8o"]
 
 [node name="LobbyScene" type="Node2D"]
+script = ExtResource("1_top8o")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 1152.0
@@ -26,4 +29,3 @@ text = "Lobby"
 [node name="Begin" type="Button" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
-
