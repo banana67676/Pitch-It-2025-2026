@@ -3,8 +3,8 @@ extends Node
 const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 const Drawing = preload("res://Drawing/drawing.gd")
 var output : Drawing
-@onready var prod_name: Label = $DisplayScene/ProdName
-@onready var slogan: Label = $DisplayScene/Slogan
+@onready var prod_name: Label = $CardInfo/ProdName
+@onready var slogan: Label = $CardInfo/Slogan
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -10,7 +10,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-var cards = []
+var users = {}
+var created_cards = []
 
 func run_game():
 	# Run creation screen
@@ -21,7 +22,7 @@ func run_game():
 	get_tree().find_child("Creation_Scene").export_card.rpc()
 	# Change to display
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display)
-	for product in cards:
+	for product in created_cards:
 		get_tree().current_scene.display.rpc(product)
 		await get_tree().create_time(GameManager.presentation_time)
 	
