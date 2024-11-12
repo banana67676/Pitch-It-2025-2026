@@ -24,7 +24,7 @@ offset_right = 157.0
 offset_bottom = 51.0
 text = "Lobby"
 
-[node name="Player List" type="Node2D" parent="."]
+[node name="PlayerList" type="Node2D" parent="."]
 
 [node name="Begin" type="Button" parent="."]
 offset_right = 8.0

@@ -8,7 +8,7 @@ func _ready() -> void:
 		$Begin.visible = false
 	pass # Replace with function body.
 
-func show_player():
+func show_player(id):
 	var player_label = Label.new()
 	player_label.text = "who knows?"
 	$PlayerList.add_child(player_label)
@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu)
+		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true)
 
 func _on_begin_pressed() -> void:
 	MultiplayerManager.run_game()
