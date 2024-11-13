@@ -78,16 +78,20 @@ func run_game():
 	
 	# Get cards
 	get_parent().get_node("Creation_Scene").export_card.rpc()
+	
+	print(cards)
 	# Change to display
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
 	for product in cards:
 		get_tree().current_scene.display.rpc(product)
-		await get_tree().create_time(GameManager.presentation_time).timeout
+		await get_tree().create_timer(GameManager.presentation_time).timeout
 	
 	# Voting
 	receive_player_data.rpc(players)
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
 	await get_tree().create_time(20).timeout
+	
+	await get_tree().create_timer(20).timeout
 	
 	# Results
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)

@@ -22,13 +22,18 @@ func export_card():
 	var data = PitchCardData.new()
 	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
-	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image
-	data.creator = ""
+	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture.get_image()
+	data.user = "test"
 	import_card.rpc(data)
 
 @rpc("authority", "reliable")
 func import_card(pd: PitchCardData):
-	MultiplayerManager.results.append(pd)
+	MultiplayerManager.cards.append(pd)
+	import_card.rpc(data)
+
+@rpc("authority", "reliable")
+func import_card(pd: PitchCardData):
+	MultiplayerManager.cards.append(pd)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
