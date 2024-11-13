@@ -1,5 +1,8 @@
 extends Node
 
+var username : String = ""
+var score : int
+var data : PitchCardData
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

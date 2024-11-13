@@ -3,14 +3,15 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if multiplayer.is_server():
-		multiplayer.peer_connected.connect(show_player)
+		pass
+		MultiplayerManager.player_ready.connect(show_player)
 	else:
 		$Begin.visible = false
 	pass # Replace with function body.
 
 func show_player(id):
 	var player_label = Label.new()
-	player_label.text = MultiplayerManager.players[id]
+	player_label.text = MultiplayerManager.players[id].username
 	$PlayerList.add_child(player_label)
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.

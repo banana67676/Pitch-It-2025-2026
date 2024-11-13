@@ -2,6 +2,10 @@ extends Node
 
 var peer = ENetMultiplayerPeer.new()
 
+const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
+const Lobby = preload("res://Scenes/Lobby Scene/lobby.gd")
+
+signal player_ready
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -25,7 +29,7 @@ var players = {}
 var username = ""
 
 func add_player(id):
-	players[id]
+	var player
 
 func join_server(port, usern):
 	username = usern
@@ -41,15 +45,20 @@ func join_server(port, usern):
 					multiplayer.connected_to_server.connect(_on_connected_ok)
 
 func _on_connected_ok():
-	set_username.rpc(username)
+	set_username.rpc_id(1, username)
 
-@rpc("authority","reliable")
+@rpc("any_peer","call_local","reliable")
 func set_username(username: String):
+	if !multiplayer.is_server():
+		return
 	if GameManager.game_state != GameManager.game_state_enum.lobby:
-		join_setup.rpc(multiplayer.get_remote_sender_id(), false)
+		join_setup.rpc_id(multiplayer.get_remote_sender_id(), false)
 	else:
-		join_setup.rpc(multiplayer.get_remote_sender_id(), true)
-		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = username
+		join_setup.rpc_id(multiplayer.get_remote_sender_id(), true)
+		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = PlayerData.new()
+		MultiplayerManager.players[multiplayer.get_remote_sender_id()].username = username
+		player_ready.emit(multiplayer.get_remote_sender_id())
+		
 
 @rpc("any_peer", "reliable")
 func join_setup(success: bool):
