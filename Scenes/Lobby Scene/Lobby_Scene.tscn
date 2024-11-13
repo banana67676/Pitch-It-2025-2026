@@ -15,19 +15,28 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 100
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="."]
-offset_top = 28.0
-offset_right = 157.0
-offset_bottom = 51.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Lobby"
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+split_offset = 100
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Begin" type="Button" parent="MarginContainer/VSplitContainer/MarginContainer2"]
+layout_mode = 2
 
 [node name="PlayerList" type="Node2D" parent="."]
 
-[node name="Begin" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
-
-[connection signal="pressed" from="Begin" to="." method="_on_begin_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer2/Begin" to="." method="_on_begin_pressed"]

@@ -20,7 +20,7 @@ var game_mode : game_mode_enum = game_mode_enum.standard
 func get_round_time() -> int:
 	match game_mode:
 		game_mode_enum.standard:
-			return 120
+			return 5
 	
 	return 2135
 
