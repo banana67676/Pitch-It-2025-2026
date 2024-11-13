@@ -8,9 +8,9 @@ func _ready() -> void:
 		$Begin.visible = false
 	pass # Replace with function body.
 
-func show_player(id):
+func show_player():
 	var player_label = Label.new()
-	player_label.text = MultiplayerManager.players[id]
+	player_label.text = "who knows?"
 	$PlayerList.add_child(player_label)
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,8 +19,14 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true)
+<<<<<<< HEAD
+		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu)
 
 func _on_begin_pressed() -> void:
 	MultiplayerManager.run_game()
 	pass # Replace with function body.
+||||||| b510006
+		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu)
+=======
+		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, false)
+>>>>>>> 36f2d7a41904f1e1ea85896b74f49b95e1f448bd

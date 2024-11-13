@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+android/
+./vscode/
+<<<<<<< HEAD
+*~
+*.DS_Store
+||||||| b510006
+=======
+*~
+>>>>>>> 36f2d7a41904f1e1ea85896b74f49b95e1f448bd

@@ -1,0 +1,51 @@
+<<<<<<< HEAD
+[gd_scene load_steps=2 format=3 uid="uid://cj0mn0lb3a808"]
+
+[ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
+||||||| b510006
+[gd_scene format=3 uid="uid://cj0mn0lb3a808"]
+=======
+[gd_scene load_steps=2 format=3 uid="uid://cj0mn0lb3a808"]
+
+[ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_top8o"]
+>>>>>>> 36f2d7a41904f1e1ea85896b74f49b95e1f448bd
+
+[node name="LobbyScene" type="Node2D"]
+<<<<<<< HEAD
+script = ExtResource("1_fj56n")
+||||||| b510006
+=======
+script = ExtResource("1_top8o")
+>>>>>>> 36f2d7a41904f1e1ea85896b74f49b95e1f448bd
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+offset_top = 28.0
+offset_right = 157.0
+offset_bottom = 51.0
+text = "Lobby"
+
+[node name="Player List" type="Node2D" parent="."]
+
+[node name="Begin" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+<<<<<<< HEAD
+
+[connection signal="pressed" from="Begin" to="." method="_on_begin_pressed"]
+||||||| b510006
+
+=======
+>>>>>>> 36f2d7a41904f1e1ea85896b74f49b95e1f448bd

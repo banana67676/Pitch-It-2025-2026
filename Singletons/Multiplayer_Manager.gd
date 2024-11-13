@@ -21,11 +21,11 @@ func init_server(port, usern):
 		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
 
 var cards = []
-var players = []
+var players = {}
 var username = ""
 
 func add_player(id):
-	var player = id
+	players[id]
 
 func join_server(port, usern):
 	username = usern
@@ -49,7 +49,7 @@ func set_username(username: String):
 		join_setup.rpc(multiplayer.get_remote_sender_id(), false)
 	else:
 		join_setup.rpc(multiplayer.get_remote_sender_id(), true)
-		MultiplayerManager.users[multiplayer.get_remote_sender_id()] = username
+		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = username
 
 @rpc("any_peer", "reliable")
 func join_setup(success: bool):
