@@ -64,8 +64,7 @@ func run_game():
 	await get_tree().create_timer(GameManager.creation_time).timeout
 	
 	# Get cards
-	print(get_tree().get_child("Creation_Scene"))
-	get_tree().get_child("Creation_Scene").export_card.rpc()
+	get_parent().get_node("Creation_Scene").export_card.rpc()
 	# Change to display
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
 	for product in cards:
