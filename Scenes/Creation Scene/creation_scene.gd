@@ -22,7 +22,7 @@ func export_card():
 	var data = PitchCardData.new()
 	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
-	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture
+	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture.get_image()
 	data.creator = ""
 	import_card.rpc(data)
 
