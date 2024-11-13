@@ -6,13 +6,17 @@ func _ready() -> void:
 		pass
 		MultiplayerManager.player_ready.connect(show_player)
 	else:
-		$Begin.visible = false
+		$MarginContainer/VSplitContainer/MarginContainer2/Begin.visible = false
 	pass # Replace with function body.
+
+var player_count : int = 0
 
 func show_player(id):
 	var player_label = Label.new()
 	player_label.text = MultiplayerManager.players[id].username
 	$PlayerList.add_child(player_label)
+	player_label.set_global_position(Vector2(200+100*player_count % 3, 150+50*(int(player_count) / 3)))
+	player_count += 1
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
