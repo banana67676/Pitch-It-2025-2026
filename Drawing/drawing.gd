@@ -40,11 +40,10 @@ func _ready():
 	for color in defaults:
 		new_ui_button(color)
 		#obj.call_deferred("set","theme_override_colors/icon_normal_color", color)
-	var varied_button = new_ui_button(Color8(255,255,255,255))
-		
+	new_ui_button(Color8(255,255,255,255))
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if enabled:
 		if Input.is_action_pressed("Mouse Click"):
 			# Plan: Create a parametric line equation where f(0) = prev_mouse_pos && f(1) = mouse_pos
@@ -109,4 +108,4 @@ func _on_color_picker_button_color_changed(color: Color) -> void:
 	pass # Replace with function body.
 
 func set_image(texture : Image):
-	image_texture.update(image)
+	image_texture.update(texture)

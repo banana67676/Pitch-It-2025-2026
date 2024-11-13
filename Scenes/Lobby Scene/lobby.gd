@@ -19,10 +19,10 @@ func show_player(id):
 	player_count += 1
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
 		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true)
 

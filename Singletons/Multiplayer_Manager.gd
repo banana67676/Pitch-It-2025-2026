@@ -21,7 +21,7 @@ func init_server(port, usern):
 		peer.create_server(port.to_int())
 		multiplayer.multiplayer_peer = peer
 		multiplayer.peer_connected.connect(add_player)
-		add_player(1)
+		set_username(usern)
 		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
 
 var cards = []
@@ -67,6 +67,10 @@ func join_setup(success: bool):
 	else:
 		multiplayer.multiplayer_peer = null
 
+func receive_player_data(players: Array[PlayerData]):
+	MultiplayerManager.players = players
+	pass
+
 func run_game():
 	# Run creation screen
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
@@ -81,8 +85,8 @@ func run_game():
 		await get_tree().create_time(GameManager.presentation_time).timeout
 	
 	# Voting
+	receive_player_data.rpc(players)
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
-	
 	await get_tree().create_time(20).timeout
 	
 	# Results
