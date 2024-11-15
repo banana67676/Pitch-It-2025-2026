@@ -29,11 +29,6 @@ func export_card():
 @rpc("authority", "reliable")
 func import_card(pd: PitchCardData):
 	MultiplayerManager.cards.append(pd)
-	import_card.rpc(data)
-
-@rpc("authority", "reliable")
-func import_card(pd: PitchCardData):
-	MultiplayerManager.cards.append(pd)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
