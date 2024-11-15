@@ -12,10 +12,15 @@ func show_scores(voting_results: Dictionary):
 		result.value = voting_results[record]
 		result_list.append(result)
 	result_list.sort_custom(comp_score)
+	for i in range(result_list.size()):
+		var entry = Label.new()
+		entry.text = result_list[result_list.size()-i-1]
+		$List.add_child(entry)
+		
 	pass
 
 func comp_score(r1: Result, r2: Result):
-	return r1.value < r2.value
+	return r1.value > r2.value
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

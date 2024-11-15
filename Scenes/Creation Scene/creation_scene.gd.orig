@@ -22,8 +22,16 @@ func export_card():
 	var data = PitchCardData.new()
 	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
+<<<<<<< HEAD
+	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image
+	data.creator = ""
+||||||| ec6e11d
+	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture
+	data.creator = ""
+=======
 	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture.get_image()
 	data.user = "test"
+>>>>>>> 80f2f67be4bfa8f6d05212de29e68262c5422582
 	import_card.rpc(data)
 
 @rpc("authority", "reliable")

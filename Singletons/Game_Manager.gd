@@ -30,13 +30,16 @@ var presentation_time : float = 60
 
 var settings : bool = false
 
+signal scene_changed
+
 func quit_game(protected:bool):
 	get_tree().quit()
 
 @rpc("any_peer", "call_local", "reliable")
 func change_game_state(state:game_state_enum, protected : bool):
 	game_state = state
-	get_tree().change_scene_to_file(enum_to_scene(state)) 
+	get_tree().change_scene_to_file.bind(enum_to_scene(state)).call_deferred()
+	scene_changed.emit()
 
 
 func enum_to_scene(state:game_state_enum) -> String:
