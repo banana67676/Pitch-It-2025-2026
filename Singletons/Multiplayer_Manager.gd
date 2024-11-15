@@ -48,7 +48,7 @@ func join_server(port, usern):
 func _on_connected_ok():
 	set_username.rpc_id(1, username)
 
-@rpc("any_peer","call_local","reliable")
+@rpc("any_peer", "call_local", "reliable")
 func set_username(username: String):
 	if !multiplayer.is_server():
 		return
@@ -64,7 +64,7 @@ func set_username(username: String):
 		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = PlayerData.new()
 		MultiplayerManager.players[multiplayer.get_remote_sender_id()].username = username
 		player_ready.emit(multiplayer.get_remote_sender_id())
-		
+
 
 @rpc("any_peer", "reliable")
 func join_setup(success: bool):
@@ -81,23 +81,22 @@ func run_game():
 	# Run creation screen
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
 	await get_tree().create_timer(GameManager.creation_time).timeout
-	
+
 	# Get cards
 	get_parent().get_node("Creation_Scene").export_card.rpc()
-	
+
 	print(cards)
 	# Change to display
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
 	for product in cards:
 		get_tree().current_scene.display.rpc(product)
 		await get_tree().create_timer(GameManager.presentation_time).timeout
-	
+
 	# Voting
 	receive_player_data.rpc(players)
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
-	await get_tree().create_time(20).timeout
-	
 	await get_tree().create_timer(20).timeout
-	
+
+
 	# Results
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)
