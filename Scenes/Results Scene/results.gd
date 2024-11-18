@@ -14,7 +14,7 @@ func show_scores(voting_results: Dictionary):
 	result_list.sort_custom(comp_score)
 	for i in range(result_list.size()):
 		var entry = Label.new()
-		entry.text = result_list[result_list.size()-i-1]
+		entry.text = str(result_list.size()-i-1,". $",result_list[result_list.size()-i-1].username)
 		$List.add_child(entry)
 		
 	pass

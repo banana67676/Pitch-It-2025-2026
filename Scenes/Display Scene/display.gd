@@ -24,4 +24,5 @@ func display(card: PitchCardData):
 	output.set_image(card.logo)
 	prod_name.text=card.title
 	slogan.text=card.slogan
+	output.visible = true
 	pass
