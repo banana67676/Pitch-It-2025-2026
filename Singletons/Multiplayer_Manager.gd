@@ -1,12 +1,11 @@
 extends Node
 
 var peer = ENetMultiplayerPeer.new()
-const Lobby = preload("res://Scenes/Lobby Scene/lobby.gd")
 const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
 signal player_ready
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameManager.connect("scene_changed", continue_init)
+	# connect("lobby_ready", continue_init)
 	pass # Replace with function body.
 
 
@@ -24,6 +23,10 @@ func init_server(port, usern):
 		multiplayer.multiplayer_peer = peer
 		multiplayer.peer_connected.connect(add_player)
 		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+		while get_tree().current_scene == null:
+			pass
+		#await get_tree().create_timer(5.0).timeout
+		continue_init()
 
 var cards = []
 var players = {}
@@ -50,20 +53,20 @@ func _on_connected_ok():
 
 @rpc("any_peer", "call_local", "reliable")
 func set_username(username: String):
+	var lobby_scene = get_parent().get_node("LobbyScene")
 	if !multiplayer.is_server():
 		return
 	if multiplayer.get_remote_sender_id() == 0:
 		MultiplayerManager.players[multiplayer.get_unique_id()] = PlayerData.new()
 		MultiplayerManager.players[multiplayer.get_unique_id()].username = username
-		get_parent().find_child("LobbyScene").connect("player_ready", get_parent().find_child("LobbyScene").show_player)
-		player_ready.emit(multiplayer.get_unique_id())
+		lobby_scene.show_player(multiplayer.get_unique_id())
 	if GameManager.game_state != GameManager.game_state_enum.lobby:
 		join_setup.rpc_id(multiplayer.get_remote_sender_id(), false)
 	else:
 		join_setup.rpc_id(multiplayer.get_remote_sender_id(), true)
 		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = PlayerData.new()
 		MultiplayerManager.players[multiplayer.get_remote_sender_id()].username = username
-		player_ready.emit(multiplayer.get_remote_sender_id())
+		lobby_scene.show_player(multiplayer.get_unique_id())
 
 
 @rpc("any_peer", "reliable")

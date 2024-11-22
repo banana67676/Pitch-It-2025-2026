@@ -1,9 +1,11 @@
 extends Node
 
 const MM = preload("res://Singletons/Multiplayer_Manager.gd")
+signal lobby_ready
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if multiplayer.is_server():
+		lobby_ready.emit()
 		pass
 	else:
 		$MarginContainer/VSplitContainer/MarginContainer2/Begin.visible = false
