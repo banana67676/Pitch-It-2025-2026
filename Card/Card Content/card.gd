@@ -1,7 +1,5 @@
 extends Node2D
 
-@export var FLIP_TIME = .5
-
 enum card_types {
 	who,
 	what

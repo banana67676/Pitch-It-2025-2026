@@ -73,9 +73,9 @@ func join_setup(success: bool):
 	else:
 		multiplayer.multiplayer_peer = null
 
+@rpc("any_peer", "call_local", "reliable")
 func receive_player_data(players: Array[PlayerData]):
 	MultiplayerManager.players = players
-	pass
 
 func run_game():
 	# Run creation screen
