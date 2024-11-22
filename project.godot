@@ -20,6 +20,7 @@ boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
 GameManager="*res://Singletons/Game_Manager.gd"
 MultiplayerManager="*res://Singletons/Multiplayer_Manager.gd"
+Camera="*res://UI/Camera.tscn"
 
 [display]
 

@@ -55,7 +55,7 @@ func set_username(username: String):
 	if multiplayer.get_remote_sender_id() == 0:
 		MultiplayerManager.players[multiplayer.get_unique_id()] = PlayerData.new()
 		MultiplayerManager.players[multiplayer.get_unique_id()].username = username
-		get_parent().find_child("LobbyScene").connect("player_ready", get_parent().find_child("LobbyScene").show_player)
+		get_parent().get_node("LobbyScene").connect("player_ready", get_parent().get_node("LobbyScene").show_player)
 		player_ready.emit(multiplayer.get_unique_id())
 	if GameManager.game_state != GameManager.game_state_enum.lobby:
 		join_setup.rpc_id(multiplayer.get_remote_sender_id(), false)

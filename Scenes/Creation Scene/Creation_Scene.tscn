@@ -63,5 +63,13 @@ scale = Vector2(0.7, 0.7)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_h7afi")
 
-[node name="Card_Preset" parent="." instance=ExtResource("3_4ok8t")]
-position = Vector2(878, 338)
+[node name="What" parent="." instance=ExtResource("3_4ok8t")]
+position = Vector2(939, 925)
+rotation = 0.174533
+scale = Vector2(0.8, 0.8)
+card_type = 1
+
+[node name="Who" parent="." instance=ExtResource("3_4ok8t")]
+position = Vector2(937, 925)
+rotation = -0.174533
+scale = Vector2(0.8, 0.8)
