@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Card/Card Content/card.gd" id="1_2iua7"]
 
-[node name="Card_Preset" type="Node2D"]
+[node name="Card_Preset" type="CharacterBody2D"]
 script = ExtResource("1_2iua7")
 
 [node name="Face" type="ColorRect" parent="."]
