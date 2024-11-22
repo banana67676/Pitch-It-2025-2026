@@ -125,22 +125,16 @@ var state = stay
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(.1).timeout
 	if (card_type == card_types.who):
 		possible_text = who_text
 	elif (card_type == card_types.what):
 		possible_text = what_text
 	pick_text()
 
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	move(Vector2(0,0))
-
 func pick_text():
 	label.text = possible_text[randi_range(0, possible_text.size() - 1)]
 
-func move(location : Vector2):
-	global_position = lerp(global_position, location, 0.2)
-	global_rotation = lerp(global_rotation, 0, 0.2)
+func move(location : Vector2, rot : float):
+	global_position = lerp(global_position, location, 0.05)
+	global_rotation = lerp(global_rotation, rot, 0.05)
