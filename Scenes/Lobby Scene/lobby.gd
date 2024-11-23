@@ -17,9 +17,23 @@ func show_player(id):
 	var player_label = Label.new()
 	player_label.text = MultiplayerManager.players[id].username
 	$PlayerList.add_child(player_label)
-	player_label.set_global_position(Vector2(200+100*player_count % 3, 150+50*(int(player_count) / 3)))
+	player_label.set_global_position(Vector2(200+100*(player_count % 3), 150+50*(int(player_count) / 3)))
 	player_count += 1
 	pass
+
+
+func reset_player_data():
+	for player in $PlayerList.get_children():
+		remove_child(player)
+		player.queue_free()
+	player_count = 0
+	for player in MultiplayerManager.players:
+		var player_label = Label.new()
+		player_label.text = MultiplayerManager.players[player].username
+		$PlayerList.add_child(player_label)
+		player_label.set_global_position(Vector2(200+100*(player_count % 3), 150+50*(int(player_count) / 3)))
+		player_count += 1
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass

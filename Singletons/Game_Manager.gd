@@ -41,7 +41,14 @@ func change_game_state(state:game_state_enum, protected : bool):
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
 	game_state = state
-	get_tree().change_scene_to_file.bind(enum_to_scene(state)).call()
+	get_tree().current_scene.visible=false
+	var new_scene = load(enum_to_scene(state))
+	var scene_node = new_scene.instantiate()
+	get_tree().current_scene.queue_free()
+	get_tree().root.add_child(scene_node)
+	get_tree().current_scene = scene_node
+
+	#get_tree().change_scene_to_file(enum_to_scene(state))
 	scene_changed.emit()
 	Camera.fade_in()
 

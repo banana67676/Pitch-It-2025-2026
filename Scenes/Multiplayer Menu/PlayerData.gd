@@ -12,3 +12,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+func serialize() -> Dictionary:
+	if data != null:
+		return {"username": username, "score" : score, "data": data.serialize()}
+	else:
+		return {"username": username, "score": score, "data": null}
