@@ -11,6 +11,7 @@ func _ready() -> void:
 	output = Drawing.new()
 	output.enabled = false
 	output.visible = false
+	output.global_position = Vector2(100,300)
 	add_child(output)
 	pass # Replace with function body.
 
@@ -19,7 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-@rpc("any_peer", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func display(card: PitchCardData):
 	output.set_image(card.logo)
 	prod_name.text=card.title

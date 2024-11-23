@@ -37,11 +37,11 @@ func export_card():
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
 	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image_texture.get_image()
 	data.user = "test"
-	import_card.rpc(data)
+	import_card.rpc(data.serialize())
 
 @rpc("authority", "reliable")
-func import_card(pd: PitchCardData):
-	MultiplayerManager.cards.append(pd)
+func import_card(pd: Dictionary):
+	MultiplayerManager.players[multiplayer.get_remote_sender_id()].data = MultiplayerManager.deserialize(pd)
 
 
 func _unhandled_input(_event: InputEvent) -> void:

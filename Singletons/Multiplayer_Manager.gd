@@ -29,7 +29,9 @@ func init_server(port, usern):
 		#await get_tree().create_timer(5.0).timeout
 		continue_init()
 
-var cards = []
+var cards = {}
+var votes = {}
+var score_card = {}
 var players = {}
 var username = ""
 
@@ -88,8 +90,12 @@ func join_setup(success: bool):
 	else:
 		multiplayer.multiplayer_peer = null
 
+func run_game_loop():
+	for i in range(2):
+		run_game()
+	run_game(true)
 
-func run_game():
+func run_game(final : bool = false):
 	# Run creation screen
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
 	await get_tree().create_timer(GameManager.creation_time).timeout
@@ -110,9 +116,24 @@ func run_game():
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
 	await get_tree().create_timer(20).timeout
 
-
+	get_node("/root/VotingScene").send_vote.rpc()
+	await get_tree().create_timer(4).timeout
+	
+	var round_results = {}
+	for vote in votes.values():
+		round_results[vote] += 1
+		MultiplayerManager[vote].score += 100000
 	# Results
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)
+	await get_tree().create_timer(3).timeout
+	MultiplayerManager.update_player_data.rpc()
+	get_node("/root/ResultsScene").show_scores.rpc(round_results)
+	await get_tree().create_timer(15).timeout
+	
+	if final:
+		get_node("/root/ResultsScene").show_final.rpc()
+
+	# Optional: Offer replay
 
 
 func deserialize(data: Dictionary):

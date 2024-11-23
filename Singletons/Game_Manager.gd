@@ -26,7 +26,7 @@ func get_round_time() -> int:
 	return 2135
 
 var game_state : int = game_state_enum.title
-var creation_time : float = 5
+var creation_time : float = 8
 var presentation_time : float = 60
 
 var settings : bool = false
