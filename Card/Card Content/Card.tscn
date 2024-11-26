@@ -1,22 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://6b5nae3lm6ou"]
+[gd_scene load_steps=4 format=3 uid="uid://6b5nae3lm6ou"]
 
 [ext_resource type="Script" path="res://Card/Card Content/card.gd" id="1_2iua7"]
+[ext_resource type="Texture2D" uid="uid://bx3n0pvnl1u4l" path="res://Assets/What-card-asset.png" id="2_bhry4"]
+[ext_resource type="Theme" uid="uid://lcg4l4h02ma" path="res://Assets/Font.tres" id="3_pqtad"]
 
 [node name="Card_Preset" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_2iua7")
 
-[node name="Face" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Face" type="TextureRect" parent="."]
+texture_filter = 2
 offset_right = 350.0
 offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color(0.777933, 0.354876, 0.405116, 1)
+texture = ExtResource("2_bhry4")
+expand_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Face"]
 layout_mode = 1
@@ -34,12 +33,15 @@ theme_override_constants/margin_bottom = 10
 
 [node name="ColorRect" type="ColorRect" parent="Face/MarginContainer"]
 layout_mode = 2
+color = Color(1, 1, 1, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="Face/MarginContainer/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 15.0
+offset_right = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 8
@@ -49,8 +51,10 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Label" type="Label" parent="Face/MarginContainer/ColorRect/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("3_pqtad")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "logo"
+theme_override_font_sizes/font_size = 30
+text = "TXT"
 horizontal_alignment = 1
 autowrap_mode = 3
 
