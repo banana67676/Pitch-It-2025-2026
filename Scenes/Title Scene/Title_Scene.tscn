@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq861buo4rsju"]
+[gd_scene load_steps=3 format=3 uid="uid://dq861buo4rsju"]
 
 [ext_resource type="Script" path="res://Scenes/Title Scene/title_scene.gd" id="1_flmj4"]
+[ext_resource type="Theme" uid="uid://lcg4l4h02ma" path="res://Assets/Font.tres" id="2_wvn0b"]
 
 [node name="Title_Scene" type="Node2D"]
 script = ExtResource("1_flmj4")
@@ -13,33 +14,59 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-dragger_visibility = 1
+theme_override_constants/separation = 40
+alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+[node name="Blank" type="Container" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="title" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = -30
 
-[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/title"]
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 100
-text = "Pitch-It!"
+theme = ExtResource("2_wvn0b")
+theme_override_colors/font_color = Color(0.83, 0.785733, 0.166, 1)
+theme_override_colors/font_shadow_color = Color(0.619894, 0.457824, 0.171442, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 120
+text = "Pitch It!"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+[node name="slogan" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/slogan"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_wvn0b")
+theme_override_colors/font_color = Color(0.831373, 0.784314, 0.164706, 1)
+theme_override_font_sizes/font_size = 30
+text = "Who's got the Million Dollar Idea?"
+horizontal_alignment = 1
+
+[node name="Start" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 175
+theme_override_constants/margin_bottom = 50
 
-[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Start"]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("2_wvn0b")
+theme_override_colors/font_color = Color(0.831373, 0.784314, 0.164706, 1)
 text = "Press any key to start"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -13,6 +13,7 @@ config_version=5
 config/name="Pitch-it"
 run/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0.0117647, 0.101961, 1)
 config/icon="res://Assets/icon.svg"
 boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
@@ -24,6 +25,7 @@ Camera="*res://UI/Camera.tscn"
 
 [display]
 
+window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
@@ -55,3 +57,4 @@ Esc={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.49, 0.128707, 0.1029, 1)

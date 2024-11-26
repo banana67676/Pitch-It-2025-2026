@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+
+const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
+const WHO_CARD_ASSET = preload("res://Assets/Who-card-asset.png")
+
 enum card_types {
 	who,
 	what
@@ -109,12 +113,9 @@ enum card_types {
 var possible_text = []
 
 
-@onready var front = $Front
-@onready var back = $Back
 @onready var label: Label = $Face/MarginContainer/ColorRect/MarginContainer/Label
 
-
-@onready var currentSide = back
+@onready var face: TextureRect = $Face
 
 enum {
 	stay,
@@ -125,6 +126,10 @@ var state = stay
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if card_type == card_types.who:
+		face.texture = WHO_CARD_ASSET
+	else:
+		face.texture = WHAT_CARD_ASSET
 	await get_tree().create_timer(.1).timeout
 	if (card_type == card_types.who):
 		possible_text = who_text
