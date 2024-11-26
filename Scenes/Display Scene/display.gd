@@ -21,7 +21,8 @@ func _process(delta: float) -> void:
 	pass
 
 @rpc("any_peer", "call_local", "reliable")
-func display(card: PitchCardData):
+func display_card(card_serialized: Dictionary):
+	var card = PitchCardData.deserialize(card_serialized)
 	output.set_image(card.logo)
 	prod_name.text=card.title
 	slogan.text=card.slogan

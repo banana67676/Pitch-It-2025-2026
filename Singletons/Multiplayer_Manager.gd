@@ -91,28 +91,35 @@ func join_setup(success: bool):
 		multiplayer.multiplayer_peer = null
 
 func run_game_loop():
-	for i in range(2):
-		run_game()
-	run_game(true)
+	if multiplayer.is_server():
+		#for i in range(2):
+		#	run_game()
+		run_game(true)
 
 func run_game(final : bool = false):
 	# Run creation screen
+	print(multiplayer.get_peers())
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
+	
 	await get_tree().create_timer(GameManager.creation_time).timeout
 
 	# Get cards
-	get_parent().get_node("Creation_Scene").export_card.rpc()
-
-	print(cards)
+	get_parent().get_node("/root/Creation_Scene").export_card.rpc()
+	while get_cards().size() < players.size():
+		await get_tree().create_timer(0.5).timeout
+	print(get_cards())
+	 #update_player_data.rpc(serialize(players))
 	# Change to display
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
+	await GameManager.scene_changed
 	await get_tree().create_timer(0.5).timeout # Protects against the game state moving ahead too quickly
-	for product in cards:
-		get_tree().current_scene.display.rpc(product)
+	cards = get_cards()
+	for product in cards.values():
+		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize())
 		await get_tree().create_timer(GameManager.presentation_time).timeout
 
 	# Voting
-	update_player_data.rpc(players)
+	update_player_data.rpc(serialize(players))
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
 	await get_tree().create_timer(20).timeout
 
@@ -126,7 +133,7 @@ func run_game(final : bool = false):
 	# Results
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)
 	await get_tree().create_timer(3).timeout
-	MultiplayerManager.update_player_data.rpc()
+	update_player_data.rpc(serialize(players))
 	get_node("/root/ResultsScene").show_scores.rpc(round_results)
 	await get_tree().create_timer(15).timeout
 	
@@ -147,4 +154,10 @@ func serialize(list: Dictionary):
 	var ret = {}
 	for player_id in list.keys():
 		ret[player_id] = list[player_id].serialize()
+	return ret
+
+func get_cards():
+	var ret = {}
+	for key in players.keys():
+		ret[key] = players[key].data
 	return ret

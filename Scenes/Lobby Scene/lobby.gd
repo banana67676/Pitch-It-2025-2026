@@ -17,7 +17,7 @@ func show_player(id):
 	var player_label = Label.new()
 	player_label.text = MultiplayerManager.players[id].username
 	$PlayerList.add_child(player_label)
-	player_label.set_global_position(Vector2(200+100*(player_count % 3), 150+50*(int(player_count) / 3)))
+	player_label.set_global_position(Vector2(200+250*(player_count % 3), 150+50*(int(player_count) / 3)))
 	player_count += 1
 	pass
 
@@ -43,5 +43,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true)
 
 func _on_begin_pressed() -> void:
+	print("pressed")
 	MultiplayerManager.run_game_loop()
 	pass # Replace with function body.

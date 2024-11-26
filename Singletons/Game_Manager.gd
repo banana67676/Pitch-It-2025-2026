@@ -44,9 +44,12 @@ func change_game_state(state:game_state_enum, protected : bool):
 	get_tree().current_scene.visible=false
 	var new_scene = load(enum_to_scene(state))
 	var scene_node = new_scene.instantiate()
-	get_tree().current_scene.queue_free()
+	get_tree().current_scene.free()
 	get_tree().root.add_child(scene_node)
+	print(get_tree().current_scene)
 	get_tree().current_scene = scene_node
+	
+	
 
 	#get_tree().change_scene_to_file(enum_to_scene(state))
 	scene_changed.emit()

@@ -2,7 +2,7 @@ extends Resource
 class_name PitchCardData
 var title : String
 var slogan : String
-var user : String
+var username : String
 var user_id : int
 var logo : Image
 var online : bool
@@ -11,18 +11,25 @@ const WIDTH = 800
 const HEIGHT = 600
 
 func serialize() -> Dictionary:
-	return {
+	var data = {
 		'title': title,
 		'slogan': slogan,
-		'user': user,
+		'user': username,
 		'userId': user_id,
-		'logo' : logo.data
 	}
+	var test = logo.data
+	print(test.keys())
+	data["logo"] = test["data"]
+	return data
 
 static func deserialize(data: Dictionary) -> PitchCardData:
 	var pcData : PitchCardData = PitchCardData.new()
-	pcData.logo = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGB8,
-		data['logo']
+	pcData.title = data["title"]
+	pcData.slogan = data["slogan"]
+	pcData.username = data["user"]
+	pcData.user_id = data["userId"]
+	pcData.logo = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGBA8,
+		data["logo"]
 	)
 	return pcData
 # Called when the node enters the scene tree for the first time.
