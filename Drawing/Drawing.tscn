@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://ukycayh8nnxn"]
+[gd_scene load_steps=6 format=3 uid="uid://ukycayh8nnxn"]
 
 [ext_resource type="Script" path="res://Drawing/drawing.gd" id="1_nhb1v"]
 [ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="2_o4gb6"]
 [ext_resource type="Texture2D" uid="uid://cj0vpgo4t3ro7" path="res://Assets/drawborder.svg" id="3_ndbog"]
+[ext_resource type="Theme" uid="uid://lcg4l4h02ma" path="res://Assets/Font.tres" id="3_rijon"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8fswx"]
 
 [node name="DrawingScene" type="Node2D"]
 script = ExtResource("1_nhb1v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+z_as_relative = false
+offset_right = 821.0
+offset_bottom = 624.0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -53,6 +60,7 @@ offset_left = 852.0
 offset_top = 561.0
 offset_right = 948.0
 offset_bottom = 628.0
+theme = ExtResource("3_rijon")
 text = "Erase All"
 
 [node name="DrawingBorder" type="Sprite2D" parent="."]
