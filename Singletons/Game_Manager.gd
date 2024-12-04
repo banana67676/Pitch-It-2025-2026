@@ -27,7 +27,7 @@ func get_round_time() -> int:
 
 var game_state : int = game_state_enum.title
 var creation_time : float = 8
-var presentation_time : float = 60
+var presentation_time : float = 10
 
 var settings : bool = false
 
@@ -71,5 +71,5 @@ func enum_to_scene(state:game_state_enum) -> String:
 		game_state_enum.voting:
 			return "res://Scenes/Voting Scene/Voting_Scene.tscn"
 		game_state_enum.results:
-			return "res://Scenes/Results Scene/Results Scene.tscn"
+			return "res://Scenes/Results Scene/Results_Scene.tscn"
 	return "2135"

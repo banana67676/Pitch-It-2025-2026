@@ -76,6 +76,7 @@ func update_player_data(data):
 	if !multiplayer.is_server():
 		for player_id in data:
 			players[player_id] = deserialize(data[player_id])
+		cards = get_cards()
 	var lobby_scene = get_parent().get_node("LobbyScene")
 	if lobby_scene != null:
 		lobby_scene.reset_player_data()
@@ -113,8 +114,8 @@ func run_game(final : bool = false):
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
 	await get_tree().create_timer(2).timeout
 	cards = get_cards()
-	for product in cards.values():
-		handle_display_pain.rpc(product.serialize())
+	for product in get_cards().values():
+		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize())
 		await get_tree().create_timer(GameManager.presentation_time).timeout
 
 	# Voting
@@ -151,7 +152,7 @@ func deserialize(data: Dictionary):
 	var player = PlayerData.new()
 	player.username = data["username"]
 	player.score = data["score"]
-	player.data = data["data"].deserialize() if data["data"] != null else null
+	player.data = PitchCardData.deserialize(data["data"]) if data["data"] != null else null
 	return player
 
 func serialize(list: Dictionary):
@@ -165,3 +166,10 @@ func get_cards():
 	for key in players.keys():
 		ret[key] = players[key].data
 	return ret
+	
+@rpc("any_peer", "call_local", "reliable")
+func import_card(pd: Dictionary):
+	print(pd.keys())
+	print(pd["user"])
+	MultiplayerManager.players[multiplayer.get_remote_sender_id()].data = PitchCardData.deserialize(pd)
+	print("data saved: "+ str(MultiplayerManager.players[multiplayer.get_remote_sender_id()]))

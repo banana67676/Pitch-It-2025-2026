@@ -2,14 +2,18 @@ extends Node
 
 const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 const Drawing = preload("res://Drawing/drawing.gd")
-var output : Drawing
+var output : Sprite2D
 @onready var prod_name: Label = $DisplayScene/ProdName
 @onready var slogan: Label = $DisplayScene/Slogan
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	output = Drawing.new()
-	output.enabled = false
+	output = Sprite2D.new()
+	var canvas_fill = PackedByteArray()
+	canvas_fill.resize(Drawing.WIDTH * Drawing.HEIGHT * 4)
+	self.repeat_fill(canvas_fill, PackedByteArray([0, 0, 0, 0]))
+	var image = Image.create_from_data(Drawing.WIDTH, Drawing.HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
+	output.texture = ImageTexture.create_from_image(image)
 	output.visible = false
 	output.global_position = Vector2(100,300)
 	add_child(output)
@@ -23,8 +27,12 @@ func _process(delta: float) -> void:
 @rpc("any_peer", "call_local", "reliable")
 func display_card(card_serialized: Dictionary):
 	var card = PitchCardData.deserialize(card_serialized)
-	output.set_image(card.logo)
+	output.texture.update(card.logo)
 	prod_name.text=card.title
 	slogan.text=card.slogan
 	output.visible = true
 	pass
+
+func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
+	for i in range(array.size()):
+		array.set(i, suppliant[i % suppliant.size()])

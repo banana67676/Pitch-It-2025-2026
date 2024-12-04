@@ -18,7 +18,6 @@ func serialize() -> Dictionary:
 		'userId': user_id,
 	}
 	var test = logo.data
-	print(test.keys())
 	data["logo"] = test["data"]
 	return data
 
