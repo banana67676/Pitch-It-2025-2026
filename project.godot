@@ -25,6 +25,7 @@ Camera="*res://UI/Camera.tscn"
 
 [display]
 
+window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
@@ -56,4 +57,4 @@ Esc={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.81, 0.1701, 0.1701, 1)
+environment/defaults/default_clear_color=Color(0.67, 0.1876, 0.19564, 1)
