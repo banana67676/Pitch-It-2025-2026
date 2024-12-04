@@ -55,6 +55,11 @@ offset_right = 948.0
 offset_bottom = 628.0
 text = "Erase All"
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 821.0
+offset_bottom = 624.0
+
 [node name="DrawingBorder" type="Sprite2D" parent="."]
 position = Vector2(415, 315)
 texture = ExtResource("3_ndbog")
