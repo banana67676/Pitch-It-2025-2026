@@ -76,7 +76,7 @@ func update_player_data(data):
 	if !multiplayer.is_server():
 		for player_id in data:
 			players[player_id] = deserialize(data[player_id])
-	var lobby_scene = get_node("/root/LobbyScene")
+	var lobby_scene = get_parent().get_node("LobbyScene")
 	if lobby_scene != null:
 		lobby_scene.reset_player_data()
 
@@ -84,7 +84,7 @@ func update_player_data(data):
 func join_setup(success: bool):
 	if success:
 		await GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
-		var lobby_scene = get_node("/root/LobbyScene")
+		var lobby_scene = get_parent().get_node("LobbyScene")
 		set_username(username)
 		lobby_scene.reset_player_data()
 	else:
@@ -111,11 +111,10 @@ func run_game(final : bool = false):
 	 #update_player_data.rpc(serialize(players))
 	# Change to display
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
-	await GameManager.scene_changed
-	await get_tree().create_timer(0.5).timeout # Protects against the game state moving ahead too quickly
+	await get_tree().create_timer(2).timeout
 	cards = get_cards()
 	for product in cards.values():
-		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize())
+		handle_display_pain.rpc(product.serialize())
 		await get_tree().create_timer(GameManager.presentation_time).timeout
 
 	# Voting
@@ -123,7 +122,7 @@ func run_game(final : bool = false):
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
 	await get_tree().create_timer(20).timeout
 
-	get_node("/root/VotingScene").send_vote.rpc()
+	get_parent().get_node("/root/VotingScene").send_vote.rpc()
 	await get_tree().create_timer(4).timeout
 	
 	var round_results = {}
@@ -134,7 +133,7 @@ func run_game(final : bool = false):
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)
 	await get_tree().create_timer(3).timeout
 	update_player_data.rpc(serialize(players))
-	get_node("/root/ResultsScene").show_scores.rpc(round_results)
+	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results)
 	await get_tree().create_timer(15).timeout
 	
 	if final:
@@ -142,6 +141,11 @@ func run_game(final : bool = false):
 
 	# Optional: Offer replay
 
+@rpc("any_peer","call_local","reliable")
+func handle_display_pain(card: Dictionary):
+	await GameManager.scene_changed
+	get_parent().get_node("/root/DisplayScene").display_card(card)
+	
 
 func deserialize(data: Dictionary):
 	var player = PlayerData.new()

@@ -25,7 +25,6 @@ Camera="*res://UI/Camera.tscn"
 
 [display]
 
-window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
