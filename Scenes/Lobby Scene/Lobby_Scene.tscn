@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=3 format=3 uid="uid://cj0mn0lb3a808"]
 
 [ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
+[ext_resource type="Theme" uid="uid://lcg4l4h02ma" path="res://Assets/Font.tres" id="2_bue6x"]
 
 [node name="LobbyScene" type="Node2D"]
 script = ExtResource("1_fj56n")
@@ -19,6 +20,8 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource("2_bue6x")
+theme_override_font_sizes/font_size = 30
 text = "Lobby"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]

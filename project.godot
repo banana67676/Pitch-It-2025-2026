@@ -41,6 +41,10 @@ folder_colors={
 "res://UI/": "teal"
 }
 
+[gui]
+
+theme/custom_font="res://Assets/Chauncy Fatty Fatty.ttf"
+
 [input]
 
 "Mouse Click"={
