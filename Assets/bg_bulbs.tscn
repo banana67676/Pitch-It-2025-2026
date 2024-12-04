@@ -1,0 +1,179 @@
+[gd_scene load_steps=2 format=3 uid="uid://wtmjmq6e51qm"]
+
+[ext_resource type="Texture2D" uid="uid://1cge76jf7kxk" path="res://Assets/Artboard 1.png" id="1_75fp8"]
+
+[node name="BG_Bulbs" type="Node2D"]
+
+[node name="Artboard1" type="Sprite2D" parent="."]
+position = Vector2(91, 96.126)
+rotation = -0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard2" type="Sprite2D" parent="."]
+position = Vector2(251, 13.126)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard3" type="Sprite2D" parent="."]
+position = Vector2(292, 197.126)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard4" type="Sprite2D" parent="."]
+position = Vector2(592.126, 50.0621)
+rotation = 0.785398
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard6" type="Sprite2D" parent="."]
+position = Vector2(635.406, 213.532)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard7" type="Sprite2D" parent="."]
+position = Vector2(676.406, 397.532)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard9" type="Sprite2D" parent="."]
+position = Vector2(-10.874, 322.252)
+rotation = -0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard14" type="Sprite2D" parent="."]
+position = Vector2(117, 551)
+rotation = -0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard10" type="Sprite2D" parent="."]
+position = Vector2(149.126, 239.252)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard11" type="Sprite2D" parent="."]
+position = Vector2(190.126, 423.252)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard12" type="Sprite2D" parent="."]
+position = Vector2(460, 299)
+rotation = 0.785398
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard13" type="Sprite2D" parent="."]
+position = Vector2(373.532, 522.658)
+rotation = 0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard15" type="Sprite2D" parent="."]
+position = Vector2(574.532, 623.658)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard5" type="Sprite2D" parent="."]
+position = Vector2(438, 139.126)
+rotation = -0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard17" type="Sprite2D" parent="."]
+position = Vector2(939.126, 93.0621)
+rotation = 0.785398
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard18" type="Sprite2D" parent="."]
+position = Vector2(982.406, 256.532)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard19" type="Sprite2D" parent="."]
+position = Vector2(1023.41, 440.532)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard21" type="Sprite2D" parent="."]
+position = Vector2(759.406, -14.5936)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard27" type="Sprite2D" parent="."]
+position = Vector2(800.406, 169.406)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard20" type="Sprite2D" parent="."]
+position = Vector2(336.126, 365.252)
+rotation = -0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard22" type="Sprite2D" parent="."]
+position = Vector2(537.126, 466.252)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard23" type="Sprite2D" parent="."]
+position = Vector2(770, 361.126)
+rotation = 0.785398
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard24" type="Sprite2D" parent="."]
+position = Vector2(720.532, 565.658)
+rotation = 0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard25" type="Sprite2D" parent="."]
+position = Vector2(880.532, 482.658)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard8" type="Sprite2D" parent="."]
+position = Vector2(1084.13, 138.126)
+rotation = -0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard29" type="Sprite2D" parent="."]
+position = Vector2(1088, 564)
+rotation = 0.261799
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard30" type="Sprite2D" parent="."]
+position = Vector2(1177.72, 101.72)
+rotation = 1.0472
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard31" type="Sprite2D" parent="."]
+position = Vector2(1128.25, 306.252)
+rotation = 0.785398
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard26" type="Sprite2D" parent="."]
+position = Vector2(921.532, 666.658)
+rotation = -0.523599
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")

@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=2 format=3 uid="uid://btymdikyjn22l"]
+
+[ext_resource type="Script" path="res://Scenes/Display Scene/display.gd" id="1_aahes"]
 
 [node name="DisplayScene" type="Node2D"]
+script = ExtResource("1_aahes")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
-[ext_resource type="Theme" path="res://Assets/Font.tres" id="2_2yjat"]
+[ext_resource type="Theme" uid="uid://lcg4l4h02ma" path="res://Assets/Font.tres" id="2_2yjat"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h7afi"]
@@ -42,6 +42,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_2yjat")
+theme_override_font_sizes/font_size = 37
+placeholder_text = "Product Title Here"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -55,6 +57,8 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_2yjat")
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Product Slogan Here"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2

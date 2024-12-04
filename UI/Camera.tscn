@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dobnjwk7wcjc6"]
+[gd_scene load_steps=6 format=3 uid="uid://dobnjwk7wcjc6"]
 
 [ext_resource type="Script" path="res://UI/camera.gd" id="1_vixt6"]
+[ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="2_5j6mc"]
 
 [sub_resource type="Animation" id="Animation_itgtb"]
 resource_name = "Fade"
@@ -44,6 +45,11 @@ _data = {
 z_index = 10
 position = Vector2(576, 324)
 script = ExtResource("1_vixt6")
+
+[node name="BG_Bulbs" parent="." instance=ExtResource("2_5j6mc")]
+z_index = -1
+z_as_relative = false
+position = Vector2(-576, -324)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

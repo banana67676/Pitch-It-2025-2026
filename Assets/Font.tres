@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://lcg4l4h02ma"]
 
-[ext_resource type="FontFile" uid="uid://rny6qp437kcl" path="res://Assets/Comic Sans MS.ttf" id="1_nxf0b"]
+[ext_resource type="FontFile" uid="uid://dugsxqldhjyyf" path="res://Assets/Chauncy Fatty Fatty.ttf" id="1_wvydo"]
 
 [resource]
-default_font = ExtResource("1_nxf0b")
-/colors/Shadow = Color(0.619894, 0.457824, 0.171442, 1)
-/colors/Yellow = Color(0.831373, 0.784314, 0.164706, 1)
+default_font = ExtResource("1_wvydo")
+/colors/Shadow = Color(0.64638, 0.478319, 0.181788, 1)
+/colors/Yellow = Color(0.910985, 0.864009, 0.264205, 1)
