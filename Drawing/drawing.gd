@@ -50,6 +50,8 @@ func _ready():
 		#obj.call_deferred("set","theme_override_colors/icon_normal_color", color)
 	new_ui_button(Color8(255, 255, 255, 255))
 
+	Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
+
 
 func _process(_delta: float) -> void:
 	if enabled:
@@ -106,7 +108,7 @@ func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
 		mode_size *= 1.10
 	else:
 		mode = drawing_modes.DRAW
-		Input.set_custom_mouse_cursor(eraser_icon, Input.CURSOR_ARROW, pencil_offset)
+		Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
 
 		mode_size /= 1.10
 	pass # Replace with function body.
@@ -127,3 +129,13 @@ func _on_erase_all_button_pressed() -> void:
 		for y in range(HEIGHT):
 			image.set_pixel(x, y, Color8(0, 0, 0, 0))
 	image_texture.update(image)
+
+
+func _on_color_rect_mouse_entered() -> void:
+	print("entered")
+	Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
+
+
+func _on_color_rect_mouse_exited() -> void:
+	print("exited")
+	Input.set_custom_mouse_cursor(null)
