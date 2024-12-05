@@ -80,7 +80,7 @@ func _process(_delta: float) -> void:
 
 
 func _draw() -> void:
-	self.draw_texture(image_texture, Vector2(15, 15))
+	self.draw_texture(image_texture, Vector2.ZERO)
 #
 func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
 	for i in range(array.size()):
