@@ -1,6 +1,7 @@
 extends Node
 
 const MM = preload("res://Singletons/Multiplayer_Manager.gd")
+const theme = preload("res://Assets/Font.tres")
 signal lobby_ready
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +29,8 @@ func reset_player_data():
 		player.queue_free()
 	player_count = 0
 	for player in MultiplayerManager.players:
-		var player_label = Label.new()
+		var player_label : Label = Label.new()
+		player_label.theme = theme
 		player_label.text = MultiplayerManager.players[player].username
 		$PlayerList.add_child(player_label)
 		player_label.set_global_position(Vector2(200+250*(player_count % 3), 150+50*(int(player_count) / 3)))

@@ -3,8 +3,6 @@ extends Node2D
 const WIDTH = 800
 const HEIGHT = 600
 
-const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
-
 
 @onready var who: CharacterBody2D = $Who
 @onready var what: CharacterBody2D = $What
@@ -29,21 +27,17 @@ func _process(delta: float) -> void:
 		what.move(Vector2(860,400), -PI/32)
 	
 
-@rpc("authority", "call_local", "reliable") # Authority should be able to request this
+@rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
 func export_card():
 	var data = PitchCardData.new()
 	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
 	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image
-	data.username = "test"
+	data.username = MultiplayerManager.username
+	$MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.enabled = false
 	var sData = data.serialize()
-	#print(sData["logo"])
-	import_card.rpc(sData)
-
-@rpc("any_peer", "call_local", "reliable")
-func import_card(pd: Dictionary):
-	print(pd.keys())
-	MultiplayerManager.players[multiplayer.get_remote_sender_id()].data = PitchCardData.deserialize(pd)
+	print(MultiplayerManager.username + "sent")
+	MultiplayerManager.import_card.rpc_id(1,sData)
 
 
 
