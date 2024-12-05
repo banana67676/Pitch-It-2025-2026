@@ -16,7 +16,12 @@ var color_plte
 var prev_mouse_pos
 var draw_color_buffer = [Color(0, 0, 0, 255)]
 var icon = load("res://Assets/palette.png")
+
 const eraser_icon = preload("res://Assets/mouse-eraser.png")
+const pencil_icon = preload("res://Assets/pencil.svg")
+const eraser_offset = Vector2(35, 5)
+const pencil_offset = Vector2(0, 20)
+
 
 @onready var size_slider: HSlider = $Control/SizeSlider
 
@@ -97,11 +102,12 @@ func min_distance(start: Vector2, end: Vector2, compare: Vector2) -> float:
 func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		mode = drawing_modes.ERASE
-		Input.set_custom_mouse_cursor(eraser_icon, Input.CURSOR_ARROW, Vector2(16, 16))
+		Input.set_custom_mouse_cursor(eraser_icon, Input.CURSOR_ARROW, eraser_offset)
 		mode_size *= 1.10
 	else:
 		mode = drawing_modes.DRAW
-		Input.set_custom_mouse_cursor(null)
+		Input.set_custom_mouse_cursor(eraser_icon, Input.CURSOR_ARROW, pencil_offset)
+
 		mode_size /= 1.10
 	pass # Replace with function body.
 

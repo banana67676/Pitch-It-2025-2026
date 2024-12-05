@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo3vx0ii1i20j"]
 
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
-[ext_resource type="Theme" uid="uid://lcg4l4h02ma" path="res://Assets/Font.tres" id="2_8ipfh"]
+[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_8ipfh"]
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/username.gd" id="2_vny5h"]
 
 [node name="Multiplayer_Menu" type="Node2D"]

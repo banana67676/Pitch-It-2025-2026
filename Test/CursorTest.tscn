@@ -6,38 +6,38 @@
 script = ExtResource("1_gfi2j")
 
 [node name="left" type="Button" parent="."]
-offset_left = 6.0
+offset_left = 47.0
 offset_top = 50.0
-offset_right = 40.0
+offset_right = 81.0
 offset_bottom = 81.0
 text = "left"
 
 [node name="right" type="Button" parent="."]
-offset_left = 115.0
-offset_top = 44.0
-offset_right = 160.0
-offset_bottom = 75.0
+offset_left = 84.0
+offset_top = 50.0
+offset_right = 129.0
+offset_bottom = 81.0
 text = "right"
 
 [node name="down" type="Button" parent="."]
-offset_left = 51.0
-offset_top = 87.0
-offset_right = 102.0
-offset_bottom = 118.0
+offset_left = 62.0
+offset_top = 81.0
+offset_right = 113.0
+offset_bottom = 112.0
 text = "down"
 
 [node name="up" type="Button" parent="."]
-offset_left = 67.0
-offset_top = 14.0
-offset_right = 96.0
-offset_bottom = 45.0
+offset_left = 70.0
+offset_top = 22.0
+offset_right = 99.0
+offset_bottom = 53.0
 text = "up"
 
 [node name="Label" type="Label" parent="."]
-offset_left = 57.0
-offset_top = 54.0
-offset_right = 97.0
-offset_bottom = 77.0
+offset_left = 127.0
+offset_top = 13.0
+offset_right = 167.0
+offset_bottom = 36.0
 text = "label"
 
 [connection signal="pressed" from="left" to="." method="_on_left_pressed"]
