@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbtsdmo20u71v"]
+
+[ext_resource type="Script" path="res://Test/cursor_test.gd" id="1_gfi2j"]
+
+[node name="CursorTest" type="Node2D"]
+script = ExtResource("1_gfi2j")
+
+[node name="left" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 50.0
+offset_right = 40.0
+offset_bottom = 81.0
+text = "left"
+
+[node name="right" type="Button" parent="."]
+offset_left = 115.0
+offset_top = 44.0
+offset_right = 160.0
+offset_bottom = 75.0
+text = "right"
+
+[node name="down" type="Button" parent="."]
+offset_left = 51.0
+offset_top = 87.0
+offset_right = 102.0
+offset_bottom = 118.0
+text = "down"
+
+[node name="up" type="Button" parent="."]
+offset_left = 67.0
+offset_top = 14.0
+offset_right = 96.0
+offset_bottom = 45.0
+text = "up"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 57.0
+offset_top = 54.0
+offset_right = 97.0
+offset_bottom = 77.0
+text = "label"
+
+[connection signal="pressed" from="left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="up" to="." method="_on_up_pressed"]

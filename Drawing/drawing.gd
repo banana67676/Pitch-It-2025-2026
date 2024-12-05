@@ -97,7 +97,7 @@ func min_distance(start: Vector2, end: Vector2, compare: Vector2) -> float:
 func _on_draw_erase_toggle_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		mode = drawing_modes.ERASE
-		Input.set_custom_mouse_cursor(eraser_icon)
+		Input.set_custom_mouse_cursor(eraser_icon, Input.CURSOR_ARROW, Vector2(16, 16))
 		mode_size *= 1.10
 	else:
 		mode = drawing_modes.DRAW
