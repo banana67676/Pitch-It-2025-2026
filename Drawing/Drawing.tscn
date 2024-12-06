@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ukycayh8nnxn"]
+[gd_scene load_steps=7 format=3 uid="uid://ukycayh8nnxn"]
 
 [ext_resource type="Script" path="res://Drawing/drawing.gd" id="1_nhb1v"]
 [ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="2_o4gb6"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/Theme.tres" id="3_2g31n"]
 [ext_resource type="Texture2D" uid="uid://cj0vpgo4t3ro7" path="res://Assets/drawborder.svg" id="3_ndbog"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="3_rijon"]
 
@@ -43,10 +44,12 @@ offset_left = 862.0
 offset_top = 478.0
 offset_right = 1120.0
 offset_bottom = 571.0
+theme = ExtResource("3_2g31n")
 min_value = 1.0
 max_value = 150.0
 step = 5.0
 value = 11.0
+allow_greater = true
 
 [node name="Erase All Button" type="Button" parent="Control"]
 layout_mode = 0
@@ -67,8 +70,10 @@ replication_config = SubResource("SceneReplicationConfig_8fswx")
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -1
 z_as_relative = false
-offset_right = 821.0
-offset_bottom = 624.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 816.0
+offset_bottom = 616.0
 
 [connection signal="color_changed" from="Control/ColorPicker/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="toggled" from="Control/DrawEraseToggle" to="." method="_on_draw_erase_toggle_toggled"]

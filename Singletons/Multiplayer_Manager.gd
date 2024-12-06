@@ -97,11 +97,12 @@ func run_game_loop():
 		#	run_game()
 		run_game(true)
 
-func run_game(final : bool = false):
+@rpc("any_peer", "reliable")
+func run_game(final: bool = false):
 	# Run creation screen
 	print(multiplayer.get_peers())
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
-	
+
 	await get_tree().create_timer(GameManager.creation_time).timeout
 
 	# Get cards
@@ -125,7 +126,7 @@ func run_game(final : bool = false):
 
 	get_parent().get_node("/root/VotingScene").send_vote.rpc()
 	await get_tree().create_timer(4).timeout
-	
+
 	var round_results = {}
 	for vote in votes.values():
 		round_results[vote] += 1
@@ -136,17 +137,17 @@ func run_game(final : bool = false):
 	update_player_data.rpc(serialize(players))
 	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results)
 	await get_tree().create_timer(15).timeout
-	
+
 	if final:
 		get_node("/root/ResultsScene").show_final.rpc()
 
 	# Optional: Offer replay
 
-@rpc("any_peer","call_local","reliable")
+@rpc("any_peer", "call_local", "reliable")
 func handle_display_pain(card: Dictionary):
 	await GameManager.scene_changed
 	get_parent().get_node("/root/DisplayScene").display_card(card)
-	
+
 
 func deserialize(data: Dictionary):
 	var player = PlayerData.new()
@@ -166,10 +167,10 @@ func get_cards():
 	for key in players.keys():
 		ret[key] = players[key].data
 	return ret
-	
+
 @rpc("any_peer", "call_local", "reliable")
 func import_card(pd: Dictionary):
 	print(pd.keys())
 	print(pd["user"])
 	MultiplayerManager.players[multiplayer.get_remote_sender_id()].data = PitchCardData.deserialize(pd)
-	print("data saved: "+ str(MultiplayerManager.players[multiplayer.get_remote_sender_id()]))
+	print("data saved: " + str(MultiplayerManager.players[multiplayer.get_remote_sender_id()]))
