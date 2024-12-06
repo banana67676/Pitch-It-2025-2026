@@ -52,6 +52,8 @@ func join_server(port, usern):
 					multiplayer.connected_to_server.connect(_on_connected_ok)
 
 func _on_connected_ok():
+	GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+	await GameManager.scene_changed
 	set_username.rpc_id(1, username)
 
 @rpc("any_peer", "reliable")
@@ -78,13 +80,17 @@ func update_player_data(data):
 			players[player_id] = deserialize(data[player_id])
 		cards = get_cards()
 	var lobby_scene = get_parent().get_node("LobbyScene")
+	
 	if lobby_scene != null:
 		lobby_scene.reset_player_data()
+	else:
+		print("lobby scene is null")
 
 @rpc("any_peer", "reliable")
 func join_setup(success: bool):
 	if success:
-		await GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+		await GameManager.scene_changed
 		var lobby_scene = get_parent().get_node("LobbyScene")
 		set_username(username)
 		lobby_scene.reset_player_data()
