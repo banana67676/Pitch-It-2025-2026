@@ -5,7 +5,7 @@ extends Node2D
 @onready var up: Button = $up
 @onready var label: Label = $Label
 
-const eraser_icon = preload("res://Assets/pencil.svg")
+const eraser_icon = preload("res://Assets/mouse-eraser.png")
 
 var offsetVector = Vector2(0, 0)
 
@@ -25,10 +25,10 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_left_pressed() -> void:
-	offsetVector += Vector2(-1, 0)
+	offsetVector += Vector2(1, 0)
 
 func _on_right_pressed() -> void:
-	offsetVector += Vector2(1, 0)
+	offsetVector += Vector2(-1, 0)
 
 func _on_down_pressed() -> void:
 	offsetVector += Vector2(0, -1)

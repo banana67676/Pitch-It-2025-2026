@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/palette.png" id="1_djk7k"]
+
+[node name="_TextureButton_14" type="TextureButton"]
+modulate = Color(1, 0, 0, 1)
+offset_right = 20.0
+offset_bottom = 20.0
+texture_normal = ExtResource("1_djk7k")

@@ -19,7 +19,7 @@ var icon = load("res://Assets/palette.png")
 
 const eraser_icon = preload("res://Assets/mouse-eraser.png")
 const pencil_icon = preload("res://Assets/pencil.svg")
-const eraser_offset = Vector2(35, 5)
+const eraser_offset = Vector2(0, 38)
 const pencil_offset = Vector2(0, 20)
 
 
@@ -130,12 +130,22 @@ func _on_erase_all_button_pressed() -> void:
 			image.set_pixel(x, y, Color8(0, 0, 0, 0))
 	image_texture.update(image)
 
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT: # right click to erase
+			if event.pressed:
+				_on_draw_erase_toggle_toggled(true)
+			else:
+				_on_draw_erase_toggle_toggled(false)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP: # scroll wheel to change size
+			size_slider.value += 5
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			size_slider.value -= 5
+
 
 func _on_color_rect_mouse_entered() -> void:
-	print("entered")
 	Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
 
 
 func _on_color_rect_mouse_exited() -> void:
-	print("exited")
 	Input.set_custom_mouse_cursor(null)
