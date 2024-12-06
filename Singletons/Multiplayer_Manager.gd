@@ -174,3 +174,51 @@ func import_card(pd: Dictionary):
 	print(pd["user"])
 	MultiplayerManager.players[multiplayer.get_remote_sender_id()].data = PitchCardData.deserialize(pd)
 	print("data saved: " + str(MultiplayerManager.players[multiplayer.get_remote_sender_id()]))
+
+
+	# Print the entire dictionary received
+	print("Received dictionary: ", pd)
+
+	# Print the keys of the received dictionary
+	print("Received dictionary keys: ", pd.keys())
+
+	# Check and print the value associated with the 'user' key
+	if "user" in pd:
+		print("User key exists: ", pd["user"])
+	else:
+		print("Key 'user' not found in the dictionary")
+
+	# Print the entire MultiplayerManager.players dictionary before updating
+	print("MultiplayerManager.players before update: ", MultiplayerManager.players)
+
+	# Get the remote sender ID
+	var player_id = multiplayer.get_remote_sender_id()
+	print("Remote sender ID: ", player_id)
+
+	# Check if the player ID exists in MultiplayerManager.players
+	if player_id in MultiplayerManager.players:
+		print("Player exists in MultiplayerManager.players")
+	else:
+		print("Player ID not found in MultiplayerManager.players")
+
+	# Deserialize the data and print it
+	var deserialized_data = PitchCardData.deserialize(pd)
+	print("Deserialized data: ", deserialized_data)
+
+	# Save the deserialized data to the player's data
+	MultiplayerManager.players[player_id].data = deserialized_data
+
+	# Print the entire MultiplayerManager.players dictionary after updating
+	print("MultiplayerManager.players after update: ", MultiplayerManager.players)
+
+	# Print the updated player data
+	print("Data saved: " + str(MultiplayerManager.players[player_id]))
+
+	# Print the specific data field of the updated player
+	print("Updated player data field: ", MultiplayerManager.players[player_id].data)
+
+	# Print the type of the deserialized data to ensure it's correct
+	print("Type of deserialized data: ", typeof(deserialized_data))
+
+	# Print the type of the player's data field to ensure it's correct
+	print("Type of player's data field: ", typeof(MultiplayerManager.players[player_id].data))
