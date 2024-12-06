@@ -12,6 +12,13 @@ text = "this is the displaying"
 
 [node name="DisplayScene" type="Node2D" parent="."]
 
+[node name="ProdName" type="Label" parent="DisplayScene"]
+offset_left = 270.0
+offset_top = 56.0
+offset_right = 331.0
+offset_bottom = 80.0
+text = "product"
+
 [node name="Slogan" type="Label" parent="DisplayScene"]
 offset_left = 269.0
 offset_top = 96.0
@@ -19,10 +26,3 @@ offset_right = 309.0
 offset_bottom = 119.0
 text = "slogan
 "
-
-[node name="ProdName" type="Label" parent="DisplayScene"]
-offset_left = 270.0
-offset_top = 56.0
-offset_right = 331.0
-offset_bottom = 79.0
-text = "product"
