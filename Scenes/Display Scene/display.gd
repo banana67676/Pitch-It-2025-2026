@@ -15,8 +15,8 @@ func _ready() -> void:
 	var image = Image.create_from_data(Drawing.WIDTH, Drawing.HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
 	output.texture = ImageTexture.create_from_image(image)
 	output.visible = false
-	output.global_position = Vector2(get_window().size.x /9, get_window().size.y /7)
-	output.scale = Vector2(0.8,0.8)
+	output.global_position = Vector2(1152/2,400)
+	output.scale = Vector2(0.7,0.7)
 	add_child(output)
 	pass # Replace with function body.
 
