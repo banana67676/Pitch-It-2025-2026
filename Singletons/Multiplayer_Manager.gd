@@ -172,10 +172,10 @@ func reset():
 	await GameManager.scene_changed
 	var home_scene = get_parent().get_node("/root/Multiplayer_Menu")
 	home_scene.USERNAME_READ.text = username
-	var cards = {}
-	var votes = {}
-	var score_card = {}
-	var players = {}
+	cards = {}
+	votes = {}
+	score_card = {}
+	players = {}
 
 func deserialize(data: Dictionary):
 	var player = PlayerData.new()

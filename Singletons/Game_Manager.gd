@@ -34,11 +34,11 @@ var settings : bool = false
 
 signal scene_changed
 
-func quit_game(protected:bool):
+func quit_game(_protected:bool):
 	get_tree().quit()
 
 @rpc("any_peer", "call_local", "reliable")
-func change_game_state(state:game_state_enum, protected : bool):
+func change_game_state(state:game_state_enum, _protected : bool):
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
 	game_state = state

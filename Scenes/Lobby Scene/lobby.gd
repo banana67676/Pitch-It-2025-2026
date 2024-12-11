@@ -45,8 +45,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true)
 
 func _on_begin_pressed() -> void:
-	print("pressed")
-	MultiplayerManager.run_game_loop()
+	if MultiplayerManager.players.size() > 1:
+		print("pressed")
+		MultiplayerManager.run_game_loop()
 	pass # Replace with function body.
 
 
