@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bo3vx0ii1i20j"]
+[gd_scene load_steps=5 format=3 uid="uid://bo3vx0ii1i20j"]
 
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_8ipfh"]
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/username.gd" id="2_vny5h"]
+[ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="4_tqlc3"]
 
 [node name="Multiplayer_Menu" type="Node2D"]
 script = ExtResource("1_a2imu")
@@ -88,7 +89,14 @@ theme_override_font_sizes/font_size = 50
 text = "Join
 "
 
+[node name="Back Button" parent="." instance=ExtResource("4_tqlc3")]
+offset_left = 25.0
+offset_top = 21.0
+offset_right = 99.0
+offset_bottom = 95.0
+
 [connection signal="child_entered_tree" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" to="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" method="_on_child_entered_tree"]
 [connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" to="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" method="_on_text_changed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
