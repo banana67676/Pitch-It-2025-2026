@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_8ipfh"]
 [ext_resource type="Script" path="res://Scenes/Multiplayer Menu/username.gd" id="2_vny5h"]
-[ext_resource type="PackedScene" path="res://UI/back_button.tscn" id="4_tqlc3"]
+[ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="4_tqlc3"]
 
 [node name="Multiplayer_Menu" type="Node2D"]
 script = ExtResource("1_a2imu")
@@ -94,7 +94,6 @@ offset_left = 25.0
 offset_top = 21.0
 offset_right = 99.0
 offset_bottom = 95.0
-icon = null
 
 [connection signal="child_entered_tree" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" to="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" method="_on_child_entered_tree"]
 [connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" to="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" method="_on_text_changed"]
