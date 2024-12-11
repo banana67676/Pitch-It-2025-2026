@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=5 format=3 uid="uid://cj0mn0lb3a808"]
 
 [ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_bue6x"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_pf8wj"]
+[ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="4_dneng"]
 
 [node name="LobbyScene" type="Node2D"]
 script = ExtResource("1_fj56n")
@@ -51,6 +52,7 @@ offset_left = 25.0
 offset_top = 21.0
 offset_right = 99.0
 offset_bottom = 95.0
+icon = ExtResource("4_dneng")
 
 [connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer2/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
