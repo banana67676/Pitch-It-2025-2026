@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dobnjwk7wcjc6"]
+[gd_scene load_steps=8 format=3 uid="uid://dobnjwk7wcjc6"]
 
 [ext_resource type="Script" path="res://UI/camera.gd" id="1_vixt6"]
 [ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="2_5j6mc"]
+[ext_resource type="AudioStream" uid="uid://da5o3827lpf1m" path="res://Assets/blipSelect.wav" id="3_35qlm"]
+[ext_resource type="AudioStream" uid="uid://c3lir33f3v55o" path="res://Assets/DesertBoss.mp3" id="4_n65x4"]
 
 [sub_resource type="Animation" id="Animation_itgtb"]
 resource_name = "Fade"
@@ -64,3 +66,12 @@ offset_top = -455.0
 offset_right = 1909.0
 offset_bottom = 1158.0
 color = Color(0, 0.0117647, 0.101961, 1)
+
+[node name="Mouse_SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_35qlm")
+volume_db = -4.89
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_n65x4")
+volume_db = -12.18
+autoplay = true
