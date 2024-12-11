@@ -27,6 +27,7 @@ text = "Lobby"
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 layout_mode = 2
 split_offset = 100
+dragger_visibility = 1
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
@@ -39,6 +40,8 @@ size_flags_vertical = 3
 
 [node name="Begin" type="Button" parent="MarginContainer/VSplitContainer/MarginContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Start Game!"
 
 [node name="PlayerList" type="Node2D" parent="."]
 
