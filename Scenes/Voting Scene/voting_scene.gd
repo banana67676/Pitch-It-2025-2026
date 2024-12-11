@@ -38,6 +38,6 @@ func lock(user_id):
 func send_vote():
 	import_vote.rpc(selection)
 
-@rpc("any_peer", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func import_vote(vote: int):
 	MultiplayerManager.votes[multiplayer.get_remote_sender_id()] = vote

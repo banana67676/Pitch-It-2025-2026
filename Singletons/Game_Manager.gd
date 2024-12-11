@@ -28,6 +28,7 @@ func get_round_time() -> int:
 var game_state : int = game_state_enum.title
 var creation_time : float = 8
 var presentation_time : float = 10
+var win_threshold : int = 1000000
 
 var settings : bool = false
 
