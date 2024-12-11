@@ -13,4 +13,5 @@ offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 172.0
+text = "Results"

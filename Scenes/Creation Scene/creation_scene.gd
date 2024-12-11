@@ -33,6 +33,7 @@ func export_card():
 	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
 	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
 	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image
+	data.user_id = multiplayer.get_unique_id()
 	data.username = MultiplayerManager.username
 	$MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.enabled = false
 	var sData = data.serialize()

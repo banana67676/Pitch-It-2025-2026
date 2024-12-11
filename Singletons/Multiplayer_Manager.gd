@@ -131,12 +131,20 @@ func run_game(final: bool = false):
 	await get_tree().create_timer(20).timeout
 
 	get_parent().get_node("/root/VotingScene").send_vote.rpc()
-	await get_tree().create_timer(4).timeout
+	while votes.size() < players.size():
+		await get_tree().create_timer(0.5).timeout
 
 	var round_results = {}
+	for player in players.keys():
+		round_results[player] = 0
+	
+	var has_winner = false
 	for vote in votes.values():
 		round_results[vote] += 1
-		MultiplayerManager[vote].score += 100000
+		MultiplayerManager.players[vote].score += 100000
+		if MultiplayerManager.players[vote].score > GameManager.win_threshold: 
+			has_winner = true
+		
 	# Results
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)
 	await get_tree().create_timer(3).timeout
@@ -144,8 +152,8 @@ func run_game(final: bool = false):
 	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results)
 	await get_tree().create_timer(15).timeout
 
-	if final:
-		get_node("/root/ResultsScene").show_final.rpc()
+	if has_winner:
+		reset.rpc()
 
 	# Optional: Offer replay
 
@@ -154,6 +162,17 @@ func handle_display_pain(card: Dictionary):
 	await GameManager.scene_changed
 	get_parent().get_node("/root/DisplayScene").display_card(card)
 
+@rpc("any_peer","call_local","reliable")
+func reset():
+	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, false)
+	multiplayer.multiplayer_peer.close()
+	await GameManager.scene_changed
+	var home_scene = get_parent().get_node("/root/Multiplayer_Menu")
+	home_scene.USERNAME_READ.text = username
+	var cards = {}
+	var votes = {}
+	var score_card = {}
+	var players = {}
 
 func deserialize(data: Dictionary):
 	var player = PlayerData.new()

@@ -69,9 +69,8 @@ color = Color(0, 0.0117647, 0.101961, 1)
 
 [node name="Mouse_SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_35qlm")
-volume_db = -4.89
+volume_db = -3.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_n65x4")
-volume_db = -12.18
 autoplay = true
