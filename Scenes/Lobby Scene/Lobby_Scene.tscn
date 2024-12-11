@@ -51,6 +51,7 @@ offset_left = 25.0
 offset_top = 21.0
 offset_right = 99.0
 offset_bottom = 95.0
+icon = null
 
 [connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer2/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]

@@ -28,7 +28,6 @@ Camera="*res://UI/Camera.tscn"
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_height"
 
 [file_customization]
 

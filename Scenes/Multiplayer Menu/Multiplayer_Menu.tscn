@@ -94,6 +94,7 @@ offset_left = 25.0
 offset_top = 21.0
 offset_right = 99.0
 offset_bottom = 95.0
+icon = null
 
 [connection signal="child_entered_tree" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" to="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" method="_on_child_entered_tree"]
 [connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" to="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/TextEdit" method="_on_text_changed"]
