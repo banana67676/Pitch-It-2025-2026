@@ -48,3 +48,7 @@ func _on_begin_pressed() -> void:
 	print("pressed")
 	MultiplayerManager.run_game_loop()
 	pass # Replace with function body.
+
+
+func _on_back_button_pressed() -> void:
+	GameManager.change_game_state(GameManager.game_state_enum.title,false)

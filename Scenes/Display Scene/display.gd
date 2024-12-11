@@ -3,8 +3,8 @@ extends Node
 const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
 const Drawing = preload("res://Drawing/drawing.gd")
 var output : Sprite2D
-@onready var prod_name: Label = $DisplayScene/ProdName
-@onready var slogan: Label = $DisplayScene/Slogan
+@onready var prod_name: Label = $DisplayScene/VBoxContainer/ProdName
+@onready var slogan: Label = $DisplayScene/VBoxContainer/Slogan
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +15,8 @@ func _ready() -> void:
 	var image = Image.create_from_data(Drawing.WIDTH, Drawing.HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
 	output.texture = ImageTexture.create_from_image(image)
 	output.visible = false
-	output.global_position = Vector2(100,300)
+	output.global_position = Vector2(get_window().size.x /9, get_window().size.y /7)
+	output.scale = Vector2(0.8,0.8)
 	add_child(output)
 	pass # Replace with function body.
 
