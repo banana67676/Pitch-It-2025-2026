@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://1u2v3yh0utwc"]
-
-[ext_resource type="Texture2D" uid="uid://bax63g5vxjt5d" path="res://Assets/go-back.1024x710.png" id="1_kxo1d"]
+[gd_scene load_steps=1 format=3 uid="uid://1u2v3yh0utwc"]
 
 [node name="Button" type="Button"]
 offset_left = 6.0
@@ -8,6 +6,5 @@ offset_top = 7.0
 offset_right = 270.0
 offset_bottom = 271.0
 scale = Vector2(0.2, 0.2)
-icon = ExtResource("1_kxo1d")
 flat = true
 icon_alignment = 1
