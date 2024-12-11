@@ -101,12 +101,11 @@ func run_game_loop():
 	if multiplayer.is_server():
 		#for i in range(2):
 		#	run_game()
-		run_game(true)
+		run_game()
 
 @rpc("any_peer", "reliable")
-func run_game(final: bool = false):
+func run_game():
 	# Run creation screen
-	print(multiplayer.get_peers())
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
 
 	await get_tree().create_timer(GameManager.creation_time).timeout
@@ -140,9 +139,11 @@ func run_game(final: bool = false):
 	
 	var has_winner = false
 	for vote in votes.values():
+		if vote == -1:
+			continue
 		round_results[vote] += 1
 		MultiplayerManager.players[vote].score += 100000
-		if MultiplayerManager.players[vote].score > GameManager.win_threshold: 
+		if MultiplayerManager.players[vote].score >= GameManager.win_threshold: 
 			has_winner = true
 		
 	# Results
@@ -154,6 +155,8 @@ func run_game(final: bool = false):
 
 	if has_winner:
 		reset.rpc()
+	else:
+		run_game()
 
 	# Optional: Offer replay
 

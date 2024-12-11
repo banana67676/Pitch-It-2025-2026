@@ -5,8 +5,14 @@
 [node name="VotingScene" type="Node2D"]
 script = ExtResource("1_ar3lm")
 
-[node name="List" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_top = 37.0
+offset_right = 1147.0
+offset_bottom = 647.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="."]
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 24.0
+text = "Voting Scene"

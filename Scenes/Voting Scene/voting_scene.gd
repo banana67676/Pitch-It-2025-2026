@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var VoteOption = preload("res://Scenes/Voting Scene/VoteOption.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,24 +16,24 @@ func _process(delta: float) -> void:
 func prepare(cards):
 	var index = 0
 	for card in cards:
-		var disp = Label.new()
-		disp.text = str(card.title, " ", card.slogan, " ", card.username)
-		disp.global_position = Vector2(50, index * 150 + 150)
-		var button = Button.new()
-		button.toggle_mode = true
-		button.text = "Invest $100,000"
-		button.global_position = Vector2(250, index * 150 + 150)
-		button.connect("pressed", lock.bind(card.user_id))
-		disp.add_child(button)
-		$List.add_child(disp)
-		index += 1
+		if card.user_id != multiplayer.get_unique_id():
+			var disp = VoteOption.instantiate()
+			disp.get_child(0).get_child(0).text = str(card.title, " ", card.username)
+			var button = disp.get_child(0).get_child(1)
+			button.toggle_mode = true
+			button.text = "Invest $100,000"
+			button.connect("pressed", lock.bind(card.user_id))
+			$VBoxContainer.add_child(disp)
+			index += 1
 
 func lock(user_id):
 	selection = user_id
-	for label in $List.get_children():
-		for child in label.get_children():
-			if child is Button:
-				child.disabled = true
+	var children = []
+	for sect in $VBoxContainer.get_children():
+		children.append(sect.get_child(1))
+	for button in children:
+		if button is Button:
+				button.disabled = true
 
 @rpc("any_peer", "call_local", "reliable")
 func send_vote():

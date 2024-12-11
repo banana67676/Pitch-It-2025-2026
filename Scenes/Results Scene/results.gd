@@ -28,7 +28,7 @@ func show_scores(voting_results: Dictionary) -> bool:
 		MultiplayerManager.score_card[result_list[result_list.size()-i-1].user_id])
 		entry.set_global_position(Vector2(20,40+i*50))
 		$List.add_child(entry)
-	if result_list[0].value > 1000000: 
+	if result_list[0].value >= 1000000: 
 		var winner = Label.new()
 		winner.text = str(result_list[0].username, " wins with a total investment of ", MultiplayerManager.score_card[result_list[0].user_id])
 		winner.set_global_position(Vector2(150,200))
