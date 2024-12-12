@@ -38,6 +38,13 @@ folder_colors={
 "res://Card/Pitch/": "orange",
 "res://Drawing/": "green",
 "res://Scenes/": "blue",
+"res://Scenes/Creation Scene/": "pink",
+"res://Scenes/Display Scene/": "orange",
+"res://Scenes/Lobby Scene/": "teal",
+"res://Scenes/Multiplayer Menu/": "green",
+"res://Scenes/Results Scene/": "yellow",
+"res://Scenes/Title Scene/": "red",
+"res://Scenes/Voting Scene/": "purple",
 "res://UI/": "teal"
 }
 
