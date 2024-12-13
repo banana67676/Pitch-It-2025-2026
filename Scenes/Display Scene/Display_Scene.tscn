@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=3 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bfa7l"]
+properties/0/path = NodePath("TimeLabel:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="DisplayScene" type="Node2D"]
 script = ExtResource("1_o62vh")
@@ -26,3 +31,14 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "slogan
 "
+
+[node name="MultiplayerSynchronizer2" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_bfa7l")
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 905.0
+offset_top = 446.0
+offset_right = 967.0
+offset_bottom = 491.0
+theme_override_font_sizes/font_size = 30
+text = "Text"

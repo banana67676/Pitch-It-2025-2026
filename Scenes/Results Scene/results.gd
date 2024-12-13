@@ -31,7 +31,7 @@ func show_scores(voting_results: Dictionary) -> bool:
 	if result_list[0].value >= GameManager.win_threshold: 
 		var winner = Label.new()
 		winner.text = str(result_list[0].username, " wins with a total investment of ", MultiplayerManager.score_card[result_list[0].user_id])
-		winner.set_global_position(Vector2(150,200))
+		winner.set_global_position(Vector2(200,200))
 		$List.add_child(winner)
 		return true
 	else:
@@ -54,5 +54,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

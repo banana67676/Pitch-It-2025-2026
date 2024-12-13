@@ -19,4 +19,4 @@ func fade_in():
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Mouse Click"):
 		mouse_sfx.pitch_scale = randf_range(0.9,1.1)
-		mouse_sfx.play()
+		# mouse_sfx.play()

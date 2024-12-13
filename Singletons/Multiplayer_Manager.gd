@@ -41,7 +41,7 @@ func add_player(id):
 func join_server(port, usern):
 	username = usern
 	print(port.to_int())
-	if port.to_int() != null:
+	if multiplayer.multiplayer_peer == null && port.to_int() != null:
 		var ip_addresses = ["localhost"]
 		for i in ip_addresses:
 			print(i)
@@ -122,7 +122,8 @@ func run_game():
 	cards = get_cards()
 	for product in get_cards().values():
 		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize())
-		await get_tree().create_timer(GameManager.presentation_time).timeout
+		start(GameManager.presentation_time)
+		await self.timeout
 
 	# Voting
 	update_player_data.rpc(serialize(players))
