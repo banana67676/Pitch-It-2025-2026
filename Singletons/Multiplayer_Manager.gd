@@ -1,4 +1,4 @@
-extends Node
+extends Timer
 
 var peer = ENetMultiplayerPeer.new()
 const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
@@ -107,8 +107,8 @@ func run_game_loop():
 func run_game():
 	# Run creation screen
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
-
-	await get_tree().create_timer(GameManager.creation_time).timeout
+	start(GameManager.creation_time)
+	await self.timeout
 
 	# Get cards
 	get_parent().get_node("/root/Creation_Scene").export_card.rpc()

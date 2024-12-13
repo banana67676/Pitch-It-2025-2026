@@ -25,8 +25,8 @@ buses/default_bus_layout="res://bus.tres"
 [autoload]
 
 GameManager="*res://Singletons/Game_Manager.gd"
-MultiplayerManager="*res://Singletons/Multiplayer_Manager.gd"
 Camera="*res://UI/Camera.tscn"
+MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
 
 [display]
 

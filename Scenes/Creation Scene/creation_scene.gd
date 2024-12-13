@@ -25,6 +25,8 @@ func _process(delta: float) -> void:
 	if moving_cards_flag:
 		who.move(Vector2(860,220), PI/32)
 		what.move(Vector2(860,400), -PI/32)
+	if multiplayer.is_server():
+		$Label.text = str("Time remaining: ",round(MultiplayerManager.get_time_left()))
 	
 
 @rpc("any_peer", "call_local", "reliable") # Authority should be able to request this

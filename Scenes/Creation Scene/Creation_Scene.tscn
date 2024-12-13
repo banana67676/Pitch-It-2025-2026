@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h7afi"]
+properties/0/path = NodePath("Label:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Creation_Scene" type="Node2D"]
 script = ExtResource("1_0n1cf")
@@ -80,3 +83,12 @@ card_type = 1
 position = Vector2(937, 925)
 rotation = -0.174533
 scale = Vector2(0.8, 0.8)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 648.0
+offset_top = 168.0
+offset_right = 710.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 30
+text = "Text
+"
