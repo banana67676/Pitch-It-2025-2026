@@ -8,7 +8,8 @@ enum game_state_enum {
 	creation,
 	display,
 	voting,
-	results
+	results,
+	settings
 }
 
 enum game_mode_enum {
@@ -72,4 +73,6 @@ func enum_to_scene(state: game_state_enum) -> String:
 			return "res://Scenes/Voting Scene/Voting_Scene.tscn"
 		game_state_enum.results:
 			return "res://Scenes/Results Scene/Results_Scene.tscn"
+		game_state_enum.settings:
+			return "res://Scenes/Settings Scene/settings_scene.tscn"
 	return "2135"

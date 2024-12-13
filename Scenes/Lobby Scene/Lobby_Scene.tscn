@@ -49,9 +49,9 @@ text = "Start Game!"
 
 [node name="Back Button" parent="." instance=ExtResource("3_pf8wj")]
 offset_left = 25.0
-offset_top = 21.0
-offset_right = 99.0
-offset_bottom = 95.0
+offset_top = 25.0
+offset_right = 100.0
+offset_bottom = 100.0
 icon = ExtResource("4_dneng")
 
 [connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer2/Begin" to="." method="_on_begin_pressed"]

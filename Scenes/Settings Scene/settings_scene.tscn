@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd60pjnm1aiw6"]
+
+[ext_resource type="Script" path="res://Scenes/Settings Scene/settings.gd" id="1_wsb46"]
+[ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="2_suo4c"]
+
+[node name="Settings Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wsb46")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.5
+offset_right = 89.5
+offset_bottom = 74.0
+grow_horizontal = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Settings" type="Label" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Volume Settings" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="Volume settings" type="VBoxContainer" parent="MarginContainer/VSplitContainer/Volume Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/Volume Settings/Volume settings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Volume"
+
+[node name="Label3" type="Label" parent="MarginContainer/VSplitContainer/Volume Settings/Volume settings"]
+layout_mode = 2
+text = "Music"
+
+[node name="Volume Slider" type="HSlider" parent="MarginContainer/VSplitContainer/Volume Settings/Volume settings"]
+layout_mode = 2
+value = 75.0
+
+[node name="Label2" type="Label" parent="MarginContainer/VSplitContainer/Volume Settings/Volume settings"]
+layout_mode = 2
+text = "Sound Effects"
+
+[node name="Volume Slider2" type="HSlider" parent="MarginContainer/VSplitContainer/Volume Settings/Volume settings"]
+layout_mode = 2
+value = 75.0
+
+[node name="Back Button" parent="." instance=ExtResource("2_suo4c")]
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -1052.0
+offset_bottom = -548.0
+
+[connection signal="value_changed" from="MarginContainer/VSplitContainer/Volume Settings/Volume settings/Volume Slider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VSplitContainer/Volume Settings/Volume settings/Volume Slider2" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]

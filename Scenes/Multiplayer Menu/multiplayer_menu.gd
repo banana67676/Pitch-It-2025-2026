@@ -15,9 +15,12 @@ func _on_join_pressed() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.title,false)
+		GameManager.change_game_state(GameManager.game_state_enum.title, false)
 
 
 func _on_back_button_pressed() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.title,false)
-	
+	GameManager.change_game_state(GameManager.game_state_enum.title, false)
+
+
+func _on_settings_button_pressed() -> void:
+	GameManager.change_game_state(GameManager.game_state_enum.settings, false)

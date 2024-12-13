@@ -18,6 +18,10 @@ boot_splash/image="res://Assets/WhiteBuilb.png"
 config/icon="res://Assets/icon.svg"
 boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
+[audio]
+
+buses/default_bus_layout="res://bus.tres"
+
 [autoload]
 
 GameManager="*res://Singletons/Game_Manager.gd"
