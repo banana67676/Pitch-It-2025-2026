@@ -1,1 +1,1 @@
-This is our game development business project called Pitch It. This is a digital version of the card game that our project sponsor developed. 
+This is our game development business project called Pitch It. This is a digital version of the card game that our project sponsor developed. The digital version has many features the original card game lacked, such as multiplayer and voice chat. These new features will be implemented.
