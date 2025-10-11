@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6b5nae3lm6ou"]
 
-[ext_resource type="Script" path="res://Card/Card Content/card.gd" id="1_2iua7"]
+[ext_resource type="Script" uid="uid://bbv87auwrc7oq" path="res://Card/Card Content/card.gd" id="1_2iua7"]
 [ext_resource type="Texture2D" uid="uid://bx3n0pvnl1u4l" path="res://Assets/What-card-asset.png" id="2_bhry4"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="3_pqtad"]
 

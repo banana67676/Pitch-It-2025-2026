@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dobnjwk7wcjc6"]
 
-[ext_resource type="Script" path="res://UI/camera.gd" id="1_vixt6"]
-[ext_resource type="PackedScene" path="res://Assets/bg_bulbs.tscn" id="2_5j6mc"]
+[ext_resource type="Script" uid="uid://b4et2kvldptig" path="res://UI/camera.gd" id="1_vixt6"]
+[ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="2_5j6mc"]
 [ext_resource type="AudioStream" uid="uid://da5o3827lpf1m" path="res://Assets/blipSelect.wav" id="3_35qlm"]
 [ext_resource type="AudioStream" uid="uid://c3lir33f3v55o" path="res://Assets/DesertBoss.mp3" id="4_n65x4"]
 
@@ -39,8 +39,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kl75r"]
 _data = {
-"Fade": SubResource("Animation_itgtb"),
-"RESET": SubResource("Animation_t3kjc")
+&"Fade": SubResource("Animation_itgtb"),
+&"RESET": SubResource("Animation_t3kjc")
 }
 
 [node name="Camera" type="Camera2D"]

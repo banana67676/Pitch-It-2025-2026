@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btymdikyjn22l"]
 
-[ext_resource type="Script" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
+[ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bfa7l"]
 properties/0/path = NodePath("TimeLabel:text")

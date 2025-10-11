@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsqsy7tvvtupp"]
 
-[ext_resource type="Script" path="res://Singletons/Multiplayer_Manager.gd" id="1_jo503"]
+[ext_resource type="Script" uid="uid://dgqdk7spstvc8" path="res://Singletons/Multiplayer_Manager.gd" id="1_jo503"]
 
 [node name="MultiplayerManager" type="Timer"]
 script = ExtResource("1_jo503")
