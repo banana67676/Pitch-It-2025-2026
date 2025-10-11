@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbndp01wsxkrr"]
 
-[ext_resource type="Shader" path="res://UI/CircleShader.gdshader" id="1_npug2"]
+[ext_resource type="Shader" uid="uid://blsdigpmtqt2i" path="res://UI/CircleShader.gdshader" id="1_npug2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hfoa"]
 shader = ExtResource("1_npug2")

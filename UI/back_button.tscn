@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://duxmvr8dp7osx"]
 
-[ext_resource type="Shader" path="res://UI/hue_shift.gdshader" id="1_sw8ip"]
+[ext_resource type="Shader" uid="uid://b33mid31k1rxx" path="res://UI/hue_shift.gdshader" id="1_sw8ip"]
 [ext_resource type="Texture2D" uid="uid://bcj7bbild4rgk" path="res://Assets/back.png" id="2_nnbd6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ayx6"]
