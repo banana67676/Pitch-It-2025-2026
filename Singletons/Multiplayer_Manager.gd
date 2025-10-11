@@ -41,6 +41,7 @@ func add_player(id):
 func join_server(port, usern):
 	username = usern
 	print(port.to_int())
+	multiplayer.multiplayer_peer = null
 	if multiplayer.multiplayer_peer == null && port.to_int() != null:
 		var ip_addresses = ["localhost"]
 		for i in ip_addresses:
