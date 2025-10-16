@@ -32,8 +32,8 @@ func _process(delta: float) -> void:
 @rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
 func export_card():
 	var data = PitchCardData.new()
-	data.title = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/Title.text
-	data.slogan = $MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer/Slogan.text
+	data.title = %Title.text
+	data.slogan = %Slogan.text
 	data.logo = $MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.image
 	data.user_id = multiplayer.get_unique_id()
 	data.username = MultiplayerManager.username

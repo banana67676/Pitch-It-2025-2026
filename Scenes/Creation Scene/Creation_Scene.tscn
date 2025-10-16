@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://xkn8gxryucgg"]
 
-[ext_resource type="Script" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
+[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_2yjat"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
@@ -38,17 +38,23 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Title" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="Title" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_2yjat")
 theme_override_font_sizes/font_size = 37
 placeholder_text = "Product Title Here"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 30
@@ -56,12 +62,38 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
-[node name="Slogan" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="Slogan" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_2yjat")
 theme_override_font_sizes/font_size = 16
 placeholder_text = "Product Slogan Here"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -30
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 24
+text = "3/5"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="Button" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource("2_2yjat")
+theme_override_font_sizes/font_size = 24
+text = "Done"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
