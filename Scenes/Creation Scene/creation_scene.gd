@@ -26,7 +26,12 @@ func _process(delta: float) -> void:
 		who.move(Vector2(860,220), PI/32)
 		what.move(Vector2(860,400), -PI/32)
 	if multiplayer.is_server():
-		$Label.text = str("Time remaining: ",round(MultiplayerManager.get_time_left()))
+		var time_left = MultiplayerManager.get_time_left() 
+		
+		if (time_left > 10):
+			$Label.text = str("Time remaining: ",int(round(time_left)))
+		else:
+			$Label.text = str("Time remaining: %.1f" % time_left)
 	
 
 @rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
