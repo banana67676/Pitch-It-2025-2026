@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cj0mn0lb3a808"]
 
-[ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
+[ext_resource type="Script" uid="uid://cws7jvys13ih5" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_bue6x"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_pf8wj"]
 [ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="4_dneng"]
@@ -31,16 +31,51 @@ layout_mode = 2
 split_offset = 100
 dragger_visibility = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 250
 
-[node name="Begin" type="Button" parent="MarginContainer/VSplitContainer/MarginContainer2"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_bue6x")
+text = "testing babacii"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "testing babacii"
+
+[node name="Label3" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "testing babacii"
+
+[node name="Label4" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "testing babacii"
+
+[node name="Label5" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "testing babacii"
+
+[node name="Label6" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "testing babacii"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 350
+
+[node name="Begin" type="Button" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Start Game!"
@@ -54,5 +89,5 @@ offset_right = 100.0
 offset_bottom = 100.0
 icon = ExtResource("4_dneng")
 
-[connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer2/Begin" to="." method="_on_begin_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
