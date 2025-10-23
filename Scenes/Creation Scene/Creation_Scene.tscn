@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://xkn8gxryucgg"]
 
-[ext_resource type="Script" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
+[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_2yjat"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
@@ -92,3 +92,17 @@ offset_bottom = 213.0
 theme_override_font_sizes/font_size = 30
 text = "Text
 "
+
+[node name="BrushSize" type="Label" parent="."]
+offset_left = 688.0
+offset_top = 515.0
+offset_right = 761.0
+offset_bottom = 551.0
+text = "Brush Size"
+
+[node name="Eraser" type="Label" parent="."]
+offset_left = 774.0
+offset_top = 563.0
+offset_right = 816.0
+offset_bottom = 587.0
+text = "Eraser"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ukycayh8nnxn"]
 
-[ext_resource type="Script" path="res://Drawing/drawing.gd" id="1_nhb1v"]
+[ext_resource type="Script" uid="uid://cplbmxh8k2sif" path="res://Drawing/drawing.gd" id="1_nhb1v"]
 [ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="2_o4gb6"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/Theme.tres" id="3_2g31n"]
 [ext_resource type="Texture2D" uid="uid://cj0vpgo4t3ro7" path="res://Assets/drawborder.svg" id="3_ndbog"]

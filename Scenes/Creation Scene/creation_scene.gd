@@ -43,6 +43,8 @@ func export_card():
 	data.user_id = multiplayer.get_unique_id()
 	data.username = MultiplayerManager.username
 	$MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.enabled = false
+	$BrushSize.text
+	$Eraser.text
 	var sData = data.serialize()
 	print(MultiplayerManager.username + "sent")
 	MultiplayerManager.import_card.rpc_id(1,sData)
