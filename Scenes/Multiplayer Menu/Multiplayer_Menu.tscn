@@ -68,6 +68,11 @@ size_flags_vertical = 3
 theme = ExtResource("2_8ipfh")
 text = "2135"
 
+[node name="Error" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+visible = false
+layout_mode = 2
+text = "You need a Name to join!"
+
 [node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
