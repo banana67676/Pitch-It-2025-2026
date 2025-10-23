@@ -28,13 +28,15 @@ func reset_player_data():
 		remove_child(player)
 		player.queue_free()
 	player_count = 0
+	#player is the key (their user id)
 	for player in MultiplayerManager.players:
-		var player_label : Label = Label.new()
-		player_label.theme = theme
-		player_label.text = MultiplayerManager.players[player].username
-		$PlayerList.add_child(player_label)
-		player_label.set_global_position(Vector2(200+250*(player_count % 3), 150+50*(int(player_count) / 3)))
-		player_count += 1
+		var player_label : Label = Label.new() #new label (to display them in the lobby)
+		player_label.name = str(player) #make the label name their player id as a string
+		player_label.theme = theme #set the labels theme
+		player_label.text = MultiplayerManager.players[player].username #the text equals their chosen username
+		$PlayerList.add_child(player_label) #adds the child to the node handling the list
+		player_label.set_global_position(Vector2(200+250*(player_count % 3), 150+50*(int(player_count) / 3))) #set pos
+		player_count += 1 #increase player count
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -52,3 +54,5 @@ func _on_begin_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.title,false)
+	MultiplayerManager.disconnect_from_server()
+	#reset_player_data()
