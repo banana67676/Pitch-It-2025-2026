@@ -92,3 +92,17 @@ offset_bottom = 213.0
 theme_override_font_sizes/font_size = 30
 text = "Text
 "
+
+[node name="BrushSize" type="Label" parent="."]
+offset_left = 688.0
+offset_top = 515.0
+offset_right = 761.0
+offset_bottom = 551.0
+text = "Brush Size"
+
+[node name="Eraser" type="Label" parent="."]
+offset_left = 774.0
+offset_top = 563.0
+offset_right = 816.0
+offset_bottom = 587.0
+text = "Eraser"

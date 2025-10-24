@@ -26,7 +26,12 @@ func _process(delta: float) -> void:
 		who.move(Vector2(860,220), PI/32)
 		what.move(Vector2(860,400), -PI/32)
 	if multiplayer.is_server():
-		$Label.text = str("Time remaining: ",round(MultiplayerManager.get_time_left()))
+		var time_left = MultiplayerManager.get_time_left() 
+		
+		if (time_left > 10):
+			$Label.text = str("Time remaining: ",int(round(time_left)))
+		else:
+			$Label.text = str("Time remaining: %.1f" % time_left)
 	
 
 @rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
@@ -38,6 +43,8 @@ func export_card():
 	data.user_id = multiplayer.get_unique_id()
 	data.username = MultiplayerManager.username
 	$MarginContainer/VSplitContainer/HSplitContainer/DrawingScene.enabled = false
+	$BrushSize.text
+	$Eraser.text
 	var sData = data.serialize()
 	print(MultiplayerManager.username + "sent")
 	MultiplayerManager.import_card.rpc_id(1,sData)
