@@ -81,7 +81,7 @@ func _on_peer_disconnected(id: int):
 	# Use the ID to remove their data from your list
 	if MultiplayerManager.players.has(id):
 		print(players)
-		rpc_remove_player(id) #remove the player for the server and ALL clients
+		rpc_remove_player.rpc(id) #remove the player for the server and ALL clients
 		print(players)
 		# You would also use this ID to remove their Node2D/Node3D representation from the scene
 	else:
@@ -89,12 +89,12 @@ func _on_peer_disconnected(id: int):
 
 #called by the client to disconnect themselves from the server
 #called when a client chooses to leave the lobby
-func disconnect_from_server():
+func disconnect_from_server(id: int):
 	var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
 	lobby_scene.reset_player_data()
 	#MultiplayerManager.players.erase(player_id_to_remove)
 	#multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer.disconnect_peer(1)
+	multiplayer.multiplayer_peer.disconnect_peer(id)
 	multiplayer.multiplayer_peer = null
 	print(players)
 	#find some way to remove the player from the player list
@@ -106,6 +106,7 @@ func rpc_remove_player(id_to_remove: int):
 	if MultiplayerManager.players.has(id_to_remove): #if the id exists, remove it
 		MultiplayerManager.players.erase(id_to_remove)
 		print("Peer " + str(multiplayer.get_unique_id()) + ": Removed player ID " + str(id_to_remove))
+		#disconnect_from_server(id_to_remove)
 
 #function can be called by anyone in the network
 #allows communication between multiple peers
