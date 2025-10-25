@@ -42,6 +42,7 @@ func _on_join_pressed() -> void:
 	ERROR_LABEL.hide() # Equivalent to error.visible = false
 	
 	# The original logic now runs
+	MultiplayerManager.create_new_peer()
 	MultiplayerManager.join_server(SERVER_PORT_READ.text, user_name)
 
 

@@ -76,5 +76,5 @@ func _on_begin_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.title,false)
-	#MultiplayerManager.disconnect_from_server()
+	MultiplayerManager.disconnect_from_server()
 	#reset_player_data()

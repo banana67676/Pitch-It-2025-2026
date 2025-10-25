@@ -5,6 +5,11 @@ var peer = ENetMultiplayerPeer.new()
 #grabs the player data from the PlayerData script
 const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
 
+#called when a client tries to join a server
+func create_new_peer():
+	if peer == null: #is only null after a client has disconnected from a previous server
+		peer = ENetMultiplayerPeer.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect("lobby_ready", continue_init)
@@ -80,6 +85,7 @@ func _on_peer_disconnected(id: int):
 	print("Client with ID " + str(id) + " disconnected.")
 	# Use the ID to remove their data from your list
 	if MultiplayerManager.players.has(id):
+		print(str(peer.get_unique_id()) + " printed this line")
 		print(players)
 		rpc_remove_player.rpc(id) #remove the player for the server and ALL clients
 		print(players)
@@ -88,16 +94,18 @@ func _on_peer_disconnected(id: int):
 		print("Error: Disconnected ID not found in player list.")
 
 #called by the client to disconnect themselves from the server
-#called when a client chooses to leave the lobby
-func disconnect_from_server(id: int):
+func disconnect_from_server():
 	var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
+	print("attempted to disconnect id " + str(peer.get_unique_id()))
+	#multiplayer.multiplayer_peer.disconnect_peer(peer.get_unique_id())
+	# Inside the client's disconnect_from_server() function:
+	var self_id = multiplayer.get_unique_id() # Get the client's own ID
+	if MultiplayerManager.players.has(self_id):
+		MultiplayerManager.players.erase(self_id) # Remove self from local list
 	lobby_scene.reset_player_data()
-	#MultiplayerManager.players.erase(player_id_to_remove)
-	#multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer.disconnect_peer(id)
 	multiplayer.multiplayer_peer = null
+	peer = null
 	print(players)
-	#find some way to remove the player from the player list
 
 #this function is called by the server to tell the clients "Hey, I need you to remove players from your playerlist"
 @rpc("call_local", "reliable")
@@ -106,7 +114,9 @@ func rpc_remove_player(id_to_remove: int):
 	if MultiplayerManager.players.has(id_to_remove): #if the id exists, remove it
 		MultiplayerManager.players.erase(id_to_remove)
 		print("Peer " + str(multiplayer.get_unique_id()) + ": Removed player ID " + str(id_to_remove))
-		#disconnect_from_server(id_to_remove)
+		print(str(peer.get_unique_id()) + " printed this line")
+		var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
+		lobby_scene.reset_player_data()
 
 #function can be called by anyone in the network
 #allows communication between multiple peers
