@@ -27,7 +27,7 @@ func get_round_time() -> int:
 	return 2135
 
 var game_state: int = game_state_enum.title
-var creation_time: float = 15
+var creation_time: float = 60
 var presentation_time: float = 10
 var win_threshold: int = 200000
 
@@ -35,11 +35,11 @@ var settings: bool = false
 
 signal scene_changed
 
-func quit_game(protected: bool):
+func quit_game(_protected: bool):
 	get_tree().quit()
 
 @rpc("any_peer", "call_local", "reliable")
-func change_game_state(state: game_state_enum, protected: bool):
+func change_game_state(state: game_state_enum, _protected: bool):
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
 	game_state = state
@@ -48,7 +48,7 @@ func change_game_state(state: game_state_enum, protected: bool):
 	var scene_node = new_scene.instantiate()
 	get_tree().current_scene.free()
 	get_tree().root.add_child(scene_node)
-	print(get_tree().current_scene)
+	#print(get_tree().current_scene)
 	get_tree().current_scene = scene_node
 
 

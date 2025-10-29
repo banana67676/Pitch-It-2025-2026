@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=6 format=3 uid="uid://cj0mn0lb3a808"]
 
 [ext_resource type="Script" uid="uid://cws7jvys13ih5" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_bue6x"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_6bo0c"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_pf8wj"]
 [ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="4_dneng"]
 
@@ -14,17 +15,14 @@ offset_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_bottom = 75
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("2_bue6x")
-theme_override_font_sizes/font_size = 30
-text = "Lobby"
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_bottom = 0
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -34,7 +32,7 @@ dragger_visibility = 1
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_top = 75
+theme_override_constants/margin_top = 125
 theme_override_constants/margin_bottom = 250
 
 [node name="PlayerList" type="GridContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
@@ -46,15 +44,17 @@ theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 20
 columns = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 350
+alignment = 1
 
-[node name="Begin" type="Button" parent="MarginContainer/MarginContainer"]
-unique_name_in_owner = true
+[node name="LobbyHeader" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Start Game!"
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_6bo0c")
+theme_type_variation = &"HeaderYellow"
+text = "Lobby"
 
 [node name="Back Button" parent="." instance=ExtResource("3_pf8wj")]
 offset_left = 25.0
@@ -65,10 +65,11 @@ icon = ExtResource("4_dneng")
 
 [node name="PlayerNameTemplate" type="PanelContainer" parent="."]
 visible = false
-offset_left = 1236.0
-offset_top = 54.0
-offset_right = 1379.0
-offset_bottom = 88.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 142.0
+offset_bottom = 35.0
+mouse_filter = 1
 
 [node name="Padding" type="MarginContainer" parent="PlayerNameTemplate"]
 layout_mode = 2
@@ -83,5 +84,14 @@ theme = ExtResource("2_bue6x")
 text = "testing babacii"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
+[node name="Begin" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 509.0
+offset_right = 771.0
+offset_bottom = 647.0
+theme_override_font_sizes/font_size = 50
+text = "Start Game!"
+
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Begin" to="." method="_on_begin_pressed"]
