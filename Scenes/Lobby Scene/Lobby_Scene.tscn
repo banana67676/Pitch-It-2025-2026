@@ -19,11 +19,6 @@ theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 75
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 400
-theme_override_constants/margin_bottom = 0
-
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 layout_mode = 2
 split_offset = 100
@@ -56,6 +51,17 @@ theme = ExtResource("3_6bo0c")
 theme_type_variation = &"HeaderYellow"
 text = "Lobby"
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_bottom = 0
+
+[node name="Begin" type="Button" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Start Game!"
+
 [node name="Back Button" parent="." instance=ExtResource("3_pf8wj")]
 offset_left = 25.0
 offset_top = 25.0
@@ -84,14 +90,5 @@ theme = ExtResource("2_bue6x")
 text = "testing babacii"
 horizontal_alignment = 1
 
-[node name="Begin" type="Button" parent="."]
-unique_name_in_owner = true
-offset_left = 19.0
-offset_top = 509.0
-offset_right = 771.0
-offset_bottom = 647.0
-theme_override_font_sizes/font_size = 50
-text = "Start Game!"
-
+[connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Begin" to="." method="_on_begin_pressed"]
