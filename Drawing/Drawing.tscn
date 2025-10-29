@@ -21,7 +21,6 @@ offset_bottom = 648.0
 position = Vector2(968, 508)
 
 [node name="ColorPalette" type="Node2D" parent="Control/ColorPicker"]
-visible = false
 position = Vector2(-24, -398)
 
 [node name="ColorPickerButton" parent="Control/ColorPicker" instance=ExtResource("2_o4gb6")]
