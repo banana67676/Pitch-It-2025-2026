@@ -1,27 +1,34 @@
 extends Timer
 
 var peer = ENetMultiplayerPeer.new()
+
+#grabs the player data from the PlayerData script
 const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect("lobby_ready", continue_init)
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
+#continues initilization by setting the player's username
 func continue_init():
 	set_username(username)
 
+#initializes the server when a player makes a lobby
 func init_server(port, usern):
 	username = usern
-	if port != null:
-		peer.create_server(port.to_int())
-		multiplayer.multiplayer_peer = peer
-		multiplayer.peer_connected.connect(add_player)
-		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+	if port != null: #proceed if the port exists
+		peer.create_server(port.to_int()) #create a server with the port as an integer
+		multiplayer.multiplayer_peer = peer #registers the peer to the multiplayer
+		multiplayer.peer_connected.connect(add_player) #a signal. Whenever a peer is connected to the lobby, the add_player function will be called
+		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+		GameManager.change_game_state(GameManager.game_state_enum.lobby, false) #calls the change state function to switch the game state to the lobby
+		
+		#wait until the scene has changed to continue initilization
 		await GameManager.scene_changed
 		#while !get_parent().has_node("/root/LobbyScene"):
 		#	await get_tree().create_timer(0.1).timeout
@@ -29,97 +36,159 @@ func init_server(port, usern):
 		#await get_tree().create_timer(5.0).timeout
 		continue_init()
 
+#variables for things
 var cards = {}
 var votes = {}
 var score_card = {}
 var players = {}
 var username = ""
 
+#unused function?
 func add_player(id):
 	pass
 
+#function for other players to join the server
 func join_server(port, usern):
-	username = usern
-	print(port.to_int())
+	username = usern #set their username
+	#print(port.to_int())
+	#if the player isn't already in a multiplayer status and the port exists
 	multiplayer.multiplayer_peer = null
 	if multiplayer.multiplayer_peer == null && port.to_int() != null:
+	
+		#this defines an array of IP addresses to try and connect to
+		#in this case, the only definition is "localhost", meaning it will only try to connect to a server on the same device
 		var ip_addresses = ["localhost"]
 		for i in ip_addresses:
-			print(i)
+			#print(i)
 			if !i.begins_with("f"):
-				peer.create_client(i, port.to_int())
-				multiplayer.multiplayer_peer = peer
+				peer.create_client(i, port.to_int()) #creates a client
+				multiplayer.multiplayer_peer = peer #it is now the connected peer
+				print(players)
+				#if the signal isn't connected to the _on_conncted_ok() function, connect it to the function
 				if !multiplayer.connected_to_server.is_connected(_on_connected_ok):
 					multiplayer.connected_to_server.connect(_on_connected_ok)
 
 func _on_connected_ok():
+	#changes the game state to the lobby and waits until the scene has changed
 	GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
 	await GameManager.scene_changed
-	set_username.rpc_id(1, username)
+	set_username.rpc_id(1, username) #then it sets the username using the rpc function set_username
 
+# The ID is automatically passed as an argument by the signal
+func _on_peer_disconnected(id: int):
+	# This 'id' is the unique ID of the client that just left.
+	print("Client with ID " + str(id) + " disconnected.")
+	# Use the ID to remove their data from your list
+	if MultiplayerManager.players.has(id):
+		print(players)
+		rpc_remove_player.rpc(id) #remove the player for the server and ALL clients
+		print(players)
+		# You would also use this ID to remove their Node2D/Node3D representation from the scene
+	else:
+		print("Error: Disconnected ID not found in player list.")
+
+#called by the client to disconnect themselves from the server
+#called when a client chooses to leave the lobby
+func disconnect_from_server(id: int):
+	var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
+	lobby_scene.reset_player_data()
+	#MultiplayerManager.players.erase(player_id_to_remove)
+	#multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer.disconnect_peer(id)
+	multiplayer.multiplayer_peer = null
+	print(players)
+	#find some way to remove the player from the player list
+
+#this function is called by the server to tell the clients "Hey, I need you to remove players from your playerlist"
+@rpc("call_local", "reliable")
+func rpc_remove_player(id_to_remove: int):
+	# This function will run on EVERY peer (including the server itself, due to "call_local")
+	if MultiplayerManager.players.has(id_to_remove): #if the id exists, remove it
+		MultiplayerManager.players.erase(id_to_remove)
+		print("Peer " + str(multiplayer.get_unique_id()) + ": Removed player ID " + str(id_to_remove))
+		#disconnect_from_server(id_to_remove)
+
+#function can be called by anyone in the network
+#allows communication between multiple peers
 @rpc("any_peer", "reliable")
 func set_username(username: String):
-	var lobby_scene = get_node("/root/LobbyScene")
+	var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
+	#if this function is called by the server, create its own username
 	if multiplayer.get_remote_sender_id() == 0:
+		#new player data added to the dictionary of players
 		MultiplayerManager.players[multiplayer.get_unique_id()] = PlayerData.new()
+		#sets the username for the server
 		MultiplayerManager.players[multiplayer.get_unique_id()].username = username
-		lobby_scene.show_player(multiplayer.get_unique_id())
+		lobby_scene.show_player(multiplayer.get_unique_id()) #show the username in the lobby (this is the lobby host)
+	#if the game is not currently in the lobby state
 	elif GameManager.game_state != GameManager.game_state_enum.lobby:
+		#call the rpc function join_setup
 		join_setup.rpc_id(multiplayer.get_remote_sender_id(), false)
 	else:
+		#call the rpc function join_setup (for the client)
 		join_setup.rpc_id(multiplayer.get_remote_sender_id(), true)
-		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = PlayerData.new()
-		MultiplayerManager.players[multiplayer.get_remote_sender_id()].username = username
-		lobby_scene.show_player(multiplayer.get_remote_sender_id())
+		MultiplayerManager.players[multiplayer.get_remote_sender_id()] = PlayerData.new() #new player data is added to the dictionary of players
+		MultiplayerManager.players[multiplayer.get_remote_sender_id()].username = username #sets the players username based on their id
+		lobby_scene.show_player(multiplayer.get_remote_sender_id()) #show the player in the lobby
+	#if the current instance is the server
 	if multiplayer.is_server():
+		#send the clients an updated list of all the players in the game
 		update_player_data.rpc(serialize(players))
 
+#function can be called by anyone in the network
 @rpc("any_peer", "reliable")
 func update_player_data(data):
+	#if client
 	if !multiplayer.is_server():
+		#for every player in the passed table/dictionary
 		for player_id in data:
-			players[player_id] = deserialize(data[player_id])
-		cards = get_cards()
-	var lobby_scene = get_parent().get_node("LobbyScene")
+			#each player_id in the players table references a PlayerData object (not just flattened data)
+			players[player_id] = deserialize(data[player_id]) #updates the players table with the recieved infromation in a readable format by deserializing
+		cards = get_cards() #grab the cards
+	var lobby_scene = get_parent().get_node("LobbyScene") #reference the lobby scene
 	
+	#if the lobby scene exists
 	if lobby_scene != null:
-		lobby_scene.reset_player_data()
+		lobby_scene.reset_player_data() #reset the players data in the lobby scene
 	else:
 		print("lobby scene is null")
 
+#function can be called by anyone in the network
 @rpc("any_peer", "reliable")
 func join_setup(success: bool):
+	#if successful in joining the setup
 	if success:
-		GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
-		await GameManager.scene_changed
-		var lobby_scene = get_parent().get_node("LobbyScene")
-		set_username(username)
-		lobby_scene.reset_player_data()
+		GameManager.change_game_state(GameManager.game_state_enum.lobby, false) #change state to the lobby state
+		await GameManager.scene_changed #wait until the lobby is loaded
+		var lobby_scene = get_parent().get_node("LobbyScene") #reference the lobby scene
+		set_username(username) #set the username
+		lobby_scene.reset_player_data() #reset player data?
 	else:
-		multiplayer.multiplayer_peer = null
+		multiplayer.multiplayer_peer = null #if not successful, then there is no connected peer
 
+#runs the game loop
 func run_game_loop():
+	#if this instance is the server
 	if multiplayer.is_server():
-		#for i in range(2):
-		#	run_game()
-		run_game()
+		run_game() #run the game
 
+#function can be called by anyone in the network
 @rpc("any_peer", "reliable")
-func run_game():
-	# Run creation screen
+func run_game(): # Runs all of the phases of the game
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.creation, false)
-	start(GameManager.creation_time)
-	await self.timeout
+	start(GameManager.creation_time) #starts the timer
+	await self.timeout #wait until the time runs out
 
-	# Get cards
+	#get cards
 	get_parent().get_node("/root/Creation_Scene").export_card.rpc()
 	while get_cards().size() < players.size():
 		await get_tree().create_timer(0.5).timeout
 	print(get_cards())
-	 #update_player_data.rpc(serialize(players))
-	# Change to display
+	#update_player_data.rpc(serialize(players))
+	#Change to display ste
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.display, false)
 	await get_tree().create_timer(2).timeout
+	#grabs the cards
 	cards = get_cards()
 	for product in get_cards().values():
 		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize())
@@ -128,13 +197,15 @@ func run_game():
 
 	# Voting
 	update_player_data.rpc(serialize(players))
+	#switch to the voting phase
 	GameManager.change_game_state.rpc(GameManager.game_state_enum.voting, false)
-	await get_tree().create_timer(20).timeout
+	await get_tree().create_timer(20).timeout #timer for the voting phase
 
 	get_parent().get_node("/root/VotingScene").send_vote.rpc()
 	while votes.size() < players.size():
 		await get_tree().create_timer(0.5).timeout
 
+	#the voting calculations
 	var round_results = {}
 	for player in players.keys():
 		round_results[player] = 0
@@ -145,16 +216,18 @@ func run_game():
 			continue
 		round_results[vote] += 1
 		MultiplayerManager.players[vote].score += 100000
+		#if the player has more money than the money needed to win, they win
 		if MultiplayerManager.players[vote].score >= GameManager.win_threshold: 
 			has_winner = true
 		
 	# Results
-	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false)
-	await get_tree().create_timer(3).timeout
+	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false) #switch to the results phase
+	await get_tree().create_timer(3).timeout 
 	update_player_data.rpc(serialize(players))
-	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results)
-	await get_tree().create_timer(15).timeout
-
+	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results) #shows the scores for the round
+	await get_tree().create_timer(15).timeout #the timer for that phase
+	
+	#if somebody won, reset the game, otherwise continue playing the game
 	if has_winner:
 		reset.rpc()
 	else:
@@ -162,23 +235,27 @@ func run_game():
 
 	# Optional: Offer replay
 
+#function can be called by anyone in the network
 @rpc("any_peer", "call_local", "reliable")
 func handle_display_pain(card: Dictionary):
 	await GameManager.scene_changed
-	get_parent().get_node("/root/DisplayScene").display_card(card)
+	get_parent().get_node("/root/DisplayScene").display_card(card) #displays the cards
 
+#function can be called by anyone in the network
 @rpc("any_peer","call_local","reliable")
 func reset():
-	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, false)
-	multiplayer.multiplayer_peer.close()
+	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, false) #back to the main menu
+	multiplayer.multiplayer_peer.close() #disconnect
 	await GameManager.scene_changed
 	var home_scene = get_parent().get_node("/root/Multiplayer_Menu")
 	home_scene.USERNAME_READ.text = username
-	var cards = {}
-	var votes = {}
-	var score_card = {}
-	var players = {}
+	#reset variables
+	cards = {}
+	votes = {}
+	score_card = {}
+	players = {}
 
+#function to deserialize the data
 func deserialize(data: Dictionary):
 	var player = PlayerData.new()
 	player.username = data["username"]
@@ -186,19 +263,23 @@ func deserialize(data: Dictionary):
 	player.data = PitchCardData.deserialize(data["data"]) if data["data"] != null else null
 	return player
 
+#function to serialize the provided data
 func serialize(list: Dictionary):
 	var ret = {}
 	for player_id in list.keys():
 		ret[player_id] = list[player_id].serialize()
 	return ret
 
+#function to grab the cards that the player had
 func get_cards():
 	var ret = {}
 	for key in players.keys():
 		ret[key] = players[key].data
 	return ret
 
+#function that can be called by anyone in the network
 @rpc("any_peer", "call_local", "reliable")
+#imports the cards
 func import_card(pd: Dictionary):
 	print(pd.keys())
 	print(pd["user"])
