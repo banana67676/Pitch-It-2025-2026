@@ -34,7 +34,11 @@ func new_ui_button(color):
 	var index = color_plte.get_child_count() - 1
 	button.set_position(Vector2((index % 2) * 30, (index / 2) * 30))
 	button.modulate = color;
-	button.connect("pressed", func(): draw_color = button.modulate)
+	button.connect("pressed", func():
+		draw_color = button.modulate
+		$Control/ColorPicker/ColorPickerButton.color = draw_color
+	)
+
 	return button
 
 func _ready():
