@@ -83,5 +83,13 @@ theme = ExtResource("2_bue6x")
 text = "testing babacii"
 horizontal_alignment = 1
 
+[node name="GameModeButton" type="Button" parent="."]
+offset_left = 463.0
+offset_top = 554.0
+offset_right = 703.0
+offset_bottom = 636.0
+theme_override_font_sizes/font_size = 50
+text = "Game modes"
+
 [connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
