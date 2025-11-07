@@ -1,20 +1,45 @@
-[gd_scene format=3 uid="uid://da4q0u4q2myc1"]
+[gd_scene load_steps=3 format=3 uid="uid://da4q0u4q2myc1"]
 
-[node name="Node2D" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_2qdo2"]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rh6ki"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="VoteBox" type="PanelContainer"]
+custom_minimum_size = Vector2(441, 63)
+offset_right = 1152.0
+offset_bottom = 644.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rh6ki")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "Text"
+
+[node name="VoteButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("1_2qdo2")
+theme_type_variation = &"ButtonSmall"
+text = "Invest $100,000"
