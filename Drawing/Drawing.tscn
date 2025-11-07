@@ -62,7 +62,7 @@ theme_override_font_sizes/font_size = 24
 text = "Clear"
 
 [node name="DrawingBorder" type="Sprite2D" parent="."]
-position = Vector2(415, 315)
+position = Vector2(400, 299)
 texture = ExtResource("3_ndbog")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -71,10 +71,8 @@ replication_config = SubResource("SceneReplicationConfig_8fswx")
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -1
 z_as_relative = false
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 816.0
-offset_bottom = 616.0
+offset_right = 800.0
+offset_bottom = 600.0
 color = Color(0.84114, 0.737569, 0.748733, 1)
 
 [connection signal="color_changed" from="Control/ColorPicker/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
