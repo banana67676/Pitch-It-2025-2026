@@ -1,18 +1,106 @@
-[gd_scene load_steps=2 format=3 uid="uid://ngfm742hhhhd"]
+[gd_scene load_steps=5 format=3 uid="uid://ngfm742hhhhd"]
 
-[ext_resource type="Script" path="res://Scenes/Voting Scene/voting_scene.gd" id="1_ar3lm"]
+[ext_resource type="Script" uid="uid://befd3glh4iybt" path="res://Scenes/Voting Scene/voting_scene.gd" id="1_ar3lm"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_ydydk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydydk"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ydydk"]
+properties/0/path = NodePath("MarginContainer/MarginContainer2/TimeRemaining:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="VotingScene" type="Node2D"]
 script = ExtResource("1_ar3lm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_top = 37.0
-offset_right = 1147.0
-offset_bottom = 647.0
-size_flags_horizontal = 6
-size_flags_vertical = 4
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 75
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 24.0
-text = "Voting Scene"
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VotingHeader" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_ydydk")
+theme_type_variation = &"HeaderYellow"
+text = "Voting"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = -100
+
+[node name="VotingContainer" type="GridContainer" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+columns = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 530
+
+[node name="TimeRemaining" type="Label" parent="MarginContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Time Remaining:"
+horizontal_alignment = 1
+
+[node name="VoteBox" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(441, 63)
+offset_left = 355.0
+offset_top = 135.0
+offset_right = 796.0
+offset_bottom = 198.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ydydk")
+
+[node name="MarginContainer" type="MarginContainer" parent="VoteBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VoteBox/MarginContainer"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="VoteBox/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "Text"
+
+[node name="VoteButton" type="Button" parent="VoteBox/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_ydydk")
+theme_type_variation = &"ButtonSmall"
+text = "Invest $100,000"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ydydk")

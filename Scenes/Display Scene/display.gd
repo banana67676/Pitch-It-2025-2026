@@ -22,10 +22,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if multiplayer.is_server():
 		$TimeLabel.text = str("Time remaining: ",round(MultiplayerManager.get_time_left()))
-	pass
 
 @rpc("any_peer", "call_local", "reliable")
 func display_card(card_serialized: Dictionary):
