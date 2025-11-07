@@ -8,7 +8,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if multiplayer.is_server():
-		%TimeRemaining.text = str("Time remaining: ",round(MultiplayerManager.get_time_left()))
+		var time_left = MultiplayerManager.get_time_left()
+		if (time_left > 10):
+			$TimeRemaining.text = str("Time remaining: ",int(round(time_left)))
+		else:
+			$TimeRemaining.text = str("Time remaining: %.1f" % time_left)
 
 var selection = -1
 

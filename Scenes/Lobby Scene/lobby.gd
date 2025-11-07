@@ -59,3 +59,8 @@ func _on_begin_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	MultiplayerManager.disconnect_from_server()
+
+
+
+func _on_game_mode_button_pressed() -> void:
+	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false)

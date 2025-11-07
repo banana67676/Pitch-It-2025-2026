@@ -17,8 +17,10 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_fj56n")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 1154.0
+offset_bottom = 649.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 200
@@ -101,5 +103,15 @@ theme_override_font_sizes/font_size = 24
 text = "testing babacii"
 horizontal_alignment = 1
 
+[node name="Game Mode button" type="Button" parent="."]
+offset_left = 385.0
+offset_top = 561.0
+offset_right = 786.0
+offset_bottom = 655.0
+theme = ExtResource("3_6bo0c")
+theme_override_font_sizes/font_size = 50
+text = "Game Mode"
+
 [connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Game Mode button" to="." method="_on_game_mode_button_pressed"]
