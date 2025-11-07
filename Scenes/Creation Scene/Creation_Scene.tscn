@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
-[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_2yjat"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_42e26"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h7afi"]
@@ -38,36 +38,81 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Title" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_2yjat")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+
+[node name="Title" type="LineEdit" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_42e26")
+theme_type_variation = &"YellowLineEdit"
 theme_override_font_sizes/font_size = 37
-placeholder_text = "Product Title Here"
+placeholder_text = "Product Title"
+alignment = 1
+caret_blink = true
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
-[node name="Slogan" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="Slogan" type="LineEdit" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_2yjat")
-theme_override_font_sizes/font_size = 16
-placeholder_text = "Product Slogan Here"
+theme = ExtResource("2_42e26")
+theme_type_variation = &"WhiteLineEdit"
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Product Slogan"
+alignment = 1
+caret_blink = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -30
+
+[node name="DonePlayers" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 24
+text = "3/5"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="Button" parent="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource("2_42e26")
+theme_type_variation = &"ButtonSmall"
+theme_override_font_sizes/font_size = 24
+text = "Done"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DrawingScene" parent="MarginContainer/VSplitContainer/HSplitContainer" instance=ExtResource("1_r6dir")]
+unique_name_in_owner = true
 scale = Vector2(0.7, 0.7)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -90,9 +135,10 @@ offset_top = 168.0
 offset_right = 710.0
 offset_bottom = 213.0
 theme_override_font_sizes/font_size = 30
-text = "Text
+text = "Time Remaining:
 "
 
+[connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
 [node name="BrushSize" type="Label" parent="."]
 offset_left = 688.0
 offset_top = 515.0

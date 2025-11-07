@@ -1,14 +1,16 @@
 extends CharacterBody2D
 
+#preloading the textures (that aren't needed anymore)
+#const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
+#const WHO_CARD_ASSET = preload("res://Assets/Who-card-asset.png")
 
-const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
-const WHO_CARD_ASSET = preload("res://Assets/Who-card-asset.png")
-
+#the potential card types
 enum card_types {
 	who,
 	what
 }
 
+#exporting the type of card that this card is (either a "who" card or a "what" card)
 @export var card_type: card_types
 
 @export var what_text = [
@@ -112,10 +114,13 @@ enum card_types {
 
 var possible_text = []
 
+#references to the nodes in the scene
+@onready var card: PanelContainer = $Card
+@onready var label: Label = $Card/Text
 
-@onready var label: Label = $Face/MarginContainer/ColorRect/MarginContainer/Label
-
-@onready var face: TextureRect = $Face
+#the red and yellow color for text
+var yellow_color = Color.from_rgba8(240, 221, 12, 255)
+var red_color = Color.from_rgba8(153, 29, 35, 255)
 
 enum {
 	stay,
@@ -126,10 +131,18 @@ var state = stay
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#CARD VISUALS
+	var stylebox = StyleBoxFlat.new() #stylebox to change the background color of the card
 	if card_type == card_types.who:
-		face.texture = WHO_CARD_ASSET
+		stylebox.bg_color = yellow_color
+		label.add_theme_color_override(&"font_color", red_color) #make the text red
 	else:
-		face.texture = WHAT_CARD_ASSET
+		stylebox.bg_color = red_color
+		label.add_theme_color_override(&"font_color", yellow_color) #make the text yellow
+	stylebox.set_corner_radius_all(20) #setting the corner radius for all corners
+	card.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
+	
+	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout
 	if (card_type == card_types.who):
 		possible_text = who_text

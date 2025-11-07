@@ -6,3 +6,6 @@
 default_font = ExtResource("1_wvydo")
 /colors/Shadow = Color(0.64638, 0.478319, 0.181788, 1)
 /colors/Yellow = Color(0.910985, 0.864009, 0.264205, 1)
+HeaderLarge/colors/font_color = Color(0.94, 0.8655833, 0.04700001, 1)
+HeaderLarge/colors/font_outline_color = Color(0.83, 0.74284995, 0.08300002, 1)
+HeaderLarge/font_sizes/font_size = 48
