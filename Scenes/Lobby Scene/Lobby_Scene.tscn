@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=8 format=3 uid="uid://cj0mn0lb3a808"]
 
 [ext_resource type="Script" uid="uid://cws7jvys13ih5" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_bue6x"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_6bo0c"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_pf8wj"]
 [ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="4_dneng"]
+[ext_resource type="Texture2D" uid="uid://drvfg5rn54mvb" path="res://Assets/gear.png" id="6_bal86"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bo0c"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
@@ -111,6 +112,62 @@ offset_bottom = 655.0
 theme = ExtResource("3_6bo0c")
 theme_override_font_sizes/font_size = 50
 text = "Game Mode"
+
+[node name="Settings Button OLD" parent="." instance=ExtResource("3_pf8wj")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 497.0
+offset_top = 171.0
+offset_right = 572.0
+offset_bottom = 246.0
+grow_horizontal = 1
+grow_vertical = 1
+icon = ExtResource("6_bal86")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1032.0
+offset_top = 13.0
+offset_right = 1140.0
+offset_bottom = 86.0
+action_mode = 0
+text = "Settings
+"
+
+[node name="Setting panel" type="Panel" parent="Button"]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 58.0
+offset_right = 51.0
+offset_bottom = 98.0
+
+[node name="Volume Settings" type="MarginContainer" parent="Button/Setting panel"]
+layout_mode = 0
+
+[node name="Volume settings" type="VBoxContainer" parent="Button/Setting panel/Volume Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Button/Setting panel/Volume Settings/Volume settings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Volume"
+
+[node name="Label3" type="Label" parent="Button/Setting panel/Volume Settings/Volume settings"]
+layout_mode = 2
+text = "Music"
+
+[node name="Volume Slider" type="HSlider" parent="Button/Setting panel/Volume Settings/Volume settings"]
+layout_mode = 2
+value = 75.0
+
+[node name="Label2" type="Label" parent="Button/Setting panel/Volume Settings/Volume settings"]
+layout_mode = 2
+text = "Sound Effects"
+
+[node name="Volume Slider2" type="HSlider" parent="Button/Setting panel/Volume Settings/Volume settings"]
+layout_mode = 2
+value = 75.0
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
