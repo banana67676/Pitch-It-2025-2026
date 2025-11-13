@@ -1,44 +1,192 @@
-[gd_scene load_steps=3 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=11 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
+[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_7btl7"]
+[ext_resource type="Script" uid="uid://bnwiv8xq5f8gs" path="res://UI/spawning_timer.gd" id="3_urqfg"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="4_vsoll"]
+[ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="5_mjgjq"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bfa7l"]
-properties/0/path = NodePath("TimeLabel:text")
-properties/0/spawn = true
-properties/0/replication_mode = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urqfg"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7btl7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsoll"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjgjq"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmnxq"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.67058825, 0.1882353, 0.19607843, 1)
 
 [node name="DisplayScene" type="Node2D"]
 script = ExtResource("1_o62vh")
 
 [node name="DisplayScene" type="MarginContainer" parent="."]
 offset_right = 1152.0
-offset_bottom = 172.0
+offset_bottom = 649.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DisplayScene"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DisplayScene"]
 layout_mode = 2
 
-[node name="ProdName" type="Label" parent="DisplayScene/VBoxContainer"]
+[node name="InfoMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 50
-text = "product"
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 0
 
-[node name="Slogan" type="Label" parent="DisplayScene/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplayScene/HBoxContainer/InfoMargin"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PlayerNameMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[node name="PlayerName" type="Label" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/PlayerNameMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 30
-text = "slogan
-"
+text = "Player Name"
+horizontal_alignment = 1
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_bfa7l")
+[node name="ProductBox" type="PanelContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_urqfg")
 
-[node name="TimeLabel" type="Label" parent="."]
-offset_left = 905.0
-offset_top = 446.0
-offset_right = 967.0
-offset_bottom = 491.0
-theme_override_font_sizes/font_size = 30
-text = "Text"
+[node name="Padding" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/ProductBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Product" type="Label" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/ProductBox/Padding"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 54)
+layout_mode = 2
+theme = ExtResource("2_7btl7")
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 36
+text = "Product Name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SloganMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="SloganBox" type="PanelContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_urqfg")
+
+[node name="Padding" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin/SloganBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Slogan" type="Label" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin/SloganBox/Padding"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+theme = ExtResource("2_7btl7")
+theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+theme_override_font_sizes/font_size = 20
+text = "Slogan"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TimerContainer" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_top = 175
+
+[node name="Timer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/TimerContainer" instance=ExtResource("4_vsoll")]
+layout_mode = 2
+
+[node name="BoardMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="DisplayScene/HBoxContainer/BoardMargin"]
+custom_minimum_size = Vector2(662, 500)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7btl7")
+
+[node name="DrawingBoard" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+z_index = -1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vsoll")
+
+[node name="DrawingBorder" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+z_index = 2
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjgjq")
+
+[node name="BoardCover" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nmnxq")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cyweidcx36nir")
+spawn_path = NodePath("../DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/TimerContainer")
+script = ExtResource("3_urqfg")
+attached_timer = ExtResource("4_vsoll")
+
+[node name="Who" parent="." instance=ExtResource("5_mjgjq")]
+position = Vector2(34.999996, 371)
+rotation = -0.10297442
+scale = Vector2(0.5, 0.5)
+
+[node name="What" parent="." instance=ExtResource("5_mjgjq")]
+position = Vector2(239, 355.99997)
+rotation = 0.05235988
+scale = Vector2(0.5, 0.5)
+card_type = 1

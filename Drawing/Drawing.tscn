@@ -1,9 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://ukycayh8nnxn"]
+[gd_scene load_steps=8 format=3 uid="uid://ukycayh8nnxn"]
 
 [ext_resource type="Script" uid="uid://cplbmxh8k2sif" path="res://Drawing/drawing.gd" id="1_nhb1v"]
 [ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="2_o4gb6"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_2g31n"]
-[ext_resource type="Texture2D" uid="uid://cj0vpgo4t3ro7" path="res://Assets/drawborder.svg" id="3_ndbog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ml1p"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vexi"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yfq7"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.67058825, 0.1882353, 0.19607843, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8fswx"]
 
@@ -13,8 +44,9 @@ script = ExtResource("1_nhb1v")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -8.0
 offset_right = 1152.0
-offset_bottom = 648.0
+offset_bottom = 640.0
 
 [node name="ColorPicker" type="Node2D" parent="Control"]
 position = Vector2(968, 508)
@@ -61,24 +93,35 @@ theme_type_variation = &"ButtonSmall"
 theme_override_font_sizes/font_size = 24
 text = "Clear"
 
-[node name="DrawingBorder" type="Sprite2D" parent="."]
-position = Vector2(415, 315)
-texture = ExtResource("3_ndbog")
+[node name="DrawingBoard" type="Panel" parent="."]
+z_index = -1
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 808.0
+offset_bottom = 608.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ml1p")
+
+[node name="DrawingBorder" type="Panel" parent="."]
+z_index = 2
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 808.0
+offset_bottom = 608.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2vexi")
+
+[node name="BoardCover" type="Panel" parent="."]
+z_index = 1
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 808.0
+offset_bottom = 608.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1yfq7")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8fswx")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
-z_as_relative = false
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 816.0
-offset_bottom = 616.0
-color = Color(0.84114, 0.737569, 0.748733, 1)
-
 [connection signal="color_changed" from="Control/ColorPicker/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="toggled" from="Control/DrawEraseToggle" to="." method="_on_draw_erase_toggle_toggled"]
 [connection signal="pressed" from="Control/Erase All Button" to="." method="_on_erase_all_button_pressed"]
-[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]
+[connection signal="mouse_entered" from="DrawingBoard" to="." method="_on_drawing_board_mouse_entered"]
+[connection signal="mouse_exited" from="DrawingBoard" to="." method="_on_drawing_board_mouse_exited"]

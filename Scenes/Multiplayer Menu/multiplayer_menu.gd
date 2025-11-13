@@ -54,6 +54,7 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_username_text_changed(new_text: String) -> void:
-	if new_text.length() > 32:
-		USERNAME_READ.text = USERNAME_READ.text.substr(0,32)
-		USERNAME_READ.set_caret_column(32)
+	var max_length: int = 20
+	if new_text.length() > max_length:
+		USERNAME_READ.text = USERNAME_READ.text.substr(0,max_length)
+		USERNAME_READ.set_caret_column(max_length)

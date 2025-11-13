@@ -47,7 +47,7 @@ scale = Vector2(0.235, 0.235)
 texture = ExtResource("1_75fp8")
 
 [node name="Artboard14" type="Sprite2D" parent="."]
-position = Vector2(117, 551)
+position = Vector2(145.99998, 570)
 rotation = -0.261799
 scale = Vector2(0.235, 0.235)
 texture = ExtResource("1_75fp8")
@@ -77,7 +77,7 @@ scale = Vector2(0.235, 0.235)
 texture = ExtResource("1_75fp8")
 
 [node name="Artboard15" type="Sprite2D" parent="."]
-position = Vector2(574.532, 623.658)
+position = Vector2(601, 668.0001)
 rotation = -0.523599
 scale = Vector2(0.235, 0.235)
 texture = ExtResource("1_75fp8")
@@ -90,6 +90,12 @@ texture = ExtResource("1_75fp8")
 
 [node name="Artboard17" type="Sprite2D" parent="."]
 position = Vector2(939.126, 93.0621)
+rotation = 0.785398
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_75fp8")
+
+[node name="Artboard28" type="Sprite2D" parent="."]
+position = Vector2(4.999939, 652)
 rotation = 0.785398
 scale = Vector2(0.235, 0.235)
 texture = ExtResource("1_75fp8")

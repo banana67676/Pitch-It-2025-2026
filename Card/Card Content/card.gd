@@ -9,9 +9,11 @@ enum card_types {
 	who,
 	what
 }
-
 #exporting the type of card that this card is (either a "who" card or a "what" card)
 @export var card_type: card_types
+
+#determines if this card should give itself a random text
+@export var give_random_text: bool
 
 @export var what_text = [
 	"Microwave Ovens",
@@ -144,11 +146,12 @@ func _ready() -> void:
 	
 	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout
-	if (card_type == card_types.who):
-		possible_text = who_text
-	elif (card_type == card_types.what):
-		possible_text = what_text
-	pick_text()
+	if give_random_text:
+		if (card_type == card_types.who):
+			possible_text = who_text
+		elif (card_type == card_types.what):
+			possible_text = what_text
+		pick_text()
 
 func pick_text():
 	label.text = possible_text[randi_range(0, possible_text.size() - 1)]

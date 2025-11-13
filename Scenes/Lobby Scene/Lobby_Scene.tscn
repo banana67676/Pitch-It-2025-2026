@@ -17,27 +17,24 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_fj56n")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 offset_right = 1152.0
 offset_bottom = 648.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 35
-theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 75
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
-layout_mode = 2
-split_offset = 100
-dragger_visibility = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 125
 theme_override_constants/margin_bottom = 250
 
-[node name="PlayerList" type="GridContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+[node name="PlayerList" type="GridContainer" parent="MarginContainer/MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -60,7 +57,9 @@ text = "Lobby"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 0
 
 [node name="Begin" type="Button" parent="MarginContainer/MarginContainer"]

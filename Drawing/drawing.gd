@@ -143,9 +143,17 @@ func _input(event):
 			size_slider.value -= 5
 
 
-func _on_color_rect_mouse_entered() -> void:
+#func _on_color_rect_mouse_entered() -> void:
+	#Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
+#
+#
+#func _on_color_rect_mouse_exited() -> void:
+	#Input.set_custom_mouse_cursor(null)
+
+
+func _on_drawing_board_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
 
 
-func _on_color_rect_mouse_exited() -> void:
+func _on_drawing_board_mouse_exited() -> void:
 	Input.set_custom_mouse_cursor(null)
