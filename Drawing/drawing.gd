@@ -38,7 +38,10 @@ func new_ui_button(color):
 		draw_color = button.modulate
 		$Control/ColorPicker/ColorPickerButton.color = draw_color
 	)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 15e799326302edc5afbe3c7c6429775367faa993
 	return button
 
 func _ready():
@@ -48,7 +51,7 @@ func _ready():
 	self.repeat_fill(canvas_fill, PackedByteArray([0, 0, 0, 0]))
 	image = Image.create_from_data(WIDTH, HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
 	image_texture = ImageTexture.create_from_image(image)
-	color_plte = $Control/ColorPicker/ColorPalette
+	color_plte = $Control/ColorPicker/ColorPalette  ###### This line is what the preset og ccolors is loinked to aso I need to find a way a way to link it up witht he color circle
 	for color in defaults:
 		new_ui_button(color)
 		#obj.call_deferred("set","theme_override_colors/icon_normal_color", color)
