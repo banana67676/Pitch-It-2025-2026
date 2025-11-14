@@ -58,8 +58,7 @@ func _process(_delta: float) -> void:
 		if Input.is_action_pressed("Mouse Click"):
 			# Plan: Create a parametric line equation where f(0) = prev_mouse_pos && f(1) = mouse_pos
 			# Then measure each point's distance from the line segment
-			var canvas_offset = $ColorRect.position
-			var mouse_pos = get_local_mouse_position() - canvas_offset
+			var mouse_pos = get_local_mouse_position()
 			mode_size = size_slider.value
 			if prev_mouse_pos == null:
 				prev_mouse_pos = mouse_pos
@@ -144,9 +143,17 @@ func _input(event):
 			size_slider.value -= 5
 
 
-func _on_color_rect_mouse_entered() -> void:
+#func _on_color_rect_mouse_entered() -> void:
+	#Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
+#
+#
+#func _on_color_rect_mouse_exited() -> void:
+	#Input.set_custom_mouse_cursor(null)
+
+
+func _on_drawing_board_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(pencil_icon, Input.CURSOR_ARROW, pencil_offset)
 
 
-func _on_color_rect_mouse_exited() -> void:
+func _on_drawing_board_mouse_exited() -> void:
 	Input.set_custom_mouse_cursor(null)
