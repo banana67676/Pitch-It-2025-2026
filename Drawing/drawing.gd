@@ -38,11 +38,6 @@ func new_ui_button(color):
 		draw_color = button.modulate
 		$Control/ColorPicker/ColorPickerButton.color = draw_color
 	)
-<<<<<<< HEAD
-
-=======
->>>>>>> 15e799326302edc5afbe3c7c6429775367faa993
-	return button
 
 func _ready():
 	position = Vector2(0, 0)

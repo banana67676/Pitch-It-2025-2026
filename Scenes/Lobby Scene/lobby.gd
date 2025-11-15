@@ -7,7 +7,8 @@ const theme = preload("res://Assets/Font.tres")
 #node references
 @onready var player_list: GridContainer = %PlayerList
 @onready var player_name_template: PanelContainer = $PlayerNameTemplate
-@onready var game_modes_button = $GameModeButton
+@onready var settings_popup: Control = $Overlay/Setting/SettingsPopup
+
 
 #signals
 signal lobby_ready
@@ -15,21 +16,14 @@ signal lobby_ready
 #values
 var player_count : int = 0
 
-
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	game_modes_button.pressed.connect(_on_game_modes_button_pressed)
-	
 	if multiplayer.is_server():
 		lobby_ready.emit()
 	else:
 		%Begin.visible = false
+	settings_popup.visible = false
 
-
-func _on_game_modes_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Lobby Scene/GameModes_Scene.tscn")
 
 func show_player(id):
 	var player_box = player_name_template.duplicate()
@@ -73,3 +67,8 @@ func _on_back_button_pressed() -> void:
 
 func _on_game_mode_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false)
+
+
+func _on_setting_pressed() -> void:
+	settings_popup.visible = !settings_popup.visible
+	pass # Replace with function body.
