@@ -36,7 +36,7 @@ func show_player(id):
 
 func reset_player_data():
 	for player in %PlayerList.get_children():
-		remove_child(player)
+		#remove_child(player)
 		player.queue_free()
 	player_count = 0
 	#player is the key (their user id)

@@ -8,4 +8,5 @@ func _ready() -> void:
 func _spawn_timer() -> void:
 	if multiplayer.is_server():
 		var timer = attached_timer.instantiate()
-		get_node(spawn_path).call_deferred("add_child", timer)
+		get_node(spawn_path).add_child(timer, true)
+		#get_node(spawn_path).call_deferred("add_child", timer)

@@ -29,7 +29,7 @@ func get_round_time() -> int:
 	return 2135 #default port for testing
 
 var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
-var creation_time: float = 60 #time to create a product
+var creation_time: float = 62 #time to create a product
 var presentation_time: float = 3 #time to present a product
 var voting_time: float = 30 #time to vote on a product
 var win_threshold: int = 200000 #amount of money needed to win
@@ -69,18 +69,26 @@ func change_game_state(state: game_state_enum, protected: bool):
 
 @rpc("any_peer", "call_local", "reliable")
 func delayed_change_game_state(state: game_state_enum, protected: bool, initial_delay: float, final_delay: float):
-	#The camera in movement to show the logo
-	Camera.fade_out()
-	await Camera.animation_player.animation_finished
-	Camera.find_child("GameArt").visible = true
-	Camera.fade_in()
-	await Camera.animation_player.animation_finished
+	#The camera in movement to show the logo/title card
+	title_card_intro_transition()
 	
 	await get_tree().create_timer(initial_delay).timeout #wait the initial delay before switching scenes
 	_game_state_switcher(state, protected) #actually switch game states
 	await get_tree().create_timer(final_delay).timeout #wait the final delay before showing the new scene
 	
 	#The camera out movement to fade back into the scene
+	title_card_outro_transition()
+
+#fades out the camera, then fades back into the "Pitch It!" screen
+func title_card_intro_transition():
+	Camera.fade_out()
+	await Camera.animation_player.animation_finished
+	Camera.find_child("GameArt").visible = true
+	Camera.fade_in()
+	await Camera.animation_player.animation_finished
+
+#fades out the camera, then fades back in to the newly transitioned scene
+func title_card_outro_transition():
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
 	Camera.find_child("GameArt").visible = false
