@@ -9,7 +9,7 @@ enum game_state_enum {
 	display,
 	voting,
 	results,
-	settings
+	settings,
 }
 
 #the potential game MODES (only the default mode right now)
@@ -37,6 +37,11 @@ var settings: bool = false
 
 signal scene_changed
 
+func _ready() -> void:
+	GDSync.change_scene_called.connect(func(): print("scene change called"))
+	GDSync.change_scene_failed.connect(func(): print("scene change failed"))
+	GDSync.change_scene_success.connect(func(): print("scene change success"))
+
 #function to quit the game
 func quit_game(_protected: bool):
 	get_tree().quit()
@@ -48,12 +53,13 @@ func get_current_scene():
 #the function that actually switches the game state
 func _game_state_switcher(state: game_state_enum, _protected: bool):
 	game_state = state
-	get_tree().current_scene.visible = false
-	var new_scene = load(enum_to_scene(state))
-	var scene_node = new_scene.instantiate()
-	get_tree().current_scene.free()
-	get_tree().root.add_child(scene_node)
-	get_tree().current_scene = scene_node
+	#get_tree().current_scene.visible = false
+	GDSync.change_scene(enum_to_scene(state))
+	#var new_scene = load(enum_to_scene(state))
+	#var scene_node = new_scene.instantiate()
+	#get_tree().current_scene.free()
+	#get_tree().root.add_child(scene_node)
+	#get_tree().current_scene = scene_node
 	scene_changed.emit()
 
 #function to change the game state (e.g. lobby -> creation)

@@ -13,6 +13,7 @@ config_version=5
 version="0.13"
 publicKey="b3e7f0e043579190"
 privateKey="7247ceb74dbe8589"
+useSenderID=true
 
 [application]
 
