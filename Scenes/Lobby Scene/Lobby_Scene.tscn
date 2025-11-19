@@ -1,51 +1,75 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=9 format=3 uid="uid://cj0mn0lb3a808"]
 
-[ext_resource type="Script" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
+[ext_resource type="Script" uid="uid://cws7jvys13ih5" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_bue6x"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_6bo0c"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_pf8wj"]
 [ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="4_dneng"]
+[ext_resource type="Texture2D" uid="uid://drvfg5rn54mvb" path="res://Assets/gear.png" id="6_gaby6"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_4jme6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bo0c"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="LobbyScene" type="Node2D"]
 script = ExtResource("1_fj56n")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 offset_right = 1152.0
 offset_bottom = 648.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 75
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 125
+theme_override_constants/margin_bottom = 250
+
+[node name="PlayerList" type="GridContainer" parent="MarginContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+columns = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LobbyHeader" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource("2_bue6x")
-theme_override_font_sizes/font_size = 30
+theme = ExtResource("3_6bo0c")
+theme_type_variation = &"HeaderYellow"
 text = "Lobby"
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-split_offset = 100
-dragger_visibility = 1
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 0
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VSplitContainer"]
+[node name="Begin" type="Button" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Begin" type="Button" parent="MarginContainer/VSplitContainer/MarginContainer2"]
-layout_mode = 2
+theme = ExtResource("3_6bo0c")
 theme_override_font_sizes/font_size = 50
 text = "Start Game!"
-
-[node name="PlayerList" type="Node2D" parent="."]
 
 [node name="Back Button" parent="." instance=ExtResource("3_pf8wj")]
 offset_left = 25.0
@@ -54,5 +78,65 @@ offset_right = 100.0
 offset_bottom = 100.0
 icon = ExtResource("4_dneng")
 
-[connection signal="pressed" from="MarginContainer/VSplitContainer/MarginContainer2/Begin" to="." method="_on_begin_pressed"]
+[node name="PlayerNameTemplate" type="PanelContainer" parent="."]
+visible = false
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 142.0
+offset_bottom = 35.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6bo0c")
+
+[node name="Padding" type="MarginContainer" parent="PlayerNameTemplate"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Name" type="Label" parent="PlayerNameTemplate/Padding"]
+layout_mode = 2
+theme = ExtResource("2_bue6x")
+theme_override_font_sizes/font_size = 24
+text = "testing babacii"
+horizontal_alignment = 1
+
+[node name="Game Mode button" type="Button" parent="."]
+offset_left = 385.0
+offset_top = 561.0
+offset_right = 786.0
+offset_bottom = 655.0
+theme = ExtResource("3_6bo0c")
+theme_override_font_sizes/font_size = 50
+text = "Game Mode"
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Setting" type="Button" parent="Overlay"]
+layout_direction = 3
+layout_mode = 0
+offset_left = -1130.0
+offset_top = 28.0
+offset_right = -1072.0
+offset_bottom = 86.0
+icon = ExtResource("6_gaby6")
+
+[node name="SettingsPopup" parent="Overlay/Setting" instance=ExtResource("7_4jme6")]
+layout_direction = 2
+layout_mode = 1
+offset_left = -135.0
+offset_top = 53.0
+offset_right = 26.0
+offset_bottom = 263.0
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Game Mode button" to="." method="_on_game_mode_button_pressed"]
+[connection signal="pressed" from="Overlay/Setting" to="." method="_on_setting_pressed"]
