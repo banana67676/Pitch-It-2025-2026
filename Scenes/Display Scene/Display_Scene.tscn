@@ -180,13 +180,13 @@ spawn_path = NodePath("../DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/Ti
 script = ExtResource("3_urqfg")
 attached_timer = ExtResource("4_vsoll")
 
-[node name="Who" parent="." instance=ExtResource("5_mjgjq")]
+[node name="What" parent="." instance=ExtResource("5_mjgjq")]
 position = Vector2(34.999996, 371)
 rotation = -0.10297442
 scale = Vector2(0.5, 0.5)
+card_type = 1
 
-[node name="What" parent="." instance=ExtResource("5_mjgjq")]
+[node name="Who" parent="." instance=ExtResource("5_mjgjq")]
 position = Vector2(239, 355.99997)
 rotation = 0.05235988
 scale = Vector2(0.5, 0.5)
-card_type = 1

@@ -20,6 +20,6 @@ func fade_in():
 
 #button click sound?
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Mouse Click"):
+	if Input.is_action_just_pressed("Left Click"):
 		mouse_sfx.pitch_scale = randf_range(0.9,1.1)
 		# mouse_sfx.play()
