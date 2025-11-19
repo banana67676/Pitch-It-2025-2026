@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://vt4f6pmafi8o"]
+
+[ext_resource type="Texture2D" uid="uid://bju75ksx6a46j" path="res://Assets/WhiteBuilb.png" id="1_rjxly"]
+[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_no37k"]
+[ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="3_no37k"]
+
+[node name="GameArt" type="Node2D"]
+
+[node name="Artboard1" type="Sprite2D" parent="."]
+position = Vector2(573, 334)
+scale = Vector2(1.00094, 1.00094)
+texture = ExtResource("1_rjxly")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_top = 50.0
+offset_right = 1152.0
+offset_bottom = 698.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Blank" type="Container" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="title" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = -30
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/title"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_no37k")
+theme_override_colors/font_color = Color(0.894606, 0.849589, 0.232212, 1)
+theme_override_colors/font_shadow_color = Color(0.624703, 0.461538, 0.173293, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_font_sizes/font_size = 120
+text = "Pitch It!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="slogan" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/slogan"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_no37k")
+theme_override_colors/font_color = Color(0.831373, 0.784314, 0.164706, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "Who's got the Million Dollar Idea?"
+horizontal_alignment = 1
+
+[node name="Start" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="BG_Bulbs" parent="." instance=ExtResource("3_no37k")]
+z_index = -1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_right = 1601.0
+offset_bottom = 968.0
+color = Color(0.67058825, 0.1882353, 0.19607843, 1)

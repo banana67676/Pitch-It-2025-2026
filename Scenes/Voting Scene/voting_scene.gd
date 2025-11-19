@@ -6,22 +6,19 @@ extends Node2D
 func _ready() -> void:
 	prepare(MultiplayerManager.cards.values())
 
-func _process(_delta: float) -> void:
-	if multiplayer.is_server():
-		var time_left = MultiplayerManager.get_time_left()
-		if (time_left > 10):
-			$TimeRemaining.text = str("Time remaining: ",int(round(time_left)))
-		else:
-			$TimeRemaining.text = str("Time remaining: %.1f" % time_left)
-
 var selection = -1
 
 func prepare(cards):
+	@warning_ignore("unused_variable")
 	var index: int = 0
+	#the card is the product that the user made bro...
 	for card in cards:
 		if card.user_id != multiplayer.get_unique_id():
 			var vote_box = VoteOption.instantiate()
-			vote_box.find_child("PlayerName").text = str(card.title, " ", card.username)
+			vote_box.find_child("ProductName").text = str(card.title) #find the ProductName label and change its text to the product
+			vote_box.find_child("PlayerName").text = "By: " + str(card.username) #find the PlayerName label and change its text to the username
+			
+			#vote_box.find_child("PlayerName").text = "Product: " + str(card.title) + " | By: " + str(card.username) + "'s"
 			#disp.get_child(0).get_child(0).text = str(card.title, " ", card.username)
 			var button = vote_box.find_child("VoteButton")
 			button.toggle_mode = true
@@ -37,7 +34,7 @@ func lock(user_id):
 		children.append(sect.get_child(1))
 	for button in children:
 		if button is Button:
-			button.text = "Invested"
+			#button.text = "Invested"
 			button.disabled = true
 
 @rpc("any_peer", "call_local", "reliable")

@@ -7,7 +7,7 @@ const theme = preload("res://Assets/Font.tres")
 #node references
 @onready var player_list: GridContainer = %PlayerList
 @onready var player_name_template: PanelContainer = $PlayerNameTemplate
-@onready var settings_popup: Control = $Overlay/Setting/SettingsPopup
+
 
 
 #signals
@@ -22,7 +22,6 @@ func _ready() -> void:
 		lobby_ready.emit()
 	else:
 		%Begin.visible = false
-	settings_popup.visible = false
 
 
 func show_player(id):
@@ -36,7 +35,7 @@ func show_player(id):
 
 func reset_player_data():
 	for player in %PlayerList.get_children():
-		remove_child(player)
+		#remove_child(player)
 		player.queue_free()
 	player_count = 0
 	#player is the key (their user id)
@@ -56,7 +55,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func _on_begin_pressed() -> void:
-	print("pressed")
 	MultiplayerManager.run_game_loop()
 
 
@@ -67,8 +65,3 @@ func _on_back_button_pressed() -> void:
 
 func _on_game_mode_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false)
-
-
-func _on_setting_pressed() -> void:
-	settings_popup.visible = !settings_popup.visible
-	pass # Replace with function body.

@@ -29,7 +29,7 @@ func get_round_time() -> int:
 	return 2135 #default port for testing
 
 var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
-var creation_time: float = 60 #time to create a product
+var creation_time: float = 62 #time to create a product
 var presentation_time: float = 3 #time to present a product
 var voting_time: float = 30 #time to vote on a product
 var win_threshold: int = 200000 #amount of money needed to win
@@ -42,25 +42,56 @@ signal scene_changed
 func quit_game(_protected: bool):
 	get_tree().quit()
 
-#function to change the game state (e.g. lobby -> creation)
-#this one can specifically be called by any connected peer, and this function will exeucte on ALL peers
-#basically it changes the game state for everyone
-@rpc("any_peer", "call_local", "reliable")
-func change_game_state(state: game_state_enum, _protected: bool):
-	Camera.fade_out()
-	await Camera.animation_player.animation_finished
+#returns the current scene
+func get_current_scene():
+	return enum_to_scene(game_state)
+
+#the function that actually switches the game state
+func _game_state_switcher(state: game_state_enum, _protected: bool):
 	game_state = state
 	get_tree().current_scene.visible = false
 	var new_scene = load(enum_to_scene(state))
 	var scene_node = new_scene.instantiate()
 	get_tree().current_scene.free()
 	get_tree().root.add_child(scene_node)
-	#print(get_tree().current_scene)
 	get_tree().current_scene = scene_node
-
-
-	#get_tree().change_scene_to_file(enum_to_scene(state))
 	scene_changed.emit()
+
+#function to change the game state (e.g. lobby -> creation)
+#this one can specifically be called by any connected peer, and this function will exeucte on ALL peers
+#basically it changes the game state for everyone
+@rpc("any_peer", "call_local", "reliable")
+func change_game_state(state: game_state_enum, protected: bool):
+	Camera.fade_out()
+	await Camera.animation_player.animation_finished
+	_game_state_switcher(state, protected)
+	Camera.fade_in()
+
+@rpc("any_peer", "call_local", "reliable")
+func delayed_change_game_state(state: game_state_enum, protected: bool, initial_delay: float, final_delay: float):
+	#The camera in movement to show the logo/title card
+	title_card_intro_transition()
+	
+	await get_tree().create_timer(initial_delay).timeout #wait the initial delay before switching scenes
+	_game_state_switcher(state, protected) #actually switch game states
+	await get_tree().create_timer(final_delay).timeout #wait the final delay before showing the new scene
+	
+	#The camera out movement to fade back into the scene
+	title_card_outro_transition()
+
+#fades out the camera, then fades back into the "Pitch It!" screen
+func title_card_intro_transition():
+	Camera.fade_out()
+	await Camera.animation_player.animation_finished
+	Camera.find_child("GameArt").visible = true
+	Camera.fade_in()
+	await Camera.animation_player.animation_finished
+
+#fades out the camera, then fades back in to the newly transitioned scene
+func title_card_outro_transition():
+	Camera.fade_out()
+	await Camera.animation_player.animation_finished
+	Camera.find_child("GameArt").visible = false
 	Camera.fade_in()
 
 #converts the given enum into the scene that needs to be changed into

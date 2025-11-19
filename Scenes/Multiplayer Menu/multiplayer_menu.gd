@@ -48,12 +48,13 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _on_back_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.title, false)
 
-
-func _on_settings_button_pressed() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.settings, false)
+#Right here is where I need to go
+#func _on_settings_button_pressed() -> void:
+	#GameManager.change_game_state(GameManager.game_state_enum.settings, false)
 
 
 func _on_username_text_changed(new_text: String) -> void:
-	if new_text.length() > 32:
-		USERNAME_READ.text = USERNAME_READ.text.substr(0,32)
-		USERNAME_READ.set_caret_column(32)
+	var max_length: int = 20
+	if new_text.length() > max_length:
+		USERNAME_READ.text = USERNAME_READ.text.substr(0,max_length)
+		USERNAME_READ.set_caret_column(max_length)

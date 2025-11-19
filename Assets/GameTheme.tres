@@ -1,4 +1,7 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://b7qrc55c1kxgl"]
+[gd_resource type="Theme" load_steps=20 format=3 uid="uid://b7qrc55c1kxgl"]
+
+[ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="1_wca55"]
+[ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="2_0vcl5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7bxx3"]
 
@@ -70,6 +73,32 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0nssd"]
 bg_color = Color(1.82897e-06, 0.672048, 0.779558, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5sax"]
+bg_color = Color(0.94, 0.8655833, 0.04700001, 0.78431374)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kidmo"]
+bg_color = Color(0.94, 0.8655833, 0.04700001, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3ng0"]
+bg_color = Color(0.37, 0.08510001, 0.09459667, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vcl5"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
 border_width_bottom = 5
@@ -128,6 +157,11 @@ ButtonSmall/styles/hover = SubResource("StyleBoxFlat_eq4yn")
 ButtonSmall/styles/normal = SubResource("StyleBoxFlat_lxuol")
 ButtonSmall/styles/pressed = SubResource("StyleBoxFlat_ho5hn")
 ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_0nssd")
+HSlider/icons/grabber = ExtResource("1_wca55")
+HSlider/icons/grabber_highlight = ExtResource("2_0vcl5")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_l5sax")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kidmo")
+HSlider/styles/slider = SubResource("StyleBoxFlat_n3ng0")
 HeaderYellow/base_type = &"Label"
 HeaderYellow/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 HeaderYellow/font_sizes/font_size = 48
