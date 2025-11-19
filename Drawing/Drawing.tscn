@@ -1,83 +1,204 @@
-[gd_scene load_steps=7 format=3 uid="uid://ukycayh8nnxn"]
+[gd_scene load_steps=17 format=3 uid="uid://ukycayh8nnxn"]
 
-[ext_resource type="Script" path="res://Drawing/drawing.gd" id="1_nhb1v"]
+[ext_resource type="Script" uid="uid://cplbmxh8k2sif" path="res://Drawing/drawing.gd" id="1_nhb1v"]
 [ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="2_o4gb6"]
-[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/Theme.tres" id="3_2g31n"]
-[ext_resource type="Texture2D" uid="uid://cj0vpgo4t3ro7" path="res://Assets/drawborder.svg" id="3_ndbog"]
-[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="3_rijon"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_2g31n"]
+[ext_resource type="Texture2D" uid="uid://dvtqwc0doq2d5" path="res://Assets/pencil-button_hover.svg" id="5_2vexi"]
+[ext_resource type="Texture2D" uid="uid://cgrmy5n1ggt54" path="res://Assets/pencil-button_pressed.svg" id="5_tgeca"]
+[ext_resource type="Texture2D" uid="uid://b5ov44hvwcrd7" path="res://Assets/eraser-button_normal.svg" id="6_sc8jr"]
+[ext_resource type="Texture2D" uid="uid://dfs62hbo0sok0" path="res://Assets/pencil-button_focused.svg" id="7_0ig3g"]
+[ext_resource type="Texture2D" uid="uid://s2afj7rknnpd" path="res://Assets/eraser-button_pressed.svg" id="7_jmuk6"]
+[ext_resource type="Texture2D" uid="uid://ud4yndnvb64d" path="res://Assets/eraser-button_hover.svg" id="8_xbj7x"]
+[ext_resource type="Texture2D" uid="uid://cewclbc002fab" path="res://Assets/eraser-button_focused.svg" id="9_kw2l4"]
+[ext_resource type="Texture2D" uid="uid://dg7c1nonja48p" path="res://Assets/eraser-outline.svg" id="11_sc8jr"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8fswx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ml1p"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vexi"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yfq7"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.67058825, 0.1882353, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qsod"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w545e"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="DrawingScene" type="Node2D"]
 script = ExtResource("1_nhb1v")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 32.0
 
-[node name="ColorPicker" type="Node2D" parent="Control"]
-position = Vector2(968, 508)
+[node name="Board" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(816, 616)
+layout_mode = 2
 
-[node name="ColorPalette" type="Node2D" parent="Control/ColorPicker"]
-position = Vector2(-24, -398)
-
-[node name="ColorPickerButton" parent="Control/ColorPicker" instance=ExtResource("2_o4gb6")]
-offset_left = -84.0
-offset_top = -232.0
-offset_right = 116.0
-offset_bottom = -32.0
-
-[node name="DrawEraseToggle" type="CheckButton" parent="Control"]
-layout_mode = 0
-offset_left = 1069.0
-offset_top = 574.0
-offset_right = 1113.0
-offset_bottom = 617.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Control/DrawEraseToggle"]
-
-[node name="SizeSlider" type="HSlider" parent="Control"]
-layout_mode = 0
-offset_left = 862.0
-offset_top = 478.0
-offset_right = 1120.0
-offset_bottom = 571.0
-theme = ExtResource("3_2g31n")
-min_value = 1.0
-max_value = 150.0
-step = 5.0
-value = 11.0
-allow_greater = true
-
-[node name="Erase All Button" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 903.0
-offset_top = 558.0
-offset_right = 999.0
-offset_bottom = 625.0
-theme = ExtResource("3_rijon")
-text = "Clear"
-
-[node name="DrawingBorder" type="Sprite2D" parent="."]
-position = Vector2(415, 315)
-texture = ExtResource("3_ndbog")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_8fswx")
-
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="DrawingBoard" type="Panel" parent="HBoxContainer/Board"]
 z_index = -1
-z_as_relative = false
-offset_left = 16.0
-offset_top = 16.0
+layout_mode = 0
 offset_right = 816.0
 offset_bottom = 616.0
-color = Color(0.84114, 0.737569, 0.748733, 1)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ml1p")
 
-[connection signal="color_changed" from="Control/ColorPicker/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
-[connection signal="toggled" from="Control/DrawEraseToggle" to="." method="_on_draw_erase_toggle_toggled"]
-[connection signal="pressed" from="Control/Erase All Button" to="." method="_on_erase_all_button_pressed"]
-[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]
+[node name="DrawingBorder" type="Panel" parent="HBoxContainer/Board"]
+z_index = 2
+layout_mode = 0
+offset_right = 816.0
+offset_bottom = 616.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_2vexi")
+
+[node name="BoardCover" type="Panel" parent="HBoxContainer/Board"]
+z_index = 1
+layout_mode = 0
+offset_right = 816.0
+offset_bottom = 616.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1yfq7")
+
+[node name="SideBarMargin" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="SideBar" type="VBoxContainer" parent="HBoxContainer/SideBarMargin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PencilEraser" type="HBoxContainer" parent="HBoxContainer/SideBarMargin/SideBar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PencilButton" type="TextureButton" parent="HBoxContainer/SideBarMargin/SideBar/PencilEraser"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("7_0ig3g")
+texture_pressed = ExtResource("5_tgeca")
+texture_hover = ExtResource("5_2vexi")
+texture_focused = ExtResource("7_0ig3g")
+
+[node name="EraserButton" type="TextureButton" parent="HBoxContainer/SideBarMargin/SideBar/PencilEraser"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("6_sc8jr")
+texture_pressed = ExtResource("7_jmuk6")
+texture_hover = ExtResource("8_xbj7x")
+texture_focused = ExtResource("9_kw2l4")
+
+[node name="SizeContainer" type="MarginContainer" parent="HBoxContainer/SideBarMargin/SideBar"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SideBarMargin/SideBar/SizeContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SideBarMargin/SideBar/SizeContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PencilSize" type="Panel" parent="HBoxContainer/SideBarMargin/SideBar/SizeContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_8qsod")
+
+[node name="SizeSlider" type="HSlider" parent="HBoxContainer/SideBarMargin/SideBar/SizeContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("3_2g31n")
+min_value = 2.0
+max_value = 36.0
+step = 2.0
+value = 12.0
+
+[node name="ColorPresetsPanel" type="PanelContainer" parent="HBoxContainer/SideBarMargin/SideBar"]
+custom_minimum_size = Vector2(309, 193.125)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w545e")
+
+[node name="ColorPresetsContainer" type="GridContainer" parent="HBoxContainer/SideBarMargin/SideBar/ColorPresetsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 5
+
+[node name="ColorPickerButton" parent="HBoxContainer/SideBarMargin/SideBar" instance=ExtResource("2_o4gb6")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ClearMargin" type="MarginContainer" parent="HBoxContainer/SideBarMargin/SideBar"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
+
+[node name="ClearButton" type="Button" parent="HBoxContainer/SideBarMargin/SideBar/ClearMargin"]
+layout_mode = 2
+theme = ExtResource("3_2g31n")
+theme_type_variation = &"ButtonSmall"
+theme_override_font_sizes/font_size = 24
+text = "Clear Drawing"
+
+[node name="EraserOutline" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("11_sc8jr")
+
+[connection signal="mouse_entered" from="HBoxContainer/Board" to="." method="_on_board_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Board" to="." method="_on_board_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/SideBarMargin/SideBar/PencilEraser/PencilButton" to="." method="_on_pencil_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/SideBarMargin/SideBar/PencilEraser/EraserButton" to="." method="_on_eraser_button_pressed"]
+[connection signal="color_changed" from="HBoxContainer/SideBarMargin/SideBar/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="HBoxContainer/SideBarMargin/SideBar/ClearMargin/ClearButton" to="." method="_on_erase_all_button_pressed"]

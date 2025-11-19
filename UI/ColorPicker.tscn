@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbndp01wsxkrr"]
+[gd_scene load_steps=7 format=3 uid="uid://cbndp01wsxkrr"]
 
-[ext_resource type="Shader" path="res://UI/CircleShader.gdshader" id="1_npug2"]
+[ext_resource type="Shader" uid="uid://blsdigpmtqt2i" path="res://UI/CircleShader.gdshader" id="1_npug2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hfoa"]
 shader = ExtResource("1_npug2")
@@ -8,13 +8,46 @@ shader_parameter/radius_scale = 1.0
 shader_parameter/width = 200.0
 shader_parameter/height = 200.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtfsm"]
+bg_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8uqp"]
+bg_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvube"]
+bg_color = Color(0.43, 0.09890001, 0.11545507, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.43, 0.09890001, 0.11545507, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xa04e"]
+bg_color = Color(0.43137255, 0.09803922, 0.11372549, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.43137255, 0.09803922, 0.11372549, 1)
+
 [node name="ColorPickerButton" type="ColorPickerButton"]
 material = SubResource("ShaderMaterial_8hfoa")
 offset_right = 200.0
 offset_bottom = 200.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 23.0
-offset_bottom = 24.0
-color = Color(0.670588, 0.188235, 0.196078, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_rtfsm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_r8uqp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pvube")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xa04e")
+toggle_mode = false
+edit_alpha = false
+edit_intensity = false
