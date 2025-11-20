@@ -6,6 +6,7 @@ var is_done: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GDSync.expose_func(done_button)
 	_setup_tween()
 	_set_done_players(0, MultiplayerManager.players.size()) #set the label for the numbers of done players to 0 out of total (0/total)
 	await get_tree().create_timer(1).timeout #initial delay
@@ -19,13 +20,13 @@ func _ready() -> void:
 @rpc("any_peer", "call_local", "reliable") # Authority should be able to request this
 func export_card():
 	print("Called by:")
-	print(multiplayer.get_unique_id())
+	print(GDSync.get_client_id())
 	print()
 	var data = PitchCardData.new()
 	data.title = %Title.text
 	data.slogan = %Slogan.text
 	data.logo = %DrawingScene.image
-	data.user_id = multiplayer.get_unique_id()
+	data.user_id = GDSync.get_client_id()
 	data.username = MultiplayerManager.username
 	data.who_card = $Who.find_child("Text").text
 	data.what_card = $What.find_child("Text").text
@@ -39,7 +40,7 @@ func _on_done_button_pressed() -> void:
 	if not is_done:
 		is_done = true
 		%DoneButton.disabled = true
-		done_button.rpc() #call the rpc function to replicate effects for all peers
+		GDSync.call_func_all(done_button) #call the function to replicate effects for all peers
 
 
 #the effects of pressing the done button that need to be replicated for all peers

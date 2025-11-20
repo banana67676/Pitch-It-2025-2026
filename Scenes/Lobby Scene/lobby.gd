@@ -7,7 +7,6 @@ const theme = preload("res://Assets/Font.tres")
 #node references
 @onready var player_list: GridContainer = %PlayerList
 @onready var player_name_template: PanelContainer = $PlayerNameTemplate
-@onready var settings_popup: Control = $Overlay/Setting/SettingsPopup
 
 
 #signals
@@ -18,11 +17,10 @@ var player_count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if multiplayer.is_server():
+	if GDSync.is_host():
 		lobby_ready.emit()
 	else:
 		%Begin.visible = false
-	settings_popup.visible = false
 
 
 func show_player(id):
@@ -60,14 +58,9 @@ func _on_begin_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	MultiplayerManager.disconnect_from_server()
+	MultiplayerManager.client_left()
 
 
 
 func _on_game_mode_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false)
-
-
-func _on_setting_pressed() -> void:
-	settings_popup.visible = !settings_popup.visible
-	pass # Replace with function body.

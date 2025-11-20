@@ -36,7 +36,6 @@ func _on_join_pressed() -> void:
 	var success = _check_textbox_conditions("join")
 	if success:
 		var username: String = USERNAME_READ.text.strip_edges()
-		MultiplayerManager.create_new_peer()
 		MultiplayerManager.join_server(SERVER_PORT_READ.text, username)
 
 

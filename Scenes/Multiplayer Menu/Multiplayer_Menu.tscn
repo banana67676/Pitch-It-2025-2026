@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo3vx0ii1i20j"]
+[gd_scene load_steps=7 format=3 uid="uid://bo3vx0ii1i20j"]
 
 [ext_resource type="Script" uid="uid://bylibl7ebk8p3" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="3_oj2lg"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="4_kyjbj"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="4_tqlc3"]
 [ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="5_wxcf5"]
@@ -104,6 +105,7 @@ offset_bottom = 100.0
 icon = ExtResource("5_wxcf5")
 
 [node name="Settings Button" parent="." instance=ExtResource("4_tqlc3")]
+visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -114,6 +116,17 @@ offset_bottom = 100.0
 grow_horizontal = 1
 grow_vertical = 1
 icon = ExtResource("6_43hsl")
+
+[node name="Settings Scene" parent="." instance=ExtResource("3_oj2lg")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+grow_horizontal = 0
+size_flags_vertical = 0
 
 [connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=12 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_7btl7"]
 [ext_resource type="Script" uid="uid://bnwiv8xq5f8gs" path="res://UI/spawning_timer.gd" id="3_urqfg"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="4_vsoll"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="5_mjgjq"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_nmnxq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urqfg"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
@@ -150,6 +151,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="DisplayScene/HBoxContainer/BoardMargin"]
@@ -190,3 +192,9 @@ card_type = 1
 position = Vector2(239, 355.99997)
 rotation = 0.05235988
 scale = Vector2(0.5, 0.5)
+
+[node name="Settings Scene" parent="." instance=ExtResource("6_nmnxq")]
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0

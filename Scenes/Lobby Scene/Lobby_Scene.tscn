@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cj0mn0lb3a808"]
+[gd_scene load_steps=8 format=3 uid="uid://cj0mn0lb3a808"]
 
 [ext_resource type="Script" uid="uid://cws7jvys13ih5" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_bue6x"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_6bo0c"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_pf8wj"]
 [ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="4_dneng"]
-[ext_resource type="Texture2D" uid="uid://drvfg5rn54mvb" path="res://Assets/gear.png" id="6_gaby6"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_4jme6"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_bal86"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bo0c"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
@@ -102,7 +101,7 @@ theme_override_font_sizes/font_size = 24
 text = "testing babacii"
 horizontal_alignment = 1
 
-[node name="Game Mode button" type="Button" parent="."]
+[node name="GameModeButton" type="Button" parent="."]
 offset_left = 385.0
 offset_top = 561.0
 offset_right = 786.0
@@ -111,32 +110,12 @@ theme = ExtResource("3_6bo0c")
 theme_override_font_sizes/font_size = 50
 text = "Game Mode"
 
-[node name="Overlay" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Setting" type="Button" parent="Overlay"]
-layout_direction = 3
-layout_mode = 0
-offset_left = -1130.0
-offset_top = 28.0
-offset_right = -1072.0
-offset_bottom = 86.0
-icon = ExtResource("6_gaby6")
-
-[node name="SettingsPopup" parent="Overlay/Setting" instance=ExtResource("7_4jme6")]
-layout_direction = 2
-layout_mode = 1
-offset_left = -135.0
-offset_top = 53.0
-offset_right = 26.0
-offset_bottom = 263.0
+[node name="Settings Scene" parent="." instance=ExtResource("6_bal86")]
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
 [connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Game Mode button" to="." method="_on_game_mode_button_pressed"]
-[connection signal="pressed" from="Overlay/Setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="GameModeButton" to="." method="_on_game_mode_button_pressed"]

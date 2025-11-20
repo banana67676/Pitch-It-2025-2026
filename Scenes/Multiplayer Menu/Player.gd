@@ -4,7 +4,7 @@ extends Node2D
 var username = ""
 
 func get_user_id():
-	return multiplayer.get_unique_id() 
+	return GDSync.get_client_id()
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())

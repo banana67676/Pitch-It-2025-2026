@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xkn8gxryucgg"]
+[gd_scene load_steps=8 format=3 uid="uid://xkn8gxryucgg"]
 
 [ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
 [ext_resource type="Script" uid="uid://bnwiv8xq5f8gs" path="res://UI/spawning_timer.gd" id="5_42e26"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="6_6loq4"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_vy3qb"]
 
 [node name="Creation_Scene" type="Node2D"]
 script = ExtResource("1_0n1cf")
@@ -125,5 +126,11 @@ attached_timer = ExtResource("6_6loq4")
 unique_name_in_owner = true
 position = Vector2(290.4, 185)
 scale = Vector2(0.7, 0.7)
+
+[node name="Settings Scene" parent="." instance=ExtResource("7_vy3qb")]
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
 
 [connection signal="pressed" from="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]

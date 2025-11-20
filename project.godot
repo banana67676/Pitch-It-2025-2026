@@ -35,6 +35,7 @@ GameManager="*res://Singletons/Game_Manager.gd"
 Camera="*res://UI/Camera.tscn"
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
+SettingsManager="*res://Singletons/Settings_Manager.gd"
 
 [display]
 
@@ -68,6 +69,7 @@ folder_colors={
 
 [gui]
 
+theme/custom="uid://b7qrc55c1kxgl"
 theme/custom_font="res://Assets/Chauncy Fatty Fatty.ttf"
 
 [input]

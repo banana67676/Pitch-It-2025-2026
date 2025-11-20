@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ngfm742hhhhd"]
+[gd_scene load_steps=7 format=3 uid="uid://ngfm742hhhhd"]
 
 [ext_resource type="Script" uid="uid://befd3glh4iybt" path="res://Scenes/Voting Scene/voting_scene.gd" id="1_ar3lm"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_ydydk"]
 [ext_resource type="PackedScene" uid="uid://da4q0u4q2myc1" path="res://Scenes/Voting Scene/VoteOption.tscn" id="3_lmcqu"]
 [ext_resource type="Script" uid="uid://bnwiv8xq5f8gs" path="res://UI/spawning_timer.gd" id="4_mcvaj"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="5_7j4a1"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_7j4a1"]
 
 [node name="VotingScene" type="Node2D"]
 script = ExtResource("1_ar3lm")
@@ -60,3 +61,9 @@ _spawnable_scenes = PackedStringArray("uid://cyweidcx36nir")
 spawn_path = NodePath("../MarginContainer/TimerContainer")
 script = ExtResource("4_mcvaj")
 attached_timer = ExtResource("5_7j4a1")
+
+[node name="Settings Scene" parent="." instance=ExtResource("6_7j4a1")]
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
