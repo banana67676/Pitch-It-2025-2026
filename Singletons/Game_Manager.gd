@@ -13,9 +13,12 @@ enum game_state_enum {
 	game_mode,
 }
 
+
+
 #the potential game MODES (only the default mode right now)
 enum game_mode_enum {
-	standard
+	standard,
+	blitz,
 }
 
 #sets the current gamemode to the standard game mode
@@ -33,6 +36,9 @@ var creation_time: float = 62 #time to create a product
 var presentation_time: float = 3 #time to present a product
 var voting_time: float = 30 #time to vote on a product
 var win_threshold: int = 200000 #amount of money needed to win
+
+
+
 
 var settings: bool = false
 

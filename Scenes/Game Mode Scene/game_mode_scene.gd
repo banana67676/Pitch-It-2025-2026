@@ -17,3 +17,8 @@ func _on_back_button_2_pressed() -> void:
 	await GameManager.scene_changed
 	var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
 	lobby_scene.reset_player_data()
+
+
+func _on_blitz_game_mode_pressed() -> void:
+	GameManager.game_mode = GameManager.game_mode_enum.blitz
+	GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
