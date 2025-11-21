@@ -18,7 +18,7 @@ useSenderID=true
 [application]
 
 config/name="Pitch It!"
-run/main_scene="res://Scenes/Title Scene/Title_Scene.tscn"
+run/main_scene="uid://dpjm1n3gy0e1r"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0.0117647, 0.101961, 1)
 boot_splash/image="res://Assets/WhiteBuilb.png"
@@ -35,7 +35,6 @@ GameManager="*res://Singletons/Game_Manager.gd"
 Camera="*res://UI/Camera.tscn"
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
-SettingsManager="*res://Singletons/Settings_Manager.gd"
 
 [display]
 
@@ -57,6 +56,7 @@ folder_colors={
 "res://Scenes/": "blue",
 "res://Scenes/Creation Scene/": "green",
 "res://Scenes/Display Scene/": "blue",
+"res://Scenes/Game Opening/": "red",
 "res://Scenes/Lobby Scene/": "yellow",
 "res://Scenes/Multiplayer Menu/": "orange",
 "res://Scenes/Results Scene/": "pink",

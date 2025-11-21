@@ -6,6 +6,8 @@ extends Node2D
 
 @onready var player_scene = preload("res://Scenes/Multiplayer Menu/Player.tscn")
 
+signal back_to_title
+
 
 #returns true if the player has inputted a username and port to host/join a lobby
 func _check_textbox_conditions(host_or_join: String) -> bool:
@@ -41,11 +43,7 @@ func _on_join_pressed() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.title, false)
-
-
-func _on_back_button_pressed() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.title, false)
+		back_to_title.emit()
 
 
 func _on_settings_button_pressed() -> void:
@@ -57,3 +55,7 @@ func _on_username_text_changed(new_text: String) -> void:
 	if new_text.length() > max_length:
 		USERNAME_READ.text = USERNAME_READ.text.substr(0,max_length)
 		USERNAME_READ.set_caret_column(max_length)
+
+
+func _on_back_button_pressed() -> void:
+	back_to_title.emit()

@@ -12,9 +12,6 @@ const theme = preload("res://Assets/Font.tres")
 #signals
 signal lobby_ready
 
-#values
-var player_count : int = 0
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if GDSync.is_host():
@@ -29,14 +26,12 @@ func show_player(id):
 	player_name.text = MultiplayerManager.players[id].username #the text equals their chosen username
 	player_list.add_child(player_box) #adds the child to the node displaying the list
 	player_box.visible = true #making the label visible
-	player_count += 1 #increase player count
 
 
-func reset_player_data():
+func reset_shown_players():
 	for player in %PlayerList.get_children():
 		#remove_child(player)
 		player.queue_free()
-	player_count = 0
 	#player is the key (their user id)
 	for player in MultiplayerManager.players:
 		var player_box = player_name_template.duplicate()
@@ -45,7 +40,6 @@ func reset_player_data():
 		player_name.text = MultiplayerManager.players[player].username #the text equals their chosen username
 		player_list.add_child(player_box) #adds the child to the node displaying the list
 		player_box.visible = true #making the label visible
-		player_count += 1 #increase player count
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -57,10 +51,9 @@ func _on_begin_pressed() -> void:
 	MultiplayerManager.run_game_loop()
 
 
-func _on_back_button_pressed() -> void:
-	MultiplayerManager.client_left()
-
-
-
 func _on_game_mode_button_pressed() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false)
+
+
+func _on_back_button_pressed() -> void:
+	MultiplayerManager.client_left()

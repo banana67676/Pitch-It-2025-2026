@@ -61,7 +61,7 @@ func client_joined(joined_id: int, usern: String) -> void:
 		await GameManager.scene_changed #wait for it to be the lobby
 	#serialize the data to compress it and make it easier to send across the internet
 	GDSync.call_func(update_player_list, [serialize(players)]) #update the player list for all connected peers
-	_lobby_scene_reset() #update the player name visibility in the lobby scene
+	_lobby_scene_update() #update the player name visibility in the lobby scene
 
 
 #the player_list argument is sent as serialized data (which is easier to send back and forth)
@@ -69,7 +69,7 @@ func client_joined(joined_id: int, usern: String) -> void:
 func update_player_list(player_list) -> void:
 	for player_id in player_list: #for every player in the passed table/dictionary
 		players[player_id] = deserialize(player_list[player_id]) #unpacks the sent data
-	_lobby_scene_reset() #update the player name visibility in the lobby scene
+	_lobby_scene_update() #update the player name visibility in the lobby scene
 
 
 ##used to communicate between peers. This specific function can be called by any peer
@@ -81,7 +81,7 @@ func update_player_list(player_list) -> void:
 			##each player_id in the players table references a PlayerData object (not just flattened data)
 			#players[player_id] = deserialize(data[player_id]) #updates the players table with the recieved infromation in a readable format by deserializing
 	#cards = get_cards() #grab the product cards that the players created
-	#_lobby_scene_reset() #if it's currently the lobby scene, reset the shown player names
+	#_lobby_scene_update() #if it's currently the lobby scene, reset the shown player names
 
 #END OF CREATING AND JOINING LOBBY
 #------------------------------------------------------------------------------------------------------------------------------#
@@ -102,7 +102,7 @@ func remove_player_from_list(client_id: int) -> void:
 	print("ID " + str(client_id) + " disconnected")
 	if MultiplayerManager.players.has(client_id):
 		MultiplayerManager.players.erase(client_id)
-		_lobby_scene_reset()
+		_lobby_scene_update()
 
 
 #disconnects the client from the lobby
@@ -128,7 +128,8 @@ func run_game_loop() -> void:
 func run_game() -> void: # Runs all of the phases of the game
 	
 	# CREATION PORTION
-	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.creation, false, 1.6, 0)
+	#GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.creation, false, 1.6, 0)
+	GameManager.change_game_state(GameManager.game_state_enum.creation, false)
 	await GameManager.scene_changed #wait for scene to change
 	start(GameManager.creation_time) #starts the timer
 	await self.timeout #wait until the timer runs out
@@ -257,11 +258,11 @@ func lobby_join_failed(lobby_name: String, _error: int) -> void:
 
 
 #resets the shown names of players in the lobby scene IF it's currently the lobby scene
-func _lobby_scene_reset() -> void:
+func _lobby_scene_update() -> void:
 	var current_scene = GameManager.get_current_scene() #grab the current scene
 	if current_scene == GameManager.enum_to_scene(GameManager.game_state_enum.lobby): #if it's the lobby scene
 		var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
-		lobby_scene.reset_player_data() #reset the players data in the lobby scene
+		lobby_scene.reset_shown_players() #reset the players data in the lobby scene
 
 #resets the game for everyone
 @rpc("any_peer","call_local","reliable")

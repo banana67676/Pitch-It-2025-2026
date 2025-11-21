@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd60pjnm1aiw6"]
+[gd_scene load_steps=7 format=3 uid="uid://dd60pjnm1aiw6"]
 
 [ext_resource type="Script" uid="uid://bk6w85hptyk0w" path="res://Scenes/Settings Scene/settings.gd" id="1_wsb46"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_pkdhy"]
 [ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="2_suo4c"]
-[ext_resource type="Texture2D" uid="uid://35rklmeq32fc" path="res://Assets/gear.svg" id="4_rauak"]
+[ext_resource type="Texture2D" uid="uid://35rklmeq32fc" path="res://Assets/gear_normal.svg" id="4_rauak"]
+[ext_resource type="Texture2D" uid="uid://bk727i5pgpgkv" path="res://Assets/gear_hover.svg" id="5_rauak"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkdhy"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
@@ -20,6 +21,7 @@ size_flags_vertical = 8
 script = ExtResource("1_wsb46")
 
 [node name="SettingsMenu" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -66,6 +68,7 @@ layout_mode = 2
 text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_pkdhy")
 value = 75.0
@@ -75,6 +78,7 @@ layout_mode = 2
 text = "Sound Effects"
 
 [node name="SFXSlider" type="HSlider" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_pkdhy")
 value = 75.0
@@ -92,6 +96,7 @@ offset_left = -60.0
 offset_bottom = 60.0
 pivot_offset = Vector2(30, 30)
 texture_normal = ExtResource("4_rauak")
+texture_hover = ExtResource("5_rauak")
 
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

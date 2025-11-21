@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://35rklmeq32fc"
-path="res://.godot/imported/gear.svg-74a3bb2090b325520a1b4ef959f3ab81.ctex"
+uid="uid://bk727i5pgpgkv"
+path="res://.godot/imported/gear_hover.svg-82f415b67cefa37903632c678b81d130.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gear.svg"
-dest_files=["res://.godot/imported/gear.svg-74a3bb2090b325520a1b4ef959f3ab81.ctex"]
+source_file="res://Assets/gear_hover.svg"
+dest_files=["res://.godot/imported/gear_hover.svg-82f415b67cefa37903632c678b81d130.ctex"]
 
 [params]
 
