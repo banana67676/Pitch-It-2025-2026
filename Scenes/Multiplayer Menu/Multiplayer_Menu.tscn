@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo3vx0ii1i20j"]
+[gd_scene load_steps=7 format=3 uid="uid://bo3vx0ii1i20j"]
 
 [ext_resource type="Script" uid="uid://bylibl7ebk8p3" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="3_oj2lg"]
@@ -10,9 +10,10 @@
 script = ExtResource("1_a2imu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_top = 2.0
-offset_right = 1153.0
-offset_bottom = 647.0
+offset_left = -34.0
+offset_top = 9.0
+offset_right = 1119.0
+offset_bottom = 654.0
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
@@ -116,6 +117,12 @@ offset_right = 1136.0
 offset_bottom = 16.0
 grow_horizontal = 0
 size_flags_vertical = 0
+
+[node name="Settings Scene" parent="." instance=ExtResource("6_oj2lg")]
+offset_left = 1207.0
+offset_top = 1.0
+offset_right = 1207.0
+offset_bottom = 1.0
 
 [connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]

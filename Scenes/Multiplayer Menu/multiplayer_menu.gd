@@ -45,9 +45,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
 		back_to_title.emit()
 
-
-func _on_settings_button_pressed() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.settings, false)
+#Right here is where I need to go
+#func _on_settings_button_pressed() -> void:
+	#GameManager.change_game_state(GameManager.game_state_enum.settings, false)
 
 
 func _on_username_text_changed(new_text: String) -> void:
