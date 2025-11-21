@@ -13,6 +13,7 @@ var score_card = {}
 var players = {}
 var username: String = ""
 var done_players: int = 0
+var game_settings: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,17 +25,35 @@ func create_new_peer():
 	if peer == null: #is only null after a client has disconnected from a previous server
 		peer = ENetMultiplayerPeer.new()
 
-#initializes the server when a player makes a lobby
-func init_server(port, usern):
+func init_server_with_settings(port, usern: String, settings: Dictionary):
+	# 1. Store the settings globally on the Host
+	game_settings = settings
+	
+	# Use the MAX PLAYERS setting from the UI (defaults to 4 if setting is missing)
+	var max_players = settings.get("max_players", 4)
+	
 	if port == null: #if the port doesn't exist, don't proceed
-		return
+		return false
+		
 	peer = ENetMultiplayerPeer.new()
-	peer.create_server(port.to_int()) #create a server
+	# Create server using the custom max_players
+	var error = peer.create_server(port.to_int(), max_players) # <--- USING max_players
+	
+	if error != OK:
+		print("Server failed to create: ", error)
+		return false 
+		
 	multiplayer.multiplayer_peer = peer #registers the peer to the multiplayer
+	
+	# 2. Connect the peer_connected signal (Crucial for syncing the settings)
+	multiplayer.peer_connected.connect(_on_peer_connected) # <--- ADD THIS LINE
+	
 	GameManager.change_game_state(GameManager.game_state_enum.lobby, false) #calls the change state function to switch the game state to the lobby
 	await GameManager.scene_changed #wait until the scene has changed
 	set_username(usern) #then set the player's username
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected) #connects the function to allow peers to disconnect
+	
+	return true
 
 #function for other players to join the server
 func join_server(port, usern):
@@ -101,7 +120,23 @@ func join_setup(success: bool):
 		lobby_scene.reset_player_data() #reset player data?
 	else:
 		multiplayer.multiplayer_peer = null #if not successful, then there is no connected peer
+# Host only: Handles client joining and sends settings
+func _on_peer_connected(id):
+	print("Client connected: ", id)
+	if multiplayer.is_server():
+		# Send the stored game settings to the newly connected peer
+		sync_game_settings.rpc_id(id, game_settings) 
+		# Note: set_username (called by client) will handle player list update
 
+# RPC called by the Host (ID 1) to send game settings to a connected client
+@rpc("unreliable") 
+func sync_game_settings(settings_data: Dictionary):
+	# This runs on the client when received
+	game_settings = settings_data
+	print("Received game settings: ", settings_data)
+
+# The ID is automatically passed as an argument by the signal
+# ... (Your existing _on_peer_disconnected function continues here)
 #END OF CREATING/JOINING LOBBY STUFF
 #------------------------------------------------------------------------------------------------------------------------------#
 #--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--#
@@ -171,7 +206,7 @@ func run_game(): # Runs all of the phases of the game
 	# CREATION PORTION
 	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.creation, false, 0.8, 0.8)
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.creation_time) #starts the timer
+	start(GameManager.get_creation_time()) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
 	# DISPLAY PORTION
@@ -190,14 +225,14 @@ func run_game(): # Runs all of the phases of the game
 		#print("Product:")
 		#print(product)
 		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize()) #show the product
-		start(GameManager.presentation_time) #start the timer
+		start(GameManager.get_presentation_time()) #start the timer
 		await self.timeout #wait until the timer runs out
 	
 	# VOTING PORTION
 	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.voting, false, 0.8, 0)
 	update_player_data.rpc(serialize(players))
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.voting_time) #start the timer
+	start(GameManager.get_voting_time()) #start the timer
 	await self.timeout #wait until the time runs out
 	
 	get_parent().get_node("/root/VotingScene").send_vote.rpc()

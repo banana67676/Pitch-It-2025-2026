@@ -11,6 +11,7 @@ enum game_state_enum {
 	results,
 	settings,
 	game_mode,
+	host_settings,
 }
 
 #the potential game MODES (only the default mode right now)
@@ -28,15 +29,24 @@ func get_round_time() -> int:
 			return 120 #returns 120 for the standard gamemode
 	return 2135 #default port for testing
 
-var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
-var creation_time: float = 62 #time to create a product
-var presentation_time: float = 3 #time to present a product
-var voting_time: float = 30 #time to vote on a product
-var win_threshold: int = 200000 #amount of money needed to win
+var game_state: int = game_state_enum.title
+var win_threshold: int = 200000 # Keep threshold as default for now
 
+# Use getter functions or properties to retrieve the host-set values
 var settings: bool = false
-
 signal scene_changed
+
+# Get the custom time from the MultiplayerManager's stored settings
+func get_creation_time() -> float:
+	# Use a safe default (e.g., 62) if the settings haven't been loaded yet.
+	return MultiplayerManager.game_settings.get("time_creation", 62.0)
+
+func get_presentation_time() -> float:
+	# Presentation time is usually fixed, but you can link it if you add a UI option.
+	return MultiplayerManager.game_settings.get("time_presentation", 3.0) 
+
+func get_voting_time() -> float:
+	return MultiplayerManager.game_settings.get("time_voting", 30.0)
 
 #function to quit the game
 func quit_game(_protected: bool):
@@ -115,4 +125,6 @@ func enum_to_scene(state: game_state_enum) -> String:
 			return "res://Scenes/Settings Scene/settings_scene.tscn"
 		game_state_enum.game_mode:
 			return "res://Scenes/Game Mode Scene/game_mode_scene.tscn"
+		game_state_enum.host_settings: 
+			return "res://Scenes/HostSetting.tscn" 
 	return "2135"

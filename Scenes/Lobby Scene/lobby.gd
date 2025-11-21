@@ -8,7 +8,8 @@ const theme = preload("res://Assets/Font.tres")
 @onready var player_list: GridContainer = %PlayerList
 @onready var player_name_template: PanelContainer = $PlayerNameTemplate
 @onready var settings_popup: Control = $Overlay/Setting/SettingsPopup
-
+@onready var lobby_name_label: Label = %LobbyNameLabel 
+@onready var max_players_label: Label = %MaxPlayersLabel 
 
 #signals
 signal lobby_ready
@@ -18,13 +19,31 @@ var player_count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set the visibility of the start button
 	if multiplayer.is_server():
+		%Begin.visible = true # Host can see the start button
 		lobby_ready.emit()
 	else:
-		%Begin.visible = false
+		%Begin.visible = false # Clients cannot start the game
+		
 	settings_popup.visible = false
+	
+	# NEW: Display the custom lobby settings
+	update_lobby_display()
 
 
+func update_lobby_display():
+	# Retrieve the settings dictionary
+	var settings = MultiplayerManager.game_settings
+	
+	# 1. Set the custom lobby name
+	lobby_name_label.text = settings.get("lobby_name", "Untitled Lobby")
+	
+	# 2. Update the max players text
+	var max_players = settings.get("max_players", 4)
+	max_players_label.text = "Max Players: " + str(max_players)
+	
+	# Note: Your player count display (e.g., 1/4) is handled inside reset_player_data.
 func show_player(id):
 	var player_box = player_name_template.duplicate()
 	var player_name = player_box.get_node("Padding/Name") #the actual label for the player
@@ -35,19 +54,29 @@ func show_player(id):
 
 
 func reset_player_data():
+	# Get the max player count from settings
+	var settings = MultiplayerManager.game_settings
+	var max_players = settings.get("max_players", 4) # Default to 4
+	
+	# Remove existing player boxes
 	for player in %PlayerList.get_children():
-		#remove_child(player)
 		player.queue_free()
+		
 	player_count = 0
-	#player is the key (their user id)
-	for player in MultiplayerManager.players:
+	
+	# Populate the list with current players
+	for player_id in MultiplayerManager.players: # Use player_id for clarity
 		var player_box = player_name_template.duplicate()
-		player_box.name = str(player) #make the label name their player id as a string
+		player_box.name = str(player_id) # make the label name their player id as a string
 		var player_name = player_box.get_node("Padding/Name") #the actual label for the player
-		player_name.text = MultiplayerManager.players[player].username #the text equals their chosen username
+		player_name.text = MultiplayerManager.players[player_id].username #the text equals their chosen username
 		player_list.add_child(player_box) #adds the child to the node displaying the list
 		player_box.visible = true #making the label visible
 		player_count += 1 #increase player count
+		
+	# NEW: Update the player count display (assuming you have a label for this)
+	# If your player count label is max_players_label, you might want to format it here too:
+	max_players_label.text = "Players: " + str(player_count) + "/" + str(max_players)
 
 
 func _unhandled_input(_event: InputEvent) -> void:

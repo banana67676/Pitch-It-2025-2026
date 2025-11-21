@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dcxxqv6rdrqok"]
+
+[node name="HostSetting" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="LobbyNameInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 151.0
+offset_right = 532.9375
+offset_bottom = 183.0
+
+[node name="MaxPlayersSpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 217.0
+offset_right = 550.9375
+offset_bottom = 249.0
+
+[node name="CreationTimeSpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 273.0
+offset_right = 551.9375
+offset_bottom = 305.0
+
+[node name="VotingTimeSpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 483.0
+offset_top = 328.0
+offset_right = 552.9375
+offset_bottom = 360.0
+
+[node name="CreateButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 479.0
+offset_right = 545.0
+offset_bottom = 536.0
+text = "Create Lobby"
+
+[node name="LobbyName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 151.0
+offset_right = 438.0
+offset_bottom = 182.0
+text = "Lobby name"
+
+[node name="Votingtime" type="Label" parent="."]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 326.0
+offset_right = 446.0
+offset_bottom = 357.0
+text = "Voting time"
+
+[node name="MaxPlayers" type="Label" parent="."]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 218.0
+offset_right = 431.0
+offset_bottom = 249.0
+text = "Maximum Players"
+
+[node name="creation time" type="Label" parent="."]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 274.0
+offset_right = 437.0
+offset_bottom = 305.0
+text = "Creation time"
