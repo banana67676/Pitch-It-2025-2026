@@ -2,9 +2,105 @@
 
 [ext_resource type="Script" uid="uid://c2i4dopkjlqnv" path="res://Scenes/Results Scene/results.gd" id="1_nrup7"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="2_34uq8"]
+[gd_scene load_steps=6 format=3 uid="uid://d0h0jocpg4m2i"]
+
+[ext_resource type="Script" uid="uid://c2i4dopkjlqnv" path="res://Scenes/Results Scene/results.gd" id="1_nrup7"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_25vq6"]
+[ext_resource type="PackedScene" uid="uid://da4q0u4q2myc1" path="res://Scenes/Voting Scene/VoteOption.tscn" id="3_vx48y"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="4_vx48y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vx48y"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
 
 [node name="ResultsScene" type="Node2D"]
 script = ExtResource("1_nrup7")
+
+[node name="Title" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 75
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResultsHeader" type="Label" parent="Title/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_25vq6")
+theme_type_variation = &"HeaderYellow"
+text = "Results"
+
+[node name="MarginContainer" type="MarginContainer" parent="Title"]
+layout_mode = 2
+theme_override_constants/margin_left = -100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = -100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Top3" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Control" type="Control" parent="Title/MarginContainer/HBoxContainer/Top3"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="VoteBox" parent="Title/MarginContainer/HBoxContainer/Top3" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox2" parent="Title/MarginContainer/HBoxContainer/Top3" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox3" parent="Title/MarginContainer/HBoxContainer/Top3" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="EveryoneElse" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="VoteBox" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox2" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox3" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox4" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox5" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox6" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox7" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox8" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
+
+[node name="VoteBox9" parent="Title/MarginContainer/HBoxContainer/EveryoneElse" instance=ExtResource("3_vx48y")]
+layout_mode = 2
 
 [node name="List" type="Control" parent="."]
 layout_mode = 3
@@ -12,7 +108,21 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Timer" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 685.0
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 75
+
+[node name="TimerContainer" type="MarginContainer" parent="Timer"]
+layout_mode = 2
+theme_override_constants/margin_top = 530
+
+[node name="Timer" parent="Timer/TimerContainer" instance=ExtResource("4_vx48y")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 172.0
 text = "Results"
@@ -22,3 +132,48 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vx48y")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = -2
+
+[node name="ProductName" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "Product Name"
+
+[node name="PlayerName" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("2_25vq6")
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 14
+text = "Player Name"
+
+[node name="VoteButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_25vq6")
+theme_type_variation = &"ButtonSmall"
+text = "Invest $100,000"
