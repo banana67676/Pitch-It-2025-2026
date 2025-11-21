@@ -5,7 +5,7 @@ extends Control
 
 @export var show_settings: bool:
 	set(value):
-		$SettingsMenu.visible = value
+		settings_menu.visible = value
 		show_settings = value
 
 var music_bus_index = AudioServer.get_bus_index("Music")
@@ -15,7 +15,7 @@ var is_just_clicked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$SettingsMenu.visible = show_settings
+	settings_menu.visible = show_settings
 	%MusicSlider.value = GameManager.volume_music
 	%SFXSlider.value = GameManager.volume_sfx
 	#print("volume: " + str(AudioServer.get_bus_volume_db(music_bus_index)))

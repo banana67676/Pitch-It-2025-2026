@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo3vx0ii1i20j"]
+[gd_scene load_steps=6 format=3 uid="uid://bo3vx0ii1i20j"]
 
 [ext_resource type="Script" uid="uid://bylibl7ebk8p3" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
+[ext_resource type="Texture2D" uid="uid://c8g1ru1elixlg" path="res://Assets/back_normal.svg" id="3_wjj1h"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="4_kyjbj"]
-[ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="4_tqlc3"]
-[ext_resource type="Texture2D" uid="uid://deokgdlg7ho68" path="res://Assets/back.svg" id="5_wxcf5"]
-[ext_resource type="Texture2D" uid="uid://drvfg5rn54mvb" path="res://Assets/gear.png" id="6_43hsl"]
+[ext_resource type="Texture2D" uid="uid://xr4fx3fa6ano" path="res://Assets/back_hover.svg" id="4_oj2lg"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_oj2lg"]
 
 [node name="Multiplayer_Menu" type="Node2D"]
@@ -98,33 +97,24 @@ theme_override_font_sizes/font_size = 50
 text = "Join
 "
 
-[node name="Back Button" parent="." instance=ExtResource("4_tqlc3")]
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 100.0
-offset_bottom = 100.0
-icon = ExtResource("5_wxcf5")
-
-[node name="Settings Button" parent="." instance=ExtResource("4_tqlc3")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 992.0
-offset_top = -113.0
-offset_right = 1067.0
-offset_bottom = -38.0
-grow_horizontal = 1
-grow_vertical = 1
-icon = ExtResource("6_43hsl")
-
 [node name="Settings Scene" parent="." instance=ExtResource("6_oj2lg")]
-offset_left = 1207.0
-offset_top = 1.0
-offset_right = 1207.0
-offset_bottom = 1.0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+show_settings = false
+
+[node name="BackButton" type="TextureButton" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 76.0
+offset_bottom = 76.0
+rotation = 1.5707964
+pivot_offset = Vector2(30, 30)
+texture_normal = ExtResource("3_wjj1h")
+texture_hover = ExtResource("4_oj2lg")
 
 [connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Settings Button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
