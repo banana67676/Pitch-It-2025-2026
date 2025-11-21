@@ -1,8 +1,10 @@
 extends Node2D
 
+@onready var blitzInfo: VBoxContainer = $"Blitz Game mode/Information"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	blitzInfo.visible = false
 	pass # Replace with function body.
 
 
@@ -21,4 +23,7 @@ func _on_back_button_2_pressed() -> void:
 
 func _on_blitz_game_mode_pressed() -> void:
 	GameManager.game_mode = GameManager.game_mode_enum.blitz
-	GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+	#GameManager.change_game_state(GameManager.game_state_enum.lobby, false)
+	blitzInfo.visible = !blitzInfo.visible
+	
+	

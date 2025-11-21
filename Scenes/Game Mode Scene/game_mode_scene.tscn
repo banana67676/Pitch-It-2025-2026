@@ -41,18 +41,42 @@ theme = ExtResource("2_b4g7q")
 text = "Classic"
 
 [node name="Blitz Game mode" type="Button" parent="."]
-offset_left = 574.0
-offset_top = 79.0
-offset_right = 786.0
-offset_bottom = 255.0
+offset_left = 354.0
+offset_top = 265.0
+offset_right = 566.0
+offset_bottom = 441.0
 theme = ExtResource("2_b4g7q")
 text = "Blitz"
 
-[node name="Random Shuffle" type="Button" parent="."]
-offset_left = 349.0
-offset_top = 261.0
-offset_right = 561.0
-offset_bottom = 437.0
+[node name="Information" type="VBoxContainer" parent="Blitz Game mode"]
+visible = false
+layout_mode = 0
+offset_left = 262.0
+offset_top = 100.0
+offset_right = 1533.0
+offset_bottom = 298.0
+theme_override_constants/separation = 15
+
+[node name="Game mode title" type="Label" parent="Blitz Game mode/Information"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Game Mode: Blitz"
+
+[node name="Description" type="Label" parent="Blitz Game mode/Information"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Description:
+A fast-paced, lightning-round twist on the game! 
+You get only half the time to create your idea,
+pitch it, and even vote on the others. Think fast, 
+trust your instincts, and embrace the chaos, 
+Blitz Mode doesn’t slow down for anyone!"
+
+[node name="Random game mode" type="Button" parent="."]
+offset_left = 575.0
+offset_top = 73.0
+offset_right = 787.0
+offset_bottom = 249.0
 theme = ExtResource("2_b4g7q")
 text = "Random"
 

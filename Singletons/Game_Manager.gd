@@ -31,10 +31,23 @@ func get_round_time() -> int:
 			return 120 #returns 120 for the standard gamemode
 	return 2135 #default port for testing
 
+
+
+#New functions to get the time for each of the scenes
+func get_creation_time() -> float:
+	return 62 * mode_scale()
+
+func get_presentation_time() -> float:
+	return 30 * mode_scale()
+
+func get_voting_time() -> float:
+	return 30 * mode_scale()
+	
+
 var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
-var creation_time: float = 62 #time to create a product
-var presentation_time: float = 3 #time to present a product
-var voting_time: float = 30 #time to vote on a product
+#var creation_time: float = 62 #time to create a product
+#var presentation_time: float = 3 #time to present a product
+#var voting_time: float = 30 #time to vote on a product
 var win_threshold: int = 200000 #amount of money needed to win
 
 
@@ -51,6 +64,15 @@ func quit_game(_protected: bool):
 #returns the current scene
 func get_current_scene():
 	return enum_to_scene(game_state)
+
+
+func mode_scale() -> float:
+	match game_mode:
+		game_mode_enum.standard:
+			return 1.0
+		game_mode_enum.blitz:
+			return 1.0
+	return 1.0
 
 #the function that actually switches the game state
 func _game_state_switcher(state: game_state_enum, _protected: bool):

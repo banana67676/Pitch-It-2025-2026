@@ -171,7 +171,7 @@ func run_game(): # Runs all of the phases of the game
 	# CREATION PORTION
 	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.creation, false, 0.8, 0.8)
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.creation_time) #starts the timer
+	start(GameManager.get_creation_time()) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
 	# DISPLAY PORTION
@@ -190,14 +190,14 @@ func run_game(): # Runs all of the phases of the game
 		#print("Product:")
 		#print(product)
 		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize()) #show the product
-		start(GameManager.presentation_time) #start the timer
+		start(GameManager.get_presentation_time()) #start the timer
 		await self.timeout #wait until the timer runs out
 	
 	# VOTING PORTION
 	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.voting, false, 0.8, 0)
 	update_player_data.rpc(serialize(players))
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.voting_time) #start the timer
+	start(GameManager.get_voting_time()) #start the timer
 	await self.timeout #wait until the time runs out
 	
 	get_parent().get_node("/root/VotingScene").send_vote.rpc()
