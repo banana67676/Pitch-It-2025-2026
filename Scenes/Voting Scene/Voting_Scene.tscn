@@ -1,14 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://ngfm742hhhhd"]
+[gd_scene load_steps=6 format=3 uid="uid://ngfm742hhhhd"]
 
 [ext_resource type="Script" uid="uid://befd3glh4iybt" path="res://Scenes/Voting Scene/voting_scene.gd" id="1_ar3lm"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_ydydk"]
-[ext_resource type="PackedScene" uid="uid://da4q0u4q2myc1" path="res://Scenes/Voting Scene/VoteOption.tscn" id="3_lmcqu"]
-[ext_resource type="Script" uid="uid://bnwiv8xq5f8gs" path="res://UI/spawning_timer.gd" id="4_mcvaj"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="5_7j4a1"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_7j4a1"]
+[ext_resource type="Script" uid="uid://bm72wtg3tc5n8" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="6_cgjaj"]
 
 [node name="VotingScene" type="Node2D"]
 script = ExtResource("1_ar3lm")
+
+[node name="Timer" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 685.0
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 75
+
+[node name="TimerContainer" type="MarginContainer" parent="Timer"]
+layout_mode = 2
+theme_override_constants/margin_top = 530
+
+[node name="Timer" parent="Timer/TimerContainer" instance=ExtResource("5_7j4a1")]
+layout_mode = 2
+mouse_filter = 1
 
 [node name="Title" type="MarginContainer" parent="."]
 offset_right = 1152.0
@@ -45,35 +58,19 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 columns = 2
 
-[node name="Timer" type="MarginContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 685.0
-theme_override_constants/margin_top = 35
-theme_override_constants/margin_bottom = 75
-
-[node name="TimerContainer" type="MarginContainer" parent="Timer"]
-layout_mode = 2
-theme_override_constants/margin_top = 530
-
-[node name="Timer" parent="Timer/TimerContainer" instance=ExtResource("5_7j4a1")]
-layout_mode = 2
-mouse_filter = 1
-
-[node name="VoteBox" parent="." instance=ExtResource("3_lmcqu")]
-visible = false
-offset_left = 355.0
-offset_top = 135.0
-offset_right = 796.0
-offset_bottom = 198.0
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cyweidcx36nir")
-spawn_path = NodePath("../Timer/TimerContainer")
-script = ExtResource("4_mcvaj")
-attached_timer = ExtResource("5_7j4a1")
-
-[node name="Settings Scene" parent="." instance=ExtResource("6_7j4a1")]
+[node name="SettingsScene" parent="." instance=ExtResource("6_7j4a1")]
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
+
+[node name="TimerSync" type="Node" parent="."]
+script = ExtResource("6_cgjaj")
+node_path = NodePath("../Timer/TimerContainer/Timer")
+properties = PackedStringArray("text")
+interpolated = false
+interpolation_speed = 1.0
+extrapolation = null
+extrapolated = false
+max_extrapolation_time = 0.2
+metadata/_custom_type_script = "uid://bm72wtg3tc5n8"

@@ -25,7 +25,7 @@ var game_state: int = game_state_enum.title #current game state (lobby, creation
 
 #times for the different sections of the game
 var creation_time: float = 62 #time to create a product
-var presentation_time: float = 3 #time to present a product
+var presentation_time: float = 10 #time to present a product
 var voting_time: float = 30 #time to vote on a product
 var win_threshold: int = 200000 #amount of money needed to win
 
@@ -58,7 +58,7 @@ func get_current_scene():
 	return enum_to_scene(game_state)
 
 #the function that actually switches the game state
-func _singleplayer_state_switcher(state: game_state_enum, _protected: bool):
+func _singleplayer_state_switcher(state: game_state_enum):
 	game_state = state
 	get_tree().current_scene.visible = false
 	var new_scene = load(enum_to_scene(state))
@@ -68,59 +68,26 @@ func _singleplayer_state_switcher(state: game_state_enum, _protected: bool):
 	get_tree().current_scene = scene_node
 	scene_changed.emit()
 
+
 func _multiplayer_state_switcher(state: game_state_enum) -> void:
-	print("actually called from " + str(GDSync.get_client_id()))
+	#print("actually called from " + str(GDSync.get_client_id()))
 	game_state = state
-	title_card_intro_transition()
-	await get_tree().create_timer(0.7).timeout
 	if GDSync.is_host():
 		GDSync.change_scene(enum_to_scene(state)) #use GDSync's built in function to switch scenes for everyone
 	await GDSync.change_scene_success
 	scene_changed.emit()
-	await get_tree().create_timer(0.7).timeout
-	title_card_outro_transition()
 
-#function to change the game state (e.g. lobby -> creation)
-#this one can specifically be called by any connected peer, and this function will exeucte on ALL peers
-#basically it changes the game state for everyone
-@rpc("any_peer", "call_local", "reliable")
-func change_game_state(state: game_state_enum, protected: bool):
+
+func change_game_state(state: game_state_enum, use_singleplayer: bool, delay: float):
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
-	if GDSync.is_host() and state != game_state_enum.lobby: #if there is an active multiplayer lobby and you are the host
+	await get_tree().create_timer(delay/2).timeout
+	if GDSync.is_host() and state != game_state_enum.lobby and state != game_state_enum.game_opening: #if there is an active multiplayer lobby and you are the host
 		GDSync.call_func_all(_multiplayer_state_switcher, [state])
-		print("supposedly called")
-	else: #otherwise use the singeplayer scene switching system
-		_singleplayer_state_switcher(state, protected)
-	#await GDSync.change_scene_success or scene_changed
-	Camera.fade_in()
-
-@rpc("any_peer", "call_local", "reliable")
-func delayed_change_game_state(state: game_state_enum, protected: bool, initial_delay: float, final_delay: float):
-	#The camera in movement to show the logo/title card
-	title_card_intro_transition()
-	
-	await get_tree().create_timer(initial_delay).timeout #wait the initial delay before switching scenes
-	_singleplayer_state_switcher(state, protected) #actually switch game states
-	await get_tree().create_timer(final_delay).timeout #wait the final delay before showing the new scene
-	
-	#The camera out movement to fade back into the scene
-	title_card_outro_transition()
-
-#fades out the camera, then fades back into the "Pitch It!" screen
-func title_card_intro_transition():
-	Camera.fade_out()
-	Camera.find_child("GameArt").visible = true
-	await Camera.animation_player.animation_finished
-	#Camera.find_child("GameArt").visible = true
-	Camera.fade_in()
-	await Camera.animation_player.animation_finished
-
-#fades out the camera, then fades back in to the newly transitioned scene
-func title_card_outro_transition():
-	Camera.fade_out()
-	await Camera.animation_player.animation_finished
-	Camera.find_child("GameArt").visible = false
+		await GameManager.scene_changed
+	elif use_singleplayer: #otherwise use the singeplayer scene switching system if it should be used
+		_singleplayer_state_switcher(state)
+	await get_tree().create_timer(delay/2).timeout
 	Camera.fade_in()
 
 #converts the given enum into the scene that needs to be changed into

@@ -10,76 +10,64 @@
 script = ExtResource("1_a2imu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = -34.0
-offset_top = 9.0
-offset_right = 1119.0
-offset_bottom = 654.0
+offset_right = 1153.0
+offset_bottom = 645.0
 theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_bottom = 200
 
-[node name="VSplitContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+[node name="Name" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 100
+theme_override_constants/margin_left = 125
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 125
 theme_override_constants/margin_bottom = 0
 
-[node name="GridContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Name"]
+custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Name/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Username" type="LineEdit" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2"]
+[node name="Username" type="LineEdit" parent="MarginContainer/VBoxContainer/Name/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_kyjbj")
-theme_type_variation = &"WhiteLineEdit"
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 placeholder_text = "Username"
 alignment = 1
 caret_blink = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Port" type="LineEdit" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_kyjbj")
-theme_type_variation = &"YellowLineEdit"
-theme_override_font_sizes/font_size = 32
-text = "2135"
-placeholder_text = "Port"
-alignment = 1
-caret_blink = true
-
-[node name="ErrorText" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/GridContainer"]
+[node name="ErrorText" type="Label" parent="MarginContainer/VBoxContainer/Name/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer"]
+[node name="Buttons" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 150
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.1
-theme_override_constants/separation = 20
+theme_override_constants/separation = 50
 
-[node name="Host" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer"]
+[node name="Host" type="Button" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -88,7 +76,7 @@ theme_override_font_sizes/font_size = 50
 text = "Host
 "
 
-[node name="Join" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer"]
+[node name="Join" type="Button" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -97,12 +85,11 @@ theme_override_font_sizes/font_size = 50
 text = "Join
 "
 
-[node name="Settings Scene" parent="." instance=ExtResource("6_oj2lg")]
+[node name="SettingsScene" parent="." instance=ExtResource("6_oj2lg")]
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
-show_settings = false
 
 [node name="BackButton" type="TextureButton" parent="."]
 offset_left = 16.0
@@ -114,7 +101,7 @@ pivot_offset = Vector2(30, 30)
 texture_normal = ExtResource("3_wjj1h")
 texture_hover = ExtResource("4_oj2lg")
 
-[connection signal="text_changed" from="MarginContainer/VSplitContainer/MarginContainer/GridContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
-[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/Name/VBoxContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

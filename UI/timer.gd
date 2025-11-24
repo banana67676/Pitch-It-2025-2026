@@ -2,7 +2,7 @@ extends Label
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if multiplayer.is_server():
+	if GDSync.is_host():
 		var time_left = MultiplayerManager.get_time_left() 
 		if (time_left > 10):
 			text = str("Time remaining: ",int(round(time_left))) #if more than 10 seconds, round to the nearest second w/o decimal

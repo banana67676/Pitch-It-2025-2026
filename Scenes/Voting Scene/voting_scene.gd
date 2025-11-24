@@ -4,6 +4,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GDSync.expose_func(send_vote)
+	GDSync.expose_func(import_vote)
 	prepare(MultiplayerManager.cards.values())
 
 var selection = -1
@@ -39,7 +41,7 @@ func lock(user_id):
 
 @rpc("any_peer", "call_local", "reliable")
 func send_vote():
-	import_vote.rpc(selection)
+	GDSync.call_func_all(import_vote, [selection])
 
 @rpc("any_peer", "call_local", "reliable")
 func import_vote(vote: int):

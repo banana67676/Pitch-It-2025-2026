@@ -2,7 +2,6 @@ extends Node
 
 #preloads
 const MM = preload("res://Singletons/Multiplayer_Manager.gd")
-const theme = preload("res://Assets/Font.tres")
 
 #node references
 @onready var player_list: GridContainer = %PlayerList
@@ -44,7 +43,7 @@ func reset_shown_players():
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true)
+		GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true, 0)
 
 
 func _on_begin_pressed() -> void:
@@ -52,7 +51,7 @@ func _on_begin_pressed() -> void:
 
 
 func _on_game_mode_button_pressed() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false)
+	GameManager.change_game_state(GameManager.game_state_enum.game_mode, false, 0)
 
 
 func _on_back_button_pressed() -> void:

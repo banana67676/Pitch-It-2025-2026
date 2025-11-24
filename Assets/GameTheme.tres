@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=20 format=3 uid="uid://b7qrc55c1kxgl"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://b7qrc55c1kxgl"]
 
 [ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="1_wca55"]
 [ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="2_0vcl5"]
@@ -99,25 +99,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vcl5"]
-bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
-border_width_bottom = 5
-border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcet5"]
-bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
-border_width_bottom = 5
-border_color = Color(0.27, 0.062100008, 0.06903, 0.5882353)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wca55"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_387i8"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
 border_width_bottom = 5
 border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
@@ -126,10 +108,19 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bxx3"]
-bg_color = Color(0.37, 0.08510001, 0.09934506, 0.5882353)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxrx6"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
 border_width_bottom = 5
 border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ek0qr"]
+bg_color = Color(0.27, 0.089099996, 0.09513, 0.627451)
+border_width_bottom = 5
+border_color = Color(0.17, 0.056099996, 0.059896663, 0.627451)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -158,6 +149,7 @@ ButtonSmall/styles/normal = SubResource("StyleBoxFlat_lxuol")
 ButtonSmall/styles/pressed = SubResource("StyleBoxFlat_ho5hn")
 ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_0nssd")
 HSlider/icons/grabber = ExtResource("1_wca55")
+HSlider/icons/grabber_disabled = ExtResource("1_wca55")
 HSlider/icons/grabber_highlight = ExtResource("2_0vcl5")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_l5sax")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kidmo")
@@ -165,6 +157,13 @@ HSlider/styles/slider = SubResource("StyleBoxFlat_n3ng0")
 HeaderYellow/base_type = &"Label"
 HeaderYellow/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 HeaderYellow/font_sizes/font_size = 48
+LineEdit/colors/caret_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0.875, 0.875, 0.875, 0.5)
+LineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_387i8")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_oxrx6")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_ek0qr")
 TextEdit/colors/background_color = Color(0.6, 0.114, 0.1383001, 0.5882353)
 TextEdit/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 TextEdit/colors/font_outline_color = Color(0.83137256, 0.7411765, 0.08235294, 1)
@@ -172,14 +171,3 @@ TextEdit/colors/font_placeholder_color = Color(0.94, 0.8655833, 0.04700001, 0.6)
 TextEdit/colors/font_readonly_color = Color(0.94, 0.8655833, 0.04700001, 0.5019608)
 TextEdit/colors/search_result_border_color = Color(0.94, 0.8655833, 0.04700001, 0.4)
 TextEdit/constants/outline_size = 1
-WhiteLineEdit/base_type = &"LineEdit"
-WhiteLineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
-WhiteLineEdit/styles/focus = SubResource("StyleBoxFlat_0vcl5")
-WhiteLineEdit/styles/normal = SubResource("StyleBoxFlat_lcet5")
-YellowLineEdit/base_type = &"LineEdit"
-YellowLineEdit/colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
-YellowLineEdit/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
-YellowLineEdit/colors/font_placeholder_color = Color(0.94, 0.8655833, 0.04700001, 0.6)
-YellowLineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
-YellowLineEdit/styles/focus = SubResource("StyleBoxFlat_wca55")
-YellowLineEdit/styles/normal = SubResource("StyleBoxFlat_7bxx3")

@@ -12,7 +12,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Settings Scene" type="Control"]
+[node name="SettingsScene" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 8

@@ -1,10 +1,12 @@
-@tool
+
 extends Control
 
 @onready var settings_menu: PanelContainer = $SettingsMenu
 
 @export var show_settings: bool:
 	set(value):
+		if settings_menu == null:
+			return
 		settings_menu.visible = value
 		show_settings = value
 

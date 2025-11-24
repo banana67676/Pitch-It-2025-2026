@@ -3,6 +3,8 @@ extends Timer
 #grabs the player data from the PlayerData script
 const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
 
+signal display_ready
+
 #variables for things
 var cards = {}
 var votes = {}
@@ -28,24 +30,25 @@ func expose_functions() -> void:
 	GDSync.expose_func(update_player_list)
 	GDSync.expose_func(remove_player_from_list)
 	GDSync.expose_func(disconnect_client)
+	GDSync.expose_func(update_player_data)
 
-#---------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------
 
 #initializes the server when a player makes a lobby
-func init_server(_port, usern):
+func init_server(usern):
 	username = usern #set their username
 	GDSync.lobby_create("Test Lobby")
 	GDSync.lobby_join("Test Lobby")
-	GameManager.change_game_state(GameManager.game_state_enum.lobby, false) #calls the change state function to switch the game state to the lobby
+	GameManager.change_game_state(GameManager.game_state_enum.lobby, true, 0.5) #calls the change state function to switch the game state to the lobby
 	await GameManager.scene_changed #wait until the scene has changed
 	client_joined(GDSync.get_client_id(), usern)
 
 
 #function for other players to join the server
-func join_server(_port, usern):
+func join_server(usern):
 	username = usern #set username
 	GDSync.lobby_join("Test Lobby")
-	GameManager.change_game_state(GameManager.game_state_enum.lobby, false) #change to lobby scene
+	GameManager.change_game_state(GameManager.game_state_enum.lobby, true, 0.5) #change to lobby scene
 	await GameManager.scene_changed #wait for scene to change
 	GDSync.call_func_on(GDSync.get_host(), client_joined, [GDSync.get_client_id(), usern])
 
@@ -72,16 +75,15 @@ func update_player_list(player_list) -> void:
 	_lobby_scene_update() #update the player name visibility in the lobby scene
 
 
-##used to communicate between peers. This specific function can be called by any peer
-##This function will be called for ALL connected peers (so the effects of the function are replicated to all peers)
-#@rpc("any_peer", "reliable", "call_local")
-#func update_player_data(data) -> void:
-	#if !multiplayer.is_server(): #if client
-		#for player_id in data: #for every player in the passed table/dictionary
-			##each player_id in the players table references a PlayerData object (not just flattened data)
-			#players[player_id] = deserialize(data[player_id]) #updates the players table with the recieved infromation in a readable format by deserializing
-	#cards = get_cards() #grab the product cards that the players created
-	#_lobby_scene_update() #if it's currently the lobby scene, reset the shown player names
+#used to communicate between peers. This specific function can be called by any peer
+#This function will be called for ALL connected peers (so the effects of the function are replicated to all peers)
+func update_player_data(data) -> void:
+	if !GDSync.is_host(): #if client
+		for player_id in data: #for every player in the passed table/dictionary
+			#each player_id in the players table references a PlayerData object (not just flattened data)
+			players[player_id] = deserialize(data[player_id]) #updates the players table with the recieved infromation in a readable format by deserializing
+	cards = get_cards() #grab the product cards that the players created
+	_lobby_scene_update() #if it's currently the lobby scene, reset the shown player names
 
 #END OF CREATING AND JOINING LOBBY
 #------------------------------------------------------------------------------------------------------------------------------#
@@ -108,7 +110,7 @@ func remove_player_from_list(client_id: int) -> void:
 #disconnects the client from the lobby
 func disconnect_client() -> void:
 	MultiplayerManager.players.clear()
-	GameManager.change_game_state(GameManager.game_state_enum.title, false)
+	GameManager.change_game_state(GameManager.game_state_enum.game_opening, true, 0)
 	await GameManager.scene_changed
 	GDSync.lobby_leave()
 
@@ -123,44 +125,42 @@ func run_game_loop() -> void:
 	if multiplayer.is_server(): #if this instance is the server
 		run_game() #run the game
 
-#function can be called by anyone in the network and will be replicated by everyone in the network
-#@rpc("any_peer", "reliable")
 func run_game() -> void: # Runs all of the phases of the game
 	
 	# CREATION PORTION
-	#GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.creation, false, 1.6, 0)
-	GameManager.change_game_state(GameManager.game_state_enum.creation, false)
+	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.creation, false, 1])
 	await GameManager.scene_changed #wait for scene to change
 	start(GameManager.creation_time) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
 	# DISPLAY PORTION
-	get_parent().get_node("/root/Creation_Scene").export_card.rpc() #get the product cards that the players made
-	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.display, false, 0.5, 2.8) #change to display scene
-	#cards = get_cards()
-	#update_player_data.rpc(serialize(players))
+	var creation_scene = get_parent().get_node("/root/Creation_Scene")
+	GDSync.call_func_all(creation_scene.export_card) #get the product cards that the players made
+	for i in range(MultiplayerManager.players.size()):
+		await display_ready
+	#await get_tree().create_timer(2).timeout #the delay before going into the display
+	print(get_cards())
+	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.display, false, 2]) #change to display scene
 	await GameManager.scene_changed #wait for scene to change
-	#update_player_data.rpc(serialize(players))
-	cards = get_cards()
-	#print("Cards:")
-	print(cards)
-	print("Too Late")
+	await get_tree().create_timer(2).timeout #the delay before going into the display
 	
-	await get_tree().create_timer(3.5).timeout #the delay before going into the display
-	for product in cards.values(): #for every product
-		#print("Product:")
-		#print(product)
-		get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize()) #show the product
+	for product in get_cards().values(): #for every product
+		var display_scene = get_parent().get_node("/root/DisplayScene")
+		display_scene.display_card(product.serialize())
+		#GDSync.call_func_all(display_scene.display_card, [product.serialize()]) #show the product
+		#get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize()) #show the product
 		start(GameManager.presentation_time) #start the timer
 		await self.timeout #wait until the timer runs out
 	
 	# VOTING PORTION
-	GameManager.delayed_change_game_state.rpc(GameManager.game_state_enum.voting, false, 0.8, 0)
+	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
 	#update_player_data.rpc(serialize(players))
 	await GameManager.scene_changed #wait for scene to change
 	start(GameManager.voting_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
+	var voting_scene = get_parent().get_node("/root/VotingScene")
+	GDSync.call_func_all(voting_scene.send_vote)
 	get_parent().get_node("/root/VotingScene").send_vote.rpc()
 	#while votes.size() < players.size():
 		#await get_tree().create_timer(0.5).timeout
@@ -181,7 +181,7 @@ func run_game() -> void: # Runs all of the phases of the game
 			has_winner = true
 		
 	# RESULTS
-	GameManager.change_game_state.rpc(GameManager.game_state_enum.results, false) #switch to the results phase
+	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.results, false, 1]) #switch to the results phase
 	await get_tree().create_timer(3).timeout 
 	#update_player_data.rpc(serialize(players))
 	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results) #shows the scores for the round
@@ -267,7 +267,7 @@ func _lobby_scene_update() -> void:
 #resets the game for everyone
 @rpc("any_peer","call_local","reliable")
 func reset() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, false) #back to the main menu
+	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true, 0) #back to the main menu
 	multiplayer.multiplayer_peer.close() #disconnect
 	await GameManager.scene_changed
 	var home_scene = get_parent().get_node("/root/Multiplayer_Menu")
@@ -300,13 +300,7 @@ func get_cards():
 		ret[key] = players[key].data #index of user id = the data for the player
 	return ret
 
-#function that can be called by anyone in the network
-@rpc("any_peer", "call_local", "reliable")
-func import_card(pd: Dictionary) -> void: #imports the cards
-	#print(pd.keys())
-	#print(pd["user"])
-	print("Part 2 Called by:")
-	print(multiplayer.get_remote_sender_id())
-	print()
-	MultiplayerManager.players[multiplayer.get_remote_sender_id()].data = PitchCardData.deserialize(pd)
-	#print("data saved: " + str(MultiplayerManager.players[multiplayer.get_remote_sender_id()]))
+
+func import_card(player_data: PackedByteArray, player_id: int) -> void: #imports the cards
+	MultiplayerManager.players[player_id].data = PitchCardData.deserialize(player_data)
+	display_ready.emit()

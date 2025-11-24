@@ -13,7 +13,7 @@ config_version=5
 version="0.13"
 publicKey="b3e7f0e043579190"
 privateKey="7247ceb74dbe8589"
-useSenderID=true
+useSenderID=false
 
 [application]
 
@@ -22,8 +22,6 @@ run/main_scene="uid://dpjm1n3gy0e1r"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0.0117647, 0.101961, 1)
 boot_splash/image="res://Assets/WhiteBuilb.png"
-config/icon="res://Assets/icon.svg"
-boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
 [audio]
 
