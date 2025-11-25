@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dcxxqv6rdrqok"]
+[gd_scene load_steps=0 format=3 uid="uid://dcxxqv6rdrqok"]
 
 [node name="HostSetting" type="Control"]
 layout_mode = 3
