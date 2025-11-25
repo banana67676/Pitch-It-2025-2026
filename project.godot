@@ -55,6 +55,7 @@ folder_colors={
 "res://Scenes/Creation Scene/": "green",
 "res://Scenes/Display Scene/": "blue",
 "res://Scenes/Game Opening/": "red",
+"res://Scenes/Join Scene/": "green",
 "res://Scenes/Lobby Scene/": "yellow",
 "res://Scenes/Multiplayer Menu/": "orange",
 "res://Scenes/Results Scene/": "pink",
