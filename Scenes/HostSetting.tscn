@@ -1,8 +1,12 @@
-[gd_scene load_steps=0 format=3 uid="uid://dcxxqv6rdrqok"]
+[gd_scene load_steps=3 format=3 uid="uid://dcxxqv6rdrqok"]
+
+[ext_resource type="Script" uid="uid://bp2hpc6fklec0" path="res://Scenes/host_setting.gd" id="1_8dtox"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_uxv21"]
 
 [node name="HostSetting" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_8dtox")
 
 [node name="LobbyNameInput" type="LineEdit" parent="."]
 layout_mode = 0
@@ -71,3 +75,14 @@ offset_top = 274.0
 offset_right = 437.0
 offset_bottom = 305.0
 text = "Creation time"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 400.0
+offset_right = 538.0
+offset_bottom = 451.0
+theme = ExtResource("1_uxv21")
+text = "private toggle"
+
+[connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]
