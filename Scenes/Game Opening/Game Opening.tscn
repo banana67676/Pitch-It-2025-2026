@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpjm1n3gy0e1r"]
+
+[ext_resource type="Script" uid="uid://cyrws4hmwqi3i" path="res://Scenes/Game Opening/game_opening.gd" id="1_jtvcn"]
+[ext_resource type="PackedScene" uid="uid://dq861buo4rsju" path="res://Scenes/Title Scene/Title_Scene.tscn" id="1_rs8hr"]
+[ext_resource type="PackedScene" uid="uid://bo3vx0ii1i20j" path="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn" id="2_jtvcn"]
+
+[node name="GameOpening" type="Node2D"]
+script = ExtResource("1_jtvcn")
+
+[node name="Title_Scene" parent="." instance=ExtResource("1_rs8hr")]
+
+[node name="Multiplayer_Menu" parent="." instance=ExtResource("2_jtvcn")]
+position = Vector2(0, 800)

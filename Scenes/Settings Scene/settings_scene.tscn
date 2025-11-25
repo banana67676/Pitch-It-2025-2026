@@ -1,90 +1,98 @@
 [gd_scene load_steps=6 format=3 uid="uid://dd60pjnm1aiw6"]
 
 [ext_resource type="Script" uid="uid://bk6w85hptyk0w" path="res://Scenes/Settings Scene/settings.gd" id="1_wsb46"]
-[ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="2_suo4c"]
-[ext_resource type="Texture2D" uid="uid://drvfg5rn54mvb" path="res://Assets/gear.png" id="3_1l8eg"]
-[ext_resource type="Shader" uid="uid://b33mid31k1rxx" path="res://UI/hue_shift.gdshader" id="3_pkdhy"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_pkdhy"]
+[ext_resource type="Texture2D" uid="uid://35rklmeq32fc" path="res://Assets/gear_normal.svg" id="4_rauak"]
+[ext_resource type="Texture2D" uid="uid://bk727i5pgpgkv" path="res://Assets/gear_hover.svg" id="5_rauak"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rauak"]
-shader = ExtResource("3_pkdhy")
-shader_parameter/filter_color = Color(0.9098039, 0.8627451, 0.2627451, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkdhy"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[node name="Settings Scene" type="Control"]
+[node name="SettingsScene" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
 script = ExtResource("1_wsb46")
 
-[node name="Overlay" type="Control" parent="."]
+[node name="SettingsMenu" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = -9.0
+offset_right = 8.0
+offset_bottom = 234.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pkdhy")
 
-[node name="Back Button" parent="Overlay" instance=ExtResource("2_suo4c")]
-layout_mode = 1
-offset_left = 25.0
-offset_top = 25.0
-offset_right = -1052.0
-offset_bottom = -548.0
-
-[node name="Setting" type="Button" parent="Overlay"]
-material = SubResource("ShaderMaterial_rauak")
-layout_direction = 3
-layout_mode = 0
-offset_left = 78.0
-offset_top = 20.0
-offset_right = 136.0
-offset_bottom = 78.0
-icon = ExtResource("3_1l8eg")
-
-[node name="VSplitContainer" type="VSplitContainer" parent="Overlay/Setting"]
-layout_direction = 2
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 1.4280001
-offset_left = -125.0
-offset_top = 68.0
-offset_right = 54.0
-offset_bottom = 212.176
-
-[node name="Settings" type="Label" parent="Overlay/Setting/VSplitContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Settings" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_pkdhy")
+theme_type_variation = &"HeaderYellow"
+theme_override_font_sizes/font_size = 30
 text = "Settings"
+
+[node name="Volume Settings" type="MarginContainer" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Volume settings" type="VBoxContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings"]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Volume"
 horizontal_alignment = 1
 
-[node name="Volume Settings" type="MarginContainer" parent="Overlay/Setting/VSplitContainer"]
-layout_mode = 2
-
-[node name="Volume settings" type="VBoxContainer" parent="Overlay/Setting/VSplitContainer/Volume Settings"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Overlay/Setting/VSplitContainer/Volume Settings/Volume settings"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Volume"
-
-[node name="Label3" type="Label" parent="Overlay/Setting/VSplitContainer/Volume Settings/Volume settings"]
+[node name="Music" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
 layout_mode = 2
 text = "Music"
 
-[node name="Volume Slider" type="HSlider" parent="Overlay/Setting/VSplitContainer/Volume Settings/Volume settings"]
+[node name="MusicSlider" type="HSlider" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_pkdhy")
 value = 75.0
 
-[node name="Label2" type="Label" parent="Overlay/Setting/VSplitContainer/Volume Settings/Volume settings"]
+[node name="SFX" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
 layout_mode = 2
 text = "Sound Effects"
 
-[node name="Volume Slider2" type="HSlider" parent="Overlay/Setting/VSplitContainer/Volume Settings/Volume settings"]
+[node name="SFXSlider" type="HSlider" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_pkdhy")
 value = 75.0
 
-[connection signal="pressed" from="Overlay/Back Button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Overlay/Setting" to="." method="_on_setting_pressed"]
+[node name="SettingsButton" type="TextureButton" parent="."]
+layout_mode = 1
+offset_left = -60.0
+offset_bottom = 60.0
+pivot_offset = Vector2(30, 30)
+texture_normal = ExtResource("4_rauak")
+texture_hover = ExtResource("5_rauak")
+ignore_texture_size = true
+
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

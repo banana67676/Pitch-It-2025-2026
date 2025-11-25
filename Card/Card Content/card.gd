@@ -9,11 +9,8 @@ enum card_types {
 	who,
 	what
 }
-#exporting the type of card that this card is (either a "who" card or a "what" card)
-@export var card_type: card_types
 
-#determines if this card should give itself a random text
-@export var give_random_text: bool
+@export var card_type: card_types #exporting the type of card that this card is (either a "who" card or a "what" card)
 
 @export var what_text = [
 	"Microwave Ovens",
@@ -124,13 +121,6 @@ var possible_text = []
 var yellow_color = Color.from_rgba8(240, 221, 12, 255)
 var red_color = Color.from_rgba8(153, 29, 35, 255)
 
-enum {
-	stay,
-	shrinking,
-	growing
-}
-var state = stay
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#CARD VISUALS
@@ -146,16 +136,11 @@ func _ready() -> void:
 	
 	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout
-	if give_random_text:
-		if (card_type == card_types.who):
-			possible_text = who_text
-		elif (card_type == card_types.what):
-			possible_text = what_text
-		pick_text()
+	if (card_type == card_types.who):
+		possible_text = who_text
+	elif (card_type == card_types.what):
+		possible_text = what_text
+	pick_text()
 
 func pick_text():
 	label.text = possible_text[randi_range(0, possible_text.size() - 1)]
-
-func move(location : Vector2, rot : float):
-	global_position = lerp(global_position, location, 0.05)
-	global_rotation = lerp(global_rotation, rot, 0.05)

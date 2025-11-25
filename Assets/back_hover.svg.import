@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcj7bbild4rgk"
-path="res://.godot/imported/back.png-053dd747ba6ac70cbaf48f0fcdf7d070.ctex"
+uid="uid://xr4fx3fa6ano"
+path="res://.godot/imported/back_hover.svg-8ed3c51d1cc77582b9b81ded8c1b276a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/back.png"
-dest_files=["res://.godot/imported/back.png-053dd747ba6ac70cbaf48f0fcdf7d070.ctex"]
+source_file="res://Assets/back_hover.svg"
+dest_files=["res://.godot/imported/back_hover.svg-8ed3c51d1cc77582b9b81ded8c1b276a.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

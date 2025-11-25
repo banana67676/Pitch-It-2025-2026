@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://ukycayh8nnxn"]
+[gd_scene load_steps=18 format=3 uid="uid://ukycayh8nnxn"]
 
 [ext_resource type="Script" uid="uid://cplbmxh8k2sif" path="res://Drawing/drawing.gd" id="1_nhb1v"]
 [ext_resource type="PackedScene" uid="uid://cbndp01wsxkrr" path="res://UI/ColorPicker.tscn" id="2_o4gb6"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_2g31n"]
 [ext_resource type="Texture2D" uid="uid://dvtqwc0doq2d5" path="res://Assets/pencil-button_hover.svg" id="5_2vexi"]
+[ext_resource type="Texture2D" uid="uid://bwwyhp7bjd2sj" path="res://Assets/pencil-button_normal.svg" id="5_jmuk6"]
 [ext_resource type="Texture2D" uid="uid://cgrmy5n1ggt54" path="res://Assets/pencil-button_pressed.svg" id="5_tgeca"]
 [ext_resource type="Texture2D" uid="uid://b5ov44hvwcrd7" path="res://Assets/eraser-button_normal.svg" id="6_sc8jr"]
 [ext_resource type="Texture2D" uid="uid://dfs62hbo0sok0" path="res://Assets/pencil-button_focused.svg" id="7_0ig3g"]
@@ -116,6 +117,7 @@ layout_mode = 2
 texture_normal = ExtResource("7_0ig3g")
 texture_pressed = ExtResource("5_tgeca")
 texture_hover = ExtResource("5_2vexi")
+texture_disabled = ExtResource("5_jmuk6")
 texture_focused = ExtResource("7_0ig3g")
 
 [node name="EraserButton" type="TextureButton" parent="HBoxContainer/SideBarMargin/SideBar/PencilEraser"]
@@ -124,6 +126,7 @@ layout_mode = 2
 texture_normal = ExtResource("6_sc8jr")
 texture_pressed = ExtResource("7_jmuk6")
 texture_hover = ExtResource("8_xbj7x")
+texture_disabled = ExtResource("6_sc8jr")
 texture_focused = ExtResource("9_kw2l4")
 
 [node name="SizeContainer" type="MarginContainer" parent="HBoxContainer/SideBarMargin/SideBar"]
@@ -186,6 +189,7 @@ theme_override_constants/margin_left = 70
 theme_override_constants/margin_right = 70
 
 [node name="ClearButton" type="Button" parent="HBoxContainer/SideBarMargin/SideBar/ClearMargin"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_2g31n")
 theme_type_variation = &"ButtonSmall"
