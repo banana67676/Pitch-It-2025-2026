@@ -117,20 +117,20 @@ var possible_text = []
 @onready var card: PanelContainer = $Card
 @onready var label: Label = $Card/Text
 
-#the red and yellow color for text
-var yellow_color = Color.from_rgba8(240, 221, 12, 255)
-var red_color = Color.from_rgba8(153, 29, 35, 255)
+#the red and yellow color constants for text (Godot doesn't let them be constants
+var YELLOW_COLOR: Color = Color.from_rgba8(240, 221, 12, 255)
+var RED_COLOR: Color = Color.from_rgba8(153, 29, 35, 255)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#CARD VISUALS
 	var stylebox = StyleBoxFlat.new() #stylebox to change the background color of the card
 	if card_type == card_types.who:
-		stylebox.bg_color = yellow_color
-		label.add_theme_color_override(&"font_color", red_color) #make the text red
+		stylebox.bg_color = YELLOW_COLOR
+		label.add_theme_color_override(&"font_color", RED_COLOR) #make the text red
 	else:
-		stylebox.bg_color = red_color
-		label.add_theme_color_override(&"font_color", yellow_color) #make the text yellow
+		stylebox.bg_color = RED_COLOR
+		label.add_theme_color_override(&"font_color", YELLOW_COLOR) #make the text yellow
 	stylebox.set_corner_radius_all(20) #setting the corner radius for all corners
 	card.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
 	

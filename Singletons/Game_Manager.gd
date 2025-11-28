@@ -25,8 +25,9 @@ var game_state: int = game_state_enum.title #current game state (lobby, creation
 
 #times for the different sections of the game
 var creation_time: float = 62 #time to create a product
-var presentation_time: float = 10 #time to present a product
-var voting_time: float = 30 #time to vote on a product
+var presentation_time: float = 3 #time to present a product
+var voting_time: float = 5 #time to vote on a product
+var results_time: float = 30 #time that the results are displayed
 var win_threshold: int = 200000 #amount of money needed to win
 
 #variables for the game settings (stored here so that the values can be transferred between scenes)

@@ -1,13 +1,13 @@
 extends Node
 
-#const PitchCardData = preload("res://Card/Pitch/pitch_card_data.gd")
+
 const Drawing = preload("res://Drawing/drawing.gd")
 var output: Sprite2D
 @onready var prod_name: Label = %Product
 @onready var slogan: Label = %Slogan
 @onready var player_name: Label = %PlayerName
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	#$NodeInstantiator.node_instantiated.connect(func(_arg): print("Node was successfully instantiated"))
 	GDSync.expose_func(display_card)
@@ -24,14 +24,12 @@ func _ready() -> void:
 	output.scale = Vector2(0.807, 0.807) #scale the drawing appropriately to fit the frame
 	add_child(output)
 
+
 #function to display the card (this function is called on connected peer)
 #EVERYONE is calling this
 func display_card(card_serialized: PackedByteArray):
 	var card = PitchCardData.deserialize(card_serialized)
-	if !GDSync.is_host():
-		print("Client called display_card")
-	else:
-		print("Host called display_card")
+	MultiplayerManager.cards[card.user_id] = card #update the product cards for MultiplayerManager (the data is needed later)
 	output.texture.update(card.logo)
 	prod_name.text = card.title #display the product name
 	slogan.text = card.slogan #display the slogan
@@ -39,6 +37,7 @@ func display_card(card_serialized: PackedByteArray):
 	$WhoCard/WhoText.text = card.who_card #change the text to show the "Who" card the player got
 	$WhatCard/WhatText.text = card.what_card #change the text to show the "What" card the player got
 	output.visible = true
+
 
 func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
 	for i in range(array.size()):

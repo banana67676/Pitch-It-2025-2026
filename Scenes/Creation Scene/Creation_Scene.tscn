@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://xkn8gxryucgg"]
+[gd_scene load_steps=7 format=3 uid="uid://xkn8gxryucgg"]
 
 [ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_42e26"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="6_6loq4"]
-[ext_resource type="Script" uid="uid://bm72wtg3tc5n8" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="7_3tpnf"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_vy3qb"]
 
 [node name="Creation_Scene" type="Node2D"]
@@ -128,17 +127,6 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
-
-[node name="TimerSync" type="Node" parent="."]
-script = ExtResource("7_3tpnf")
-node_path = NodePath("../SidebarMargin/VBoxContainer/TimerContainer/Timer")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
 
 [connection signal="pressed" from="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
 [connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/TitleMargin/Title" to="." method="_on_title_text_changed"]

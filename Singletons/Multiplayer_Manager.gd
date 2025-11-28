@@ -30,7 +30,6 @@ func expose_functions() -> void:
 	GDSync.expose_func(update_player_list)
 	GDSync.expose_func(remove_player_from_list)
 	GDSync.expose_func(disconnect_client)
-	GDSync.expose_func(update_player_data)
 
 #---------------------------------------------------------------------------------------------------------------------------------
 
@@ -48,6 +47,7 @@ func init_server(usern):
 func join_server(usern):
 	username = usern #set username
 	GDSync.lobby_join("Test Lobby")
+	print(GDSync.lobby_get_name())
 	GameManager.change_game_state(GameManager.game_state_enum.lobby, true, 0.5) #change to lobby scene
 	await GameManager.scene_changed #wait for scene to change
 	GDSync.call_func_on(GDSync.get_host(), client_joined, [GDSync.get_client_id(), usern])
@@ -75,21 +75,12 @@ func update_player_list(player_list) -> void:
 	_lobby_scene_update() #update the player name visibility in the lobby scene
 
 
-#used to communicate between peers. This specific function can be called by any peer
-#This function will be called for ALL connected peers (so the effects of the function are replicated to all peers)
-func update_player_data(data) -> void:
-	if !GDSync.is_host(): #if client
-		for player_id in data: #for every player in the passed table/dictionary
-			#each player_id in the players table references a PlayerData object (not just flattened data)
-			players[player_id] = deserialize(data[player_id]) #updates the players table with the recieved infromation in a readable format by deserializing
-	cards = get_cards() #grab the product cards that the players created
-	_lobby_scene_update() #if it's currently the lobby scene, reset the shown player names
-
 #END OF CREATING AND JOINING LOBBY
 #------------------------------------------------------------------------------------------------------------------------------#
 #--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--#
 #------------------------------------------------------------------------------------------------------------------------------#
 #START OF DISCONNECTING FROM LOBBY
+
 
 #when a client wants to leave the lobby
 func client_left() -> void:
@@ -100,6 +91,7 @@ func client_left() -> void:
 		disconnect_client()
 
 
+#removes a specific player from the player list and updates the lobby scene
 func remove_player_from_list(client_id: int) -> void:
 	print("ID " + str(client_id) + " disconnected")
 	if MultiplayerManager.players.has(client_id):
@@ -114,18 +106,18 @@ func disconnect_client() -> void:
 	await GameManager.scene_changed
 	GDSync.lobby_leave()
 
+
 #END OF DISCONNECTING FROM LOBBY
 #------------------------------------------------------------------------------------------------------------------------------#
 #--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--[]--#
 #------------------------------------------------------------------------------------------------------------------------------#
 #START OF RUNNING THE GAME
 
-#runs the game loop
-func run_game_loop() -> void:
-	if multiplayer.is_server(): #if this instance is the server
-		run_game() #run the game
 
-func run_game() -> void: # Runs all of the phases of the game
+#runs through the phases of the game
+func run_game() -> void:
+	if not GDSync.is_host():
+		return #don't continue if not the host
 	
 	# CREATION PORTION
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.creation, false, 1])
@@ -135,33 +127,30 @@ func run_game() -> void: # Runs all of the phases of the game
 	
 	# DISPLAY PORTION
 	var creation_scene = get_parent().get_node("/root/Creation_Scene")
-	GDSync.call_func_all(creation_scene.export_card) #get the product cards that the players made
+	GDSync.call_func_all(creation_scene.export_card) #have every player compile and export their card (so the server can import)
 	for i in range(MultiplayerManager.players.size()):
-		await display_ready
-	#await get_tree().create_timer(2).timeout #the delay before going into the display
-	print(get_cards())
-	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.display, false, 2]) #change to display scene
-	await GameManager.scene_changed #wait for scene to change
-	await get_tree().create_timer(2).timeout #the delay before going into the display
+		await display_ready #wait for everyone to have exported their cards
 	
-	for product in get_cards().values(): #for every product
-		var display_scene = get_parent().get_node("/root/DisplayScene")
-		display_scene.display_card(product.serialize())
-		#GDSync.call_func_all(display_scene.display_card, [product.serialize()]) #show the product
-		#get_parent().get_node("/root/DisplayScene").display_card.rpc(product.serialize()) #show the product
+	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.display, false, 2]) #change to display scene
+	cards = get_cards() #grab the product cards of each player in the meantime
+	await GameManager.scene_changed #wait for scene to change
+	await get_tree().create_timer(1).timeout #delay before going into the display (this is needed for some reason, makes no sense)
+	
+	for product in cards.values(): #for every product
+		var display_scene = get_parent().get_node("/root/DisplayScene") #refernce display scene
+		GDSync.call_func_all(display_scene.display_card, [product.serialize()]) #show the product
 		start(GameManager.presentation_time) #start the timer
 		await self.timeout #wait until the timer runs out
 	
 	# VOTING PORTION
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
-	#update_player_data.rpc(serialize(players))
 	await GameManager.scene_changed #wait for scene to change
 	start(GameManager.voting_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
 	var voting_scene = get_parent().get_node("/root/VotingScene")
 	GDSync.call_func_all(voting_scene.send_vote)
-	get_parent().get_node("/root/VotingScene").send_vote.rpc()
+	#get_parent().get_node("/root/VotingScene").send_vote.rpc()
 	#while votes.size() < players.size():
 		#await get_tree().create_timer(0.5).timeout
 	
@@ -182,18 +171,25 @@ func run_game() -> void: # Runs all of the phases of the game
 		
 	# RESULTS
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.results, false, 1]) #switch to the results phase
-	await get_tree().create_timer(3).timeout 
+	await GameManager.scene_changed
+	await get_tree().create_timer(1).timeout
+	var results_scene = get_parent().get_node("/root/ResultsScene")
+	GDSync.call_func_all(results_scene.show_scores, [round_results])
+	start(GameManager.results_time) #start the timer
+	await self.timeout #wait until the time runs out
+	#await get_tree().create_timer(3).timeout
 	#update_player_data.rpc(serialize(players))
-	get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results) #shows the scores for the round
-	await get_tree().create_timer(15).timeout #the timer for that phase
+	#get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results) #shows the scores for the round
+	#await get_tree().create_timer(15).timeout #the timer for that phase
 	
 	#if somebody won, reset the game, otherwise continue playing the game
 	if has_winner:
-		reset.rpc()
+		GDSync.call_func_all(reset)
 	else:
 		run_game()
 
 	# Optional: Offer replay
+
 
 #END OF RUNNING THE GAME
 #------------------------------------------------------------------------------------------------------------------------------#
@@ -201,15 +197,16 @@ func run_game() -> void: # Runs all of the phases of the game
 #------------------------------------------------------------------------------------------------------------------------------#
 #START OF GDSYNC SIGNAL ASSIGNMENT AND MESSAGES
 
+
 func connect_GDSync_signals() -> void:
 	GDSync.connected.connect(connected) #connect the "connected" function to the "connected" signal
 	GDSync.connection_failed.connect(connection_failed)
 	
 	#GDSync.lobby_created.connect(lobby_created)
-	#GDSync.lobby_creation_failed.connect(lobby_creation_failed)
+	GDSync.lobby_creation_failed.connect(lobby_creation_failed)
 	
 	#GDSync.lobby_joined.connect(lobby_joined)
-	#GDSync.lobby_join_failed.connect(lobby_join_failed)
+	GDSync.lobby_join_failed.connect(lobby_join_failed)
 	
 	#GDSync.client_joined.connect(client_joined)
 	#GDSync.client_left.connect(client_left)
@@ -264,8 +261,8 @@ func _lobby_scene_update() -> void:
 		var lobby_scene = get_node("/root/LobbyScene") #make reference to the lobby scene
 		lobby_scene.reset_shown_players() #reset the players data in the lobby scene
 
-#resets the game for everyone
-@rpc("any_peer","call_local","reliable")
+
+#resets game variables and send player back to the title screen
 func reset() -> void:
 	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true, 0) #back to the main menu
 	multiplayer.multiplayer_peer.close() #disconnect
@@ -278,6 +275,7 @@ func reset() -> void:
 	score_card = {}
 	players = {}
 
+
 #function to deserialize the data
 func deserialize(data: Dictionary):
 	var player = PlayerData.new()
@@ -286,12 +284,14 @@ func deserialize(data: Dictionary):
 	player.data = PitchCardData.deserialize(data["data"]) if data["data"] != null else null
 	return player
 
+
 #function to serialize the provided data
 func serialize(list: Dictionary):
 	var ret = {}
 	for player_id in list.keys():
 		ret[player_id] = list[player_id].serialize()
 	return ret
+
 
 #function to grab the card (which is the product) that the player created
 func get_cards():
@@ -301,6 +301,7 @@ func get_cards():
 	return ret
 
 
+#imports the cards of the other players after they send their data to the server
 func import_card(player_data: PackedByteArray, player_id: int) -> void: #imports the cards
 	MultiplayerManager.players[player_id].data = PitchCardData.deserialize(player_data)
 	display_ready.emit()
