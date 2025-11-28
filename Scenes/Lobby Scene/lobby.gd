@@ -6,7 +6,9 @@ const MM = preload("res://Singletons/Multiplayer_Manager.gd")
 #node references
 @onready var player_list: GridContainer = %PlayerList
 @onready var player_name_template: PanelContainer = $PlayerNameTemplate
-
+@onready var settings_popup: Control = $Overlay/Setting/SettingsPopup
+@onready var lobby_name_label: Label = %LobbyNameLabel 
+@onready var max_players_label: Label = %MaxPlayersLabel 
 
 #signals
 signal lobby_ready
@@ -29,14 +31,13 @@ func show_player(id):
 
 func reset_shown_players():
 	for player in %PlayerList.get_children():
-		#remove_child(player)
 		player.queue_free()
 	#player is the key (their user id)
 	for player in MultiplayerManager.players:
 		var player_box = player_name_template.duplicate()
-		player_box.name = str(player) #make the label name their player id as a string
+		player_box.name = str(player_id) # make the label name their player id as a string
 		var player_name = player_box.get_node("Padding/Name") #the actual label for the player
-		player_name.text = MultiplayerManager.players[player].username #the text equals their chosen username
+		player_name.text = MultiplayerManager.players[player_id].username #the text equals their chosen username
 		player_list.add_child(player_box) #adds the child to the node displaying the list
 		player_box.visible = true #making the label visible
 

@@ -11,6 +11,7 @@ enum game_state_enum {
 	results,
 	settings,
 	game_mode,
+	host_settings,
 	game_opening,
 }
 
@@ -109,6 +110,10 @@ func enum_to_scene(state: game_state_enum) -> String:
 			return "res://Scenes/Results Scene/Results_Scene.tscn"
 		game_state_enum.settings:
 			return "res://Scenes/Settings Scene/settings_scene.tscn"
+		game_state_enum.game_mode:
+			return "res://Scenes/Game Mode Scene/game_mode_scene.tscn"
+		game_state_enum.host_settings: 
+			return "res://Scenes/HostSetting.tscn" 
 		game_state_enum.game_opening:
 			return "res://Scenes/Game Opening/Game Opening.tscn"
 	return "2135"
