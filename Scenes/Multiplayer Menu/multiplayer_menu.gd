@@ -8,6 +8,8 @@ signal back_to_title
 func _ready() -> void:
 	reset_animation()
 
+
+
 #returns true if the player has inputted a username and port to host/join a lobby
 func _check_textbox_conditions(host_or_join: String) -> bool:
 	#host_or_join is a variable that changes depending on if the player clicked the Host or Join buttons
