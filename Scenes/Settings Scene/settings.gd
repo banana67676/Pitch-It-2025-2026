@@ -18,10 +18,12 @@ var is_just_clicked: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	settings_menu.visible = show_settings
-	%MusicSlider.value = GameManager.volume_music
-	%SFXSlider.value = GameManager.volume_sfx
+	_get_stored_settings()
 	#print("volume: " + str(AudioServer.get_bus_volume_db(music_bus_index)))
 
+func _get_stored_settings():
+	%MusicSlider.value = GameManager.volume_music
+	%SFXSlider.value = GameManager.volume_sfx
 
 func _on_music_slider_value_changed(value: float) -> void:
 	GameManager.volume_music = value
@@ -33,6 +35,7 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 
 func _on_settings_button_pressed() -> void:
+	_get_stored_settings()
 	is_just_clicked = true
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	if show_settings:

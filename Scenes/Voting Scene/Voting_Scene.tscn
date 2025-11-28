@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ngfm742hhhhd"]
+[gd_scene load_steps=5 format=3 uid="uid://ngfm742hhhhd"]
 
 [ext_resource type="Script" uid="uid://befd3glh4iybt" path="res://Scenes/Voting Scene/voting_scene.gd" id="1_ar3lm"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_ydydk"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="5_7j4a1"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_7j4a1"]
-[ext_resource type="Script" uid="uid://bm72wtg3tc5n8" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="6_cgjaj"]
 
 [node name="VotingScene" type="Node2D"]
 script = ExtResource("1_ar3lm")
@@ -63,14 +62,3 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
-
-[node name="TimerSync" type="Node" parent="."]
-script = ExtResource("6_cgjaj")
-node_path = NodePath("../Timer/TimerContainer/Timer")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"

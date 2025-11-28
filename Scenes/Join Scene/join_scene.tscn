@@ -1,0 +1,191 @@
+[gd_scene load_steps=7 format=3 uid="uid://dprid1ulqg70"]
+
+[ext_resource type="Script" uid="uid://j0inb16q2dk6" path="res://Scenes/Join Scene/join.gd" id="1_6wgf3"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_pb137"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="2_34q3u"]
+[ext_resource type="Texture2D" uid="uid://5vx1v3vlki7g" path="res://Assets/refresh_normal.svg" id="3_2pnft"]
+[ext_resource type="Texture2D" uid="uid://c015omwrabaah" path="res://Assets/refresh_hover.svg" id="4_4m7nk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34q3u"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="JoinScene" type="Node2D"]
+script = ExtResource("1_6wgf3")
+
+[node name="Title" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 200
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title"]
+layout_mode = 2
+alignment = 1
+
+[node name="JoinHeader" type="Label" parent="Title/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_pb137")
+theme_type_variation = &"HeaderYellow"
+text = "Join"
+
+[node name="MarginContainer" type="MarginContainer" parent="Title"]
+layout_mode = 2
+theme_override_constants/margin_left = -100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = -100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="CustomJoin" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="HeaderContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="SpecificServer" type="Label" parent="Title/MarginContainer/HBoxContainer/CustomJoin/HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 30
+text = "Find Specific Server"
+horizontal_alignment = 1
+
+[node name="ServerName" type="LineEdit" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_colors/font_uneditable_color = Color(0.8784314, 0.8117647, 0.043137256, 0.5019608)
+theme_override_colors/font_placeholder_color = Color(0.9411765, 0.8666667, 0.047058824, 0.6)
+theme_override_colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Server Name"
+alignment = 1
+
+[node name="PasswordContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="Password" type="LineEdit" parent="Title/MarginContainer/HBoxContainer/CustomJoin/PasswordContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Password"
+alignment = 1
+
+[node name="ErrorContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+
+[node name="ErrorMessage" type="Label" parent="Title/MarginContainer/HBoxContainer/CustomJoin/ErrorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="JoinContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+
+[node name="JoinButton" type="Button" parent="Title/MarginContainer/HBoxContainer/CustomJoin/JoinContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_pb137")
+theme_override_font_sizes/font_size = 36
+text = "Join"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ServerList" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(456, 0)
+layout_mode = 2
+
+[node name="DisplayBoxTemplate" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ServerList"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_34q3u")
+
+[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ServerList/DisplayBoxTemplate"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ServerList/DisplayBoxTemplate/MarginContainer"]
+layout_mode = 2
+
+[node name="ServerName" type="Label" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ServerList/DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 20
+text = "SpeeedNinja's Lobby"
+
+[node name="PlayerCount" type="Label" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ServerList/DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "(7/10)"
+
+[node name="JoinButton" type="Button" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ServerList/DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_pb137")
+theme_type_variation = &"ButtonSmall"
+text = "Join"
+
+[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Refresh" type="TextureButton" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_2pnft")
+texture_hover = ExtResource("4_4m7nk")
+
+[node name="SettingsScene" parent="." instance=ExtResource("2_34q3u")]
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+
+[connection signal="pressed" from="Title/MarginContainer/HBoxContainer/CustomJoin/JoinContainer/JoinButton" to="." method="_on_join_button_pressed"]

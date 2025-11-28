@@ -48,7 +48,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func _on_begin_pressed() -> void:
-	MultiplayerManager.run_game_loop()
+	MultiplayerManager.run_game()
 
 
 func _on_game_mode_button_pressed() -> void:

@@ -24,8 +24,6 @@ func _ready() -> void:
 #reffered to as a card in the code, but easier to think of them as "product cards"
 #EVERYONE is calling this
 func export_card():
-	print("Called by:")
-	print(GDSync.get_client_id())
 	var data = PitchCardData.new()
 	data.title = %Title.text
 	data.slogan = %Slogan.text

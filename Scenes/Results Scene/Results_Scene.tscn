@@ -1,10 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0h0jocpg4m2i"]
+[gd_scene load_steps=9 format=3 uid="uid://d0h0jocpg4m2i"]
 
 [ext_resource type="Script" uid="uid://c2i4dopkjlqnv" path="res://Scenes/Results Scene/results.gd" id="1_34uq8"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_ynpqk"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="3_25vq6"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="3_vx48y"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34uq8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25vq6"]
+bg_color = Color(0.35100666, 0.37, 0.08510001, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vx48y"]
+bg_color = Color(0.35, 0.35, 0.35, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_403vq"]
+bg_color = Color(0.37, 0.22280167, 0.08510001, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_486qo"]
 bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -53,13 +75,13 @@ theme_override_constants/margin_top = 113
 [node name="Top3" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin"]
 layout_mode = 2
 
-[node name="1stPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
+[node name="FirstPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_34uq8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_25vq6")
 
-[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/1stPlace"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -69,31 +91,32 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/1stPlace/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/1stPlace/MarginContainer/HBoxContainer"]
+[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+theme_override_colors/font_color = Color(1, 0.8333334, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "1st"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/1stPlace/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/1stPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Player Name"
 horizontal_alignment = 2
 
-[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/1stPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
@@ -101,13 +124,13 @@ theme_override_font_sizes/font_size = 20
 text = "Money"
 horizontal_alignment = 2
 
-[node name="2ndPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
+[node name="SecondPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_34uq8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vx48y")
 
-[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/2ndPlace"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -117,31 +140,32 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/2ndPlace/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/2ndPlace/MarginContainer/HBoxContainer"]
+[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+theme_override_colors/font_color = Color(0.79, 0.79, 0.79, 1)
 theme_override_font_sizes/font_size = 48
 text = "2nd"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/2ndPlace/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/2ndPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Player Name"
 horizontal_alignment = 2
 
-[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/2ndPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
@@ -149,13 +173,13 @@ theme_override_font_sizes/font_size = 20
 text = "Money"
 horizontal_alignment = 2
 
-[node name="3rdPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
+[node name="ThirdPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_34uq8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_403vq")
 
-[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/3rdPlace"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -165,49 +189,58 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/3rdPlace/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/3rdPlace/MarginContainer/HBoxContainer"]
+[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+theme_override_colors/font_color = Color(0.8, 0.48000002, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "3rd"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/3rdPlace/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/3rdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Player Name"
 horizontal_alignment = 2
 
-[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/3rdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 20
 text = "Money"
 horizontal_alignment = 2
+
+[node name="TimerMargin" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin"]
+layout_mode = 2
+theme_override_constants/margin_top = 325
+
+[node name="Timer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/TimerMargin" instance=ExtResource("3_vx48y")]
+layout_mode = 2
 
 [node name="EveryoneElse" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
 [node name="DisplayBoxTemplate" type="PanelContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(400, 0)
 offset_left = 578.0
 offset_top = 115.0
 offset_right = 978.0
 offset_bottom = 168.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_34uq8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_486qo")
 
 [node name="MarginContainer" type="MarginContainer" parent="DisplayBoxTemplate"]
 layout_mode = 2
@@ -226,15 +259,23 @@ metadata/_edit_lock_ = true
 [node name="Placement" type="Label" parent="DisplayBoxTemplate/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
 theme_override_font_sizes/font_size = 22
 text = "4th"
 
 [node name="PlayerName" type="Label" parent="DisplayBoxTemplate/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 17
 text = "Player Name"
+horizontal_alignment = 2
+
+[node name="Money" type="Label" parent="DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 17
+text = "($0)"
 horizontal_alignment = 2
 
 [node name="SettingsScene" parent="." instance=ExtResource("3_25vq6")]

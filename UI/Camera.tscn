@@ -84,6 +84,7 @@ libraries = {
 }
 
 [node name="GameArt" parent="." instance=ExtResource("5_sdqds")]
+z_index = 30
 position = Vector2(-576, -324)
 
 [node name="ColorRect" type="ColorRect" parent="."]

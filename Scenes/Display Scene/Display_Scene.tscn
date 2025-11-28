@@ -1,8 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=32 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="4_vsoll"]
-[ext_resource type="Script" uid="uid://bm72wtg3tc5n8" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="6_lj7yx"]
 [ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_nmnxq"]
 [ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="7_vg7wq"]
 [ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="8_e1xid"]
@@ -474,71 +473,3 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
-
-[node name="TimerSync" type="Node" parent="."]
-script = ExtResource("6_lj7yx")
-node_path = NodePath("../DisplayScene/TimerContainer/Timer")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
-
-[node name="DisplaySyncs" type="Node" parent="."]
-
-[node name="PlayerSync" type="Node" parent="DisplaySyncs"]
-script = ExtResource("6_lj7yx")
-node_path = NodePath("../../DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/PlayerNameMargin/PlayerName")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
-
-[node name="ProductSync" type="Node" parent="DisplaySyncs"]
-script = ExtResource("6_lj7yx")
-node_path = NodePath("../../DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/ProductBox/Padding/Product")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
-
-[node name="SloganSync" type="Node" parent="DisplaySyncs"]
-script = ExtResource("6_lj7yx")
-node_path = NodePath("../../DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin/SloganBox/Padding/Slogan")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
-
-[node name="WhoSync" type="Node" parent="DisplaySyncs"]
-script = ExtResource("6_lj7yx")
-node_path = NodePath("../../WhoCard/WhoText")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
-
-[node name="WhatSync" type="Node" parent="DisplaySyncs"]
-script = ExtResource("6_lj7yx")
-node_path = NodePath("../../WhatCard/WhatText")
-properties = PackedStringArray("text")
-interpolated = false
-interpolation_speed = 1.0
-extrapolation = null
-extrapolated = false
-max_extrapolation_time = 0.2
-metadata/_custom_type_script = "uid://bm72wtg3tc5n8"
