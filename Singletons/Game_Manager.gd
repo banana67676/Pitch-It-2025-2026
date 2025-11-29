@@ -51,6 +51,109 @@ var game_state: int = game_state_enum.title #current game state (lobby, creation
 var win_threshold: int = 200000 #amount of money needed to win
 
 
+# --- SHARED CARD DATA SO ALL PLAYERS SEE THE SAME WHO/WHAT ---
+var what_text: Array[String] = [
+	"Microwave Ovens",
+	"Frying Pans",
+	"Barbecue Grills",
+	"Tennis Shoes",
+	"Baseball Caps",
+	"Bug Repellant",
+	"Bicycles",
+	"Swimsuits",
+	"Lip Balm",
+	"Snow Skis",
+	"Surfboards",
+	"Garbage Bags",
+	"Toothbrushes",
+	"Toilet Paper",
+	"Handguns",
+	"Houseplants",
+	"Bath Toys",
+	"Coffee Maker",
+	"Facial Tissues",
+	"Golf Clubs",
+	"Raincoats",
+	"Electric Fans",
+	"Kites",
+	"Cell Phones",
+	"Laptops",
+	"Ladders",
+	"Garden Hoses",
+	"Frisbees",
+	"Lawnmowers",
+	"Solar Powered Calculators",
+	"Potting Soil",
+	"Bookmarks",
+	"Insulated Can Holders",
+	"Beach Balls",
+	"MP3 Music Players",
+	"Sunglasses",
+	"Backpacks",
+	"Pain Relief Pills",
+	"Chewing Gum",
+	"Toaster Ovens",
+	"Ear Swabs",
+	"Foot Powder",
+	"Antacid Tablets",
+	"Digital Video Cameras",
+	"Ice"
+]
+
+var who_text: Array[String] = [
+	"Medical Professionals",
+	"Firefighters",
+	"Actors",
+	"Engineers",
+	"Airplane Pilots",
+	"Used Car Salespersons",
+	"Boy Scouts",
+	"Girl Scouts",
+	"Nuns",
+	"Priests",
+	"Hunters",
+	"Sports Fans",
+	"Nascar Fans",
+	"Soccer Moms",
+	"Teachers",
+	"Bankers",
+	"Lawn Care Specialists",
+	"Construction Workers",
+	"College Professors",
+	"Accountants",
+	"Lawyers",
+	"Movie Directors",
+	"Postal Workers",
+	"Farmers",
+	"Window Washers",
+	"Fishing Boat Crew Members",
+	"Lumberjacks",
+	"Meteorologists",
+	"Gardeners",
+	"Cheerleaders",
+	"High School Jocks",
+	"Chess Team Members",
+	"Rock N' Roll Music Fans",
+	"Hip Hop Music Fans",
+	"Country Music Fans",
+	"Dog Owners",
+	"Cat Owners",
+	"Tattoo Artists",
+	"Police Officers",
+	"Military Service Personnel",
+	"Barbers or Hairstylists",
+	"Librarians",
+	"Veterinarians",
+	"Zookeepers",
+	"Bartenders",
+	"FBI Agents",
+	"Opera Performers",
+	"Graphic Artists"
+]
+
+# these hold the specific WHO/WHAT chosen for the current round
+var current_who_text: String = ""
+var current_what_text: String = ""
 
 
 var settings: bool = false
@@ -74,6 +177,21 @@ func mode_scale() -> float:
 			return 1.0
 	return 1.0
 
+
+# picks a new WHO/WHAT pair and syncs it to all peers
+func pick_new_cards() -> void:
+	if multiplayer.is_server():
+		randomize()
+		var new_who = who_text[randi_range(0, who_text.size() - 1)]
+		var new_what = what_text[randi_range(0, what_text.size() - 1)]
+		_set_current_cards.rpc(new_who, new_what)
+
+@rpc("any_peer", "call_local", "reliable")
+func _set_current_cards(who: String, what: String) -> void:
+	current_who_text = who
+	current_what_text = what
+
+
 #the function that actually switches the game state
 func _game_state_switcher(state: game_state_enum, _protected: bool):
 	game_state = state
@@ -90,6 +208,10 @@ func _game_state_switcher(state: game_state_enum, _protected: bool):
 #basically it changes the game state for everyone
 @rpc("any_peer", "call_local", "reliable")
 func change_game_state(state: game_state_enum, protected: bool):
+	# when we are going into the creation state, pick the shared cards for this round
+	if state == game_state_enum.creation:
+		pick_new_cards()
+	
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
 	_game_state_switcher(state, protected)
@@ -99,6 +221,10 @@ func change_game_state(state: game_state_enum, protected: bool):
 func delayed_change_game_state(state: game_state_enum, protected: bool, initial_delay: float, final_delay: float):
 	#The camera in movement to show the logo/title card
 	title_card_intro_transition()
+	
+	# when we are going into the creation state, pick the shared cards for this round
+	if state == game_state_enum.creation:
+		pick_new_cards()
 	
 	await get_tree().create_timer(initial_delay).timeout #wait the initial delay before switching scenes
 	_game_state_switcher(state, protected) #actually switch game states

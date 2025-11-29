@@ -148,15 +148,16 @@ func _ready() -> void:
 	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout
 	
-	if give_random_text:
-		if (card_type == card_types.who):
-			possible_text = who_text
-		elif (card_type == card_types.what):
-			possible_text = what_text
+	# make sure all players show the same text by using the values from GameManager
 	pick_text()
 
+# Call this to (re)pick/update the text on the card
 func pick_text():
-	label.text = possible_text[randi_range(0, possible_text.size() - 1)]
+	# ALWAYS use the synced values from GameManager so every player sees the same card
+	if card_type == card_types.who:
+		label.text = GameManager.current_who_text
+	elif card_type == card_types.what:
+		label.text = GameManager.current_what_text
 
 func move(location : Vector2, rot : float):
 	global_position = lerp(global_position, location, 0.05)
