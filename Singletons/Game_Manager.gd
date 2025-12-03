@@ -36,6 +36,7 @@ var creation_time: float = CREATION_DEFAULT #time to create a product
 var display_time: float = DISPLAY_DEFAULT #time to present a product
 var voting_time: float = VOTING_DEFAULT #time to vote on a product
 var results_time: float = RESULTS_DEFAULT #time that the results are displayed
+var show_winner_time: float = 5
 
 const WIN_THRESHOLD: int = 5000000 #amount of money needed to win
 

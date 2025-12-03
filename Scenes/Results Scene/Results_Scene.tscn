@@ -61,30 +61,31 @@ theme = ExtResource("1_ynpqk")
 theme_type_variation = &"HeaderYellow"
 text = "Results"
 
-[node name="MarginContainer" type="MarginContainer" parent="Title"]
+[node name="ResultsContainer" type="MarginContainer" parent="Title"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = -100
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = -100
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/ResultsContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Top3Margin" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer"]
+[node name="Top3Margin" type="MarginContainer" parent="Title/ResultsContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 113
 
-[node name="Top3" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin"]
+[node name="Top3" type="VBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin"]
 layout_mode = 2
 
-[node name="FirstPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
+[node name="FirstPlace" type="PanelContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_25vq6")
 
-[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/FirstPlace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -94,11 +95,11 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer"]
+[node name="Placement" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -106,20 +107,20 @@ theme_override_colors/font_color = Color(1, 0.8333334, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "1st"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Player Name"
 horizontal_alignment = 2
 
-[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/FirstPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
@@ -127,13 +128,13 @@ theme_override_font_sizes/font_size = 20
 text = "Money"
 horizontal_alignment = 2
 
-[node name="SecondPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
+[node name="SecondPlace" type="PanelContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vx48y")
 
-[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/SecondPlace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -143,11 +144,11 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer"]
+[node name="Placement" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -155,20 +156,20 @@ theme_override_colors/font_color = Color(0.79, 0.79, 0.79, 1)
 theme_override_font_sizes/font_size = 48
 text = "2nd"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Player Name"
 horizontal_alignment = 2
 
-[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/SecondPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
@@ -176,13 +177,13 @@ theme_override_font_sizes/font_size = 20
 text = "Money"
 horizontal_alignment = 2
 
-[node name="ThirdPlace" type="PanelContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3"]
+[node name="ThirdPlace" type="PanelContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_403vq")
 
-[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace"]
+[node name="MarginContainer" type="MarginContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -192,11 +193,11 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Placement" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer"]
+[node name="Placement" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -204,20 +205,20 @@ theme_override_colors/font_color = Color(0.8, 0.48000002, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "3rd"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="PlayerName" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Player Name"
 horizontal_alignment = 2
 
-[node name="Money" type="Label" parent="Title/MarginContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/Top3/ThirdPlace/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
@@ -225,17 +226,34 @@ theme_override_font_sizes/font_size = 20
 text = "Money"
 horizontal_alignment = 2
 
-[node name="TimerMargin" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/Top3Margin"]
+[node name="TimerMargin" type="MarginContainer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin"]
 layout_mode = 2
 theme_override_constants/margin_top = 325
 
-[node name="Timer" parent="Title/MarginContainer/HBoxContainer/Top3Margin/TimerMargin" instance=ExtResource("3_vx48y")]
+[node name="Timer" parent="Title/ResultsContainer/HBoxContainer/Top3Margin/TimerMargin" instance=ExtResource("3_vx48y")]
 layout_mode = 2
 
-[node name="EveryoneElse" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+[node name="EveryoneElse" type="VBoxContainer" parent="Title/ResultsContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
+
+[node name="WinnerContainer" type="MarginContainer" parent="Title"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+
+[node name="WinnerVBox" type="VBoxContainer" parent="Title/WinnerContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Title/WinnerContainer/WinnerVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Winner:"
+horizontal_alignment = 1
 
 [node name="DisplayBoxTemplate" type="PanelContainer" parent="."]
 visible = false

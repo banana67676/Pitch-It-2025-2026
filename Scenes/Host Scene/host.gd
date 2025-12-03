@@ -110,17 +110,23 @@ func reset_animation() -> void:
 	$SettingsScene.visible = false
 	$ResetButton.position = Vector2($ResetButton.position.x, 862)
 	$ResetButton.visible = false
+	$GameMode.position = Vector2($GameMode.position.x, 519)
+	$GameMode.visible = false
 
 
 func play_animation() -> void:
 	$BackButton.visible = true
 	$SettingsScene.visible = true
 	$ResetButton.visible = true
+	$GameMode.visible = true
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	var tween2 = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	var tween3 = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var tween4 = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property($SettingsScene, "position", Vector2($SettingsScene.position.x, 16), TWEEN_TIME)
 	tween2.tween_interval(0.2) #0.2 second delay before next tween
 	tween2.tween_property($BackButton, "position", Vector2($BackButton.position.x, 16), TWEEN_TIME)
-	tween3.tween_interval(0.4) #another 0.2 second delay before next tween
+	tween3.tween_interval(0.4) #another 0.2 seconds before next tween (because the all the tween interval timers start together)
 	tween3.tween_property($ResetButton, "position", Vector2($ResetButton.position.x, 562), TWEEN_TIME)
+	tween4.tween_interval(0.6) #ANOTHER 0.2 second delay before next tween
+	tween4.tween_property($GameMode, "position", Vector2($GameMode.position.x, 219), TWEEN_TIME)

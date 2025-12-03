@@ -10,6 +10,7 @@ class Result:
 
 func _ready() -> void:
 	GDSync.expose_func(show_scores)
+	GDSync.expose_func(show_winner)
 	#initially hide all of the places
 	%FirstPlace.visible = false
 	%SecondPlace.visible = false
@@ -30,7 +31,7 @@ func show_scores(voting_results: Dictionary) -> bool:
 			%EveryoneElse.add_child(display_box)
 	
 	#if the current first place player has reached the win threshold
-	if result_list[0].value >= GameManager.win_threshold: 
+	if result_list[0].value >= GameManager.WIN_THRESHOLD: 
 		var winner = Label.new()
 		winner.text = str(result_list[0].username, " wins with a total investment of ", MultiplayerManager.score_card[result_list[0].user_id])
 		winner.set_global_position(Vector2(200,200))
@@ -38,6 +39,7 @@ func show_scores(voting_results: Dictionary) -> bool:
 		return true
 	else:
 		return false
+
 
 func _simplified_calculating_scores() -> void:
 	var counting_votes: Dictionary
@@ -85,6 +87,14 @@ func _show_first_second_and_third_place(result_list: Array) -> void:
 		%ThirdPlace.find_child("PlayerName").text = third_place.username
 		%ThirdPlace.find_child("Money").text = "$" + format_with_commas(MultiplayerManager.score_card[third_place.user_id])
 		%ThirdPlace.visible = true
+
+
+func show_winner() -> void:
+	%ResultsContainer.visible = false
+	var first_place: PanelContainer = %FirstPlace.duplicate()
+	first_place.name = "FirstPlaceDisplay"
+	%WinnerContainer/WinnerVBox.add_child(first_place)
+	%WinnerContainer.visible = true
 
 
 #formats the provided number to be a String with commas

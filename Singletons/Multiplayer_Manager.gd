@@ -164,9 +164,9 @@ func run_game() -> void:
 		if vote == -1:
 			continue
 		round_results[vote] += 1
-		MultiplayerManager.players[vote].score += 1000000
+		MultiplayerManager.players[vote].score += 1000000 #players earn 1000000 (1 million) per vote
 		#if the player has more money than the money needed to win, they win
-		if MultiplayerManager.players[vote].score >= GameManager.win_threshold: 
+		if MultiplayerManager.players[vote].score >= GameManager.WIN_THRESHOLD: 
 			has_winner = true
 	print("Round results:")
 	print(round_results)
@@ -181,8 +181,11 @@ func run_game() -> void:
 	start(GameManager.results_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
-	#if somebody won, reset the game, otherwise continue playing the game
+	#if somebody won, show the winner and reset the game, otherwise continue playing the game
 	if has_winner:
+		GDSync.call_func_all(results_scene.show_winner)
+		start(GameManager.show_winner_time)
+		await self.timeout
 		GDSync.call_func_all(reset)
 	else:
 		run_game()
@@ -263,6 +266,7 @@ func _lobby_scene_update() -> void:
 
 #resets game variables and send player back to the title screen
 func reset() -> void:
+	GDSync.call_func_all(disconnect_client) #disconnects EVERYONE
 	GameManager.change_game_state(GameManager.game_state_enum.game_opening, true, 0) #back to the main menu
 	multiplayer.multiplayer_peer.close() #disconnect
 	await GameManager.scene_changed

@@ -275,7 +275,7 @@ offset_top = 562.0
 offset_right = 1136.0
 offset_bottom = 632.0
 
-[node name="GameModeSelection" parent="." instance=ExtResource("8_twk2c")]
+[node name="GameMode" parent="." instance=ExtResource("8_twk2c")]
 layout_mode = 0
 anchors_preset = 0
 anchor_top = 0.0
