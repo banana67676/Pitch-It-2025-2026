@@ -20,7 +20,7 @@ useSenderID=false
 config/name="Pitch It!"
 run/main_scene="uid://dpjm1n3gy0e1r"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/bg_color=Color(0, 0.0117647, 0.101961, 1)
+boot_splash/bg_color=Color(0.67058825, 0.1882353, 0.19607843, 1)
 boot_splash/image="res://Assets/WhiteBuilb.png"
 
 [audio]
@@ -30,7 +30,7 @@ buses/default_bus_layout="res://bus.tres"
 [autoload]
 
 GameManager="*res://Singletons/Game_Manager.gd"
-Camera="*res://UI/Camera.tscn"
+Camera="*res://UI/Camera/Camera.tscn"
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
 
@@ -55,15 +55,20 @@ folder_colors={
 "res://Scenes/Creation Scene/": "green",
 "res://Scenes/Display Scene/": "blue",
 "res://Scenes/Game Opening/": "red",
+"res://Scenes/Host Scene/": "purple",
 "res://Scenes/Join Scene/": "green",
 "res://Scenes/Lobby Scene/": "yellow",
-"res://Scenes/Multiplayer Menu/": "orange",
 "res://Scenes/Results Scene/": "pink",
 "res://Scenes/Settings Scene/": "gray",
 "res://Scenes/Title Scene/": "red",
+"res://Scenes/Username/": "orange",
 "res://Scenes/Voting Scene/": "purple",
 "res://Singletons/": "yellow",
-"res://UI/": "teal"
+"res://UI/": "teal",
+"res://UI/Back Button/": "yellow",
+"res://UI/Camera/": "blue",
+"res://UI/Refresh Button/": "orange",
+"res://UI/Timer/": "green"
 }
 
 [gui]

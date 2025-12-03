@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var VoteOption = preload("res://Scenes/Voting Scene/VoteOption.tscn")
 var selection = -1
@@ -20,7 +20,6 @@ func prepare(cards) -> void:
 			vote_box.find_child("PlayerName").text = "By: " + str(card.username) #find the PlayerName label and change its text to the username
 			var button = vote_box.find_child("VoteButton") #find the Vote Button
 			button.toggle_mode = true #set toggle mode to true
-			button.text = "Invest $100,000" #change its text
 			button.connect("pressed", lock.bind(card.user_id)) #attach the lock function to be called when the button is pressed
 			%VotingContainer.add_child(vote_box) #add the votebox to the grid container containg the vote boxes
 
@@ -28,7 +27,7 @@ func prepare(cards) -> void:
 #whenever a button is pressed, this function is called. The user id for the button has been binded
 #meaning it is set it stone. It will ALWAYS be the user_id that was assigned to the specific button
 func lock(user_id) -> void:
-	if selection != -1: #only if no selection has been made
+	if selection != -1: #only if no voting selection has been made
 		return
 	
 	selection = user_id

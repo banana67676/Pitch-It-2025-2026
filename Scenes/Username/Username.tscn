@@ -1,17 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo3vx0ii1i20j"]
+[gd_scene load_steps=5 format=3 uid="uid://bo3vx0ii1i20j"]
 
-[ext_resource type="Script" uid="uid://bylibl7ebk8p3" path="res://Scenes/Multiplayer Menu/multiplayer_menu.gd" id="1_a2imu"]
-[ext_resource type="Texture2D" uid="uid://c8g1ru1elixlg" path="res://Assets/back_normal.svg" id="3_wjj1h"]
+[ext_resource type="Script" uid="uid://bylibl7ebk8p3" path="res://Scenes/Username/username.gd" id="1_a2imu"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="4_kyjbj"]
-[ext_resource type="Texture2D" uid="uid://xr4fx3fa6ano" path="res://Assets/back_hover.svg" id="4_oj2lg"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_oj2lg"]
+[ext_resource type="PackedScene" uid="uid://cv3cq386oufxc" path="res://UI/Back Button/back_button.tscn" id="6_nuywi"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_oj2lg"]
 
-[node name="Multiplayer_Menu" type="Node2D"]
+[node name="Username" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_a2imu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1153.0
-offset_bottom = 645.0
+offset_bottom = 679.0
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 100
@@ -86,20 +88,21 @@ text = "Join
 "
 
 [node name="SettingsScene" parent="." instance=ExtResource("6_oj2lg")]
+layout_mode = 0
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
 
-[node name="BackButton" type="TextureButton" parent="."]
+[node name="BackButton" parent="." instance=ExtResource("6_nuywi")]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 76.0
 offset_bottom = 76.0
 rotation = 1.5707964
-pivot_offset = Vector2(30, 30)
-texture_normal = ExtResource("3_wjj1h")
-texture_hover = ExtResource("4_oj2lg")
+initial_rotation = 90.0
+final_rotation = 110.0
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/Name/VBoxContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer/Host" to="." method="_on_host_pressed"]

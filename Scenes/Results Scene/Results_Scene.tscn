@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c2i4dopkjlqnv" path="res://Scenes/Results Scene/results.gd" id="1_34uq8"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_ynpqk"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="3_25vq6"]
-[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="3_vx48y"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="3_25vq6"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="3_vx48y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25vq6"]
 bg_color = Color(0.35100666, 0.37, 0.08510001, 0.5882353)
@@ -33,10 +33,13 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="ResultsScene" type="Node2D"]
+[node name="ResultsScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_34uq8")
 
 [node name="Title" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 size_flags_horizontal = 3
@@ -232,10 +235,12 @@ layout_mode = 2
 [node name="EveryoneElse" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+alignment = 1
 
 [node name="DisplayBoxTemplate" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(400, 0)
+layout_mode = 0
 offset_left = 578.0
 offset_top = 115.0
 offset_right = 978.0
@@ -279,6 +284,7 @@ text = "($0)"
 horizontal_alignment = 2
 
 [node name="SettingsScene" parent="." instance=ExtResource("3_25vq6")]
+layout_mode = 0
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0

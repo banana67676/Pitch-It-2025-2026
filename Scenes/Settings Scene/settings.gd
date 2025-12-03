@@ -14,6 +14,7 @@ var music_bus_index = AudioServer.get_bus_index("Music")
 var sfx_bus_index = AudioServer.get_bus_index("SFX")
 
 var is_just_clicked: bool = false
+const TWEEN_TIME: float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,14 +40,14 @@ func _on_settings_button_pressed() -> void:
 	is_just_clicked = true
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	if show_settings:
-		tween.tween_property($SettingsButton, "rotation", deg_to_rad(0), 1) #moving its position
+		tween.tween_property($SettingsButton, "rotation", deg_to_rad(0), TWEEN_TIME)
 		settings_menu.visible = false
 		show_settings = false
 	else:
-		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-90), 1) #moving its position
+		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-90), TWEEN_TIME)
 		settings_menu.visible = true
 		show_settings = true
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(TWEEN_TIME).timeout
 	is_just_clicked = false
 
 
@@ -55,9 +56,9 @@ func _on_settings_button_mouse_entered() -> void:
 		return
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	if settings_menu.visible:
-		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-135), 1)
+		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-135), TWEEN_TIME)
 	else:
-		tween.tween_property($SettingsButton, "rotation", deg_to_rad(45), 1)
+		tween.tween_property($SettingsButton, "rotation", deg_to_rad(45), TWEEN_TIME)
 
 
 func _on_settings_button_mouse_exited() -> void:
@@ -65,6 +66,6 @@ func _on_settings_button_mouse_exited() -> void:
 		return
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	if settings_menu.visible:
-		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-90), 1)
+		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-90), TWEEN_TIME)
 	else:
-		tween.tween_property($SettingsButton, "rotation", deg_to_rad(0), 1)
+		tween.tween_property($SettingsButton, "rotation", deg_to_rad(0), TWEEN_TIME)

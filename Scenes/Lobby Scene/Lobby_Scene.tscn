@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cws7jvys13ih5" path="res://Scenes/Lobby Scene/lobby.gd" id="1_fj56n"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="3_6bo0c"]
 [ext_resource type="Texture2D" uid="uid://c8g1ru1elixlg" path="res://Assets/back_normal.svg" id="5_bal86"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_bal86"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_bal86"]
 [ext_resource type="Texture2D" uid="uid://xr4fx3fa6ano" path="res://Assets/back_hover.svg" id="6_gaby6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bo0c"]
@@ -13,10 +13,13 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="LobbyScene" type="Node2D"]
+[node name="LobbyScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_fj56n")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -48,6 +51,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="LobbyHeader" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -71,6 +75,7 @@ text = "Start Game!"
 
 [node name="PlayerNameTemplate" type="PanelContainer" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -1.0
 offset_top = 1.0
 offset_right = 142.0
@@ -92,22 +97,15 @@ theme_override_font_sizes/font_size = 24
 text = "testing babacii"
 horizontal_alignment = 1
 
-[node name="GameModeButton" type="Button" parent="."]
-offset_left = 385.0
-offset_top = 561.0
-offset_right = 786.0
-offset_bottom = 655.0
-theme = ExtResource("3_6bo0c")
-theme_override_font_sizes/font_size = 50
-text = "Game Mode"
-
 [node name="SettingsScene" parent="." instance=ExtResource("6_bal86")]
+layout_mode = 0
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
 
 [node name="BackButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 76.0
@@ -117,5 +115,4 @@ texture_normal = ExtResource("5_bal86")
 texture_hover = ExtResource("6_gaby6")
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/Begin" to="." method="_on_begin_pressed"]
-[connection signal="pressed" from="GameModeButton" to="." method="_on_game_mode_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

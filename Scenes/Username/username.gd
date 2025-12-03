@@ -1,9 +1,14 @@
-extends Node2D
+extends Control
+class_name UsernameScene
 
 @onready var USERNAME_READ: LineEdit = %Username
 @onready var ERROR_LABEL: Label = %ErrorText
 
+const TWEEN_TIME: float = 1
+
 signal back_to_title
+signal to_host
+signal to_join
 
 func _ready() -> void:
 	reset_animation()
@@ -25,14 +30,15 @@ func _on_host_pressed() -> void:
 	var success = _check_textbox_conditions("host")
 	if success:
 		var username: String = USERNAME_READ.text.strip_edges()
-		MultiplayerManager.init_server(username)
+		to_host.emit(username)
 
 
 func _on_join_pressed() -> void:
 	var success = _check_textbox_conditions("join")
 	if success:
 		var username: String = USERNAME_READ.text.strip_edges()
-		MultiplayerManager.join_server(username)
+		to_join.emit(username)
+		#MultiplayerManager.join_server(username)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -41,22 +47,26 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func _on_username_text_changed(new_text: String) -> void:
-	var max_length: int = 20
-	if new_text.length() > max_length:
-		USERNAME_READ.text = USERNAME_READ.text.substr(0,max_length)
-		USERNAME_READ.set_caret_column(max_length)
-
-
-func _on_back_button_pressed() -> void:
-	back_to_title.emit()
+	const MAX_LENGTH: int = 20
+	if new_text.length() > MAX_LENGTH:
+		USERNAME_READ.text = USERNAME_READ.text.substr(0,MAX_LENGTH)
+		USERNAME_READ.set_caret_column(MAX_LENGTH)
 
 
 func reset_animation() -> void:
 	$BackButton.position = Vector2(-284, $BackButton.position.y)
-	$SettingsScene.position = Vector2(1436.0, $SettingsScene.position.y)
+	$BackButton.visible = false
+	$SettingsScene.position = Vector2(1436, $SettingsScene.position.y)
+	$SettingsScene.visible = false
 
 
 func play_animation() -> void:
+	$BackButton.visible = true
+	$SettingsScene.visible = true
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel()
-	tween.tween_property($BackButton, "position", Vector2(16, $BackButton.position.y), 1)
-	tween.tween_property($SettingsScene, "position", Vector2(1136, $SettingsScene.position.y), 1)
+	tween.tween_property($BackButton, "position", Vector2(16, $BackButton.position.y), TWEEN_TIME)
+	tween.tween_property($SettingsScene, "position", Vector2(1136, $SettingsScene.position.y), TWEEN_TIME)
+
+
+func _on_back_button_pressed() -> void:
+	back_to_title.emit()

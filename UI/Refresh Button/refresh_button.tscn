@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d172fukpk00yr"]
+
+[ext_resource type="Texture2D" uid="uid://5vx1v3vlki7g" path="res://Assets/refresh_normal.svg" id="1_e70h6"]
+[ext_resource type="Texture2D" uid="uid://c015omwrabaah" path="res://Assets/refresh_hover.svg" id="2_cb67i"]
+[ext_resource type="Script" uid="uid://c35yaw43mm5y4" path="res://UI/Refresh Button/refresh_button.gd" id="3_cb67i"]
+
+[node name="RefreshButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1082.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(35, 35)
+texture_normal = ExtResource("1_e70h6")
+texture_hover = ExtResource("2_cb67i")
+script = ExtResource("3_cb67i")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cyweidcx36nir"]
 
-[ext_resource type="Script" uid="uid://bppctfroi1vtu" path="res://UI/timer.gd" id="1_342dd"]
+[ext_resource type="Script" uid="uid://bppctfroi1vtu" path="res://UI/Timer/timer.gd" id="1_342dd"]
 [ext_resource type="Script" uid="uid://bm72wtg3tc5n8" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_jpgby"]
 
 [node name="Timer" type="Label"]

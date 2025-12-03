@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://r8spcdilxiwj"]
+
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_pocvb"]
+[ext_resource type="Script" uid="uid://b2ipenfbkj4bp" path="res://Scenes/Game Mode Scene/game_mode_selection.gd" id="2_jbjvr"]
+
+[node name="GameModeSelection" type="FoldableContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -413.0
+offset_right = 209.0
+grow_vertical = 0
+theme = ExtResource("1_pocvb")
+theme_override_font_sizes/font_size = 24
+folded = true
+title = "Gamemodes"
+title_position = 1
+script = ExtResource("2_jbjvr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ModeTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_pocvb")
+theme_type_variation = &"HeaderYellow"
+theme_override_font_sizes/font_size = 24
+text = "Classic"
+horizontal_alignment = 1
+
+[node name="ModeDescription" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(189, 24)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Description"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ButtonMargin" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="ModeButtons" type="ScrollContainer" parent="MarginContainer/ButtonMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonContainer" type="GridContainer" parent="MarginContainer/ButtonMargin/ModeButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="ButtonTemplate" type="Button" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+theme = ExtResource("1_pocvb")
+theme_type_variation = &"ButtonSmall"
+text = "Classic"

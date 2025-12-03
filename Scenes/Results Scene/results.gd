@@ -1,4 +1,6 @@
-extends Node2D
+extends Control
+
+const VOTE_VALUE: int = 1000000 #each vote is worth $1,000,000
 
 class Result:
 	var username: String
@@ -37,6 +39,18 @@ func show_scores(voting_results: Dictionary) -> bool:
 	else:
 		return false
 
+func _simplified_calculating_scores() -> void:
+	var counting_votes: Dictionary
+	#for every player in the game, give them a default starting value of 0
+	for user_id: int in MultiplayerManager.players:
+		counting_votes[user_id] = 0
+	#then, count up each vote. For each vote that a person got, add one to them (found by their user_id)
+	for vote: int in MultiplayerManager.votes.values():
+		counting_votes[vote] += 1
+	#finally, set the value in MultiplayerManager.score_card of the ACTUAL amount that each player earned
+	for user_id in MultiplayerManager.score_card:
+		MultiplayerManager.score_card[user_id] = counting_votes[user_id] * VOTE_VALUE
+
 
 func _calculate_scores(voting_results: Dictionary) -> Array[Result]:
 	var result_list: Array[Result] #an arry of Result objects
@@ -47,17 +61,17 @@ func _calculate_scores(voting_results: Dictionary) -> Array[Result]:
 		result.user_id = user_id #set its user id
 		if !MultiplayerManager.score_card.has(user_id):
 			MultiplayerManager.score_card[user_id] = 0
-		MultiplayerManager.score_card[user_id] += result.value * 100000
+		MultiplayerManager.score_card[user_id] += result.value * VOTE_VALUE
 		result_list.append(result) #adds the Result object to the end of the array
 	result_list.sort_custom(comp_score) #sorts the array using the provided function
 	return result_list
 
 
 func _show_first_second_and_third_place(result_list: Array) -> void:
-	var size = result_list.size()
-	var first_place = result_list[0] if size > 0 else null
-	var second_place = result_list[1] if size > 1 else null
-	var third_place = result_list[2] if size > 2 else null
+	var list_size = result_list.size()
+	var first_place = result_list[0] if list_size > 0 else null #first place = the value if that value spot exists in the array, otherwise its null
+	var second_place = result_list[1] if list_size > 1 else null
+	var third_place = result_list[2] if list_size > 2 else null
 	
 	if first_place: #if it exists
 		%FirstPlace.find_child("PlayerName").text = first_place.username #update the player name

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const WIDTH = 800
 const HEIGHT = 600
