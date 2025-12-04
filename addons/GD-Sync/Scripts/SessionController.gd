@@ -554,10 +554,12 @@ func load_scene(scene_path : String) -> void:
 	var new_scene : Node = await instantiate_threaded(tree, packed_scene)
 	var old_scene : Node = tree.current_scene
 	
+	
 	if new_scene == null:
 		GDSync.call_func(switch_scene_failed)
 		switch_scene_failed()
 		return
+	
 	
 	var own_id : int = GDSync.get_client_id()
 	GDSync.call_func(mark_scene_ready, [own_id])
@@ -565,6 +567,7 @@ func load_scene(scene_path : String) -> void:
 	
 	await scene_ready
 	if scene_path != active_scene_change: return
+	
 	
 	new_scene.tree_entered.connect(
 		func set_current_scene() -> void:
@@ -581,7 +584,6 @@ func load_scene(scene_path : String) -> void:
 
 func mark_scene_ready(client_id : int) -> void:
 	scene_ready_list.append(client_id)
-	
 	if GDSync.is_host():
 		var clients : Array = get_all_clients()
 		

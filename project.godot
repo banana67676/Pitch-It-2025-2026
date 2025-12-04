@@ -13,16 +13,15 @@ config_version=5
 version="0.13"
 publicKey="b3e7f0e043579190"
 privateKey="7247ceb74dbe8589"
+useSenderID=false
 
 [application]
 
 config/name="Pitch It!"
-run/main_scene="res://Scenes/Title Scene/Title_Scene.tscn"
+run/main_scene="uid://dpjm1n3gy0e1r"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/bg_color=Color(0, 0.0117647, 0.101961, 1)
+boot_splash/bg_color=Color(0.67058825, 0.1882353, 0.19607843, 1)
 boot_splash/image="res://Assets/WhiteBuilb.png"
-config/icon="res://Assets/icon.svg"
-boot_splash/main_scene="res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
 
 [audio]
 
@@ -31,7 +30,7 @@ buses/default_bus_layout="res://bus.tres"
 [autoload]
 
 GameManager="*res://Singletons/Game_Manager.gd"
-Camera="*res://UI/Camera.tscn"
+Camera="*res://UI/Camera/Camera.tscn"
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
 
@@ -55,23 +54,31 @@ folder_colors={
 "res://Scenes/": "blue",
 "res://Scenes/Creation Scene/": "green",
 "res://Scenes/Display Scene/": "blue",
+"res://Scenes/Game Opening/": "red",
+"res://Scenes/Host Scene/": "purple",
+"res://Scenes/Join Scene/": "green",
 "res://Scenes/Lobby Scene/": "yellow",
-"res://Scenes/Multiplayer Menu/": "orange",
 "res://Scenes/Results Scene/": "pink",
 "res://Scenes/Settings Scene/": "gray",
 "res://Scenes/Title Scene/": "red",
+"res://Scenes/Username/": "orange",
 "res://Scenes/Voting Scene/": "purple",
 "res://Singletons/": "yellow",
-"res://UI/": "teal"
+"res://UI/": "teal",
+"res://UI/Back Button/": "yellow",
+"res://UI/Camera/": "blue",
+"res://UI/Refresh Button/": "orange",
+"res://UI/Timer/": "green"
 }
 
 [gui]
 
+theme/custom="uid://b7qrc55c1kxgl"
 theme/custom_font="res://Assets/Chauncy Fatty Fatty.ttf"
 
 [input]
 
-"Left Click"={
+"Mouse Click"={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(295, 12),"global_position":Vector2(304, 58),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
@@ -79,6 +86,11 @@ theme/custom_font="res://Assets/Chauncy Fatty Fatty.ttf"
 Esc={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+"Left Click"={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(295, 12),"global_position":Vector2(304, 58),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 "Right Click"={

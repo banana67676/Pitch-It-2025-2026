@@ -11,10 +11,9 @@ corner_radius_bottom_left = 20
 
 [node name="VoteBox" type="PanelContainer"]
 custom_minimum_size = Vector2(441, 63)
-offset_right = 1152.0
-offset_bottom = 644.0
+offset_right = 441.0
+offset_bottom = 69.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_rh6ki")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -58,4 +57,4 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("1_2qdo2")
 theme_type_variation = &"ButtonSmall"
-text = "Invest $100,000"
+text = "Invest"

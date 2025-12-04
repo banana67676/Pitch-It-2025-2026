@@ -3,18 +3,15 @@
 [ext_resource type="Script" uid="uid://bbv87auwrc7oq" path="res://Card/Card Content/card.gd" id="1_2iua7"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_6ddf6"]
 
-[node name="Card_Preset" type="CharacterBody2D"]
-motion_mode = 1
-script = ExtResource("1_2iua7")
-
-[node name="Card" type="PanelContainer" parent="."]
+[node name="Card" type="PanelContainer"]
 offset_right = 385.0
 offset_bottom = 249.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_6ddf6")
+script = ExtResource("1_2iua7")
 
-[node name="Text" type="Label" parent="Card"]
+[node name="Text" type="Label" parent="."]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_vertical = 1
@@ -24,5 +21,3 @@ text = "Text"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="Sprite" type="Sprite2D" parent="."]

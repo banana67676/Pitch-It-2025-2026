@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv8v4njccfbs7"]
+[gd_scene load_steps=4 format=3 uid="uid://dv8v4njccfbs7"]
 
 [ext_resource type="Script" uid="uid://8w06a0p5ra6g" path="res://Scenes/Game Mode Scene/game_mode_scene.gd" id="1_xtndk"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_b4g7q"]
-[ext_resource type="PackedScene" uid="uid://duxmvr8dp7osx" path="res://UI/back_button.tscn" id="3_b4g7q"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="4_spbsx"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="4_spbsx"]
 
 [node name="Game_Mode_Scene" type="Node2D"]
 script = ExtResource("1_xtndk")
@@ -20,65 +19,8 @@ text = "Game Modes
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Back Button2" parent="." instance=ExtResource("3_b4g7q")]
-offset_left = 23.0
-offset_top = 10.0
-offset_right = 109.0
-offset_bottom = 101.0
-
 [node name="Settings Scene" parent="." instance=ExtResource("4_spbsx")]
 offset_left = 1207.0
 offset_top = -5.0
 offset_right = 1207.0
 offset_bottom = -5.0
-
-[node name="Classic Gamemode" type="Button" parent="."]
-offset_left = 347.0
-offset_top = 76.0
-offset_right = 559.0
-offset_bottom = 252.0
-theme = ExtResource("2_b4g7q")
-text = "Classic"
-
-[node name="Blitz Game mode" type="Button" parent="."]
-offset_left = 354.0
-offset_top = 265.0
-offset_right = 566.0
-offset_bottom = 441.0
-theme = ExtResource("2_b4g7q")
-text = "Blitz"
-
-[node name="Information" type="VBoxContainer" parent="Blitz Game mode"]
-visible = false
-layout_mode = 0
-offset_left = 262.0
-offset_top = 100.0
-offset_right = 1533.0
-offset_bottom = 298.0
-theme_override_constants/separation = 15
-
-[node name="Game mode title" type="Label" parent="Blitz Game mode/Information"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Game Mode: Blitz"
-
-[node name="Description" type="Label" parent="Blitz Game mode/Information"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "Description:
-A fast-paced, lightning-round twist on the game! 
-You get only half the time to create your idea,
-pitch it, and even vote on the others. Think fast, 
-trust your instincts, and embrace the chaos, 
-Blitz Mode doesn’t slow down for anyone!"
-
-[node name="Random game mode" type="Button" parent="."]
-offset_left = 575.0
-offset_top = 73.0
-offset_right = 787.0
-offset_bottom = 249.0
-theme = ExtResource("2_b4g7q")
-text = "Random"
-
-[connection signal="pressed" from="Back Button2" to="." method="_on_back_button_2_pressed"]
-[connection signal="pressed" from="Blitz Game mode" to="." method="_on_blitz_game_mode_pressed"]

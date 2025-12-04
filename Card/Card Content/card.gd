@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends PanelContainer
 
 #preloading the textures (that aren't needed anymore)
 #const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
@@ -9,11 +9,8 @@ enum card_types {
 	who,
 	what
 }
-#exporting the type of card that this card is (either a "who" card or a "what" card)
-@export var card_type: card_types
 
-#determines if this card should give itself a random text
-@export var give_random_text: bool
+@export var card_type: card_types #exporting the type of card that this card is (either a "who" card or a "what" card)
 
 
 @export var what_text = [
@@ -118,47 +115,33 @@ enum card_types {
 var possible_text = []
 
 #references to the nodes in the scene
-@onready var card: PanelContainer = $Card
-@onready var label: Label = $Card/Text
+@onready var label: Label = $Text
 
-#the red and yellow color for text
-var yellow_color = Color.from_rgba8(240, 221, 12, 255)
-var red_color = Color.from_rgba8(153, 29, 35, 255)
-
-enum {
-	stay,
-	shrinking,
-	growing
-}
-var state = stay
+#the red and yellow color constants for text (Godot doesn't let them be constants
+var YELLOW_COLOR: Color = Color.from_rgba8(240, 221, 12, 255)
+var RED_COLOR: Color = Color.from_rgba8(153, 29, 35, 255)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#CARD VISUALS
 	var stylebox = StyleBoxFlat.new() #stylebox to change the background color of the card
 	if card_type == card_types.who:
-		stylebox.bg_color = yellow_color
-		label.add_theme_color_override(&"font_color", red_color) #make the text red
+		stylebox.bg_color = YELLOW_COLOR
+		label.add_theme_color_override(&"font_color", RED_COLOR) #make the text red
 	else:
-		stylebox.bg_color = red_color
-		label.add_theme_color_override(&"font_color", yellow_color) #make the text yellow
+		stylebox.bg_color = RED_COLOR
+		label.add_theme_color_override(&"font_color", YELLOW_COLOR) #make the text yellow
 	stylebox.set_corner_radius_all(20) #setting the corner radius for all corners
-	card.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
+	self.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
 	
 	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout
-	
-	# make sure all players show the same text by using the values from GameManager
+	if (card_type == card_types.who):
+		possible_text = who_text
+	elif (card_type == card_types.what):
+		possible_text = what_text
 	pick_text()
 
 # Call this to (re)pick/update the text on the card
 func pick_text():
-	# ALWAYS use the synced values from GameManager so every player sees the same card
-	if card_type == card_types.who:
-		label.text = GameManager.current_who_text
-	elif card_type == card_types.what:
-		label.text = GameManager.current_what_text
-
-func move(location : Vector2, rot : float):
-	global_position = lerp(global_position, location, 0.05)
-	global_rotation = lerp(global_rotation, rot, 0.05)
+	label.text = possible_text[randi_range(0, possible_text.size() - 1)]

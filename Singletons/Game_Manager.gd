@@ -3,197 +3,76 @@ extends Node
 #the multiple states/stages of the game
 enum game_state_enum {
 	title,
-	multiplayer_main_menu,
+	username,
 	lobby,
 	creation,
 	display,
 	voting,
 	results,
 	settings,
-	game_mode,
+	host,
+	join,
+	game_opening,
 }
 
 
 
 #the potential game MODES (only the default mode right now)
-enum game_mode_enum {
-	standard,
-	blitz,
+enum GameMode {
+	CLASSIC,
+	ALL_TOGETHER,
 }
 
-#sets the current gamemode to the standard game mode
-var game_mode: game_mode_enum = game_mode_enum.standard
-
-#returns the total time for the round, depending on gamemode
-func get_round_time() -> int:
-	match game_mode:
-		game_mode_enum.standard:
-			return 120 #returns 120 for the standard gamemode
-	return 2135 #default port for testing
-
-
-
-#New functions to get the time for each of the scenes
-func get_creation_time() -> float:
-	return 62 * mode_scale()
-
-func get_presentation_time() -> float:
-	return 30 * mode_scale()
-
-func get_voting_time() -> float:
-	return 30 * mode_scale()
-	
-
+#current game_mode and game_state
+var game_mode: GameMode = GameMode.CLASSIC
 var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
-#var creation_time: float = 62 #time to create a product
-#var presentation_time: float = 3 #time to present a product
-#var voting_time: float = 30 #time to vote on a product
-var win_threshold: int = 200000 #amount of money needed to win
 
+#the DEFAULT times for the different sections of the game
+const CREATION_DEFAULT: float = 180
+const DISPLAY_DEFAULT: float = 120
+const VOTING_DEFAULT: float = 45
+const RESULTS_DEFAULT: float = 20
 
-# --- SHARED CARD DATA SO ALL PLAYERS SEE THE SAME WHO/WHAT ---
-var what_text: Array[String] = [
-	"Microwave Ovens",
-	"Frying Pans",
-	"Barbecue Grills",
-	"Tennis Shoes",
-	"Baseball Caps",
-	"Bug Repellant",
-	"Bicycles",
-	"Swimsuits",
-	"Lip Balm",
-	"Snow Skis",
-	"Surfboards",
-	"Garbage Bags",
-	"Toothbrushes",
-	"Toilet Paper",
-	"Handguns",
-	"Houseplants",
-	"Bath Toys",
-	"Coffee Maker",
-	"Facial Tissues",
-	"Golf Clubs",
-	"Raincoats",
-	"Electric Fans",
-	"Kites",
-	"Cell Phones",
-	"Laptops",
-	"Ladders",
-	"Garden Hoses",
-	"Frisbees",
-	"Lawnmowers",
-	"Solar Powered Calculators",
-	"Potting Soil",
-	"Bookmarks",
-	"Insulated Can Holders",
-	"Beach Balls",
-	"MP3 Music Players",
-	"Sunglasses",
-	"Backpacks",
-	"Pain Relief Pills",
-	"Chewing Gum",
-	"Toaster Ovens",
-	"Ear Swabs",
-	"Foot Powder",
-	"Antacid Tablets",
-	"Digital Video Cameras",
-	"Ice"
-]
+#times for the different sections of the game (these can be modified in game by the lobby host)
+var creation_time: float = CREATION_DEFAULT #time to create a product
+var display_time: float = DISPLAY_DEFAULT #time to present a product
+var voting_time: float = VOTING_DEFAULT #time to vote on a product
+var results_time: float = RESULTS_DEFAULT #time that the results are displayed
+var show_winner_time: float = 5
 
-var who_text: Array[String] = [
-	"Medical Professionals",
-	"Firefighters",
-	"Actors",
-	"Engineers",
-	"Airplane Pilots",
-	"Used Car Salespersons",
-	"Boy Scouts",
-	"Girl Scouts",
-	"Nuns",
-	"Priests",
-	"Hunters",
-	"Sports Fans",
-	"Nascar Fans",
-	"Soccer Moms",
-	"Teachers",
-	"Bankers",
-	"Lawn Care Specialists",
-	"Construction Workers",
-	"College Professors",
-	"Accountants",
-	"Lawyers",
-	"Movie Directors",
-	"Postal Workers",
-	"Farmers",
-	"Window Washers",
-	"Fishing Boat Crew Members",
-	"Lumberjacks",
-	"Meteorologists",
-	"Gardeners",
-	"Cheerleaders",
-	"High School Jocks",
-	"Chess Team Members",
-	"Rock N' Roll Music Fans",
-	"Hip Hop Music Fans",
-	"Country Music Fans",
-	"Dog Owners",
-	"Cat Owners",
-	"Tattoo Artists",
-	"Police Officers",
-	"Military Service Personnel",
-	"Barbers or Hairstylists",
-	"Librarians",
-	"Veterinarians",
-	"Zookeepers",
-	"Bartenders",
-	"FBI Agents",
-	"Opera Performers",
-	"Graphic Artists"
-]
+const SCORE_INCREMENT: int = 1000000 #gain this much money per vote
+const WIN_THRESHOLD: int = 5000000 #amount of money needed to win
 
-# these hold the specific WHO/WHAT chosen for the current round
-var current_who_text: String = ""
-var current_what_text: String = ""
+#variables for the game settings (stored here so that the values can be transferred between scenes)
+var volume_music: float = 75.0
+var volume_sfx: float = 75.0
 
+#variables for maximum lobby name lengths and password lengths (for the lobby)
+const MAX_LOBBY_NAME_LENGTH: int = 32
+const MAX_PASSWORD_LENGTH: int = 16
 
-var settings: bool = false
 
 signal scene_changed
+
+func _ready() -> void:
+	GDSync.expose_func(change_game_state)
+	GDSync.expose_func(_multiplayer_state_switcher)
+	#GDSync.change_scene_called.connect(func(_arg): print("scene change called"))
+	#GDSync.change_scene_failed.connect(func(): print("scene change failed"))
+	#GDSync.change_scene_success.connect(func(_arg): print("scene change success"))
 
 #function to quit the game
 func quit_game(_protected: bool):
 	get_tree().quit()
+
 
 #returns the current scene
 func get_current_scene():
 	return enum_to_scene(game_state)
 
 
-func mode_scale() -> float:
-	match game_mode:
-		game_mode_enum.standard:
-			return 1.0
-		game_mode_enum.blitz:
-			return 1.0
-	return 1.0
-
-
-# picks a new WHO/WHAT pair and syncs it to all peers
-func pick_new_cards() -> void:
-	if multiplayer.is_server():
-		randomize()
-		var new_who = who_text[randi_range(0, who_text.size() - 1)]
-		var new_what = what_text[randi_range(0, what_text.size() - 1)]
-		_set_current_cards.rpc(new_who, new_what)
-
-@rpc("any_peer", "call_local", "reliable")
-func _set_current_cards(who: String, what: String) -> void:
-	current_who_text = who
-	current_what_text = what
-
-
 #the function that actually switches the game state
-func _game_state_switcher(state: game_state_enum, _protected: bool):
+func _singleplayer_state_switcher(state: game_state_enum):
 	game_state = state
 	get_tree().current_scene.visible = false
 	var new_scene = load(enum_to_scene(state))
@@ -203,49 +82,26 @@ func _game_state_switcher(state: game_state_enum, _protected: bool):
 	get_tree().current_scene = scene_node
 	scene_changed.emit()
 
-#function to change the game state (e.g. lobby -> creation)
-#this one can specifically be called by any connected peer, and this function will exeucte on ALL peers
-#basically it changes the game state for everyone
-@rpc("any_peer", "call_local", "reliable")
-func change_game_state(state: game_state_enum, protected: bool):
-	# when we are going into the creation state, pick the shared cards for this round
-	if state == game_state_enum.creation:
-		pick_new_cards()
-	
+
+func _multiplayer_state_switcher(state: game_state_enum) -> void:
+	#print("actually called from " + str(GDSync.get_client_id()))
+	game_state = state
+	if GDSync.is_host():
+		GDSync.change_scene(enum_to_scene(state)) #use GDSync's built in function to switch scenes for everyone
+	await GDSync.change_scene_success
+	scene_changed.emit()
+
+
+func change_game_state(state: game_state_enum, use_singleplayer: bool, delay: float):
 	Camera.fade_out()
 	await Camera.animation_player.animation_finished
-	_game_state_switcher(state, protected)
-	Camera.fade_in()
-
-@rpc("any_peer", "call_local", "reliable")
-func delayed_change_game_state(state: game_state_enum, protected: bool, initial_delay: float, final_delay: float):
-	#The camera in movement to show the logo/title card
-	title_card_intro_transition()
-	
-	# when we are going into the creation state, pick the shared cards for this round
-	if state == game_state_enum.creation:
-		pick_new_cards()
-	
-	await get_tree().create_timer(initial_delay).timeout #wait the initial delay before switching scenes
-	_game_state_switcher(state, protected) #actually switch game states
-	await get_tree().create_timer(final_delay).timeout #wait the final delay before showing the new scene
-	
-	#The camera out movement to fade back into the scene
-	title_card_outro_transition()
-
-#fades out the camera, then fades back into the "Pitch It!" screen
-func title_card_intro_transition():
-	Camera.fade_out()
-	await Camera.animation_player.animation_finished
-	Camera.find_child("GameArt").visible = true
-	Camera.fade_in()
-	await Camera.animation_player.animation_finished
-
-#fades out the camera, then fades back in to the newly transitioned scene
-func title_card_outro_transition():
-	Camera.fade_out()
-	await Camera.animation_player.animation_finished
-	Camera.find_child("GameArt").visible = false
+	await get_tree().create_timer(delay/2).timeout
+	if GDSync.is_host() and state != game_state_enum.lobby and state != game_state_enum.game_opening: #if there is an active multiplayer lobby and you are the host
+		GDSync.call_func_all(_multiplayer_state_switcher, [state])
+		await GameManager.scene_changed
+	elif use_singleplayer: #otherwise use the singeplayer scene switching system if it should be used
+		_singleplayer_state_switcher(state)
+	await get_tree().create_timer(delay/2).timeout
 	Camera.fade_in()
 
 #converts the given enum into the scene that needs to be changed into
@@ -253,8 +109,8 @@ func enum_to_scene(state: game_state_enum) -> String:
 	match state:
 		game_state_enum.title:
 			return "res://Scenes/Title Scene/Title_Scene.tscn"
-		game_state_enum.multiplayer_main_menu:
-			return "res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
+		game_state_enum.username:
+			return "res://Scenes/Username/Username.tscn"
 		game_state_enum.lobby:
 			return "res://Scenes/Lobby Scene/Lobby_Scene.tscn"
 		game_state_enum.creation:
@@ -265,8 +121,8 @@ func enum_to_scene(state: game_state_enum) -> String:
 			return "res://Scenes/Voting Scene/Voting_Scene.tscn"
 		game_state_enum.results:
 			return "res://Scenes/Results Scene/Results_Scene.tscn"
-		game_state_enum.settings:
-			return "res://Scenes/Settings Scene/settings_scene.tscn"
-		game_state_enum.game_mode:
-			return "res://Scenes/Game Mode Scene/game_mode_scene.tscn"
+		game_state_enum.host: 
+			return "res://Scenes/Host Scene/Host_Scene.tscn"
+		game_state_enum.game_opening:
+			return "res://Scenes/Game Opening/Game_Opening.tscn"
 	return "2135"

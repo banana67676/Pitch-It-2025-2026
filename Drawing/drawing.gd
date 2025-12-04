@@ -3,7 +3,7 @@ extends Node2D
 #the two different drawing modes as an enum
 enum drawing_modes {DRAW, ERASE}
 
-var image
+var image: Image
 var image_texture
 var mode = drawing_modes.DRAW
 var enabled = true
@@ -153,6 +153,8 @@ func _switch_to_eraser():
 	pencil_button.texture_normal = pencil_unselected_texture
 	pencil_button.texture_focused = pencil_unselected_texture
 
+
+#gets the eraser outline, which is a hollow circle that shows the current brush size, to follow the cursor
 func _eraser_outline_follow():
 	if mode == drawing_modes.ERASE and is_mouse_on_board:
 		eraser_outline.visible = true
@@ -162,6 +164,7 @@ func _eraser_outline_follow():
 		eraser_outline.visible = false
 
 
+#changes the size of the pencil size display next to the horizontal slider bar that controls pencil side
 func _change_pencil_size_display():
 	var size_multiplier = mode_size * 2 #multiplies the size to make it accurate to how the pencil actually draws
 	pencil_size.set_anchors_preset(Control.PRESET_CENTER) #set the anchor to the center
@@ -170,6 +173,7 @@ func _change_pencil_size_display():
 	pencil_size.size = Vector2(size_multiplier, size_multiplier)
 
 
+#when the color picker button is changed, change the selected color
 func _on_color_picker_button_color_changed(color: Color) -> void:
 	draw_color_buffer.append(draw_color)
 	draw_color = color
@@ -181,13 +185,20 @@ func set_image(texture: Image):
 
 #when the clear button is pressed, erase everything on the board
 func _on_erase_all_button_pressed() -> void:
+	if not enabled:
+		return
+	
 	for x in range(WIDTH):
 		for y in range(HEIGHT):
 			image.set_pixel(x, y, Color8(0, 0, 0, 0))
 	image_texture.update(image)
 
 
+#allows using the mouse to quickly switch to eraser with right click and change pencil size with scroll wheel
 func _input(event):
+	if not enabled:
+		return
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT: # right click to erase
 			if event.pressed:
@@ -202,15 +213,21 @@ func _input(event):
 
 #when the pencil button is clicked, switch the drawing mode to the pencil
 func _on_pencil_button_pressed() -> void:
-	_switch_to_pencil()
+	if enabled:
+		_switch_to_pencil()
 
 
 #when the eraser button is clicked, switch the drawing mode to the eraser
 func _on_eraser_button_pressed() -> void:
-	_switch_to_eraser()
+	if enabled:
+		_switch_to_eraser()
 
 
+#when the mouse cursor enters the board
 func _on_board_mouse_entered() -> void:
+	if not enabled:
+		return
+	
 	if mode == drawing_modes.DRAW:
 		_switch_to_pencil()
 	else:
@@ -218,6 +235,23 @@ func _on_board_mouse_entered() -> void:
 	is_mouse_on_board = true
 
 
+#when the mouse cursor exits the board
 func _on_board_mouse_exited() -> void:
+	if not enabled:
+		return
+	
 	Input.set_custom_mouse_cursor(null)
 	is_mouse_on_board = false
+
+
+#disables all of the buttons
+func disable_buttons() -> void:
+	pencil_button.texture_focused = pencil_unselected_texture
+	eraser_button.texture_focused = eraser_unselected_texture
+	%PencilButton.disabled = true
+	%EraserButton.disabled = true
+	%ClearButton.disabled = true
+	%SizeSlider.editable = false
+	%ColorPickerButton.disabled = true
+	for button: TextureButton in %ColorPresetsContainer.get_children():
+		button.disabled = true

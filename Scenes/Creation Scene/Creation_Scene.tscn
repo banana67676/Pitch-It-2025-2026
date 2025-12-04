@@ -1,17 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://xkn8gxryucgg"]
+[gd_scene load_steps=7 format=3 uid="uid://xkn8gxryucgg"]
 
-[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
+[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_42e26"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
-[ext_resource type="Script" uid="uid://bnwiv8xq5f8gs" path="res://UI/spawning_timer.gd" id="5_42e26"]
-[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="6_6loq4"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_vy3qb"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="6_6loq4"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="7_vy3qb"]
 
-[node name="Creation_Scene" type="Node2D"]
+[node name="Creation_Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_0n1cf")
 
 [node name="SidebarMargin" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 284.0
 offset_bottom = 586.0
 theme_override_constants/margin_top = 520
@@ -52,7 +54,11 @@ text = "Done"
 [node name="TimerContainer" type="MarginContainer" parent="SidebarMargin/VBoxContainer"]
 layout_mode = 2
 
+[node name="Timer" parent="SidebarMargin/VBoxContainer/TimerContainer" instance=ExtResource("6_6loq4")]
+layout_mode = 2
+
 [node name="TypingMargin" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 159.0
 theme_override_constants/margin_top = 30
@@ -80,7 +86,10 @@ theme_override_constants/margin_right = 100
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_42e26")
-theme_type_variation = &"YellowLineEdit"
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_colors/font_uneditable_color = Color(0.88, 0.8103333, 0.04400001, 0.5019608)
+theme_override_colors/font_placeholder_color = Color(0.9411765, 0.8666667, 0.047058824, 0.6)
+theme_override_colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 36
 placeholder_text = "Product Title"
 alignment = 1
@@ -97,7 +106,6 @@ theme_override_constants/margin_bottom = 15
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_42e26")
-theme_type_variation = &"WhiteLineEdit"
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Product Slogan"
 alignment = 1
@@ -105,32 +113,26 @@ caret_blink = true
 
 [node name="What" parent="." instance=ExtResource("3_4ok8t")]
 position = Vector2(25, 210)
-rotation = -0.08726646
+rotation = -0.08726645
 scale = Vector2(0.6, 0.6)
 card_type = 1
-give_random_text = true
 
 [node name="Who" parent="." instance=ExtResource("3_4ok8t")]
 position = Vector2(25, 320)
 rotation = 0.13962634
 scale = Vector2(0.6, 0.6)
-give_random_text = true
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cyweidcx36nir")
-spawn_path = NodePath("../SidebarMargin/VBoxContainer/TimerContainer")
-script = ExtResource("5_42e26")
-attached_timer = ExtResource("6_6loq4")
 
 [node name="DrawingScene" parent="." instance=ExtResource("1_r6dir")]
-unique_name_in_owner = true
 position = Vector2(290.4, 185)
 scale = Vector2(0.7, 0.7)
 
-[node name="Settings Scene" parent="." instance=ExtResource("7_vy3qb")]
-offset_left = 1216.0
-offset_top = -1.0
-offset_right = 1216.0
-offset_bottom = -1.0
+[node name="SettingsScene" parent="." instance=ExtResource("7_vy3qb")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
 
 [connection signal="pressed" from="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
+[connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/TitleMargin/Title" to="." method="_on_title_text_changed"]
+[connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/SloganMargin/Slogan" to="." method="_on_slogan_text_changed"]
