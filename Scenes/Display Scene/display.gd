@@ -40,3 +40,9 @@ func display_card(card_serialized: PackedByteArray):
 func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
 	for i in range(array.size()):
 		array.set(i, suppliant[i % suppliant.size()])
+		
+
+
+
+func _on_done_button_pressed() -> void:
+	pass # Replace with function body.

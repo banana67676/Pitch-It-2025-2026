@@ -21,7 +21,6 @@ size_flags_vertical = 8
 script = ExtResource("1_wsb46")
 
 [node name="SettingsMenu" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -84,6 +83,20 @@ layout_mode = 2
 theme = ExtResource("2_pkdhy")
 value = 75.0
 
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Button" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("2_pkdhy")
+theme_type_variation = &"ButtonSmall"
+text = "Leave"
+
 [node name="SettingsButton" type="TextureButton" parent="."]
 layout_mode = 1
 offset_left = -60.0
@@ -95,6 +108,7 @@ ignore_texture_size = true
 
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="SettingsMenu/MarginContainer/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
 [connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
