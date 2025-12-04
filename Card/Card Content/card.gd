@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends PanelContainer
 
 #preloading the textures (that aren't needed anymore)
 #const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
@@ -114,8 +114,7 @@ enum card_types {
 var possible_text = []
 
 #references to the nodes in the scene
-@onready var card: PanelContainer = $Card
-@onready var label: Label = $Card/Text
+@onready var label: Label = $Text
 
 #the red and yellow color constants for text (Godot doesn't let them be constants
 var YELLOW_COLOR: Color = Color.from_rgba8(240, 221, 12, 255)
@@ -132,7 +131,7 @@ func _ready() -> void:
 		stylebox.bg_color = RED_COLOR
 		label.add_theme_color_override(&"font_color", YELLOW_COLOR) #make the text yellow
 	stylebox.set_corner_radius_all(20) #setting the corner radius for all corners
-	card.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
+	self.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
 	
 	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout

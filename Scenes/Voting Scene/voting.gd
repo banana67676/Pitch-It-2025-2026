@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var VoteOption = preload("res://Scenes/Voting Scene/VoteOption.tscn")
 var selection = -1
@@ -20,7 +20,6 @@ func prepare(cards) -> void:
 			vote_box.find_child("PlayerName").text = "By: " + str(card.username) #find the PlayerName label and change its text to the username
 			var button = vote_box.find_child("VoteButton") #find the Vote Button
 			button.toggle_mode = true #set toggle mode to true
-			button.text = "Invest $100,000" #change its text
 			button.connect("pressed", lock.bind(card.user_id)) #attach the lock function to be called when the button is pressed
 			%VotingContainer.add_child(vote_box) #add the votebox to the grid container containg the vote boxes
 
@@ -28,15 +27,16 @@ func prepare(cards) -> void:
 #whenever a button is pressed, this function is called. The user id for the button has been binded
 #meaning it is set it stone. It will ALWAYS be the user_id that was assigned to the specific button
 func lock(user_id) -> void:
-	if selection != -1: #only if no selection has been made
+	if selection != -1: #only if no voting selection has been made
 		return
 	
-	selection = user_id
-	for vote_box: PanelContainer in %VotingContainer.get_children():
-		var button = vote_box.find_child("VoteButton")
-		if int(vote_box.name) == user_id:
-			_change_theme_to_voted(vote_box)
-		button.disabled = true
+	selection = user_id #their selected user_id
+	for vote_box: PanelContainer in %VotingContainer.get_children(): #for every vote option
+		var button = vote_box.find_child("VoteButton") #find the coresponding vote button
+		button.disabled = true #disable said button
+		if int(vote_box.name) == user_id: #if the votebox has the same id as the selected vote
+			_change_theme_to_voted(vote_box) #change the votebox theme to show that that user is the player's vote
+	GDSync.call_func_all(import_vote, [selection, GDSync.get_client_id()]) #send your vote
 
 
 func send_vote():

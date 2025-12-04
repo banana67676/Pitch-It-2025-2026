@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8w06a0p5ra6g" path="res://Scenes/Game Mode Scene/game_mode_scene.gd" id="1_xtndk"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_b4g7q"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="4_spbsx"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="4_spbsx"]
 
 [node name="Game_Mode_Scene" type="Node2D"]
 script = ExtResource("1_xtndk")

@@ -1,6 +1,7 @@
-extends Node2D
+extends Control
+class_name TitleScene
 
-@onready var text_label = $MarginContainer/ExtraText
+@onready var text_label = $ExtraTextContainer/ExtraText
 
 signal key_pressed
 
@@ -12,12 +13,13 @@ func _ready() -> void:
 		GameManager.game_state = GameManager.game_state_enum.title
 
 
+#changes the text at the bottom of the title screen
 func modify_text(text: String, color: Color) -> void:
 	text_label.text = text
 	text_label.add_theme_color_override("font_color", color)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if GameManager.game_state != GameManager.game_state_enum.title:
 		return
 	if (event is InputEventMouseButton || event is InputEventKey) and !Input.is_action_just_pressed("Esc"):

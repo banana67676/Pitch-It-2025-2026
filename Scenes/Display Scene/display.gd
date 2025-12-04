@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 
 const Drawing = preload("res://Drawing/drawing.gd")
@@ -9,7 +9,6 @@ var output: Sprite2D
 
 
 func _ready() -> void:
-	#$NodeInstantiator.node_instantiated.connect(func(_arg): print("Node was successfully instantiated"))
 	GDSync.expose_func(display_card)
 	output = Sprite2D.new()
 	output.centered = false
@@ -17,7 +16,6 @@ func _ready() -> void:
 	canvas_fill.resize(Drawing.WIDTH * Drawing.HEIGHT * 4)
 	self.repeat_fill(canvas_fill, PackedByteArray([0, 0, 0, 0]))
 	var image = Image.create_from_data(Drawing.WIDTH, Drawing.HEIGHT, false, Image.FORMAT_RGBA8, canvas_fill)
-	#output = $NodeInstantiator.instantiate_node()
 	output.texture = ImageTexture.create_from_image(image)
 	output.visible = false
 	output.global_position = Vector2(478, 92) #where the drawing is put on the screen

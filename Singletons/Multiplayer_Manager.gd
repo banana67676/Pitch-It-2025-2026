@@ -1,9 +1,9 @@
 extends Timer
 
 #grabs the player data from the PlayerData script
-const PlayerData = preload("res://Scenes/Multiplayer Menu/PlayerData.gd")
+const PlayerData = preload("res://Scenes/Username/PlayerData.gd")
 
-signal display_ready
+signal display_ready #signal that is fired when the game is ready to transition to the display scene (where everyone presents)
 
 #variables for things
 var cards = {}
@@ -11,6 +11,7 @@ var votes = {}
 var score_card = {}
 var players = {}
 var username: String = ""
+var LOBBY_NAME: String
 var done_players: int = 0
 var is_gdsync_connected: bool = false
 @onready var multiplayer_node = get_node("/root/MultiplayerManager")
@@ -34,20 +35,22 @@ func expose_functions() -> void:
 #---------------------------------------------------------------------------------------------------------------------------------
 
 #initializes the server when a player makes a lobby
-func init_server(usern):
+func init_server(usern: String, lobby_name: String, password: String, is_public: bool, max_players: int):
 	username = usern #set their username
-	GDSync.lobby_create("Test Lobby")
-	GDSync.lobby_join("Test Lobby")
+	LOBBY_NAME = lobby_name #set the lobby name for this script, so any other script can access it
+	GDSync.lobby_create(lobby_name, password, is_public, max_players)
+	GDSync.lobby_join(lobby_name, password)
 	GameManager.change_game_state(GameManager.game_state_enum.lobby, true, 0.5) #calls the change state function to switch the game state to the lobby
 	await GameManager.scene_changed #wait until the scene has changed
 	client_joined(GDSync.get_client_id(), usern)
 
 
 #function for other players to join the server
-func join_server(usern):
+func join_server(usern: String, lobby_name: String):
 	username = usern #set username
-	GDSync.lobby_join("Test Lobby")
-	print(GDSync.lobby_get_name())
+	LOBBY_NAME = lobby_name
+	#GDSync.lobby_join("Test Lobby")
+	#print(GDSync.lobby_get_name())
 	GameManager.change_game_state(GameManager.game_state_enum.lobby, true, 0.5) #change to lobby scene
 	await GameManager.scene_changed #wait for scene to change
 	GDSync.call_func_on(GDSync.get_host(), client_joined, [GDSync.get_client_id(), usern])
@@ -119,13 +122,14 @@ func run_game() -> void:
 	if not GDSync.is_host():
 		return #don't continue if not the host
 	
-	# CREATION PORTION
+	# CREATION
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.creation, false, 1])
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.get_creation_time()) #starts the timer
+	start(GameManager.creation_time) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
-	# DISPLAY PORTION
+	
+	# DISPLAY
 	var creation_scene = get_parent().get_node("/root/Creation_Scene")
 	GDSync.call_func_all(creation_scene.export_card) #have every player compile and export their card (so the server can import)
 	for i in range(MultiplayerManager.players.size()):
@@ -139,56 +143,49 @@ func run_game() -> void:
 	for product in cards.values(): #for every product
 		var display_scene = get_parent().get_node("/root/DisplayScene") #refernce display scene
 		GDSync.call_func_all(display_scene.display_card, [product.serialize()]) #show the product
-		start(GameManager.presentation_time) #start the timer
+		start(GameManager.display_time) #start the timer
 		await self.timeout #wait until the timer runs out
 	
-	# VOTING PORTION
+	
+	# VOTING
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.get_voting_time()) #start the timer
+	start(GameManager.voting_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
-	var voting_scene = get_parent().get_node("/root/VotingScene")
-	GDSync.call_func_all(voting_scene.send_vote)
-	#get_parent().get_node("/root/VotingScene").send_vote.rpc()
-	#while votes.size() < players.size():
-		#await get_tree().create_timer(0.5).timeout
-	
-	#the voting calculations
-	var round_results = {}
-	for player in players.keys():
-		round_results[player] = 0
+	#Calculations for the votes
+	var round_results = {} #new array
+	for player in players.keys(): #for every player
+		round_results[player] = 0 #give a default value for them in the new array
 	
 	var has_winner = false
-	for vote in votes.values():
+	for vote in votes.values(): #for every collected vote (votes are collected as soon as the player votes)
 		if vote == -1:
 			continue
-		round_results[vote] += 1
-		MultiplayerManager.players[vote].score += 100000
+		round_results[vote] += 1 #increase the vote count for the person the player voted for by 1
+		MultiplayerManager.players[vote].score += GameManager.SCORE_INCREMENT #increment their score by the value
 		#if the player has more money than the money needed to win, they win
-		if MultiplayerManager.players[vote].score >= GameManager.win_threshold: 
+		if MultiplayerManager.players[vote].score >= GameManager.WIN_THRESHOLD: 
 			has_winner = true
-		
+	
+	
 	# RESULTS
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.results, false, 1]) #switch to the results phase
 	await GameManager.scene_changed
-	await get_tree().create_timer(1).timeout
-	var results_scene = get_parent().get_node("/root/ResultsScene")
-	GDSync.call_func_all(results_scene.show_scores, [round_results])
+	await get_tree().create_timer(1).timeout #need this extra delay (idk why)
+	var results_scene = get_parent().get_node("/root/ResultsScene") #reference the results scene
+	GDSync.call_func_all(results_scene.show_scores, [round_results]) #tell each player to show the scores
 	start(GameManager.results_time) #start the timer
 	await self.timeout #wait until the time runs out
-	#await get_tree().create_timer(3).timeout
-	#update_player_data.rpc(serialize(players))
-	#get_parent().get_node("/root/ResultsScene").show_scores.rpc(round_results) #shows the scores for the round
-	#await get_tree().create_timer(15).timeout #the timer for that phase
 	
-	#if somebody won, reset the game, otherwise continue playing the game
+	#if somebody won, show the winner and reset the game, otherwise continue playing the game
 	if has_winner:
+		GDSync.call_func_all(results_scene.show_winner)
+		start(GameManager.show_winner_time)
+		await self.timeout
 		GDSync.call_func_all(reset)
 	else:
 		run_game()
-
-	# Optional: Offer replay
 
 
 #END OF RUNNING THE GAME
@@ -205,8 +202,8 @@ func connect_GDSync_signals() -> void:
 	#GDSync.lobby_created.connect(lobby_created)
 	GDSync.lobby_creation_failed.connect(lobby_creation_failed)
 	
-	#GDSync.lobby_joined.connect(lobby_joined)
-	GDSync.lobby_join_failed.connect(lobby_join_failed)
+	GDSync.lobby_joined.connect(lobby_joined)
+	#GDSync.lobby_join_failed.connect(lobby_join_failed)
 	
 	#GDSync.client_joined.connect(client_joined)
 	#GDSync.client_left.connect(client_left)
@@ -264,11 +261,12 @@ func _lobby_scene_update() -> void:
 
 #resets game variables and send player back to the title screen
 func reset() -> void:
-	GameManager.change_game_state(GameManager.game_state_enum.multiplayer_main_menu, true, 0) #back to the main menu
+	GDSync.call_func_all(disconnect_client) #disconnects EVERYONE
+	GameManager.change_game_state(GameManager.game_state_enum.game_opening, true, 0) #back to the main menu
 	multiplayer.multiplayer_peer.close() #disconnect
 	await GameManager.scene_changed
-	var home_scene = get_parent().get_node("/root/Multiplayer_Menu")
-	home_scene.USERNAME_READ.text = username
+	#var home_scene = get_parent().get_node("/root/Username")
+	#home_scene.USERNAME_READ.text = username
 	#reset variables
 	cards = {}
 	votes = {}

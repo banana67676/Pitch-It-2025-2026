@@ -57,4 +57,4 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme = ExtResource("1_2qdo2")
 theme_type_variation = &"ButtonSmall"
-text = "Invest $100,000"
+text = "Invest"

@@ -1,16 +1,19 @@
 [gd_scene load_steps=7 format=3 uid="uid://xkn8gxryucgg"]
 
-[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
+[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_42e26"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
-[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="6_6loq4"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_vy3qb"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="6_6loq4"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="7_vy3qb"]
 
-[node name="Creation_Scene" type="Node2D"]
+[node name="Creation_Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_0n1cf")
 
 [node name="SidebarMargin" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 284.0
 offset_bottom = 586.0
 theme_override_constants/margin_top = 520
@@ -55,6 +58,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TypingMargin" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 159.0
 theme_override_constants/margin_top = 30
@@ -109,7 +113,7 @@ caret_blink = true
 
 [node name="What" parent="." instance=ExtResource("3_4ok8t")]
 position = Vector2(25, 210)
-rotation = -0.08726646
+rotation = -0.08726645
 scale = Vector2(0.6, 0.6)
 card_type = 1
 
@@ -123,6 +127,7 @@ position = Vector2(290.4, 185)
 scale = Vector2(0.7, 0.7)
 
 [node name="SettingsScene" parent="." instance=ExtResource("7_vy3qb")]
+layout_mode = 0
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0

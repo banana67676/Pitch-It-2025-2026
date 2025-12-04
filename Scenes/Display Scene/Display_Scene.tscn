@@ -1,8 +1,8 @@
 [gd_scene load_steps=32 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
-[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/timer.tscn" id="4_vsoll"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_nmnxq"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="4_vsoll"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_nmnxq"]
 [ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="7_vg7wq"]
 [ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="8_e1xid"]
 
@@ -293,10 +293,13 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="DisplayScene" type="Node2D"]
+[node name="DisplayScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_o62vh")
 
 [node name="DisplayScene" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 649.0
 size_flags_horizontal = 3
@@ -420,6 +423,7 @@ theme_override_constants/margin_right = 685
 layout_mode = 2
 
 [node name="WhatCard" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 446.9057
 offset_right = 233.0
@@ -442,6 +446,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="WhoCard" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_left = 237.0
 offset_top = 431.9057
 offset_right = 437.0
@@ -469,6 +474,7 @@ scale = Vector2(0.807, 0.807)
 centered = false
 
 [node name="SettingsScene" parent="." instance=ExtResource("6_nmnxq")]
+layout_mode = 0
 offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0

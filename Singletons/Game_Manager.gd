@@ -3,37 +3,52 @@ extends Node
 #the multiple states/stages of the game
 enum game_state_enum {
 	title,
-	multiplayer_main_menu,
+	username,
 	lobby,
 	creation,
 	display,
 	voting,
 	results,
 	settings,
-	game_mode,
-	host_settings,
+	host,
+	join,
 	game_opening,
 }
 
 #the potential game MODES (only the default mode right now)
-enum game_mode_enum {
-	standard
+enum GameMode {
+	CLASSIC,
+	ALL_TOGETHER,
 }
 
 #current game_mode and game_state
-var game_mode: game_mode_enum = game_mode_enum.standard
+var game_mode: GameMode = GameMode.CLASSIC
 var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
 
-#times for the different sections of the game
-var creation_time: float = 62 #time to create a product
-var presentation_time: float = 3 #time to present a product
-var voting_time: float = 5 #time to vote on a product
-var results_time: float = 30 #time that the results are displayed
-var win_threshold: int = 200000 #amount of money needed to win
+#the DEFAULT times for the different sections of the game
+const CREATION_DEFAULT: float = 180
+const DISPLAY_DEFAULT: float = 120
+const VOTING_DEFAULT: float = 45
+const RESULTS_DEFAULT: float = 20
+
+#times for the different sections of the game (these can be modified in game by the lobby host)
+var creation_time: float = CREATION_DEFAULT #time to create a product
+var display_time: float = DISPLAY_DEFAULT #time to present a product
+var voting_time: float = VOTING_DEFAULT #time to vote on a product
+var results_time: float = RESULTS_DEFAULT #time that the results are displayed
+var show_winner_time: float = 5
+
+const SCORE_INCREMENT: int = 1000000 #gain this much money per vote
+const WIN_THRESHOLD: int = 5000000 #amount of money needed to win
 
 #variables for the game settings (stored here so that the values can be transferred between scenes)
 var volume_music: float = 75.0
 var volume_sfx: float = 75.0
+
+#variables for maximum lobby name lengths and password lengths (for the lobby)
+const MAX_LOBBY_NAME_LENGTH: int = 32
+const MAX_PASSWORD_LENGTH: int = 16
+
 
 signal scene_changed
 
@@ -41,23 +56,18 @@ func _ready() -> void:
 	GDSync.expose_func(change_game_state)
 	GDSync.expose_func(_multiplayer_state_switcher)
 	#GDSync.change_scene_called.connect(func(_arg): print("scene change called"))
-	GDSync.change_scene_failed.connect(func(): print("scene change failed"))
-	GDSync.change_scene_success.connect(func(_arg): print("scene change success"))
+	#GDSync.change_scene_failed.connect(func(): print("scene change failed"))
+	#GDSync.change_scene_success.connect(func(_arg): print("scene change success"))
 
 #function to quit the game
 func quit_game(_protected: bool):
 	get_tree().quit()
 
-#returns the total time for the round, depending on gamemode
-func get_round_time() -> int:
-	match game_mode:
-		game_mode_enum.standard:
-			return 120 #returns 120 for the standard gamemode
-	return 2135 #default port for testing
 
 #returns the current scene
 func get_current_scene():
 	return enum_to_scene(game_state)
+
 
 #the function that actually switches the game state
 func _singleplayer_state_switcher(state: game_state_enum):
@@ -97,8 +107,8 @@ func enum_to_scene(state: game_state_enum) -> String:
 	match state:
 		game_state_enum.title:
 			return "res://Scenes/Title Scene/Title_Scene.tscn"
-		game_state_enum.multiplayer_main_menu:
-			return "res://Scenes/Multiplayer Menu/Multiplayer_Menu.tscn"
+		game_state_enum.username:
+			return "res://Scenes/Username/Username.tscn"
 		game_state_enum.lobby:
 			return "res://Scenes/Lobby Scene/Lobby_Scene.tscn"
 		game_state_enum.creation:
@@ -109,12 +119,8 @@ func enum_to_scene(state: game_state_enum) -> String:
 			return "res://Scenes/Voting Scene/Voting_Scene.tscn"
 		game_state_enum.results:
 			return "res://Scenes/Results Scene/Results_Scene.tscn"
-		game_state_enum.settings:
-			return "res://Scenes/Settings Scene/settings_scene.tscn"
-		game_state_enum.game_mode:
-			return "res://Scenes/Game Mode Scene/game_mode_scene.tscn"
-		game_state_enum.host_settings: 
-			return "res://Scenes/HostSetting.tscn" 
+		game_state_enum.host: 
+			return "res://Scenes/Host Scene/Host_Scene.tscn"
 		game_state_enum.game_opening:
-			return "res://Scenes/Game Opening/Game Opening.tscn"
+			return "res://Scenes/Game Opening/Game_Opening.tscn"
 	return "2135"
