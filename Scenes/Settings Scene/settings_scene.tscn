@@ -71,7 +71,8 @@ text = "Music"
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_pkdhy")
-value = 75.0
+max_value = 1.0
+step = 0.01
 
 [node name="SFX" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
 layout_mode = 2

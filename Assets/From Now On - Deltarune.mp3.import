@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cs3cccm5tsd6h"
+path="res://.godot/imported/From Now On - Deltarune.mp3-beb8367c40f320b01877801a43e068eb.mp3str"
+
+[deps]
+
+source_file="res://Assets/From Now On - Deltarune.mp3"
+dest_files=["res://.godot/imported/From Now On - Deltarune.mp3-beb8367c40f320b01877801a43e068eb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://b4et2kvldptig" path="res://UI/Camera/camera.gd" id="1_vixt6"]
 [ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="2_5j6mc"]
 [ext_resource type="AudioStream" uid="uid://da5o3827lpf1m" path="res://Assets/blipSelect.wav" id="3_35qlm"]
-[ext_resource type="AudioStream" uid="uid://c3lir33f3v55o" path="res://Assets/DesertBoss.mp3" id="4_n65x4"]
 [ext_resource type="PackedScene" uid="uid://vt4f6pmafi8o" path="res://UI/game_art.tscn" id="5_sdqds"]
+[ext_resource type="AudioStream" uid="uid://cs3cccm5tsd6h" path="res://Assets/From Now On - Deltarune.mp3" id="5_xda3g"]
 
 [sub_resource type="Animation" id="Animation_itgtb"]
 resource_name = "Fade"
@@ -85,7 +85,10 @@ libraries = {
 
 [node name="GameArt" parent="." instance=ExtResource("5_sdqds")]
 z_index = 30
-position = Vector2(-576, -324)
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -100,6 +103,9 @@ color = Color(0, 0.0117647, 0.101961, 1)
 [node name="Mouse_SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_35qlm")
 volume_db = -3.0
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_n65x4")
+stream = ExtResource("5_xda3g")
+autoplay = true
+bus = &"Music"

@@ -1,4 +1,3 @@
-
 extends Control
 
 @onready var settings_menu: PanelContainer = $SettingsMenu
@@ -16,19 +15,27 @@ var sfx_bus_index = AudioServer.get_bus_index("SFX")
 var is_just_clicked: bool = false
 const TWEEN_TIME: float = 1
 
+const MIN_DB: float = -80.0
+const MAX_DB: float = 0.0
+const POWER_CURVE = .2 #the volume is raised to 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	settings_menu.visible = show_settings
 	_get_stored_settings()
-	#print("volume: " + str(AudioServer.get_bus_volume_db(music_bus_index)))
+	%MusicSlider.value = 0.75
+
 
 func _get_stored_settings():
 	%MusicSlider.value = GameManager.volume_music
 	%SFXSlider.value = GameManager.volume_sfx
 
+
 func _on_music_slider_value_changed(value: float) -> void:
-	GameManager.volume_music = value
-	AudioServer.set_bus_volume_db(music_bus_index, linear_to_db(value))
+	GameManager.volume_music = value #update the value in settings
+	var curved_value = pow(value, POWER_CURVE) #apply the power curve (because volume isn't linear, this helps make it linear)
+	var target_db: float = lerp(MIN_DB, MAX_DB, curved_value) #idek, just trust
+	AudioServer.set_bus_volume_db(music_bus_index, target_db) #set the volume
 
 
 func _on_sfx_slider_value_changed(value: float) -> void:
