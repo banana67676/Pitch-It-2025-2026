@@ -14,6 +14,7 @@ const unchecked_normal = preload("res://Assets/unchecked_normal.svg")
 const unchecked_hover = preload("res://Assets/unchecked_hover.svg")
 
 func _ready():
+	reset_values()
 	$ResetButton.pressed.connect(reset_values) #when the reset button is pressed, call the function reset_values
 
 
