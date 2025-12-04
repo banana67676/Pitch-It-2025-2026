@@ -38,6 +38,7 @@ var voting_time: float = VOTING_DEFAULT #time to vote on a product
 var results_time: float = RESULTS_DEFAULT #time that the results are displayed
 var show_winner_time: float = 5
 
+const SCORE_INCREMENT: int = 1000000 #gain this much money per vote
 const WIN_THRESHOLD: int = 5000000 #amount of money needed to win
 
 #variables for the game settings (stored here so that the values can be transferred between scenes)

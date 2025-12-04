@@ -122,13 +122,14 @@ func run_game() -> void:
 	if not GDSync.is_host():
 		return #don't continue if not the host
 	
-	# CREATION PORTION
+	# CREATION
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.creation, false, 1])
 	await GameManager.scene_changed #wait for scene to change
 	start(GameManager.creation_time) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
-	# DISPLAY PORTION
+	
+	# DISPLAY
 	var creation_scene = get_parent().get_node("/root/Creation_Scene")
 	GDSync.call_func_all(creation_scene.export_card) #have every player compile and export their card (so the server can import)
 	for i in range(MultiplayerManager.players.size()):
@@ -145,39 +146,35 @@ func run_game() -> void:
 		start(GameManager.display_time) #start the timer
 		await self.timeout #wait until the timer runs out
 	
-	# VOTING PORTION
+	
+	# VOTING
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
 	await GameManager.scene_changed #wait for scene to change
 	start(GameManager.voting_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
-	var voting_scene = get_parent().get_node("/root/VotingScene")
-	GDSync.call_func_all(voting_scene.send_vote)
-	
-	#the voting calculations
-	var round_results = {}
-	for player in players.keys():
-		round_results[player] = 0
+	#Calculations for the votes
+	var round_results = {} #new array
+	for player in players.keys(): #for every player
+		round_results[player] = 0 #give a default value for them in the new array
 	
 	var has_winner = false
-	for vote in votes.values():
+	for vote in votes.values(): #for every collected vote (votes are collected as soon as the player votes)
 		if vote == -1:
 			continue
-		round_results[vote] += 1
-		MultiplayerManager.players[vote].score += 1000000 #players earn 1000000 (1 million) per vote
+		round_results[vote] += 1 #increase the vote count for the person the player voted for by 1
+		MultiplayerManager.players[vote].score += GameManager.SCORE_INCREMENT #increment their score by the value
 		#if the player has more money than the money needed to win, they win
 		if MultiplayerManager.players[vote].score >= GameManager.WIN_THRESHOLD: 
 			has_winner = true
-	print("Round results:")
-	print(round_results)
-		
+	
+	
 	# RESULTS
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.results, false, 1]) #switch to the results phase
 	await GameManager.scene_changed
-	await get_tree().create_timer(1).timeout
-	var results_scene = get_parent().get_node("/root/ResultsScene")
-	GDSync.call_func_all(results_scene.show_scores, [round_results])
-	#print(votes)
+	await get_tree().create_timer(1).timeout #need this extra delay (idk why)
+	var results_scene = get_parent().get_node("/root/ResultsScene") #reference the results scene
+	GDSync.call_func_all(results_scene.show_scores, [round_results]) #tell each player to show the scores
 	start(GameManager.results_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
@@ -189,8 +186,6 @@ func run_game() -> void:
 		GDSync.call_func_all(reset)
 	else:
 		run_game()
-
-	# Optional: Offer replay
 
 
 #END OF RUNNING THE GAME

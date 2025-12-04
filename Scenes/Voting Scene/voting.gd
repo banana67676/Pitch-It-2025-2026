@@ -30,12 +30,13 @@ func lock(user_id) -> void:
 	if selection != -1: #only if no voting selection has been made
 		return
 	
-	selection = user_id
-	for vote_box: PanelContainer in %VotingContainer.get_children():
-		var button = vote_box.find_child("VoteButton")
-		if int(vote_box.name) == user_id:
-			_change_theme_to_voted(vote_box)
-		button.disabled = true
+	selection = user_id #their selected user_id
+	for vote_box: PanelContainer in %VotingContainer.get_children(): #for every vote option
+		var button = vote_box.find_child("VoteButton") #find the coresponding vote button
+		button.disabled = true #disable said button
+		if int(vote_box.name) == user_id: #if the votebox has the same id as the selected vote
+			_change_theme_to_voted(vote_box) #change the votebox theme to show that that user is the player's vote
+	GDSync.call_func_all(import_vote, [selection, GDSync.get_client_id()]) #send your vote
 
 
 func send_vote():
