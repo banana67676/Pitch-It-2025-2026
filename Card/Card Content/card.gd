@@ -12,6 +12,7 @@ enum card_types {
 
 @export var card_type: card_types #exporting the type of card that this card is (either a "who" card or a "what" card)
 
+
 @export var what_text = [
 	"Microwave Ovens",
 	"Frying Pans",
@@ -141,5 +142,6 @@ func _ready() -> void:
 		possible_text = what_text
 	pick_text()
 
+# Call this to (re)pick/update the text on the card
 func pick_text():
 	label.text = possible_text[randi_range(0, possible_text.size() - 1)]

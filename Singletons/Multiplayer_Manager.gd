@@ -125,7 +125,7 @@ func run_game() -> void:
 	# CREATION
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.creation, false, 1])
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.creation_time) #starts the timer
+	start(GameManager.get_creation_time()) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
 	
@@ -150,7 +150,7 @@ func run_game() -> void:
 	# VOTING
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.voting_time) #start the timer
+	start(GameManager.get_voting_time()) #start the timer
 	await self.timeout #wait until the time runs out
 	
 	#Calculations for the votes

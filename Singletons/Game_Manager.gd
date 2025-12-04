@@ -15,6 +15,8 @@ enum game_state_enum {
 	game_opening,
 }
 
+
+
 #the potential game MODES (only the default mode right now)
 enum GameMode {
 	CLASSIC,
