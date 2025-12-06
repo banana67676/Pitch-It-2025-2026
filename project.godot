@@ -22,6 +22,7 @@ run/main_scene="uid://dpjm1n3gy0e1r"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.67058825, 0.1882353, 0.19607843, 1)
 boot_splash/image="res://Assets/WhiteBuilb.png"
+config/icon="uid://c76lisgbsopf5"
 
 [audio]
 
@@ -39,6 +40,7 @@ MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
+mouse_cursor/custom_image="uid://cugeuydynw5eg"
 
 [editor_plugins]
 
