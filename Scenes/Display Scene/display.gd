@@ -7,9 +7,15 @@ var output: Sprite2D
 @onready var slogan: Label = %Slogan
 @onready var player_name: Label = %PlayerName
 
+var is_done: bool = false
+
+
 
 func _ready() -> void:
+	MultiplayerManager.done_players = 0
+	_set_done_players(0, MultiplayerManager.players.size())
 	GDSync.expose_func(display_card)
+	GDSync.expose_func(display_done_button)
 	output = Sprite2D.new()
 	output.centered = false
 	var canvas_fill = PackedByteArray()
@@ -21,6 +27,14 @@ func _ready() -> void:
 	output.global_position = Vector2(478, 92) #where the drawing is put on the screen
 	output.scale = Vector2(0.807, 0.807) #scale the drawing appropriately to fit the frame
 	add_child(output)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func display_done_button() -> void:
+	MultiplayerManager.done_players += 1
+	var total_players := MultiplayerManager.players.size()
+	_set_done_players(MultiplayerManager.done_players, total_players)
+
 
 
 #function to display the card (this function is called on connected peer)
@@ -40,3 +54,20 @@ func display_card(card_serialized: PackedByteArray):
 func repeat_fill(array: PackedByteArray, suppliant: PackedByteArray) -> void:
 	for i in range(array.size()):
 		array.set(i, suppliant[i % suppliant.size()])
+
+func _set_done_players(done_players: int, total_players: int) -> void:
+	%DonePlayers.text = "(" + str(done_players) + "/" + str(total_players) + ")" #the formatting for done players
+	if done_players == total_players: #if everyone has finished
+		MultiplayerManager.paused = true #pause the timer
+		MultiplayerManager.start(.1) #start the timer with .1 seconds left
+		MultiplayerManager.paused = false #unpause the timer
+		MultiplayerManager.done_players = 0
+
+
+func _on_done_button_pressed() -> void:
+	if is_done:
+		is_done = false  # already pressed, do nothing
+	is_done = true
+	%DoneButton.disabled = true
+	# tell EVERYONE that a player just finished viewing
+	GDSync.call_func_all(display_done_button)

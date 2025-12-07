@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_42e26"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="6_6loq4"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="7_vy3qb"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_vy3qb"]
 
 [node name="Creation_Scene" type="Control"]
 layout_mode = 3
@@ -112,13 +112,21 @@ alignment = 1
 caret_blink = true
 
 [node name="What" parent="." instance=ExtResource("3_4ok8t")]
-position = Vector2(25, 210)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 210.0
+offset_right = 410.0
+offset_bottom = 459.0
 rotation = -0.08726645
 scale = Vector2(0.6, 0.6)
 card_type = 1
 
 [node name="Who" parent="." instance=ExtResource("3_4ok8t")]
-position = Vector2(25, 320)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 320.0
+offset_right = 410.0
+offset_bottom = 569.0
 rotation = 0.13962634
 scale = Vector2(0.6, 0.6)
 

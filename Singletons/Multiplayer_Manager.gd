@@ -150,7 +150,7 @@ func run_game() -> void:
 	# VOTING
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.get_voting_time()) #start the timer
+	start(GameManager.voting_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
 	#Calculations for the votes

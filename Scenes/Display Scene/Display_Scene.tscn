@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=33 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="4_vsoll"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_nmnxq"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="6_lj7yx"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_nmnxq"]
 [ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="7_vg7wq"]
 [ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="8_e1xid"]
 
@@ -479,3 +480,38 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
+
+[node name="DoneMargin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 592.0
+offset_right = 1051.0
+offset_bottom = 638.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 45
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DoneMargin"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="DonePlayers" type="Label" parent="DoneMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "(3/5)"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="Button" parent="DoneMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("6_lj7yx")
+theme_type_variation = &"ButtonSmall"
+theme_override_font_sizes/font_size = 24
+text = "Done"
+
+[connection signal="pressed" from="DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
