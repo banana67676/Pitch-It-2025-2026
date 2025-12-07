@@ -125,7 +125,7 @@ func run_game() -> void:
 	# CREATION
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.creation, false, 1])
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.get_creation_time()) #starts the timer
+	start(GameManager.creation_time) #starts the timer
 	await self.timeout #wait until the timer runs out
 	
 	
