@@ -36,3 +36,7 @@ func _input(event: InputEvent) -> void:
 
 func reset_scene() -> void:
 	modify_text("Press any key to start", Color.from_rgba8(255, 246, 125, 255))
+
+
+func _on_quit_button_pressed() -> void:
+	GameManager.quit_game(true)

@@ -3,6 +3,7 @@ extends Control
 const WIDTH = 800
 const HEIGHT = 600
 const MAX_LENGTH: int = 45
+const TWEEN_TIME: float = 2
 
 var is_done: bool = false
 
@@ -79,6 +80,7 @@ func _setup_tween() -> void:
 	$TypingMargin.position = Vector2(0, -200)
 	$DrawingScene.position = Vector2(1200, $DrawingScene.position.y) #y-position doesn't matter for this one
 	$SidebarMargin.position = Vector2(0, 200)
+	$SettingsScene.position = Vector2($SettingsScene.position.x, -284)
 	$What.position = Vector2(-550, 300)
 	$Who.position = Vector2(-550, 200)
 	$What.rotation_degrees = 5
@@ -92,18 +94,21 @@ func _play_tween() -> void:
 	var tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	var tween2 = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	var tween3 = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	tween.tween_property($TypingMargin, "position", Vector2(0, 0), 2) #moving its position
+	var tween4 = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween.tween_property($TypingMargin, "position", Vector2(0, 0), TWEEN_TIME) #moving its position
 	tween2.tween_interval(0.5) #this is the delay
-	tween2.tween_property($DrawingScene, "position", Vector2(290.4, $DrawingScene.position.y), 2) #y-position doesn't matter for this one
+	tween2.tween_property($DrawingScene, "position", Vector2(290.4, $DrawingScene.position.y), TWEEN_TIME) #y-position doesn't matter for this one
 	tween3.tween_interval(1.0)
-	tween3.tween_property($SidebarMargin, "position", Vector2(0, 0), 2)
+	tween3.tween_property($SidebarMargin, "position", Vector2(0, 0), TWEEN_TIME)
+	tween4.tween_interval(2.0)
+	tween4.tween_property($SettingsScene, "position", Vector2($SettingsScene.position.x, 16), TWEEN_TIME/2)
 
 
 #plays the tweens for the cards specifically, since these tweens need to be played at the same time
 #and the delays used in the _play_tween() function don't work when tweens are parallel (run at the same time)
 func _play_cards_tween() -> void:
 	var tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT).set_parallel()
-	tween.tween_property($What, "position", Vector2(25, 210), 1.5)
+	tween.tween_property($What, "position", Vector2(25, 210), 1.5) #1.5 seconds for the tween
 	tween.tween_property($Who, "position", Vector2(25, 320), 1.5)
 	tween.tween_property($What, "rotation", deg_to_rad(-5), 1.5)
 	tween.tween_property($Who, "rotation", deg_to_rad(8), 1.5)

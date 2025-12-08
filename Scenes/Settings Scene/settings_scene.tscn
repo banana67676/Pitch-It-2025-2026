@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd60pjnm1aiw6"]
+[gd_scene load_steps=8 format=3 uid="uid://dd60pjnm1aiw6"]
 
 [ext_resource type="Script" uid="uid://bk6w85hptyk0w" path="res://Scenes/Settings Scene/settings.gd" id="1_wsb46"]
 [ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_pkdhy"]
+[ext_resource type="Texture2D" uid="uid://bfb1w57fhfi38" path="res://Assets/leave-game.svg" id="3_1j8e4"]
+[ext_resource type="Texture2D" uid="uid://gg8m8dh3a20n" path="res://Assets/leave-game_hover.svg" id="4_4iqqc"]
 [ext_resource type="Texture2D" uid="uid://35rklmeq32fc" path="res://Assets/gear_normal.svg" id="4_rauak"]
 [ext_resource type="Texture2D" uid="uid://bk727i5pgpgkv" path="res://Assets/gear_hover.svg" id="5_rauak"]
 
@@ -40,49 +42,59 @@ theme_override_constants/margin_top = 18
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/MarginContainer"]
+[node name="ListOfSettings" type="VBoxContainer" parent="SettingsMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Settings" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+[node name="Settings" type="Label" parent="SettingsMenu/MarginContainer/ListOfSettings"]
 layout_mode = 2
 theme = ExtResource("2_pkdhy")
 theme_type_variation = &"HeaderYellow"
 theme_override_font_sizes/font_size = 30
 text = "Settings"
 
-[node name="Volume Settings" type="MarginContainer" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+[node name="VolumeContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/ListOfSettings"]
 layout_mode = 2
 
-[node name="Volume settings" type="VBoxContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings"]
+[node name="VolumeSettings" type="VBoxContainer" parent="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer"]
 layout_mode = 2
 
-[node name="Volume" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+[node name="Volume" type="Label" parent="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="Music" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+[node name="Music" type="Label" parent="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings"]
 layout_mode = 2
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+[node name="MusicSlider" type="HSlider" parent="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_pkdhy")
 max_value = 1.0
 step = 0.01
 
-[node name="SFX" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+[node name="SFX" type="Label" parent="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings"]
 layout_mode = 2
 text = "Sound Effects"
 
-[node name="SFXSlider" type="HSlider" parent="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings"]
+[node name="SFXSlider" type="HSlider" parent="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_pkdhy")
 value = 75.0
+
+[node name="LeaveContainer" type="HBoxContainer" parent="SettingsMenu/MarginContainer/ListOfSettings"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeaveButton" type="TextureButton" parent="SettingsMenu/MarginContainer/ListOfSettings/LeaveContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("3_1j8e4")
+texture_hover = ExtResource("4_4iqqc")
 
 [node name="SettingsButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -93,8 +105,8 @@ texture_normal = ExtResource("4_rauak")
 texture_hover = ExtResource("5_rauak")
 ignore_texture_size = true
 
-[connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/Volume Settings/Volume settings/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/ListOfSettings/VolumeContainer/VolumeSettings/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
 [connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

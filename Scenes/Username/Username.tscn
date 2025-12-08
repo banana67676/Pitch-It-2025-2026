@@ -93,6 +93,7 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
+hide_leave_button = true
 
 [node name="BackButton" parent="." instance=ExtResource("6_nuywi")]
 layout_mode = 0

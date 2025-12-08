@@ -206,7 +206,7 @@ func connect_GDSync_signals() -> void:
 	#GDSync.lobby_join_failed.connect(lobby_join_failed)
 	
 	#GDSync.client_joined.connect(client_joined)
-	GDSync.client_left.connect(client_left)
+	#GDSync.client_left.connect(client_left)
 
 
 #when successfully connecting to a GD Sync server

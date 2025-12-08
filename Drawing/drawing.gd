@@ -39,6 +39,7 @@ const WIDTH = 800
 const HEIGHT = 600
 
 #textures
+const custom_cursor = preload("res://Assets/custom_cursor.svg")
 const eraser_icon = preload("res://Assets/eraser.svg")
 const pencil_icon = preload("res://Assets/pencil.svg")
 const color_preset_normal = preload("res://Assets/color-preset_normal.svg")
@@ -240,7 +241,7 @@ func _on_board_mouse_exited() -> void:
 	if not enabled:
 		return
 	
-	Input.set_custom_mouse_cursor(null)
+	Input.set_custom_mouse_cursor(custom_cursor, Input.CURSOR_ARROW)
 	is_mouse_on_board = false
 
 

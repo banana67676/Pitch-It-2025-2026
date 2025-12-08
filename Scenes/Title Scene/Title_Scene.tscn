@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq861buo4rsju"]
+[gd_scene load_steps=5 format=3 uid="uid://dq861buo4rsju"]
 
 [ext_resource type="Script" uid="uid://bgo7gpmqrtjgd" path="res://Scenes/Title Scene/title.gd" id="1_flmj4"]
 [ext_resource type="Texture2D" uid="uid://c76lisgbsopf5" path="res://Assets/WhiteBulb.svg" id="2_ukgo3"]
+[ext_resource type="Texture2D" uid="uid://b6j74qrsje1y4" path="res://Assets/quit.svg" id="3_5ghpd"]
+[ext_resource type="Texture2D" uid="uid://f3j434xog8by" path="res://Assets/quit_hover.svg" id="4_js6da"]
 
 [node name="Title_Scene" type="Control"]
 layout_mode = 3
@@ -73,3 +75,14 @@ theme_override_font_sizes/font_size = 36
 text = "Press any key to start"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 76.0
+offset_bottom = 76.0
+texture_normal = ExtResource("3_5ghpd")
+texture_hover = ExtResource("4_js6da")
+
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -8,6 +8,7 @@ extends Control
 			return
 		settings_menu.visible = value
 		show_settings = value
+@export var hide_leave_button: bool
 
 var music_bus_index = AudioServer.get_bus_index("Music")
 var sfx_bus_index = AudioServer.get_bus_index("SFX")
@@ -24,11 +25,16 @@ func _ready() -> void:
 	settings_menu.visible = show_settings
 	_get_stored_settings()
 	%MusicSlider.value = 0.75
+	%LeaveButton.pressed.connect(MultiplayerManager.client_left)
 
 
 func _get_stored_settings():
 	%MusicSlider.value = GameManager.volume_music
 	%SFXSlider.value = GameManager.volume_sfx
+	if hide_leave_button:
+		%LeaveButton.visible = false
+	else:
+		%LeaveButton.visible = true
 
 
 func _on_music_slider_value_changed(value: float) -> void:

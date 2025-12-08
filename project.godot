@@ -37,7 +37,7 @@ MultiplayerManager="*res://Singletons/multiplayer_manager.tscn"
 
 [display]
 
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 mouse_cursor/custom_image="uid://cugeuydynw5eg"
