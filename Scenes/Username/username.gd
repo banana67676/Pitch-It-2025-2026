@@ -38,12 +38,6 @@ func _on_join_pressed() -> void:
 	if success:
 		var username: String = USERNAME_READ.text.strip_edges()
 		to_join.emit(username)
-		#MultiplayerManager.join_server(username)
-
-
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_released("Esc"):
-		back_to_title.emit()
 
 
 func _on_username_text_changed(new_text: String) -> void:

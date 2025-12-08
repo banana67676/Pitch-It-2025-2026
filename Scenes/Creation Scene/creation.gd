@@ -69,12 +69,6 @@ func _set_done_players(done_players: int, total_players: int) -> void:
 		MultiplayerManager.done_players = 0
 
 
-#whenever there is an input
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_released("Esc"): #if the input is the "Escape" key
-		GameManager.quit_game(true) #quit the game
-
-
 #moves all of the nodes to their initial positions for the tweens to move them back into their original positions
 func _setup_tween() -> void:
 	$TypingMargin.position = Vector2(0, -200)
