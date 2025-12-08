@@ -22,6 +22,7 @@ func _ready():
 func _on_is_private_button_pressed() -> void:
 	if is_private:
 		%Password.editable = false
+		%Password.text = ""
 		%IsPrivateButton.texture_normal = unchecked_normal
 		%IsPrivateButton.texture_hover = unchecked_hover
 		is_private = false
@@ -41,9 +42,11 @@ func _on_host_button_pressed() -> void:
 		%ErrorMessage.text = "Lobby name must be longer than 3 characters"
 		return
 	
-	#grabbing password (they don't need one for a private lobby
-	%Password.text = %Password.text.strip_edges() #remove spaces
-	var password: String = %Password.text
+	#grabbing password (they don't need one for a private lobby)
+	var password: String = ""
+	if is_private: #only look for a password if the lobby is private
+		%Password.text = %Password.text.strip_edges() #remove spaces
+		password = %Password.text
 	#if is_private and password.is_empty(): #if private gamemode and no password entered
 		#%ErrorMessage.text = "Please enter a password for a private lobby"
 		#return
