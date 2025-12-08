@@ -42,11 +42,6 @@ func reset_shown_players():
 		player_box.visible = true #making the label visible
 
 
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_released("Esc"):
-		GameManager.change_game_state(GameManager.game_state_enum.username, true, 0)
-
-
 func _on_begin_pressed() -> void:
 	MultiplayerManager.run_game()
 

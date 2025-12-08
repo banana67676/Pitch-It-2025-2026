@@ -22,7 +22,7 @@ func modify_text(text: String, color: Color) -> void:
 func _input(event: InputEvent) -> void:
 	if GameManager.game_state != GameManager.game_state_enum.title:
 		return
-	if (event is InputEventMouseButton || event is InputEventKey) and !Input.is_action_just_pressed("Esc"):
+	if (event is InputEventMouseButton || event is InputEventKey):
 		if MultiplayerManager.is_gdsync_connected:
 			modify_text("Connected!", Color.from_rgba8(0, 194, 42, 255))
 		else:
@@ -30,8 +30,6 @@ func _input(event: InputEvent) -> void:
 			await GDSync.connected
 			modify_text("Connected!", Color.from_rgba8(64, 194, 92, 255))
 		key_pressed.emit()
-	if Input.is_action_just_pressed("Esc"):
-		GameManager.quit_game(true)
 
 
 func reset_scene() -> void:
