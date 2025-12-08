@@ -61,9 +61,9 @@ text = "Lobby"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 200
+theme_override_constants/margin_left = 300
 theme_override_constants/margin_top = 400
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 0
 
 [node name="Begin" type="Button" parent="MarginContainer/MarginContainer"]
@@ -103,6 +103,7 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
+hide_leave_button = true
 
 [node name="BackButton" type="TextureButton" parent="."]
 layout_mode = 0

@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dobnjwk7wcjc6"]
+[gd_scene load_steps=8 format=3 uid="uid://dobnjwk7wcjc6"]
 
 [ext_resource type="Script" uid="uid://b4et2kvldptig" path="res://UI/Camera/camera.gd" id="1_vixt6"]
 [ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="2_5j6mc"]
 [ext_resource type="AudioStream" uid="uid://da5o3827lpf1m" path="res://Assets/blipSelect.wav" id="3_35qlm"]
 [ext_resource type="PackedScene" uid="uid://vt4f6pmafi8o" path="res://UI/game_art.tscn" id="5_sdqds"]
-[ext_resource type="AudioStream" uid="uid://cs3cccm5tsd6h" path="res://Assets/From Now On - Deltarune.mp3" id="5_xda3g"]
 
 [sub_resource type="Animation" id="Animation_itgtb"]
 resource_name = "Fade"
@@ -106,6 +105,5 @@ volume_db = -3.0
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_xda3g")
 autoplay = true
 bus = &"Music"
