@@ -138,7 +138,7 @@ func run_game() -> void:
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.display, false, 2]) #change to display scene
 	cards = get_cards() #grab the product cards of each player in the meantime
 	await GameManager.scene_changed #wait for scene to change
-	await get_tree().create_timer(1).timeout #delay before going into the display (this is needed for some reason, makes no sense)
+	await get_tree().create_timer(2).timeout #delay before going into the display (this is needed for some reason, makes no sense)
 	
 	for product in cards.values(): #for every product
 		var display_scene = get_parent().get_node("/root/DisplayScene") #refernce display scene
@@ -150,7 +150,7 @@ func run_game() -> void:
 	# VOTING
 	GDSync.call_func_all(GameManager.change_game_state, [GameManager.game_state_enum.voting, false, 1]) #switch to voting scene
 	await GameManager.scene_changed #wait for scene to change
-	start(GameManager.get_voting_time()) #start the timer
+	start(GameManager.voting_time) #start the timer
 	await self.timeout #wait until the time runs out
 	
 	#Calculations for the votes
