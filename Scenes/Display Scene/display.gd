@@ -2,6 +2,7 @@ extends Control
 
 
 const Drawing = preload("res://Drawing/drawing.gd")
+const custom_cursor = preload("res://Assets/custom_cursor.svg")
 var output: Sprite2D
 @onready var prod_name: Label = %Product
 @onready var slogan: Label = %Slogan
@@ -9,6 +10,7 @@ var output: Sprite2D
 
 
 func _ready() -> void:
+	Input.set_custom_mouse_cursor(custom_cursor, Input.CURSOR_ARROW) #reset cursor
 	GDSync.expose_func(display_card)
 	output = Sprite2D.new()
 	output.centered = false
