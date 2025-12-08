@@ -15,6 +15,8 @@ enum game_state_enum {
 	game_opening,
 }
 
+
+
 #the potential game MODES (only the default mode right now)
 enum GameMode {
 	CLASSIC,
@@ -27,9 +29,9 @@ var game_state: int = game_state_enum.title #current game state (lobby, creation
 
 #the DEFAULT times for the different sections of the game
 const CREATION_DEFAULT: float = 180
-const DISPLAY_DEFAULT: float = 120
-const VOTING_DEFAULT: float = 45
-const RESULTS_DEFAULT: float = 20
+const DISPLAY_DEFAULT: float = 60
+const VOTING_DEFAULT: float = 30
+const RESULTS_DEFAULT: float = 10
 
 #times for the different sections of the game (these can be modified in game by the lobby host)
 var creation_time: float = CREATION_DEFAULT #time to create a product

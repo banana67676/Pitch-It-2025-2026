@@ -38,7 +38,7 @@ func export_card():
 	GDSync.call_func_on(GDSync.get_host(), MultiplayerManager.import_card, [sData, GDSync.get_client_id()])
 	#MultiplayerManager.import_card.rpc_id(1,sData)
 
-
+#------------------------------------------ USE THE CODE BELOW TO MAKE THE DONE BUTTON WORK ON DISPLAY SCENE
 #when the done button is pressed
 func _on_done_button_pressed() -> void:
 	if not is_done:
@@ -52,7 +52,7 @@ func _on_done_button_pressed() -> void:
 
 
 #the effects of pressing the done button that need to be replicated for all peers
-@rpc("any_peer", "call_local", "reliable")
+#@rpc("any_peer", "call_local", "reliable")
 func done_button() -> void:
 	var num_players = MultiplayerManager.players.size()
 	MultiplayerManager.done_players += 1
@@ -67,7 +67,7 @@ func _set_done_players(done_players: int, total_players: int) -> void:
 		MultiplayerManager.start(.1) #start the timer with .1 seconds left
 		MultiplayerManager.paused = false #unpause the timer
 		MultiplayerManager.done_players = 0
-
+#------------------------------------------------------
 
 #moves all of the nodes to their initial positions for the tweens to move them back into their original positions
 func _setup_tween() -> void:
