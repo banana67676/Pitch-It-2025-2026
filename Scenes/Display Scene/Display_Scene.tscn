@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=33 format=3 uid="uid://btymdikyjn22l"]
 
 [ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_nmnxq"]
 [ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="4_vsoll"]
-[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_nmnxq"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_nmnxq"]
 [ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="7_vg7wq"]
 [ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="8_e1xid"]
 
@@ -389,30 +390,60 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 70
 theme_override_constants/margin_right = 20
 
-[node name="PanelContainer" type="PanelContainer" parent="DisplayScene/HBoxContainer/BoardMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplayScene/HBoxContainer/BoardMargin"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer"]
 custom_minimum_size = Vector2(662, 500)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7btl7")
 
-[node name="DrawingBoard" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+[node name="DrawingBoard" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/PanelContainer"]
 z_index = -1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vsoll")
 
-[node name="DrawingBorder" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+[node name="DrawingBorder" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/PanelContainer"]
 z_index = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mjgjq")
 
-[node name="BoardCover" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+[node name="BoardCover" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/PanelContainer"]
 z_index = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nmnxq")
+
+[node name="MarginContainer" type="MarginContainer" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="DoneContainer" type="HBoxContainer" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="DonePlayers" type="Label" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/MarginContainer/DoneContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "(3/5)"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="Button" parent="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/MarginContainer/DoneContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_nmnxq")
+theme_type_variation = &"ButtonSmall"
+theme_override_font_sizes/font_size = 24
+text = "Done"
 
 [node name="TimerContainer" type="MarginContainer" parent="DisplayScene"]
 layout_mode = 2
@@ -479,3 +510,5 @@ offset_left = 1136.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
+
+[connection signal="pressed" from="DisplayScene/HBoxContainer/BoardMargin/VBoxContainer/MarginContainer/DoneContainer/DoneButton" to="." method="_on_done_button_pressed"]

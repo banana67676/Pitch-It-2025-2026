@@ -82,3 +82,8 @@ func _on_settings_button_mouse_exited() -> void:
 		tween.tween_property($SettingsButton, "rotation", deg_to_rad(-90), TWEEN_TIME)
 	else:
 		tween.tween_property($SettingsButton, "rotation", deg_to_rad(0), TWEEN_TIME)
+
+
+func _on_button_pressed() -> void:
+	MultiplayerManager.client_left()
+	pass # Replace with function body.
