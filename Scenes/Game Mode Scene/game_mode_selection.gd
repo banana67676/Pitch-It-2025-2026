@@ -14,8 +14,8 @@ class GameMode:
 
 
 #descriptions for all of the gamemodes
-var classic_description: String = "Default game mode. Everyone gets their own 'Who' and 'What' cards. Reach $5 million dollars to win"
-var all_together_description: String = "Like classic, but everyone is together where they get the same 'Who' and 'What' cards. Reach $5 million dollars to win"
+var classic_description: String = "Default game mode. Everyone is together where they get the same 'Who' and 'What' cards. Reach $5 million dollars to win"
+var Random_description: String = "Random cards. Everyone is different getting different 'Who' and 'What' cards. Reach $5 million dollars to win"
 
 #each of the different gamemodes
 var game_mode_array: Array[GameMode]
@@ -25,7 +25,7 @@ var game_mode_array: Array[GameMode]
 func _ready() -> void:
 	var classic_mode: GameMode = GameMode.new("Classic", classic_description, GameManager.GameMode.CLASSIC)
 	game_mode_array.append(classic_mode)
-	game_mode_array.append(GameMode.new("All Together", all_together_description, GameManager.GameMode.ALL_TOGETHER))
+	game_mode_array.append(GameMode.new("New cards", Random_description, GameManager.GameMode.ALL_TOGETHER))
 	_create_buttons()
 	_update_game_mode(classic_mode) #make it so that the classic gamemode is selected by default
 

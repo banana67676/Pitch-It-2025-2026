@@ -27,6 +27,7 @@ func _ready() -> void:
 	output.global_position = Vector2(478, 92) #where the drawing is put on the screen
 	output.scale = Vector2(0.807, 0.807) #scale the drawing appropriately to fit the frame
 	add_child(output)
+	reset_done_button_for_round()
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -40,6 +41,7 @@ func display_done_button() -> void:
 #function to display the card (this function is called on connected peer)
 #EVERYONE is calling this
 func display_card(card_serialized: PackedByteArray):
+	reset_done_button_for_round()
 	var card = PitchCardData.deserialize(card_serialized)
 	MultiplayerManager.cards[card.user_id] = card #update the product cards for MultiplayerManager (the data is needed later)
 	output.texture.update(card.logo)
@@ -62,12 +64,19 @@ func _set_done_players(done_players: int, total_players: int) -> void:
 		MultiplayerManager.start(.1) #start the timer with .1 seconds left
 		MultiplayerManager.paused = false #unpause the timer
 		MultiplayerManager.done_players = 0
+		
+		%DonePlayers.text = "(0/" + str(total_players) + ")"
 
 
 func _on_done_button_pressed() -> void:
 	if is_done:
-		is_done = false  # already pressed, do nothing
+		return # already pressed this round, do nothing
 	is_done = true
 	%DoneButton.disabled = true
-	# tell EVERYONE that a player just finished viewing
+	# tell EVERYONE that this player finished viewing
 	GDSync.call_func_all(display_done_button)
+	
+
+func reset_done_button_for_round() -> void:
+	is_done = false
+	%DoneButton.disabled = false
