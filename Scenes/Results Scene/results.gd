@@ -30,15 +30,19 @@ func show_scores(voting_results: Dictionary) -> bool:
 			display_box.visible = true
 			%EveryoneElse.add_child(display_box)
 	
-	#if the current first place player has reached the win threshold
-	if result_list[0].value >= GameManager.WIN_THRESHOLD: 
+	# if the current first place player's TOTAL MONEY has reached the win threshold
+	var first_id: int = result_list[0].user_id
+	var first_money: int = int(MultiplayerManager.score_card.get(first_id, 0))
+
+	if first_money >= GameManager.win_threshold:
 		var winner = Label.new()
-		winner.text = str(result_list[0].username, " wins with a total investment of ", MultiplayerManager.score_card[result_list[0].user_id])
-		winner.set_global_position(Vector2(200,200))
-		$List.add_child(winner)
+		winner.text = str(result_list[0].username, " wins with a total investment of $", format_with_commas(first_money))
+		winner.set_global_position(Vector2(200, 200))
+		%WinnerContainer/WinnerVBox.add_child(winner)
 		return true
-	else:
-		return false
+
+	return false
+
 
 
 func _simplified_calculating_scores() -> void:

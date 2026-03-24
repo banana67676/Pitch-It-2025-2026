@@ -56,6 +56,8 @@ func _on_host_button_pressed() -> void:
 	GameManager.display_time = %DisplayTimeValue.value
 	GameManager.voting_time = %VotingTimeValue.value
 	GameManager.results_time = %ResultsTimeValue.value
+	GameManager.win_threshold = int(%ThresholdValue.value) * 1000000
+
 
 
 #resets all of the values for lobby options
@@ -66,6 +68,7 @@ func reset_values() -> void:
 	%DisplayTimeValue.value = GameManager.DISPLAY_DEFAULT
 	%VotingTimeValue.value = GameManager.VOTING_DEFAULT
 	%ResultsTimeValue.value = GameManager.RESULTS_DEFAULT
+	%ThresholdValue.value = GameManager.WIN_THRESHOLD_DEFAULT / 1000000.0
 	is_private = false
 	%IsPrivateButton.texture_normal = unchecked_normal
 	%IsPrivateButton.texture_hover = unchecked_hover

@@ -8,7 +8,7 @@ var is_done: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GDSync.expose_func(done_button)
+	GDSync.expose_func(update_done_players)
 	GDSync.expose_func(export_card)
 	_setup_tween()
 	_set_done_players(0, MultiplayerManager.players.size()) #set the label for the numbers of done players to 0 out of total (0/total)
@@ -40,22 +40,18 @@ func export_card():
 
 #when the done button is pressed
 func _on_done_button_pressed() -> void:
-	if not is_done:
-		is_done = true
-		%DoneButton.disabled = true
-		%Title.editable = false
-		%Slogan.editable = false
-		$DrawingScene.enabled = false
+	# toggle state
+	is_done = !is_done
+	# UI changes based on state
+	%DoneButton.text = "Undo" if is_done else "Done"
+	%Title.editable = not is_done
+	%Slogan.editable = not is_done
+	$DrawingScene.enabled = not is_done
+	if is_done:
 		$DrawingScene.disable_buttons()
-		GDSync.call_func_all(done_button) #call the function to replicate effects for all peers
-
-
-#the effects of pressing the done button that need to be replicated for all peers
-@rpc("any_peer", "call_local", "reliable")
-func done_button() -> void:
-	var num_players = MultiplayerManager.players.size()
-	MultiplayerManager.done_players += 1
-	_set_done_players(MultiplayerManager.done_players, num_players)
+	# broadcast +1 or -1 to everyone
+	var delta := 1 if is_done else -1
+	GDSync.call_func_all(update_done_players, [delta])
 
 
 #function to set the label showing how many players are done
@@ -72,6 +68,13 @@ func _set_done_players(done_players: int, total_players: int) -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Esc"): #if the input is the "Escape" key
 		GameManager.quit_game(true) #quit the game
+
+#Function to help undo the done button
+func update_done_players(delta: int) -> void:
+	var total := MultiplayerManager.players.size()
+	MultiplayerManager.done_players += delta
+	MultiplayerManager.done_players = clamp(MultiplayerManager.done_players, 0, total)
+	_set_done_players(MultiplayerManager.done_players, total)
 
 
 #moves all of the nodes to their initial positions for the tweens to move them back into their original positions

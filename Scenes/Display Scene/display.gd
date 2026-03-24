@@ -15,7 +15,7 @@ func _ready() -> void:
 	MultiplayerManager.done_players = 0
 	_set_done_players(0, MultiplayerManager.players.size())
 	GDSync.expose_func(display_card)
-	GDSync.expose_func(display_done_button)
+	GDSync.expose_func(update_done_players)
 	output = Sprite2D.new()
 	output.centered = false
 	var canvas_fill = PackedByteArray()
@@ -28,13 +28,15 @@ func _ready() -> void:
 	output.scale = Vector2(0.807, 0.807) #scale the drawing appropriately to fit the frame
 	add_child(output)
 	reset_done_button_for_round()
+	GDSync.expose_func(update_done_players)
 
 
-@rpc("any_peer", "call_local", "reliable")
-func display_done_button() -> void:
-	MultiplayerManager.done_players += 1
+func update_done_players(delta: int) -> void:
+	MultiplayerManager.done_players += delta
 	var total_players := MultiplayerManager.players.size()
+	MultiplayerManager.done_players = clamp(MultiplayerManager.done_players, 0, total_players)
 	_set_done_players(MultiplayerManager.done_players, total_players)
+
 
 
 
@@ -69,14 +71,16 @@ func _set_done_players(done_players: int, total_players: int) -> void:
 
 
 func _on_done_button_pressed() -> void:
-	if is_done:
-		return # already pressed this round, do nothing
-	is_done = true
-	%DoneButton.disabled = true
-	# tell EVERYONE that this player finished viewing
-	GDSync.call_func_all(display_done_button)
+	is_done = !is_done
+	# update button look (optional)
+	%DoneButton.text = "Undo" if is_done else "Done"
+	# +1 when done, -1 when undo
+	var delta := 1 if is_done else -1
+	GDSync.call_func_all(update_done_players, [delta])
+
 	
 
 func reset_done_button_for_round() -> void:
 	is_done = false
 	%DoneButton.disabled = false
+	%DoneButton.text = "Done"

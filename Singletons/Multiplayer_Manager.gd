@@ -165,7 +165,7 @@ func run_game() -> void:
 		round_results[vote] += 1 #increase the vote count for the person the player voted for by 1
 		MultiplayerManager.players[vote].score += GameManager.SCORE_INCREMENT #increment their score by the value
 		#if the player has more money than the money needed to win, they win
-		if MultiplayerManager.players[vote].score >= GameManager.WIN_THRESHOLD: 
+		if MultiplayerManager.players[vote].score >= GameManager.win_threshold:
 			has_winner = true
 	
 	

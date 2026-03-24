@@ -32,16 +32,22 @@ const CREATION_DEFAULT: float = 180
 const DISPLAY_DEFAULT: float = 120
 const VOTING_DEFAULT: float = 45
 const RESULTS_DEFAULT: float = 20
+const THRESHOLD_DEFAULT: float = 5
+
+
 
 #times for the different sections of the game (these can be modified in game by the lobby host)
 var creation_time: float = CREATION_DEFAULT #time to create a product
 var display_time: float = DISPLAY_DEFAULT #time to present a product
 var voting_time: float = VOTING_DEFAULT #time to vote on a product
 var results_time: float = RESULTS_DEFAULT #time that the results are displayed
+var threshold_value: float = THRESHOLD_DEFAULT
 var show_winner_time: float = 5
 
 const SCORE_INCREMENT: int = 1000000 #gain this much money per vote
-const WIN_THRESHOLD: int = 5000000 #amount of money needed to win
+const WIN_THRESHOLD_DEFAULT: int = 5000000
+var win_threshold: int = WIN_THRESHOLD_DEFAULT
+
 
 #variables for the game settings (stored here so that the values can be transferred between scenes)
 var volume_music: float = 75.0
