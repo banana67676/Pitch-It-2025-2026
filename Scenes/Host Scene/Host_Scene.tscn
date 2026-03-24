@@ -23,8 +23,9 @@ script = ExtResource("1_8dtox")
 
 [node name="Title" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_top = -45.0
+offset_right = 1254.0
+offset_bottom = 644.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 230
@@ -140,13 +141,14 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="IsPrivate" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
+[node name="Rounds" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 24
 text = "Rounds?"
 
-[node name="IsPrivateButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
+[node name="RoundsButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
+unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("3_k5nmq")
 texture_hover = ExtResource("4_fm0rp")
@@ -156,13 +158,14 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="IsPrivate" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound/MoneyOrRound2"]
+[node name="Money" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound/MoneyOrRound2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 24
 text = "Money?"
 
-[node name="IsPrivateButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound/MoneyOrRound2"]
+[node name="MoneyButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound/MoneyOrRound2"]
+unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("3_k5nmq")
 texture_hover = ExtResource("4_fm0rp")
@@ -267,10 +270,11 @@ theme_override_constants/separation = 50
 alignment = 2
 
 [node name="ThresholdLabel" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/ThresholdContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 24
-text = "Money(Millions)"
+text = "Money (Millions)"
 
 [node name="ThresholdValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/ThresholdContainer"]
 unique_name_in_owner = true

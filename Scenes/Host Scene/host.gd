@@ -5,6 +5,7 @@ signal back_to_username
 
 var username: String
 var is_private: bool = false
+var use_rounds: bool = false
 const TWEEN_TIME: float = 1
 
 #texture preloads (for the "is private" button)
@@ -14,7 +15,39 @@ const unchecked_normal = preload("res://Assets/unchecked_normal.svg")
 const unchecked_hover = preload("res://Assets/unchecked_hover.svg")
 
 func _ready():
-	$ResetButton.pressed.connect(reset_values) #when the reset button is pressed, call the function reset_values
+	$ResetButton.pressed.connect(reset_values)
+	%RoundsButton.pressed.connect(_on_rounds_button_pressed)
+	%MoneyButton.pressed.connect(_on_money_button_pressed)
+	update_threshold_mode()
+	update_rounds_money_buttons()
+
+func _on_rounds_button_pressed() -> void:
+	use_rounds = true
+	update_threshold_mode()
+	update_rounds_money_buttons()
+
+func _on_money_button_pressed() -> void:
+	use_rounds = false
+	update_threshold_mode()
+	update_rounds_money_buttons()
+
+func update_rounds_money_buttons() -> void:
+	if use_rounds:
+		# ROUNDS = checked
+		%RoundsButton.texture_normal = checked_normal
+		%RoundsButton.texture_hover = checked_hover
+		
+		# MONEY = unchecked
+		%MoneyButton.texture_normal = unchecked_normal
+		%MoneyButton.texture_hover = unchecked_hover
+	else:
+		# ROUNDS = unchecked
+		%RoundsButton.texture_normal = unchecked_normal
+		%RoundsButton.texture_hover = unchecked_hover
+		
+		# MONEY = checked
+		%MoneyButton.texture_normal = checked_normal
+		%MoneyButton.texture_hover = checked_hover
 
 
 #when the is_private button is pressed, toggle private mode on and off
@@ -56,7 +89,10 @@ func _on_host_button_pressed() -> void:
 	GameManager.display_time = %DisplayTimeValue.value
 	GameManager.voting_time = %VotingTimeValue.value
 	GameManager.results_time = %ResultsTimeValue.value
-	GameManager.win_threshold = int(%ThresholdValue.value) * 1000000
+	if use_rounds:
+		GameManager.win_threshold = int(%ThresholdValue.value)
+	else:
+		GameManager.win_threshold = int(%ThresholdValue.value) * 1000000
 
 
 
@@ -68,7 +104,10 @@ func reset_values() -> void:
 	%DisplayTimeValue.value = GameManager.DISPLAY_DEFAULT
 	%VotingTimeValue.value = GameManager.VOTING_DEFAULT
 	%ResultsTimeValue.value = GameManager.RESULTS_DEFAULT
-	%ThresholdValue.value = GameManager.WIN_THRESHOLD_DEFAULT / 1000000.0
+	
+	use_rounds = false
+	update_threshold_mode()
+	
 	is_private = false
 	%IsPrivateButton.texture_normal = unchecked_normal
 	%IsPrivateButton.texture_hover = unchecked_hover
@@ -116,6 +155,21 @@ func reset_animation() -> void:
 	$GameMode.position = Vector2($GameMode.position.x, 519)
 	$GameMode.visible = false
 
+
+
+func update_threshold_mode() -> void:
+	if use_rounds:
+		%ThresholdLabel.text = "Rounds"
+		%ThresholdValue.min_value = 3
+		%ThresholdValue.max_value = 10
+		%ThresholdValue.step = 1
+		%ThresholdValue.value = 5
+	else:
+		%ThresholdLabel.text = "Money (Millions)"
+		%ThresholdValue.min_value = 3
+		%ThresholdValue.max_value = 10
+		%ThresholdValue.step = 1
+		%ThresholdValue.value = GameManager.WIN_THRESHOLD_DEFAULT / 1000000.0
 
 func play_animation() -> void:
 	$BackButton.visible = true
