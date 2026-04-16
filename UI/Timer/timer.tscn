@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyweidcx36nir"]
+
+[ext_resource type="Script" uid="uid://bppctfroi1vtu" path="res://UI/Timer/timer.gd" id="1_342dd"]
+[ext_resource type="Script" uid="uid://bm72wtg3tc5n8" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_jpgby"]
+
+[node name="Timer" type="Label"]
+theme_override_font_sizes/font_size = 30
+text = "Time Remaining: "
+horizontal_alignment = 1
+script = ExtResource("1_342dd")
+
+[node name="TimerSync" type="Node" parent="."]
+script = ExtResource("2_jpgby")
+node_path = NodePath("..")
+properties = PackedStringArray("text")
+interpolated = false
+interpolation_speed = 1.0
+extrapolation = null
+extrapolated = false
+max_extrapolation_time = 0.2
+metadata/_custom_type_script = "uid://bm72wtg3tc5n8"

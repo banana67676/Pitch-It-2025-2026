@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpjm1n3gy0e1r"]
+
+[ext_resource type="Script" uid="uid://cyrws4hmwqi3i" path="res://Scenes/Game Opening/game_opening.gd" id="1_38tsk"]
+[ext_resource type="PackedScene" uid="uid://dq861buo4rsju" path="res://Scenes/Title Scene/Title_Scene.tscn" id="2_17m1h"]
+[ext_resource type="PackedScene" uid="uid://bo3vx0ii1i20j" path="res://Scenes/Username/Username.tscn" id="3_4xgm8"]
+[ext_resource type="PackedScene" uid="uid://dcxxqv6rdrqok" path="res://Scenes/Host Scene/Host_Scene.tscn" id="4_sms2c"]
+[ext_resource type="PackedScene" uid="uid://dprid1ulqg70" path="res://Scenes/Join Scene/Join_Scene.tscn" id="5_17m1h"]
+
+[node name="GameOpening" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_38tsk")
+
+[node name="Title_Scene" parent="." instance=ExtResource("2_17m1h")]
+layout_mode = 0
+
+[node name="Username" parent="." instance=ExtResource("3_4xgm8")]
+layout_mode = 0
+offset_top = 800.0
+offset_bottom = 800.0
+
+[node name="HostScene" parent="." instance=ExtResource("4_sms2c")]
+layout_mode = 0
+offset_left = -1600.0
+offset_top = 800.0
+offset_right = -1600.0
+offset_bottom = 800.0
+
+[node name="JoinScene" parent="." instance=ExtResource("5_17m1h")]
+layout_mode = 0
+offset_left = 1600.0
+offset_top = 800.0
+offset_right = 1600.0
+offset_bottom = 800.0

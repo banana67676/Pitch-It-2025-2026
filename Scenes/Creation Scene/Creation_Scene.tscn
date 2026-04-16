@@ -1,94 +1,163 @@
-[gd_scene load_steps=6 format=3 uid="uid://xkn8gxryucgg"]
+[gd_scene load_steps=7 format=3 uid="uid://xkn8gxryucgg"]
 
-[ext_resource type="Script" path="res://Scenes/Creation Scene/creation_scene.gd" id="1_0n1cf"]
+[ext_resource type="Script" uid="uid://bl8d2ppo08c70" path="res://Scenes/Creation Scene/creation.gd" id="1_0n1cf"]
 [ext_resource type="PackedScene" uid="uid://ukycayh8nnxn" path="res://Drawing/Drawing.tscn" id="1_r6dir"]
-[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="2_2yjat"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_42e26"]
 [ext_resource type="PackedScene" uid="uid://6b5nae3lm6ou" path="res://Card/Card Content/Card.tscn" id="3_4ok8t"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="6_6loq4"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="7_vy3qb"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h7afi"]
-properties/0/path = NodePath("Label:text")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
-[node name="Creation_Scene" type="Node2D"]
+[node name="Creation_Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_0n1cf")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SidebarMargin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 284.0
+offset_bottom = 586.0
+theme_override_constants/margin_top = 520
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SidebarMargin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DoneMargin" type="MarginContainer" parent="SidebarMargin/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 45
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SidebarMargin/VBoxContainer/DoneMargin"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="DonePlayers" type="Label" parent="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "(3/5)"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="Button" parent="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_42e26")
+theme_type_variation = &"ButtonSmall"
+theme_override_font_sizes/font_size = 24
+text = "Done"
+
+[node name="TimerContainer" type="MarginContainer" parent="SidebarMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Timer" parent="SidebarMargin/VBoxContainer/TimerContainer" instance=ExtResource("6_6loq4")]
+layout_mode = 2
+
+[node name="TypingMargin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 159.0
 theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+[node name="TypingVBox" type="VBoxContainer" parent="TypingMargin"]
 layout_mode = 2
-split_offset = -150
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer"]
+[node name="TypingMargin" type="MarginContainer" parent="TypingMargin/TypingVBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TypingMargin/TypingVBox/TypingMargin"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
 
-[node name="Title" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+[node name="TitleMargin" type="MarginContainer" parent="TypingMargin/TypingVBox/TypingMargin/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_2yjat")
-theme_override_font_sizes/font_size = 37
-placeholder_text = "Product Title Here"
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="LineEdit" parent="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/TitleMargin"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 30
+theme = ExtResource("2_42e26")
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_colors/font_uneditable_color = Color(0.88, 0.8103333, 0.04400001, 0.5019608)
+theme_override_colors/font_placeholder_color = Color(0.9411765, 0.8666667, 0.047058824, 0.6)
+theme_override_colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Product Title"
+alignment = 1
+caret_blink = true
+
+[node name="SloganMargin" type="MarginContainer" parent="TypingMargin/TypingVBox/TypingMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 170
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 170
 theme_override_constants/margin_bottom = 15
 
-[node name="Slogan" type="TextEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="Slogan" type="LineEdit" parent="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/SloganMargin"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_2yjat")
-theme_override_font_sizes/font_size = 16
-placeholder_text = "Product Slogan Here"
-
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DrawingScene" parent="MarginContainer/VSplitContainer/HSplitContainer" instance=ExtResource("1_r6dir")]
-scale = Vector2(0.7, 0.7)
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_h7afi")
+theme = ExtResource("2_42e26")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Product Slogan"
+alignment = 1
+caret_blink = true
 
 [node name="What" parent="." instance=ExtResource("3_4ok8t")]
-position = Vector2(939, 925)
-rotation = 0.174533
-scale = Vector2(0.8, 0.8)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 210.0
+offset_right = 410.0
+offset_bottom = 459.0
+rotation = -0.08726645
+scale = Vector2(0.6, 0.6)
 card_type = 1
 
 [node name="Who" parent="." instance=ExtResource("3_4ok8t")]
-position = Vector2(937, 925)
-rotation = -0.174533
-scale = Vector2(0.8, 0.8)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 320.0
+offset_right = 410.0
+offset_bottom = 569.0
+rotation = 0.13962634
+scale = Vector2(0.6, 0.6)
 
-[node name="Label" type="Label" parent="."]
-offset_left = 648.0
-offset_top = 168.0
-offset_right = 710.0
-offset_bottom = 213.0
-theme_override_font_sizes/font_size = 30
-text = "Text
-"
+[node name="DrawingScene" parent="." instance=ExtResource("1_r6dir")]
+position = Vector2(290.4, 185)
+scale = Vector2(0.7, 0.7)
+
+[node name="SettingsScene" parent="." instance=ExtResource("7_vy3qb")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+
+[node name="roundControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="roundLabel" type="Label" parent="roundControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.462
+anchor_bottom = 1.8600001
+offset_top = 11.0
+offset_right = 34.52
+offset_bottom = -2.4000092
+theme_override_font_sizes/font_size = 25
+text = "Round: "
+
+[connection signal="pressed" from="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
+[connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/TitleMargin/Title" to="." method="_on_title_text_changed"]
+[connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/SloganMargin/Slogan" to="." method="_on_slogan_text_changed"]

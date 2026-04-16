@@ -1,18 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://ngfm742hhhhd"]
+[gd_scene load_steps=5 format=3 uid="uid://ngfm742hhhhd"]
 
-[ext_resource type="Script" path="res://Scenes/Voting Scene/voting_scene.gd" id="1_ar3lm"]
+[ext_resource type="Script" uid="uid://befd3glh4iybt" path="res://Scenes/Voting Scene/voting.gd" id="1_ar3lm"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_ydydk"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="5_7j4a1"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_7j4a1"]
 
-[node name="VotingScene" type="Node2D"]
+[node name="VotingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_ar3lm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_top = 37.0
-offset_right = 1147.0
-offset_bottom = 647.0
-size_flags_horizontal = 6
-size_flags_vertical = 4
+[node name="Timer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 685.0
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 75
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 24.0
-text = "Voting Scene"
+[node name="TimerContainer" type="MarginContainer" parent="Timer"]
+layout_mode = 2
+theme_override_constants/margin_top = 530
+
+[node name="Timer" parent="Timer/TimerContainer" instance=ExtResource("5_7j4a1")]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Title" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 75
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title"]
+layout_mode = 2
+alignment = 1
+
+[node name="VotingHeader" type="Label" parent="Title/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_ydydk")
+theme_type_variation = &"HeaderYellow"
+text = "Voting"
+
+[node name="MarginContainer" type="MarginContainer" parent="Title"]
+layout_mode = 2
+theme_override_constants/margin_left = -100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = -100
+
+[node name="VotingContainer" type="GridContainer" parent="Title/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+columns = 2
+
+[node name="SettingsScene" parent="." instance=ExtResource("6_7j4a1")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0

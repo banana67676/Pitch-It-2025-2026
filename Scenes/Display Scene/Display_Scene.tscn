@@ -1,44 +1,517 @@
-[gd_scene load_steps=3 format=3 uid="uid://btymdikyjn22l"]
+[gd_scene load_steps=33 format=3 uid="uid://btymdikyjn22l"]
 
-[ext_resource type="Script" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
+[ext_resource type="Script" uid="uid://dhbna7umiw7h4" path="res://Scenes/Display Scene/display.gd" id="1_o62vh"]
+[ext_resource type="PackedScene" uid="uid://cyweidcx36nir" path="res://UI/Timer/timer.tscn" id="4_vsoll"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="6_lj7yx"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="6_nmnxq"]
+[ext_resource type="Texture2D" uid="uid://bx8kfclenkpg" path="res://Assets/grabber.svg" id="7_vg7wq"]
+[ext_resource type="Texture2D" uid="uid://c3jy0gp8ynxlw" path="res://Assets/grabber_highlight.svg" id="8_e1xid"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bfa7l"]
-properties/0/path = NodePath("TimeLabel:text")
-properties/0/spawn = true
-properties/0/replication_mode = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urqfg"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[node name="DisplayScene" type="Node2D"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7btl7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsoll"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjgjq"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.32941177, 0.07450981, 0.08627451, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmnxq"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.67058825, 0.1882353, 0.19607843, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7bxx3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xorm8"]
+bg_color = Color(0.99, 0.9405, 0, 0.8235294)
+border_width_bottom = 20
+border_color = Color(0.86, 0.76167333, 0.017199984, 0.8235294)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biuy5"]
+bg_color = Color(0.9411765, 0.8666667, 0.047058824, 0.78431374)
+border_width_bottom = 20
+border_color = Color(0.81, 0.69700503, 0.056699995, 0.78431374)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lb3dg"]
+bg_color = Color(0.79, 0.73272496, 0.1027, 0.74509805)
+border_width_top = 20
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5gcp"]
+bg_color = Color(0.69, 0.63997495, 0.0897, 0.7058824)
+border_width_top = 10
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wca55"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq4yn"]
+bg_color = Color(0.9882353, 0.9411765, 0, 0.8235294)
+border_width_bottom = 10
+border_color = Color(0.85882354, 0.7607843, 0.015686275, 0.8235294)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxuol"]
+bg_color = Color(0.9411765, 0.8666667, 0.047058824, 0.78431374)
+border_width_bottom = 10
+border_color = Color(0.8117647, 0.69803923, 0.05490196, 0.78431374)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ho5hn"]
+bg_color = Color(0.7882353, 0.73333335, 0.101960786, 0.74509805)
+border_width_top = 10
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0nssd"]
+bg_color = Color(1.82897e-06, 0.672048, 0.779558, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5sax"]
+bg_color = Color(0.94, 0.8655833, 0.04700001, 0.78431374)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kidmo"]
+bg_color = Color(0.94, 0.8655833, 0.04700001, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3ng0"]
+bg_color = Color(0.37, 0.08510001, 0.09459667, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vcl5"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcet5"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27, 0.062100008, 0.06903, 0.5882353)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wca55"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bxx3"]
+bg_color = Color(0.37, 0.08510001, 0.09934506, 0.5882353)
+border_width_bottom = 5
+border_color = Color(0.27058825, 0.0627451, 0.07058824, 0.5882353)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_cnn2p"]
+Button/colors/font_color = Color(0.6, 0.11372549, 0.13725491, 1)
+Button/colors/font_disabled_color = Color(0.4, 0.076, 0.09220006, 1)
+Button/colors/font_focus_color = Color(0.6, 0.11372549, 0.13725491, 1)
+Button/colors/font_hover_color = Color(0.65, 0.09099999, 0.11895009, 1)
+Button/colors/font_pressed_color = Color(0.5019608, 0.09411765, 0.11372549, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_7bxx3")
+Button/styles/hover = SubResource("StyleBoxFlat_xorm8")
+Button/styles/normal = SubResource("StyleBoxFlat_biuy5")
+Button/styles/pressed = SubResource("StyleBoxFlat_lb3dg")
+ButtonSmall/base_type = &"Button"
+ButtonSmall/colors/font_color = Color(0.6, 0.11372549, 0.13725491, 1)
+ButtonSmall/colors/font_disabled_color = Color(0.4, 0.076, 0.09220006, 1)
+ButtonSmall/colors/font_focus_color = Color(0.6, 0.11372549, 0.13725491, 1)
+ButtonSmall/colors/font_hover_color = Color(0.6509804, 0.09019608, 0.11764706, 1)
+ButtonSmall/colors/font_pressed_color = Color(0.5, 0.095, 0.11525008, 1)
+ButtonSmall/styles/disabled = SubResource("StyleBoxFlat_g5gcp")
+ButtonSmall/styles/focus = SubResource("StyleBoxEmpty_wca55")
+ButtonSmall/styles/hover = SubResource("StyleBoxFlat_eq4yn")
+ButtonSmall/styles/normal = SubResource("StyleBoxFlat_lxuol")
+ButtonSmall/styles/pressed = SubResource("StyleBoxFlat_ho5hn")
+ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_0nssd")
+HSlider/icons/grabber = ExtResource("7_vg7wq")
+HSlider/icons/grabber_highlight = ExtResource("8_e1xid")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_l5sax")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kidmo")
+HSlider/styles/slider = SubResource("StyleBoxFlat_n3ng0")
+HeaderYellow/base_type = &"Label"
+HeaderYellow/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+HeaderYellow/font_sizes/font_size = 48
+TextEdit/colors/background_color = Color(0.6, 0.114, 0.1383001, 0.5882353)
+TextEdit/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+TextEdit/colors/font_outline_color = Color(0.83137256, 0.7411765, 0.08235294, 1)
+TextEdit/colors/font_placeholder_color = Color(0.94, 0.8655833, 0.04700001, 0.6)
+TextEdit/colors/font_readonly_color = Color(0.94, 0.8655833, 0.04700001, 0.5019608)
+TextEdit/colors/search_result_border_color = Color(0.94, 0.8655833, 0.04700001, 0.4)
+TextEdit/constants/outline_size = 1
+WhiteLineEdit/base_type = &"LineEdit"
+WhiteLineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
+WhiteLineEdit/styles/focus = SubResource("StyleBoxFlat_0vcl5")
+WhiteLineEdit/styles/normal = SubResource("StyleBoxFlat_lcet5")
+YellowLineEdit/base_type = &"LineEdit"
+YellowLineEdit/colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+YellowLineEdit/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+YellowLineEdit/colors/font_placeholder_color = Color(0.94, 0.8655833, 0.04700001, 0.6)
+YellowLineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
+YellowLineEdit/styles/focus = SubResource("StyleBoxFlat_wca55")
+YellowLineEdit/styles/normal = SubResource("StyleBoxFlat_7bxx3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w24qm"]
+bg_color = Color(0.6, 0.11372549, 0.13725491, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_2x875"]
+Button/colors/font_color = Color(0.6, 0.11372549, 0.13725491, 1)
+Button/colors/font_disabled_color = Color(0.4, 0.076, 0.09220006, 1)
+Button/colors/font_focus_color = Color(0.6, 0.11372549, 0.13725491, 1)
+Button/colors/font_hover_color = Color(0.65, 0.09099999, 0.11895009, 1)
+Button/colors/font_pressed_color = Color(0.5019608, 0.09411765, 0.11372549, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_7bxx3")
+Button/styles/hover = SubResource("StyleBoxFlat_xorm8")
+Button/styles/normal = SubResource("StyleBoxFlat_biuy5")
+Button/styles/pressed = SubResource("StyleBoxFlat_lb3dg")
+ButtonSmall/base_type = &"Button"
+ButtonSmall/colors/font_color = Color(0.6, 0.11372549, 0.13725491, 1)
+ButtonSmall/colors/font_disabled_color = Color(0.4, 0.076, 0.09220006, 1)
+ButtonSmall/colors/font_focus_color = Color(0.6, 0.11372549, 0.13725491, 1)
+ButtonSmall/colors/font_hover_color = Color(0.6509804, 0.09019608, 0.11764706, 1)
+ButtonSmall/colors/font_pressed_color = Color(0.5, 0.095, 0.11525008, 1)
+ButtonSmall/styles/disabled = SubResource("StyleBoxFlat_g5gcp")
+ButtonSmall/styles/focus = SubResource("StyleBoxEmpty_wca55")
+ButtonSmall/styles/hover = SubResource("StyleBoxFlat_eq4yn")
+ButtonSmall/styles/normal = SubResource("StyleBoxFlat_lxuol")
+ButtonSmall/styles/pressed = SubResource("StyleBoxFlat_ho5hn")
+ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_0nssd")
+HSlider/icons/grabber = ExtResource("7_vg7wq")
+HSlider/icons/grabber_highlight = ExtResource("8_e1xid")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_l5sax")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kidmo")
+HSlider/styles/slider = SubResource("StyleBoxFlat_n3ng0")
+HeaderYellow/base_type = &"Label"
+HeaderYellow/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+HeaderYellow/font_sizes/font_size = 48
+TextEdit/colors/background_color = Color(0.6, 0.114, 0.1383001, 0.5882353)
+TextEdit/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+TextEdit/colors/font_outline_color = Color(0.83137256, 0.7411765, 0.08235294, 1)
+TextEdit/colors/font_placeholder_color = Color(0.94, 0.8655833, 0.04700001, 0.6)
+TextEdit/colors/font_readonly_color = Color(0.94, 0.8655833, 0.04700001, 0.5019608)
+TextEdit/colors/search_result_border_color = Color(0.94, 0.8655833, 0.04700001, 0.4)
+TextEdit/constants/outline_size = 1
+WhiteLineEdit/base_type = &"LineEdit"
+WhiteLineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
+WhiteLineEdit/styles/focus = SubResource("StyleBoxFlat_0vcl5")
+WhiteLineEdit/styles/normal = SubResource("StyleBoxFlat_lcet5")
+YellowLineEdit/base_type = &"LineEdit"
+YellowLineEdit/colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+YellowLineEdit/colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+YellowLineEdit/colors/font_placeholder_color = Color(0.94, 0.8655833, 0.04700001, 0.6)
+YellowLineEdit/colors/selection_color = Color(0.6, 0.11372549, 0.13725491, 0.78431374)
+YellowLineEdit/styles/focus = SubResource("StyleBoxFlat_wca55")
+YellowLineEdit/styles/normal = SubResource("StyleBoxFlat_7bxx3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_702og"]
+bg_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="DisplayScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_o62vh")
 
 [node name="DisplayScene" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1152.0
-offset_bottom = 172.0
+offset_bottom = 649.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DisplayScene"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DisplayScene"]
 layout_mode = 2
 
-[node name="ProdName" type="Label" parent="DisplayScene/VBoxContainer"]
+[node name="InfoMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 50
-text = "product"
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 230
 
-[node name="Slogan" type="Label" parent="DisplayScene/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplayScene/HBoxContainer/InfoMargin"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PlayerNameMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 30
+
+[node name="PlayerName" type="Label" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/PlayerNameMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
 theme_override_font_sizes/font_size = 30
-text = "slogan
-"
+text = "Player Name"
+horizontal_alignment = 1
 
-[node name="MultiplayerSynchronizer2" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_bfa7l")
+[node name="ProductBox" type="PanelContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_urqfg")
 
-[node name="TimeLabel" type="Label" parent="."]
-offset_left = 905.0
-offset_top = 446.0
-offset_right = 967.0
-offset_bottom = 491.0
-theme_override_font_sizes/font_size = 30
+[node name="Padding" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/ProductBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Product" type="Label" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/ProductBox/Padding"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 36
+text = "Product Name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SloganMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="SloganBox" type="PanelContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_urqfg")
+
+[node name="Padding" type="MarginContainer" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin/SloganBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Slogan" type="Label" parent="DisplayScene/HBoxContainer/InfoMargin/VBoxContainer/SloganMargin/SloganBox/Padding"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+theme_override_font_sizes/font_size = 20
+text = "Slogan"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BoardMargin" type="MarginContainer" parent="DisplayScene/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="DisplayScene/HBoxContainer/BoardMargin"]
+custom_minimum_size = Vector2(662, 500)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7btl7")
+
+[node name="DrawingBoard" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+z_index = -1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vsoll")
+
+[node name="DrawingBorder" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+z_index = 2
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjgjq")
+
+[node name="BoardCover" type="Panel" parent="DisplayScene/HBoxContainer/BoardMargin/PanelContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nmnxq")
+
+[node name="TimerContainer" type="MarginContainer" parent="DisplayScene"]
+layout_mode = 2
+theme_override_constants/margin_top = 560
+theme_override_constants/margin_right = 685
+
+[node name="Timer" parent="DisplayScene/TimerContainer" instance=ExtResource("4_vsoll")]
+layout_mode = 2
+
+[node name="WhatCard" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 446.9057
+offset_right = 233.0
+offset_bottom = 571.4057
+rotation = -0.10471976
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_cnn2p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_w24qm")
+
+[node name="WhatText" type="Label" parent="WhatCard"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 28
 text = "Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="WhoCard" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 431.9057
+offset_right = 437.0
+offset_bottom = 556.4057
+rotation = 0.05235988
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_2x875")
+theme_override_styles/panel = SubResource("StyleBoxFlat_702og")
+
+[node name="WhoText" type="Label" parent="WhoCard"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.6, 0.11372549, 0.13725491, 1)
+theme_override_font_sizes/font_size = 28
+text = "Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DrawingImage" type="Sprite2D" parent="."]
+position = Vector2(478, 82)
+scale = Vector2(0.807, 0.807)
+centered = false
+
+[node name="SettingsScene" parent="." instance=ExtResource("6_nmnxq")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+
+[node name="DoneMargin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 592.0
+offset_right = 1051.0
+offset_bottom = 638.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 45
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DoneMargin"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="DonePlayers" type="Label" parent="DoneMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "(3/5)"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="Button" parent="DoneMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("6_lj7yx")
+theme_type_variation = &"ButtonSmall"
+theme_override_font_sizes/font_size = 24
+text = "Done"
+
+[connection signal="pressed" from="DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]

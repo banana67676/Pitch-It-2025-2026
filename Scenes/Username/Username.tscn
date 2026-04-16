@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo3vx0ii1i20j"]
+
+[ext_resource type="Script" uid="uid://bylibl7ebk8p3" path="res://Scenes/Username/username.gd" id="1_a2imu"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="4_kyjbj"]
+[ext_resource type="PackedScene" uid="uid://cv3cq386oufxc" path="res://UI/Back Button/back_button.tscn" id="6_nuywi"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="6_oj2lg"]
+
+[node name="Username" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_a2imu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 679.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 125
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 125
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Name"]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Name/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Username" type="LineEdit" parent="MarginContainer/VBoxContainer/Name/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_kyjbj")
+theme_override_font_sizes/font_size = 40
+placeholder_text = "Username"
+alignment = 1
+caret_blink = true
+
+[node name="ErrorText" type="Label" parent="MarginContainer/VBoxContainer/Name/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="Buttons" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 150
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.1
+theme_override_constants/separation = 50
+
+[node name="Host" type="Button" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_kyjbj")
+theme_override_font_sizes/font_size = 50
+text = "Host
+"
+
+[node name="Join" type="Button" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_kyjbj")
+theme_override_font_sizes/font_size = 50
+text = "Join
+"
+
+[node name="SettingsScene" parent="." instance=ExtResource("6_oj2lg")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+
+[node name="BackButton" parent="." instance=ExtResource("6_nuywi")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 76.0
+offset_bottom = 76.0
+rotation = 1.5707964
+initial_rotation = 90.0
+final_rotation = 110.0
+
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/Name/VBoxContainer/HBoxContainer2/Username" to="." method="_on_username_text_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

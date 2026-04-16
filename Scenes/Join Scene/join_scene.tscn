@@ -1,0 +1,211 @@
+[gd_scene load_steps=7 format=3 uid="uid://dprid1ulqg70"]
+
+[ext_resource type="Script" uid="uid://j0inb16q2dk6" path="res://Scenes/Join Scene/join.gd" id="1_pl5id"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_e58nu"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/Settings_Scene.tscn" id="5_8refn"]
+[ext_resource type="PackedScene" uid="uid://cv3cq386oufxc" path="res://UI/Back Button/back_button.tscn" id="6_e58nu"]
+[ext_resource type="PackedScene" uid="uid://d172fukpk00yr" path="res://UI/Refresh Button/refresh_button.tscn" id="7_3rt24"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34q3u"]
+bg_color = Color(0.36862746, 0.08627451, 0.09803922, 0.5882353)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="JoinScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pl5id")
+
+[node name="Title" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 200
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title"]
+layout_mode = 2
+alignment = 1
+
+[node name="JoinHeader" type="Label" parent="Title/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_e58nu")
+theme_type_variation = &"HeaderYellow"
+text = "Join"
+
+[node name="MarginContainer" type="MarginContainer" parent="Title"]
+layout_mode = 2
+theme_override_constants/margin_left = -100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = -100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="CustomJoin" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="HeaderContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="SpecificLobby" type="Label" parent="Title/MarginContainer/HBoxContainer/CustomJoin/HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 30
+text = "Find Specific Lobby"
+horizontal_alignment = 1
+
+[node name="LobbyName" type="LineEdit" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_colors/font_uneditable_color = Color(0.8784314, 0.8117647, 0.043137256, 0.5019608)
+theme_override_colors/font_placeholder_color = Color(0.9411765, 0.8666667, 0.047058824, 0.6)
+theme_override_colors/caret_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Lobby Name"
+alignment = 1
+
+[node name="PasswordContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="Password" type="LineEdit" parent="Title/MarginContainer/HBoxContainer/CustomJoin/PasswordContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Password"
+alignment = 1
+
+[node name="ErrorContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+
+[node name="ErrorMessage" type="Label" parent="Title/MarginContainer/HBoxContainer/CustomJoin/ErrorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="JoinContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/CustomJoin"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+
+[node name="JoinButton" type="Button" parent="Title/MarginContainer/HBoxContainer/CustomJoin/JoinContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e58nu")
+theme_override_font_sizes/font_size = 36
+text = "Join"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LobbyList" type="VBoxContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(456, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RefreshButton" parent="Title/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("7_3rt24")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SettingsScene" parent="." instance=ExtResource("5_8refn")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+
+[node name="DisplayBoxTemplate" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 0
+offset_left = 596.0
+offset_top = 135.0
+offset_right = 1052.0
+offset_bottom = 189.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_34q3u")
+
+[node name="MarginContainer" type="MarginContainer" parent="DisplayBoxTemplate"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DisplayBoxTemplate/MarginContainer"]
+layout_mode = 2
+
+[node name="LobbyName" type="Label" parent="DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 20
+text = "SpeeedNinja's Lobby"
+
+[node name="PlayerCount" type="Label" parent="DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "(7/10)"
+
+[node name="JoinButton" type="Button" parent="DisplayBoxTemplate/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e58nu")
+theme_type_variation = &"ButtonSmall"
+text = "Join"
+
+[node name="BackButton" parent="." instance=ExtResource("6_e58nu")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 76.0
+offset_bottom = 76.0
+final_rotation = 20.0
+
+[connection signal="text_changed" from="Title/MarginContainer/HBoxContainer/CustomJoin/LobbyName" to="." method="_on_lobby_name_text_changed"]
+[connection signal="text_changed" from="Title/MarginContainer/HBoxContainer/CustomJoin/PasswordContainer/Password" to="." method="_on_password_text_changed"]
+[connection signal="pressed" from="Title/MarginContainer/HBoxContainer/CustomJoin/JoinContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

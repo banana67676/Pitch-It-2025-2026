@@ -1,15 +1,17 @@
-extends CharacterBody2D
+extends PanelContainer
 
+#preloading the textures (that aren't needed anymore)
+#const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
+#const WHO_CARD_ASSET = preload("res://Assets/Who-card-asset.png")
 
-const WHAT_CARD_ASSET = preload("res://Assets/What-card-asset.png")
-const WHO_CARD_ASSET = preload("res://Assets/Who-card-asset.png")
-
+#the potential card types
 enum card_types {
 	who,
 	what
 }
 
-@export var card_type: card_types
+@export var card_type: card_types #exporting the type of card that this card is (either a "who" card or a "what" card)
+
 
 @export var what_text = [
 	"Microwave Ovens",
@@ -112,24 +114,27 @@ enum card_types {
 
 var possible_text = []
 
+#references to the nodes in the scene
+@onready var label: Label = $Text
 
-@onready var label: Label = $Face/MarginContainer/ColorRect/MarginContainer/Label
-
-@onready var face: TextureRect = $Face
-
-enum {
-	stay,
-	shrinking,
-	growing
-}
-var state = stay
+#the red and yellow color constants for text (Godot doesn't let them be constants
+var YELLOW_COLOR: Color = Color.from_rgba8(240, 221, 12, 255)
+var RED_COLOR: Color = Color.from_rgba8(153, 29, 35, 255)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#CARD VISUALS
+	var stylebox = StyleBoxFlat.new() #stylebox to change the background color of the card
 	if card_type == card_types.who:
-		face.texture = WHO_CARD_ASSET
+		stylebox.bg_color = YELLOW_COLOR
+		label.add_theme_color_override(&"font_color", RED_COLOR) #make the text red
 	else:
-		face.texture = WHAT_CARD_ASSET
+		stylebox.bg_color = RED_COLOR
+		label.add_theme_color_override(&"font_color", YELLOW_COLOR) #make the text yellow
+	stylebox.set_corner_radius_all(20) #setting the corner radius for all corners
+	self.add_theme_stylebox_override(&"panel", stylebox) #changing the background color
+	
+	#TECHNICAL STUFF
 	await get_tree().create_timer(.1).timeout
 	if (card_type == card_types.who):
 		possible_text = who_text
@@ -137,9 +142,6 @@ func _ready() -> void:
 		possible_text = what_text
 	pick_text()
 
+# Call this to (re)pick/update the text on the card
 func pick_text():
 	label.text = possible_text[randi_range(0, possible_text.size() - 1)]
-
-func move(location : Vector2, rot : float):
-	global_position = lerp(global_position, location, 0.05)
-	global_rotation = lerp(global_rotation, rot, 0.05)

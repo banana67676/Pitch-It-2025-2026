@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://vt4f6pmafi8o"]
+
+[ext_resource type="PackedScene" uid="uid://wtmjmq6e51qm" path="res://Assets/bg_bulbs.tscn" id="3_no37k"]
+[ext_resource type="Texture2D" uid="uid://c76lisgbsopf5" path="res://Assets/WhiteBulb.svg" id="3_tl324"]
+
+[node name="GameArt" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BG_Bulbs" parent="." instance=ExtResource("3_no37k")]
+z_index = -1
+
+[node name="LogoContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_bottom = 100
+
+[node name="TextureRect" type="TextureRect" parent="LogoContainer"]
+layout_mode = 2
+texture = ExtResource("3_tl324")
+stretch_mode = 3
+
+[node name="TextContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_top = 140
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_constants/separation = -20
+
+[node name="Title" type="Label" parent="TextContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.894606, 0.849589, 0.232212, 1)
+theme_override_colors/font_shadow_color = Color(0.624703, 0.461538, 0.173293, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_font_sizes/font_size = 130
+text = "Pitch It!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Slogan" type="Label" parent="TextContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.831373, 0.784314, 0.164706, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "Who's got the Million Dollar Idea?"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+layout_mode = 0
+offset_right = 1601.0
+offset_bottom = 968.0
+color = Color(0.67058825, 0.1882353, 0.19607843, 1)

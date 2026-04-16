@@ -1,61 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://6b5nae3lm6ou"]
+[gd_scene load_steps=3 format=3 uid="uid://6b5nae3lm6ou"]
 
-[ext_resource type="Script" path="res://Card/Card Content/card.gd" id="1_2iua7"]
-[ext_resource type="Texture2D" uid="uid://bx3n0pvnl1u4l" path="res://Assets/What-card-asset.png" id="2_bhry4"]
-[ext_resource type="Theme" uid="uid://bwhhwoc6lwjv3" path="res://Assets/Font.tres" id="3_pqtad"]
+[ext_resource type="Script" uid="uid://bbv87auwrc7oq" path="res://Card/Card Content/card.gd" id="1_2iua7"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="2_6ddf6"]
 
-[node name="Card_Preset" type="CharacterBody2D"]
-motion_mode = 1
+[node name="Card" type="PanelContainer"]
+offset_right = 385.0
+offset_bottom = 249.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_6ddf6")
 script = ExtResource("1_2iua7")
 
-[node name="Face" type="TextureRect" parent="."]
-texture_filter = 2
-offset_right = 350.0
-offset_bottom = 250.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("2_bhry4")
-expand_mode = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Face"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="ColorRect" type="ColorRect" parent="Face/MarginContainer"]
+[node name="Text" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-color = Color(1, 1, 1, 0)
-
-[node name="MarginContainer" type="MarginContainer" parent="Face/MarginContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_right = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="Label" parent="Face/MarginContainer/ColorRect/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("3_pqtad")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "TXT"
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 56
+text = "Text"
 horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="Sprite" type="Sprite2D" parent="."]
+vertical_alignment = 1
+autowrap_mode = 2

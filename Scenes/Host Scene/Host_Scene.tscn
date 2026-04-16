@@ -1,0 +1,351 @@
+[gd_scene load_steps=10 format=3 uid="uid://dcxxqv6rdrqok"]
+
+[ext_resource type="Script" uid="uid://bp2hpc6fklec0" path="res://Scenes/Host Scene/host.gd" id="1_8dtox"]
+[ext_resource type="Theme" uid="uid://b7qrc55c1kxgl" path="res://Assets/GameTheme.tres" id="1_uxv21"]
+[ext_resource type="Texture2D" uid="uid://c3lvfy7bn0f8r" path="res://Assets/unchecked_normal.svg" id="3_k5nmq"]
+[ext_resource type="Texture2D" uid="uid://bqsrf2ionhlss" path="res://Assets/unchecked_hover.svg" id="4_fm0rp"]
+[ext_resource type="PackedScene" uid="uid://dd60pjnm1aiw6" path="res://Scenes/Settings Scene/settings_scene.tscn" id="5_fm0rp"]
+[ext_resource type="PackedScene" uid="uid://d172fukpk00yr" path="res://UI/Refresh Button/refresh_button.tscn" id="7_onit3"]
+[ext_resource type="PackedScene" uid="uid://cv3cq386oufxc" path="res://UI/Back Button/back_button.tscn" id="8_6yw1c"]
+[ext_resource type="PackedScene" uid="uid://r8spcdilxiwj" path="res://Scenes/Game Mode Scene/Game_Mode_Selection.tscn" id="8_twk2c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onit3"]
+bg_color = Color(0.37, 0.08510001, 0.09459667, 0.39215687)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="HostScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8dtox")
+
+[node name="Title" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_top = -45.0
+offset_right = 1254.0
+offset_bottom = 644.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 230
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 230
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderContainer" type="HBoxContainer" parent="Title/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HostHeader" type="Label" parent="Title/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_uxv21")
+theme_type_variation = &"HeaderYellow"
+text = "Host"
+
+[node name="LobbyNameContainer" type="MarginContainer" parent="Title/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 20
+
+[node name="LobbyName" type="LineEdit" parent="Title/VBoxContainer/LobbyNameContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Lobby Name"
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Title/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_onit3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Title/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="OptionsContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="MiscContainer" type="VBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="MaxPlayersContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MaxPlayers" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MaxPlayersContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Max Players"
+
+[node name="MaxPlayersValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MaxPlayersContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_uxv21")
+min_value = 1.0
+max_value = 4.0
+value = 4.0
+alignment = 1
+
+[node name="IsPrivateContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="IsPrivate" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/IsPrivateContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Is Private?"
+
+[node name="IsPrivateButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/IsPrivateContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("3_k5nmq")
+texture_hover = ExtResource("4_fm0rp")
+
+[node name="PasswordContainer" type="MarginContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer"]
+layout_mode = 2
+
+[node name="Password" type="LineEdit" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/PasswordContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(274, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Password"
+alignment = 1
+editable = false
+
+[node name="MoneyOrRound" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Rounds" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rounds?"
+
+[node name="RoundsButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("3_k5nmq")
+texture_hover = ExtResource("4_fm0rp")
+
+[node name="MoneyOrRound2" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Money" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound/MoneyOrRound2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Money?"
+
+[node name="MoneyButton" type="TextureButton" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/MoneyOrRound/MoneyOrRound2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("3_k5nmq")
+texture_hover = ExtResource("4_fm0rp")
+
+[node name="TimingsContainer" type="VBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="CreationContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="CreationTime" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/CreationContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Creation Time"
+
+[node name="CreationTimeValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/CreationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_uxv21")
+min_value = 3.0
+max_value = 600.0
+value = 180.0
+alignment = 1
+
+[node name="DisplayContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="DisplayTime" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/DisplayContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Display Time"
+
+[node name="DisplayTimeValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/DisplayContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_uxv21")
+min_value = 3.0
+max_value = 600.0
+value = 120.0
+alignment = 1
+
+[node name="VotingContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="VotingTime" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/VotingContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Voting Time"
+
+[node name="VotingTimeValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/VotingContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_uxv21")
+min_value = 15.0
+max_value = 600.0
+value = 45.0
+alignment = 1
+
+[node name="ResultsContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="ResultsTime" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/ResultsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Results Time"
+
+[node name="ResultsTimeValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/ResultsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_uxv21")
+min_value = 10.0
+max_value = 600.0
+value = 20.0
+alignment = 1
+
+[node name="ThresholdContainer" type="HBoxContainer" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="ThresholdLabel" type="Label" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/ThresholdContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.8666667, 0.047058824, 1)
+theme_override_font_sizes/font_size = 24
+text = "Money (Millions)"
+
+[node name="ThresholdValue" type="SpinBox" parent="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/TimingsContainer/ThresholdContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme = ExtResource("1_uxv21")
+min_value = 3.0
+max_value = 10.0
+value = 5.0
+alignment = 1
+
+[node name="HostContainer" type="VBoxContainer" parent="Title/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ErrorMessage" type="Label" parent="Title/VBoxContainer/HostContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="HostButtonContainer" type="MarginContainer" parent="Title/VBoxContainer/HostContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="HostButton" type="Button" parent="Title/VBoxContainer/HostContainer/HostButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
+[node name="SettingsScene" parent="." instance=ExtResource("5_fm0rp")]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 16.0
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" parent="." instance=ExtResource("8_6yw1c")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 76.0
+offset_bottom = 76.0
+rotation = 3.1415927
+initial_rotation = 180.0
+final_rotation = 160.0
+
+[node name="ResetButton" parent="." instance=ExtResource("7_onit3")]
+layout_mode = 1
+offset_left = 1066.0
+offset_top = 562.0
+offset_right = 1136.0
+offset_bottom = 632.0
+
+[node name="GameMode" parent="." instance=ExtResource("8_twk2c")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 16.0
+offset_top = 219.0
+offset_right = 225.0
+offset_bottom = 632.0
+grow_vertical = 1
+
+[connection signal="text_changed" from="Title/VBoxContainer/LobbyNameContainer/LobbyName" to="." method="_on_lobby_name_text_changed"]
+[connection signal="pressed" from="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/IsPrivateContainer/IsPrivateButton" to="." method="_on_is_private_button_pressed"]
+[connection signal="text_changed" from="Title/VBoxContainer/PanelContainer/MarginContainer/OptionsContainer/MiscContainer/PasswordContainer/Password" to="." method="_on_password_text_changed"]
+[connection signal="pressed" from="Title/VBoxContainer/HostContainer/HostButtonContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
