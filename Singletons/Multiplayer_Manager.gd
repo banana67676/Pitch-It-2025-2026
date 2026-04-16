@@ -31,6 +31,7 @@ func expose_functions() -> void:
 	GDSync.expose_func(update_player_list)
 	GDSync.expose_func(remove_player_from_list)
 	GDSync.expose_func(disconnect_client)
+	GDSync.expose_func(GameManager.set_round)
 
 #---------------------------------------------------------------------------------------------------------------------------------
 
@@ -185,6 +186,8 @@ func run_game() -> void:
 		await self.timeout
 		GDSync.call_func_all(reset)
 	else:
+		var next_round = GameManager.current_round + 1
+		GDSync.call_func_all(GameManager.set_round, [next_round])
 		run_game()
 
 
@@ -262,6 +265,7 @@ func _lobby_scene_update() -> void:
 #resets game variables and send player back to the title screen
 func reset() -> void:
 	GDSync.call_func_all(disconnect_client) #disconnects EVERYONE
+	GameManager.set_round(1)
 	GameManager.change_game_state(GameManager.game_state_enum.game_opening, true, 0) #back to the main menu
 	multiplayer.multiplayer_peer.close() #disconnect
 	await GameManager.scene_changed

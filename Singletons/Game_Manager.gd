@@ -26,6 +26,7 @@ enum GameMode {
 #current game_mode and game_state
 var game_mode: GameMode = GameMode.CLASSIC
 var game_state: int = game_state_enum.title #current game state (lobby, creation, voting, results, etc.)
+var current_round: int = 1
 
 #the DEFAULT times for the different sections of the game
 const CREATION_DEFAULT: float = 180
@@ -71,6 +72,11 @@ func _ready() -> void:
 func quit_game(_protected: bool):
 	get_tree().quit()
 
+signal round_changed
+
+func set_round(new_round: int) -> void:
+	current_round = new_round
+	emit_signal("round_changed")
 
 #returns the current scene
 func get_current_scene():

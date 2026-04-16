@@ -6,6 +6,8 @@ const MAX_LENGTH: int = 45
 
 var is_done: bool = false
 
+@onready var round_label = %roundLabel
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GDSync.expose_func(update_done_players)
@@ -16,6 +18,7 @@ func _ready() -> void:
 	_play_tween()
 	await get_tree().create_timer(1.5).timeout #delay before cards tween
 	_play_cards_tween()
+	update_round_text()
 
 #func _process(delta: float) -> void:
 	#print(await GDSync.get_client_ping(GDSync.get_host()))
@@ -53,6 +56,8 @@ func _on_done_button_pressed() -> void:
 	var delta := 1 if is_done else -1
 	GDSync.call_func_all(update_done_players, [delta])
 
+func update_round_text():
+	round_label.text = "Round: " + str(GameManager.current_round)
 
 #function to set the label showing how many players are done
 func _set_done_players(done_players: int, total_players: int) -> void:

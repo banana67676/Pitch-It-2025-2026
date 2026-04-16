@@ -141,6 +141,23 @@ offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 16.0
 
+[node name="roundControl" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="roundLabel" type="Label" parent="roundControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.462
+anchor_bottom = 1.8600001
+offset_top = 11.0
+offset_right = 34.52
+offset_bottom = -2.4000092
+theme_override_font_sizes/font_size = 25
+text = "Round: "
+
 [connection signal="pressed" from="SidebarMargin/VBoxContainer/DoneMargin/HBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
 [connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/TitleMargin/Title" to="." method="_on_title_text_changed"]
 [connection signal="text_changed" from="TypingMargin/TypingVBox/TypingMargin/VBoxContainer/SloganMargin/Slogan" to="." method="_on_slogan_text_changed"]
